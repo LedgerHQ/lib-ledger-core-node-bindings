@@ -7,7 +7,7 @@
     "type" : "git",
     "url" : "https://github.com/meriadec/lib-ledger-core-node-bindings"
   },
-  "gypfile": true,
+  "gypfile": false,
   "scripts": {
     "gypinstall": "prebuild-install",
     "prebuild": "prebuild --all --verbose",
