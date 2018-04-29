@@ -1,6 +1,6 @@
 {
   "name": "ledger-core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Ledger Core Library cross-platform C++ bindings for NodeJs",
   "main": "js/index.js",
   "repository": {
