@@ -132,7 +132,7 @@ HttpReadBodyResult NJSHttpUrlConnection::readBody()
         }
     }
 
-    HttpReadBodyResult fResult_readBody(std::experimental::optional<ledger::core::api::Error>(), fResult_readBody_2);
+    HttpReadBodyResult fResult_readBody(fResult_readBody_1, fResult_readBody_2);
 
     return fResult_readBody;
 }
