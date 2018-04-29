@@ -1,8 +1,9 @@
 {
-  "name": "ledgerpackage",
+  "name": "ledger-core",
   "version": "1.0.0",
-  "description": "Package C++ test library",
-  "main": "index.js",
+  "description": "Ledger Core Library cross-platform C++ bindings for NodeJs",
+  "main": "js/index.js",
+  "gypfile": true,
   "scripts": {
     "gypinstall": "prebuild-install || node-gyp rebuild",
     "prebuild": "prebuild --all --verbose",
@@ -12,11 +13,21 @@
     "gypbuild": "node-gyp build",
     "gypbuildd": "node-gyp build --debug",
     "clean": "rimraf build node_modules prebuilds",
-    "distclean": "npm run clean",
-    "gypconfigx": "node-gyp configure -- -f xcode"
+    "gypconfigx": "node-gyp configure -- -f xcode",
+    "lint": "eslint js",
+    "prettier": "prettier --write \"js/**/*.js\""
   },
-  "author": "Bellakrid",
-  "license": "ISC",
+  "authors": [
+    {
+      "name": "Khalil Bellakrid",
+      "url": "https://github.com/KhalilBellakrid"
+    },
+    {
+      "name": "Meriadec Pillet",
+      "url": "https://github.com/meriadec"
+    }
+  ],
+  "license": "MIT",
   "dependencies": {
     "@ledgerhq/hw-app-btc": "^4.7.3",
     "@ledgerhq/hw-transport-node-hid": "^4.7.6",
@@ -32,11 +43,9 @@
     "eslint": "^4.18.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
     "node-gyp": "^3.6.2",
     "prebuild": "^6.2.2",
+    "prettier": "^1.12.1",
     "rimraf": "^2.5.3"
-  },
-  "gypfile": true
+  }
 }

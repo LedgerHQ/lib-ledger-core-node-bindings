@@ -1,12 +1,12 @@
 {
   'variables': {
-    'core_library%': "lib",
-      'run_path%': "lib",
-      'source_path%': "src",
+    'core_library%': 'lib',
+    'run_path%': 'lib',
+    'source_path%': 'src',
   },
   'targets': [
     {
-      'target_name': 'ledgercore',
+      'target_name': 'ledger-core',
       'sources': ["<!@(python glob.py <@(source_path) *.cpp *.hpp)"],
       'include_dirs': [
         "<!(node -e \"require('nan')\")",
