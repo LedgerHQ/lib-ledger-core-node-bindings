@@ -154,7 +154,7 @@ NAN_METHOD(NJSHttpRequest::complete) {
     {
         return Nan::ThrowError("NJSHttpRequest::complete : implementation of HttpRequest is not valid");
     }
-    cpp_impl->complete(arg_0,std::experimental::optional<ledger::core::api::Error>());
+    cpp_impl->complete(arg_0,arg_1);
 }
 
 NAN_METHOD(NJSHttpRequest::New) {

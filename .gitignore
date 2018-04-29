@@ -3,3 +3,4 @@
 /js/tmp/
 /lib
 /prebuilds
+*.log
