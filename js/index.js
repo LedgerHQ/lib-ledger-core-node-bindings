@@ -112,9 +112,15 @@ const NJSHttpClientImpl = {
       const urlConnection = createHttpConnection(res)
       r.complete(urlConnection, null)
     } catch (err) {
-      console.log(err)
-      const urlConnection = createHttpConnection(res, 'something went wrong')
-      r.complete(urlConnection, { code: 0, message: 'something went wrong' })
+      let strErr = ''
+      // handle axios err
+      if (err.response && err.response.data && err.response.data.error) {
+        strErr = err.response.data.error
+      } else {
+        strErr = 'something went wrong'
+      }
+      const urlConnection = createHttpConnection(res, strErr)
+      r.complete(urlConnection, { code: 0, message: strErr })
     }
   },
 }
