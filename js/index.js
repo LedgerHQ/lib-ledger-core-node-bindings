@@ -7,7 +7,7 @@ const binding = require('bindings')('ledger-core')
 const MAX_RANDOM = 2684869021
 
 const signTransaction = require('./signTransaction')
-const { stringToBytesArray, hexToBytes } = require('./helpers')
+const { stringToBytesArray, bytesToHex, hexToBytes, bytesArrayToString } = require('./helpers')
 
 /**
  * NJSExecutionContext
@@ -94,7 +94,13 @@ const NJSHttpClientImpl = {
   execute: async r => {
     const method = r.getMethod()
     const headersMap = r.getHeaders()
-    const data = r.getBody()
+    let data = r.getBody()
+    if (Array.isArray(data)) {
+      const dataStr = bytesArrayToString(data)
+      try {
+        data = JSON.parse(dataStr)
+      } catch (err) {}
+    }
     const url = r.getUrl()
     const headers = {}
     headersMap.forEach((v, k) => {
@@ -114,6 +120,9 @@ const NJSHttpClientImpl = {
 }
 
 function createHttpConnection(res, err) {
+  if (!res) {
+    return null
+  }
   const headersMap = new Map()
   Object.keys(res.headers).forEach(key => {
     if (typeof res.headers[key] === 'string') {
@@ -328,7 +337,10 @@ exports.createWallet = async (name, currency) => {
   return wallet
 }
 
-exports.createAmount = (currency, amount) => new binding.NJSAmount(currency, amount)
+exports.createAmount = (currency, amount) => {
+  const a = new binding.NJSAmount(currency, amount)
+  return a.fromLong(currency, amount)
+}
 
 exports.getCurrency = currencyName => NJSWalletPool.getCurrency(currencyName)
 

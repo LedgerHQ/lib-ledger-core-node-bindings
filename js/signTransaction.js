@@ -1,4 +1,4 @@
-const { bytesToHex } = require('./helpers')
+const { bytesToHex, stringToBytesArray, hexToBytes } = require('./helpers')
 
 async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
   const rawInputs = transaction.getInputs()
@@ -26,34 +26,26 @@ async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
   })
 
   const outputs = transaction.getOutputs()
+
   const output = outputs.find((output, i) => {
-    // FIXME: remove that when we get the fix (by khalil: "add method `isNull`
-    // to check if C++ implementation is null")
-    try {
-      const derivationPath = output.getDerivationPath()
-      const strDerivationPath = derivationPath.toString()
-      const derivationArr = strDerivationPath.split('/')
-      return derivationArr[derivationArr.length - 2] === '1'
-    } catch (err) {
+    const derivationPath = output.getDerivationPath()
+    if (derivationPath.isNull()) {
       return false
     }
+    const strDerivationPath = derivationPath.toString()
+    const derivationArr = strDerivationPath.split('/')
+    return derivationArr[derivationArr.length - 2] === '1'
   })
 
   const changePath = output.getDerivationPath().toString()
-
-  // TODO: serialize transaction here, and cut it to get outputScript
-  const outputScriptHex = transaction
-    .getOutputs()
-    .map(output => bytesToHex(output.getScript()))
-    .join('')
-
-  console.log(`outputScriptHex:`)
-  console.log(`${outputScriptHex}`)
-
+  const outputScriptHex = bytesToHex(transaction.serializeOutputs())
   const lockTime = transaction.getLockTime()
   const initialTimestamp = transaction.getTimestamp()
 
-  // return;
+  // console.log(`outputs = ${transaction.getOutputs().map(o => o.getValue().toLong())}`)
+  // console.log(`fees = ${transaction.getFees().toLong()}`)
+  // console.log(`estimated size = `, transaction.getEstimatedSize())
+
   const signedTransaction = await hwApp.createPaymentTransactionNew(
     inputs,
     associatedKeysets,
@@ -62,7 +54,7 @@ async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
     lockTime,
   )
 
-  return signedTransaction
+  return hexToBytes(signedTransaction)
 }
 
 module.exports = signTransaction
