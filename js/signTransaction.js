@@ -14,9 +14,8 @@ async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
       return [
         previousTransaction,
         outputIndex,
-        // undefined, // we don't use that TODO: document
-        // 0xffffffff,
-        sequence,
+        undefined, // we don't use that TODO: document
+        sequence, // 0xffffffff,
       ]
     }),
   )
@@ -46,12 +45,12 @@ async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
   const signedTransaction = await hwApp.createPaymentTransactionNew(
     inputs,
     associatedKeysets,
-    // changePath,
-    undefined,
+    changePath,
     outputScriptHex,
-    // lockTime,
-    0,
+    lockTime,
   )
+
+  console.log(signedTransaction)
 
   return hexToBytes(signedTransaction)
 }
