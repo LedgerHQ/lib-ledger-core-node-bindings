@@ -14,7 +14,8 @@ async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
       return [
         previousTransaction,
         outputIndex,
-        null, // we don't use that TODO: document
+        // undefined, // we don't use that TODO: document
+        // 0xffffffff,
         sequence,
       ]
     }),
@@ -37,21 +38,19 @@ async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
     return derivationArr[derivationArr.length - 2] === '1'
   })
 
-  const changePath = output.getDerivationPath().toString()
+  const changePath = output ? output.getDerivationPath().toString() : undefined
   const outputScriptHex = bytesToHex(transaction.serializeOutputs())
   const lockTime = transaction.getLockTime()
   const initialTimestamp = transaction.getTimestamp()
 
-  // console.log(`outputs = ${transaction.getOutputs().map(o => o.getValue().toLong())}`)
-  // console.log(`fees = ${transaction.getFees().toLong()}`)
-  // console.log(`estimated size = `, transaction.getEstimatedSize())
-
   const signedTransaction = await hwApp.createPaymentTransactionNew(
     inputs,
     associatedKeysets,
-    changePath,
+    // changePath,
+    undefined,
     outputScriptHex,
-    lockTime,
+    // lockTime,
+    0,
   )
 
   return hexToBytes(signedTransaction)
