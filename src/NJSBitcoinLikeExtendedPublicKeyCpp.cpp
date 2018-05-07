@@ -222,7 +222,20 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::fromBase58) {
 
     auto field_arg_0_8 = Nan::Get(info[0]->ToObject(), Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked()).ToLocalChecked();
     auto arg_0_8 = Nan::To<bool>(field_arg_0_8).FromJust();
-    BitcoinLikeNetworkParameters arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8);
+
+    auto field_arg_0_9 = Nan::Get(info[0]->ToObject(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
+    vector<uint8_t> arg_0_9;
+    Local<Array> arg_0_9_container = Local<Array>::Cast(field_arg_0_9);
+    for(uint32_t arg_0_9_id = 0; arg_0_9_id < arg_0_9_container->Length(); arg_0_9_id++)
+    {
+        if(arg_0_9_container->Get(arg_0_9_id)->IsUint32())
+        {
+            auto arg_0_9_elem = Nan::To<uint32_t>(arg_0_9_container->Get(arg_0_9_id)).FromJust();
+            arg_0_9.emplace_back(arg_0_9_elem);
+        }
+    }
+
+    BitcoinLikeNetworkParameters arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
 
     String::Utf8Value string_arg_1(info[1]->ToString());
     auto arg_1 = std::string(*string_arg_1);
@@ -316,7 +329,20 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::New) {
 
     auto field_arg_0_8 = Nan::Get(info[0]->ToObject(), Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked()).ToLocalChecked();
     auto arg_0_8 = Nan::To<bool>(field_arg_0_8).FromJust();
-    BitcoinLikeNetworkParameters arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8);
+
+    auto field_arg_0_9 = Nan::Get(info[0]->ToObject(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
+    vector<uint8_t> arg_0_9;
+    Local<Array> arg_0_9_container = Local<Array>::Cast(field_arg_0_9);
+    for(uint32_t arg_0_9_id = 0; arg_0_9_id < arg_0_9_container->Length(); arg_0_9_id++)
+    {
+        if(arg_0_9_container->Get(arg_0_9_id)->IsUint32())
+        {
+            auto arg_0_9_elem = Nan::To<uint32_t>(arg_0_9_container->Get(arg_0_9_id)).FromJust();
+            arg_0_9.emplace_back(arg_0_9_elem);
+        }
+    }
+
+    BitcoinLikeNetworkParameters arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
 
     String::Utf8Value string_arg_1(info[1]->ToString());
     auto arg_1 = std::string(*string_arg_1);
