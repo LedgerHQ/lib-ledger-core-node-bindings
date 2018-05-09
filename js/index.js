@@ -204,11 +204,13 @@ NJSPathResolverImpl.resolveLogFilePath = pathToResolve => {
   const resolvedPath = path.resolve(__dirname, 'tmp', result)
   return resolvedPath
 }
-/*
-   Resolves the path for a json file.
-  @param: path: string
-  @return: resolved path
-*/
+
+/**
+ * Resolves the path for a json file
+ *
+ * @param: path: string
+ * @return: resolved path
+ */
 NJSPathResolverImpl.resolvePreferencesPath = pathToResolve => {
   let result = pathToResolve.replace(/\//g, '__')
   result = `./preferences_${result}`
@@ -216,92 +218,59 @@ NJSPathResolverImpl.resolvePreferencesPath = pathToResolve => {
   return resolvedPath
 }
 const NJSPathResolver = new binding.NJSPathResolver(NJSPathResolverImpl)
-// ///////////////////////////////////////////
-// ////////LogPrinter Implementation//////////
-// //////////////////////////////////////////
+
+//                         -------------------------
+//                         LogPrinter implementation
+//                         -------------------------
+
 const NJSLogPrinterImpl = {
   context: {},
 }
-/*
-  @param: message: string
-*/
 
+/**
+ * @param: message: string
+ */
 const logger = (title, message) => {
   if (message) {
     // console.log(message);
   }
 }
 
-NJSLogPrinterImpl.printError = message => {
-  logger('Error', message)
-}
-/*
-  @param: message: string
-*/
-NJSLogPrinterImpl.printInfo = message => {
-  logger('Info', message)
-}
-/*
-  @param: message: string
-*/
-NJSLogPrinterImpl.printDebug = message => {
-  logger('Debug', message)
-}
-/*
-  @param: message: string
-*/
-NJSLogPrinterImpl.printWarning = message => {
-  logger('Warning', message)
-}
-/*
-  @param: message: string
-*/
-NJSLogPrinterImpl.printApdu = message => {
-  logger('Apdu', message)
-}
-/*
-  @param: message: string
-*/
-NJSLogPrinterImpl.printCriticalError = message => {
-  logger('Critical Error', message)
-}
-/*
-  @return: main NJSExecutionContext
-*/
+NJSLogPrinterImpl.printError = message => logger('Error', message)
+NJSLogPrinterImpl.printInfo = message => logger('Info', message)
+NJSLogPrinterImpl.printDebug = message => logger('Debug', message)
+NJSLogPrinterImpl.printWarning = message => logger('Warning', message)
+NJSLogPrinterImpl.printApdu = message => logger('Apdu', message)
+NJSLogPrinterImpl.printCriticalError = message => logger('Critical Error', message)
+
+/**
+ * @return: main NJSExecutionContext
+ */
 NJSLogPrinterImpl.getContext = () => NJSThreadDispatcher.getMainExecutionContext()
 
 const NJSLogPrinter = new binding.NJSLogPrinter(NJSLogPrinterImpl)
 
-// //////////////////////////////////////////////////////
-// ////////RandomNumberGenerator Implementation//////////
-// /////////////////////////////////////////////////////
+//                    ------------------------------------
+//                    RandomNumberGenerator implementation
+//                    ------------------------------------
+
 const NJSRandomNumberGeneratorImpl = {}
-/*
-  @param: size: integer
-*/
+
 NJSRandomNumberGeneratorImpl.getRandomBytes = size => crypto.randomBytes(size)
 NJSRandomNumberGeneratorImpl.getRandomInt = () => Math.random() * MAX_RANDOM
 NJSRandomNumberGeneratorImpl.getRandomLong = () => Math.random() * MAX_RANDOM * MAX_RANDOM
 NJSRandomNumberGeneratorImpl.getRandomLong = () => crypto.randomBytes(1)
+
 const NJSRandomNumberGenerator = new binding.NJSRandomNumberGenerator(NJSRandomNumberGeneratorImpl)
-// //////////////////////////////////////////////////////
-// /////////////Instanciate C++ objects/////////////////
-// /////////////////////////////////////////////////////
+
+//                          -----------------------
+//                          Instanciate C++ objects
+//                          -----------------------
+
 const NJSDatabaseBackend = new binding.NJSDatabaseBackend()
 const NJSDynamicObject = new binding.NJSDynamicObject()
 const NJSNetworks = new binding.NJSNetworks()
 
-// NJSThreadDispatcher.getMainExecutionContext();
-
-/*
-  Test for wallet pool instanciation
-static newInstance(name: string, password: optional<string>, httpClient: HttpClient,
-                      webSocketClient: WebSocketClient, pathResolver: PathResolver,
-                      logPrinter: LogPrinter, dispatcher: ThreadDispatcher,
-                      rng: RandomNumberGenerator, backend: DatabaseBackend (in C++),
-                      configuration: DynamicObject): WalletPool;
-*/
-logger('NJSWalletPool Instanciation')
 const NJSWalletPool = new binding.NJSWalletPool(
   'test_instance',
   '',
@@ -314,21 +283,6 @@ const NJSWalletPool = new binding.NJSWalletPool(
   NJSDatabaseBackend,
   NJSDynamicObject,
 )
-
-/*
-  Get wallet pool instance name
-*/
-logger('Test wallet pool instance', NJSWalletPool.getName())
-/*
-  Get wallet count
-*/
-NJSWalletPool.getWalletCount().then(res => {
-  logger('Wallet pool count before wallet creation', res)
-})
-
-/*
-  Create a new wallet
-*/
 
 exports.EVENT_CODE = EVENT_CODE
 
