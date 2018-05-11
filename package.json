@@ -9,6 +9,7 @@
   },
   "gypfile": true,
   "scripts": {
+    "preinstall": "python preinstall.py",
     "gypinstall": "prebuild-install || node-gyp rebuild",
     "prebuild": "prebuild --all --verbose",
     "prebuild-upload": "prebuild --all --strip --verbose --upload",
