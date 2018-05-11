@@ -89,6 +89,12 @@ const EVENT_CODE = {
   SYNCHRONIZATION_SUCCEED_ON_PREVIOUSLY_EMPTY_ACCOUNT: 6,
 }
 
+const TIME_PERIODS = {
+  DAY: 0,
+  WEEK: 1,
+  MONTH: 2,
+}
+
 const NJSHttpClientImpl = {
   execute: async r => {
     const method = r.getMethod()
@@ -297,6 +303,7 @@ exports.instanciateWalletPool = ({ dbPath }) => {
 //                                  -------
 
 exports.EVENT_CODE = EVENT_CODE
+exports.TIME_PERIODS = TIME_PERIODS
 
 exports.getWallet = function getWallet(walletName) {
   return NJSWalletPool.getWallet(walletName)

@@ -3,12 +3,16 @@ import urllib
 import os
 
 baseURL = "https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core"
+filePath = ""
+
 userPlatform = platform.system()
 
 bucketFile = ""
 if userPlatform == "Linux":
+    filePath = "latest/linux"
     bucketFile = "libledger-core.so"
 elif userPlatform == "Darwin":
+    filePath = "latest/macos"
     bucketFile = "libledger-core.dylib"
 elif userPlatform == "Windows":
     bucketFile = "libledger-core.dll"
@@ -17,9 +21,9 @@ else:
 
 opener = urllib.URLopener()
 
-endpointURL = baseURL + "/" + bucketFile
+endpointURL = baseURL + "/" + filePath + "/" + bucketFile
 finalFile = "lib/" + bucketFile
 
-print('Downloading ' + endpointURL + '...')
+print('Downloading ' + endpointURL + ' ...')
 opener.retrieve(endpointURL, finalFile)
 os.chmod(finalFile, 0755)
