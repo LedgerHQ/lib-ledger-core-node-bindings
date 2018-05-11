@@ -8,4 +8,4 @@ opener = urllib.URLopener()
 
 print('Downloading ' + bucketURL + ' ...')
 opener.retrieve(bucketURL, libFile)
-os.chmod(libFile, 755)
+os.chmod(libFile, 0755)
