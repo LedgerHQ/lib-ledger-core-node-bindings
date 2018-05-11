@@ -9,10 +9,9 @@ const MAX_RANDOM = 2684869021
 const signTransaction = require('./signTransaction')
 const { stringToBytesArray, bytesToHex, hexToBytes, bytesArrayToString } = require('./helpers')
 
-/**
- * NJSExecutionContext
- * -------------------
- */
+//                     ----------------------------------
+//                     NJSExecutionContext Implementation
+//                     ----------------------------------
 
 const NJSExecutionContextImpl = {
   execute: runnable => {
@@ -25,10 +24,9 @@ const NJSExecutionContextImpl = {
   delay: (runnable, ms) => setTimeout(() => runnable.run(), ms),
 }
 
-/**
- * ThreadDispatcher
- * ----------------
- */
+//                      -------------------------------
+//                      ThreadDispatcher Implementation
+//                      -------------------------------
 
 const NJSThreadDispatcherImpl = {
   contexts: {},
@@ -69,9 +67,9 @@ NJSThreadDispatcherImpl.newLock = () => {
 
 const NJSThreadDispatcher = new binding.NJSThreadDispatcher(NJSThreadDispatcherImpl)
 
-// ///////////////////////////////////////////
-// ////////HttpClient Implementation//////////
-// //////////////////////////////////////////
+//                         -------------------------
+//                         HttpClient Implementation
+//                         -------------------------
 
 const METHODS = {
   0: 'GET',
@@ -147,57 +145,62 @@ function createHttpConnection(res, err) {
   return new binding.NJSHttpUrlConnection(NJSHttpUrlConnectionImpl)
 }
 
-/*
-  @param: httpRequest: NJSHttprequest
-*/
-
 const NJSHttpClient = new binding.NJSHttpClient(NJSHttpClientImpl)
 
-// ///////////////////////////////////////////////////
-// ////////NJSWebSocketClient Implementation//////////
-// //////////////////////////////////////////////////
+//                     ---------------------------------
+//                     NJSWebSocketClient Implementation
+//                     ---------------------------------
+
 const NJSWebSocketClientImpl = {}
-/*
-  @param: url: string
-  @param: connection: NJSWebSocketConnection
-*/
+
+/**
+ * @param: url: string
+ * @param: connection: NJSWebSocketConnection
+ */
 NJSWebSocketClientImpl.connect = (url, connection) => {
   connection.OnConnect()
 }
-/*
-  @param: connection: NJSWebSocketConnection
-  @param: data: string
-*/
+
+/**
+ * @param: connection: NJSWebSocketConnection
+ * @param: data: string
+ */
 NJSWebSocketClientImpl.send = (connection, data) => {
   connection.OnMessage(data)
 }
-/*
-  @param: connection: NJSWebSocketConnection
-*/
+
+/**
+ * @param: connection: NJSWebSocketConnection
+ */
 NJSWebSocketClientImpl.disconnect = connection => {
   connection.OnClose()
 }
 const NJSWebSocketClient = new binding.NJSWebSocketClient(NJSWebSocketClientImpl)
-// ///////////////////////////////////////////////////
-// ////////NJSPathResolver Implementation////////////
-// //////////////////////////////////////////////////
+
+//                       ------------------------------
+//                       NJSPathResolver Implementation
+//                       ------------------------------
+
 const NJSPathResolverImpl = {}
-/*
-  Resolves the path for a SQLite database file.
-  @param: path: string
-  @return: resolved path
-*/
+
+/**
+ * Resolves the path for a SQLite database file.
+ * @param: path: string
+ * @return: resolved path
+ */
 NJSPathResolverImpl.resolveDatabasePath = pathToResolve => {
   let result = pathToResolve.replace(/\//g, '__')
   result = `./database_${result}`
   const resolvedPath = path.resolve(__dirname, 'tmp', result)
   return resolvedPath
 }
-/*
-  Resolves the path of a single log file..
-  @param: path: string
-  @return: resolved path
-*/
+
+/**
+ * Resolves the path of a single log file
+ *
+ * @param: path: string
+ * @return: resolved path
+ */
 NJSPathResolverImpl.resolveLogFilePath = pathToResolve => {
   let result = pathToResolve.replace(/\//g, '__')
   result = `./log_file_${result}`
@@ -284,6 +287,10 @@ const NJSWalletPool = new binding.NJSWalletPool(
   NJSDynamicObject,
 )
 
+//                                  -------
+//                                  Exports
+//                                  -------
+
 exports.EVENT_CODE = EVENT_CODE
 
 exports.getWallet = function getWallet(walletName) {
@@ -321,7 +328,6 @@ exports.createAccount = async (wallet, hwApp) => {
 }
 
 exports.createWalletUid = function createWalletUid(walletName) {
-  // TODO: use poolname in the wallet uid, if multiple pools
   return crypto
     .createHash('sha256')
     .update(walletName)
