@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const path = require('path')
 const axios = require('axios')
+const fs = require('fs')
 
 const binding = require('bindings')('ledger-core')
 
@@ -177,51 +178,6 @@ NJSWebSocketClientImpl.disconnect = connection => {
 }
 const NJSWebSocketClient = new binding.NJSWebSocketClient(NJSWebSocketClientImpl)
 
-//                       ------------------------------
-//                       NJSPathResolver Implementation
-//                       ------------------------------
-
-const NJSPathResolverImpl = {}
-
-/**
- * Resolves the path for a SQLite database file.
- * @param: path: string
- * @return: resolved path
- */
-NJSPathResolverImpl.resolveDatabasePath = pathToResolve => {
-  let result = pathToResolve.replace(/\//g, '__')
-  result = `./database_${result}`
-  const resolvedPath = path.resolve(__dirname, 'tmp', result)
-  return resolvedPath
-}
-
-/**
- * Resolves the path of a single log file
- *
- * @param: path: string
- * @return: resolved path
- */
-NJSPathResolverImpl.resolveLogFilePath = pathToResolve => {
-  let result = pathToResolve.replace(/\//g, '__')
-  result = `./log_file_${result}`
-  const resolvedPath = path.resolve(__dirname, 'tmp', result)
-  return resolvedPath
-}
-
-/**
- * Resolves the path for a json file
- *
- * @param: path: string
- * @return: resolved path
- */
-NJSPathResolverImpl.resolvePreferencesPath = pathToResolve => {
-  let result = pathToResolve.replace(/\//g, '__')
-  result = `./preferences_${result}`
-  const resolvedPath = path.resolve(__dirname, 'tmp', result)
-  return resolvedPath
-}
-const NJSPathResolver = new binding.NJSPathResolver(NJSPathResolverImpl)
-
 //                         -------------------------
 //                         LogPrinter implementation
 //                         -------------------------
@@ -274,18 +230,67 @@ const NJSDatabaseBackend = new binding.NJSDatabaseBackend()
 const NJSDynamicObject = new binding.NJSDynamicObject()
 const NJSNetworks = new binding.NJSNetworks()
 
-const NJSWalletPool = new binding.NJSWalletPool(
-  'test_instance',
-  '',
-  NJSHttpClient,
-  NJSWebSocketClient,
-  NJSPathResolver,
-  NJSLogPrinter,
-  NJSThreadDispatcher,
-  NJSRandomNumberGenerator,
-  NJSDatabaseBackend,
-  NJSDynamicObject,
-)
+let NJSWalletPool = null
+
+exports.instanciateWalletPool = ({ dbPath }) => {
+  try {
+    fs.mkdirSync(dbPath)
+  } catch (err) {
+    if (err.code !== 'EEXIST') {
+      throw err
+      process.exit(1)
+    }
+  }
+
+  const NJSPathResolverImpl = {}
+
+  /**
+   * Resolves the path of a single log file
+   *
+   * @param: path: string
+   * @return: resolved path
+   */
+  NJSPathResolverImpl.resolveLogFilePath = pathToResolve => {
+    let hash = pathToResolve.replace(/\//g, '__')
+    return path.resolve(dbPath, `./log_file_${hash}`)
+  }
+
+  /**
+   * Resolves the path for a json file
+   *
+   * @param: path: string
+   * @return: resolved path
+   */
+  NJSPathResolverImpl.resolvePreferencesPath = pathToResolve => {
+    let hash = pathToResolve.replace(/\//g, '__')
+    return path.resolve(dbPath, `./preferences_${hash}`)
+  }
+
+  /**
+   * Resolves the path for a SQLite database file.
+   * @param: path: string
+   * @return: resolved path
+   */
+  NJSPathResolverImpl.resolveDatabasePath = pathToResolve => {
+    let hash = pathToResolve.replace(/\//g, '__')
+    return path.resolve(dbPath, `./database_${hash}`)
+  }
+
+  const NJSPathResolver = new binding.NJSPathResolver(NJSPathResolverImpl)
+
+  NJSWalletPool = new binding.NJSWalletPool(
+    'test_instance',
+    '',
+    NJSHttpClient,
+    NJSWebSocketClient,
+    NJSPathResolver,
+    NJSLogPrinter,
+    NJSThreadDispatcher,
+    NJSRandomNumberGenerator,
+    NJSDatabaseBackend,
+    NJSDynamicObject,
+  )
+}
 
 //                                  -------
 //                                  Exports
