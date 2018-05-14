@@ -377,4 +377,14 @@ exports.syncAccount = function syncAccount(account) {
   })
 }
 
+exports.createWalletConfig = (configMap = {}) => {
+  const config = new binding.NJSDynamicObject()
+  for (let i in configMap) {
+    if (configMap.hasOwnProperty(i)) {
+      config.putString(i, configMap[i])
+    }
+  }
+  return config
+}
+
 exports.signTransaction = signTransaction
