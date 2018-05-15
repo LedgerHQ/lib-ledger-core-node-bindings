@@ -363,6 +363,13 @@ declare class NJSOperationListCallback
      */
     declare function onCallback(result: ?Array<NJSOperation>, error: ?Error);
 }
+declare class NJSAddress
+{
+    declare function getDerivationPath(): ?string;
+    declare function toString(): ?string;
+    declare function asBitcoinLikeAddress(): ?NJSBitcoinLikeAddress;
+    static declare function parse(address: string): ?NJSAddress;
+}
 /**Class representing an account */
 declare class NJSAccount
 {
@@ -458,6 +465,8 @@ declare class NJSAccount
      *@param callback, Callback returning, if getLastBlock succeeds, a Block object
      */
     declare function getLastBlock(callback: NJSBlockCallback);
+    /** Get the key used to generate the account */
+    declare function getRestoreKey(): string;
 }
 /**
  *Callback triggered by main completed task,
@@ -1646,6 +1655,12 @@ declare class NJSBitcoinLikeTransactionBuilder
      * @return A reference on the same builder in order to chain calls.
      */
     declare function sendToAddress(amount: NJSAmount, address: string): NJSBitcoinLikeTransactionBuilder;
+    /**
+     * Send all available funds to the given address.
+     * @param address Address of the recipient
+     * @return A reference on the same builder in order to chain calls.
+     */
+    declare function wipeToAddress(address: string): NJSBitcoinLikeTransactionBuilder;
     /**
      * Set the amount of fees per byte (of the raw transaction).
      * @return A reference on the same builder in order to chain calls.

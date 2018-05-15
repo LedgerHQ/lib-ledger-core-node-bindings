@@ -18,6 +18,7 @@
 #include "NJSQueryFilterCpp.hpp"
 #include "NJSOperationQueryCpp.hpp"
 #include "NJSOperationListCallback.hpp"
+#include "NJSAddressCpp.hpp"
 #include "NJSAccountCpp.hpp"
 #include "NJSAmountCallback.hpp"
 #include "NJSAmountListCallback.hpp"
@@ -106,6 +107,7 @@ static void initAll(Local<Object> target)
     NJSQueryFilter::Initialize(target);
     NJSOperationQuery::Initialize(target);
     NJSOperationListCallback::Initialize(target);
+    NJSAddress::Initialize(target);
     NJSAccount::Initialize(target);
     NJSAmountCallback::Initialize(target);
     NJSAmountListCallback::Initialize(target);
