@@ -290,7 +290,7 @@ exports.instanciateWalletPool = ({ dbPath }) => {
   const NJSPathResolver = new binding.NJSPathResolver(NJSPathResolverImpl)
 
   NJSWalletPool = new binding.NJSWalletPool(
-    'test_instance',
+    'ledger_live_desktop',
     '',
     NJSHttpClient,
     NJSWebSocketClient,
