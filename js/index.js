@@ -95,6 +95,11 @@ const TIME_PERIODS = {
   MONTH: 2,
 }
 
+const OPERATION_TYPES = {
+  SEND: 0,
+  RECEIVE: 1,
+}
+
 const NJSHttpClientImpl = {
   execute: async r => {
     const method = r.getMethod()
@@ -304,15 +309,14 @@ exports.instanciateWalletPool = ({ dbPath }) => {
 
 exports.EVENT_CODE = EVENT_CODE
 exports.TIME_PERIODS = TIME_PERIODS
+exports.OPERATION_TYPES = OPERATION_TYPES
 
 exports.getWallet = function getWallet(walletName) {
   return NJSWalletPool.getWallet(walletName)
 }
 
-exports.createWallet = async (name, currency) => {
-  const NJSDynamicObjectWallet = new binding.NJSDynamicObject()
-  const wallet = await NJSWalletPool.createWallet(name, currency, NJSDynamicObjectWallet)
-  // const count = await NJSWalletPool.getWalletCount()
+exports.createWallet = async (name, currency, njsConfig) => {
+  const wallet = await NJSWalletPool.createWallet(name, currency, njsConfig)
   return wallet
 }
 
