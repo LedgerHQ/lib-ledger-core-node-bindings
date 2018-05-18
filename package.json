@@ -1,11 +1,11 @@
 {
-  "name": "ledger-core",
+  "name": "@ledgerhq/ledger-core",
   "version": "1.0.0",
   "description": "Ledger Core Library cross-platform C++ bindings for NodeJs",
   "main": "js/index.js",
   "repository": {
     "type" : "git",
-    "url" : "https://github.com/meriadec/lib-ledger-core-node-bindings"
+    "url" : "https://github.com/LedgerHQ/lib-ledger-core-node-bindings"
   },
   "gypfile": true,
   "scripts": {
