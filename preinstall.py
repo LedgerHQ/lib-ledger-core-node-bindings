@@ -24,6 +24,9 @@ opener = urllib.URLopener()
 endpointURL = baseURL + "/" + filePath + "/" + bucketFile
 finalFile = "lib/" + bucketFile
 
+if not os.path.exists("lib"):
+    os.makedirs("lib")
+
 print('Downloading ' + endpointURL + ' ...')
 opener.retrieve(endpointURL, finalFile)
 os.chmod(finalFile, 0755)
