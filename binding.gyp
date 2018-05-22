@@ -16,7 +16,6 @@
         'include_dirs': ["<!(node -e \"require('nan')\")"],
       },
       'libraries': [
-        '-Wl,-rpath,@loader_path/../../<@(run_path)',
         '-L<!(pwd)/<@(core_library)',
         '-lledger-core'
       ],
@@ -35,7 +34,8 @@
             ],
             'OTHER_LDFLAGS': [
               '-framework IOKit',
-              '-framework CoreFoundation'
+              '-framework CoreFoundation',
+              '-Xlinker -rpath -Xlinker @loader_path/../../<@(run_path)'
             ],
           },
         }
@@ -44,6 +44,12 @@
         'OS=="win"', {
           'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
           'OTHER_CFLAGS': ['-std=c++14']
+        }
+      ],
+      ['OS=="linux"', {
+          'ldflags': [
+            '-Wl,-R,\'$$ORIGIN/../../<@(run_path)\''
+          ]
         }
       ]
     ],
