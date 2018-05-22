@@ -7,6 +7,7 @@
 
 #include "../include/TimePeriod.hpp"
 #include "../include/WalletType.hpp"
+#include "NJSAddressListCallback.hpp"
 #include "NJSAmountCallback.hpp"
 #include "NJSAmountListCallback.hpp"
 #include "NJSBitcoinLikeAccountCpp.hpp"
@@ -15,7 +16,6 @@
 #include "NJSLoggerCpp.hpp"
 #include "NJSOperationQueryCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
-#include "NJSStringListCallback.hpp"
 #include <cstdint>
 #include <memory>
 #include <string>

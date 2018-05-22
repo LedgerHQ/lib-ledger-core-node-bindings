@@ -10,6 +10,7 @@
 
 namespace ledger { namespace core { namespace api {
 
+class AddressListCallback;
 class AmountCallback;
 class AmountListCallback;
 class BitcoinLikeAccount;
@@ -18,7 +19,6 @@ class EventBus;
 class Logger;
 class OperationQuery;
 class Preferences;
-class StringListCallback;
 enum class TimePeriod;
 enum class WalletType;
 
@@ -133,7 +133,7 @@ public:
     virtual bool isInstanceOfRippleLikeAccount() = 0;
 
     /**TODO */
-    virtual void getFreshPublicAddresses(const std::shared_ptr<StringListCallback> & callback) = 0;
+    virtual void getFreshPublicAddresses(const std::shared_ptr<AddressListCallback> & callback) = 0;
 
     /**
      *Get type of wallet to which account belongs
