@@ -16,7 +16,7 @@
         'include_dirs': ["<!(node -e \"require('nan')\")"],
       },
       'libraries': [
-        '-Wl,-rpath,<!(pwd)/<@(run_path)',
+        '-Wl,-rpath,./<@(run_path)',
         '-L<!(pwd)/<@(core_library)',
         '-lledger-core'
       ],
