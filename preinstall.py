@@ -32,3 +32,4 @@ opener.retrieve(endpointURL, finalFile)
 
 if userPlatform != "Linux":
     os.chmod(finalFile, 0755)
+
