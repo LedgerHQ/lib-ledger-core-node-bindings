@@ -1,7 +1,6 @@
 {
   'variables': {
     'core_library%': 'lib',
-    'run_path%': 'lib',
     'source_path%': 'src',
   },
   'targets': [
@@ -19,6 +18,12 @@
         '-L<!(pwd)/<@(core_library)',
         '-lledger-core'
       ],
+      "copies": [
+        {
+          'destination': '<(module_root_dir)/build/Release/',
+          'files': ['<(module_root_dir)/<@(core_library)/libledger-core<(SHARED_LIB_SUFFIX)']
+        }
+      ],
       'conditions': [
         ['OS=="mac"', {
           'LDFLAGS': [
@@ -35,7 +40,7 @@
             'OTHER_LDFLAGS': [
               '-framework IOKit',
               '-framework CoreFoundation',
-              '-Xlinker -rpath -Xlinker @loader_path/../../<@(run_path)'
+              '-Xlinker -rpath -Xlinker @loader_path'
             ],
           },
         }
@@ -48,7 +53,7 @@
       ],
       ['OS=="linux"', {
           'ldflags': [
-            '-Wl,-R,\'$$ORIGIN/../../<@(run_path)\''
+            '-Wl,-R,\'$$ORIGIN\''
           ]
         }
       ]
