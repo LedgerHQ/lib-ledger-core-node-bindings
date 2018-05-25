@@ -28,5 +28,7 @@ if not os.path.exists("lib"):
     os.makedirs("lib")
 
 print('Downloading ' + endpointURL + ' ...')
-opener.retrieve(endpointURL, finalFile)
-os.chmod(finalFile, 0755)
+opener.retrieve(endpointURL, finalFile
+
+if userPlatform != "Linux":
+    os.chmod(finalFile, 0755)
