@@ -2,6 +2,10 @@
   'variables': {
     'core_library%': 'lib',
     'source_path%': 'src',
+    'conditions': [
+      ['OS=="win"', { 'lib_name': 'ledger-core' } ],
+      ['OS!="win"', { 'lib_name': 'libledger-core' } ],
+    ]
   },
   'targets': [
     {
@@ -21,10 +25,7 @@
       "copies": [
         {
           'destination': '<(module_root_dir)/build/Release/',
-          'files': [
-            '<(module_root_dir)/<@(core_library)/libledger-core<(SHARED_LIB_SUFFIX)',
-            '<(module_root_dir)/<@(core_library)/ledger-core.dll'
-            ]
+          'files': [ '<(module_root_dir)/<(core_library)/<(lib_name)<(SHARED_LIB_SUFFIX)' ]
         }
       ],
       'conditions': [
