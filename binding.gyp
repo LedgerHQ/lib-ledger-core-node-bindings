@@ -9,19 +9,22 @@
       'sources': ["<!@(python glob.py <@(source_path) *.cpp *.hpp)"],
       'include_dirs': [
         "<!(node -e \"require('nan')\")",
-        "<!(pwd)/include",
+        "<(module_root_dir)/include",
       ],
       'all_dependent_settings': {
         'include_dirs': ["<!(node -e \"require('nan')\")"],
       },
       'libraries': [
-        '-L<!(pwd)/<@(core_library)',
+        '-L<(module_root_dir)/<@(core_library)',
         '-lledger-core'
       ],
       "copies": [
         {
           'destination': '<(module_root_dir)/build/Release/',
-          'files': ['<(module_root_dir)/<@(core_library)/libledger-core<(SHARED_LIB_SUFFIX)']
+          'files': [
+            '<(module_root_dir)/<@(core_library)/libledger-core<(SHARED_LIB_SUFFIX)',
+            '<(module_root_dir)/<@(core_library)/ledger-core.dll'
+            ]
         }
       ],
       'conditions': [

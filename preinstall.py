@@ -15,7 +15,8 @@ elif userPlatform == "Darwin":
     filePath = "latest/macos"
     bucketFile = "libledger-core.dylib"
 elif userPlatform == "Windows":
-    bucketFile = "libledger-core.dll"
+    filePath = "latest/win/vs2015"
+    bucketFile = "ledger-core.dll"
 else:
     raise Exception('Unsupported platform ' + userPlatform)
 
@@ -30,6 +31,5 @@ if not os.path.exists("lib"):
 print('Downloading ' + endpointURL + ' ...')
 opener.retrieve(endpointURL, finalFile)
 
-if userPlatform != "Linux":
+if userPlatform != "Windows":
     os.chmod(finalFile, 0755)
-
