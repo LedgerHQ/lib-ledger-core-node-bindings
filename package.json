@@ -49,7 +49,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "node-gyp": "^3.6.2",
-    "prebuild": "^6.2.2",
+    "prebuild": "^7.6.0",
     "prettier": "^1.12.1",
     "rimraf": "^2.5.3"
   }
