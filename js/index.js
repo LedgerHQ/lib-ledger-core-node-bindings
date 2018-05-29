@@ -10,6 +10,9 @@ const MAX_RANDOM = 2684869021
 const signTransaction = require('./signTransaction')
 const { stringToBytesArray, bytesToHex, hexToBytes, bytesArrayToString } = require('./helpers')
 
+// export all helpers for convenience
+exports.helpers = require('./helpers')
+
 //                     ----------------------------------
 //                     NJSExecutionContext Implementation
 //                     ----------------------------------
@@ -87,6 +90,14 @@ const EVENT_CODE = {
   SYNCHRONIZATION_FAILED: 4,
   SYNCHRONIZATION_SUCCEED: 5,
   SYNCHRONIZATION_SUCCEED_ON_PREVIOUSLY_EMPTY_ACCOUNT: 6,
+}
+
+const SIGHASH_TYPES = {
+  SIGHASH_ALL: 1,
+  SIGHASH_NONE: 2,
+  SIGHASH_SINGLE: 3,
+  SIGHASH_FORKID: 0x40,
+  SIGHASH_ANYONECANPAY: 0x80,
 }
 
 const TIME_PERIODS = {
@@ -308,6 +319,7 @@ exports.instanciateWalletPool = ({ dbPath }) => {
 //                                  -------
 
 exports.EVENT_CODE = EVENT_CODE
+exports.SIGHASH_TYPES = SIGHASH_TYPES
 exports.TIME_PERIODS = TIME_PERIODS
 exports.OPERATION_TYPES = OPERATION_TYPES
 
