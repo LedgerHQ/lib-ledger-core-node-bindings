@@ -1,5 +1,3 @@
-const binding = require('bindings')('ledger-core')
-
 function bytesArrayToString(bytesArray = []) {
   return bytesArray.map(b => String.fromCharCode(b)).join('')
 }
@@ -30,6 +28,7 @@ function bytesToHex(bytes = []) {
 exports.bytesToHex = bytesToHex
 
 function createBitcoinLikeHelper() {
+  const binding = require('bindings')('ledger-core')
   return new binding.NJSBitcoinLikeHelper()
 }
 exports.createBitcoinLikeHelper = createBitcoinLikeHelper

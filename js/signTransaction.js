@@ -1,14 +1,19 @@
 const { bytesToHex, stringToBytesArray, hexToBytes } = require('./helpers')
 
-async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
+async function signTransaction({
+  hwApp,
+  transaction,
+  sigHashType = SIGASH_TYPES.SIGHASH_ALL,
+  supportsSegwit = true,
+  isSegwit = true,
+}) {
   const rawInputs = transaction.getInputs()
 
   const inputs = await Promise.all(
     rawInputs.map(async input => {
-      // const rawPreviousTransactionHash = await input.getPreviousTxHash()
       const rawPreviousTransaction = await input.getPreviousTransaction()
       const hexPreviousTransaction = bytesToHex(rawPreviousTransaction)
-      const previousTransaction = hwApp.splitTransaction(hexPreviousTransaction, isSegwitSupported)
+      const previousTransaction = hwApp.splitTransaction(hexPreviousTransaction, supportsSegwit)
       const outputIndex = input.getPreviousOutputIndex()
       const sequence = input.getSequence()
       return [
@@ -48,6 +53,8 @@ async function signTransaction(hwApp, transaction, isSegwitSupported = true) {
     changePath,
     outputScriptHex,
     lockTime,
+    sigHashType,
+    isSegwit,
   )
 
   console.log(signedTransaction)
