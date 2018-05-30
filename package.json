@@ -11,8 +11,8 @@
   "scripts": {
     "preinstall": "python preinstall.py",
     "gypinstall": "prebuild-install || node-gyp rebuild",
-    "prebuild": "prebuild --all --verbose",
-    "prebuild-upload": "prebuild --all --strip --verbose --upload",
+    "prebuild": "prebuild -t 1.8.4 -r electron --verbose --include-regex '\\.(node|so|dylib|dll)$'",
+    "prebuild-upload": "yarn prebuild --upload",
     "gypclean": "node-gyp clean",
     "gypconfig": "node-gyp configure",
     "gypbuild": "node-gyp build",
@@ -49,7 +49,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "node-gyp": "^3.6.2",
-    "prebuild": "^6.2.2",
+    "prebuild": "^7.6.0",
     "prettier": "^1.12.1",
     "rimraf": "^2.5.3"
   }

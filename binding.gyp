@@ -1,8 +1,11 @@
 {
   'variables': {
     'core_library%': 'lib',
-    'run_path%': 'lib',
     'source_path%': 'src',
+    'conditions': [
+      ['OS=="win"', { 'lib_name': 'ledger-core' } ],
+      ['OS!="win"', { 'lib_name': 'libledger-core' } ],
+    ]
   },
   'targets': [
     {
@@ -10,14 +13,20 @@
       'sources': ["<!@(python glob.py <@(source_path) *.cpp *.hpp)"],
       'include_dirs': [
         "<!(node -e \"require('nan')\")",
-        "<!(pwd)/include",
+        "<(module_root_dir)/include",
       ],
       'all_dependent_settings': {
         'include_dirs': ["<!(node -e \"require('nan')\")"],
       },
       'libraries': [
-        '-L<!(pwd)/<@(core_library)',
+        '-L<(module_root_dir)/<@(core_library)',
         '-lledger-core'
+      ],
+      "copies": [
+        {
+          'destination': '<(module_root_dir)/build/Release/',
+          'files': [ '<(module_root_dir)/<(core_library)/<(lib_name)<(SHARED_LIB_SUFFIX)' ]
+        }
       ],
       'conditions': [
         ['OS=="mac"', {
@@ -35,7 +44,7 @@
             'OTHER_LDFLAGS': [
               '-framework IOKit',
               '-framework CoreFoundation',
-              '-Xlinker -rpath -Xlinker @loader_path/../../<@(run_path)'
+              '-Xlinker -rpath -Xlinker @loader_path'
             ],
           },
         }
@@ -48,7 +57,7 @@
       ],
       ['OS=="linux"', {
           'ldflags': [
-            '-Wl,-R,\'$$ORIGIN/../../<@(run_path)\''
+            '-Wl,-R,\'$$ORIGIN\''
           ]
         }
       ]
