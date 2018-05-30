@@ -312,6 +312,8 @@ exports.instanciateWalletPool = ({ dbPath }) => {
     NJSDatabaseBackend,
     NJSDynamicObject,
   )
+
+  return NJSWalletPool
 }
 
 //                                  -------
