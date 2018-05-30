@@ -312,6 +312,8 @@ exports.instanciateWalletPool = ({ dbPath }) => {
     NJSDatabaseBackend,
     NJSDynamicObject,
   )
+
+  return NJSWalletPool
 }
 
 //                                  -------
@@ -322,6 +324,12 @@ exports.EVENT_CODE = EVENT_CODE
 exports.SIGHASH_TYPES = SIGHASH_TYPES
 exports.TIME_PERIODS = TIME_PERIODS
 exports.OPERATION_TYPES = OPERATION_TYPES
+
+exports.NJSLedgerCore = binding.NJSLedgerCore
+exports.NJSAmount = binding.NJSAmount
+
+// TODO in future we will deprecate usage of following functions
+// and prefer using the NJSWalletPool object returned from instanciateWalletPool
 
 exports.getWallet = function getWallet(walletName) {
   return NJSWalletPool.getWallet(walletName)
