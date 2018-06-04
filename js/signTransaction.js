@@ -6,6 +6,7 @@ async function signTransaction({
   sigHashType = SIGASH_TYPES.SIGHASH_ALL,
   supportsSegwit = true,
   isSegwit = true,
+  hasTimestamp = false,
 }) {
   const rawInputs = transaction.getInputs()
 
@@ -13,7 +14,7 @@ async function signTransaction({
     rawInputs.map(async input => {
       const rawPreviousTransaction = await input.getPreviousTransaction()
       const hexPreviousTransaction = bytesToHex(rawPreviousTransaction)
-      const previousTransaction = hwApp.splitTransaction(hexPreviousTransaction, supportsSegwit)
+      const previousTransaction = hwApp.splitTransaction(hexPreviousTransaction, supportsSegwit, hasTimestamp)
       const outputIndex = input.getPreviousOutputIndex()
       const sequence = input.getSequence()
       return [
@@ -45,7 +46,7 @@ async function signTransaction({
   const changePath = output ? output.getDerivationPath().toString() : undefined
   const outputScriptHex = bytesToHex(transaction.serializeOutputs())
   const lockTime = transaction.getLockTime()
-  const initialTimestamp = transaction.getTimestamp()
+  const initialTimestamp = hasTimestamp ? transaction.getTimestamp() : undefined
 
   const signedTransaction = await hwApp.createPaymentTransactionNew(
     inputs,
@@ -55,6 +56,7 @@ async function signTransaction({
     lockTime,
     sigHashType,
     isSegwit,
+    initialTimestamp,
   )
 
   console.log(signedTransaction)
