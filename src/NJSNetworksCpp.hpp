@@ -7,6 +7,7 @@
 
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include <memory>
+#include <string>
 
 #include <nan.h>
 #include <node.h>
