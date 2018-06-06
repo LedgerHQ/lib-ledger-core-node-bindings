@@ -3,7 +3,7 @@ const path = require('path')
 const axios = require('axios')
 const fs = require('fs')
 
-const binding = require('bindings')('ledger-core')
+const binding = require('bindings')('ledger-core-node')
 
 const MAX_RANDOM = 2684869021
 

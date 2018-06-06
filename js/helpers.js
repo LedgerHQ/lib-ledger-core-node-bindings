@@ -28,7 +28,7 @@ function bytesToHex(bytes = []) {
 exports.bytesToHex = bytesToHex
 
 function createBitcoinLikeHelper() {
-  const binding = require('bindings')('ledger-core')
+  const binding = require('bindings')('ledger-core-node')
   return new binding.NJSBitcoinLikeHelper()
 }
 exports.createBitcoinLikeHelper = createBitcoinLikeHelper
