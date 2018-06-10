@@ -9,7 +9,7 @@
   },
   'targets': [
     {
-      'target_name': 'ledger-core',
+      'target_name': 'ledger-core-node',
       'sources': ["<!@(python glob.py <@(source_path) *.cpp *.hpp)"],
       'include_dirs': [
         "<!(node -e \"require('nan')\")",
@@ -18,22 +18,16 @@
       'all_dependent_settings': {
         'include_dirs': ["<!(node -e \"require('nan')\")"],
       },
-      'libraries': [
-        '-L<(module_root_dir)/<@(core_library)',
-        '-lledger-core'
-      ],
-      "copies": [
-        {
-          'destination': '<(module_root_dir)/build/Release/',
-          'files': [ '<(module_root_dir)/<(core_library)/<(lib_name)<(SHARED_LIB_SUFFIX)' ]
-        }
-      ],
       'conditions': [
         ['OS=="mac"', {
           'LDFLAGS': [
             '-framework IOKit',
             '-framework CoreFoundation',
             '-DYLD_LIBRARY_PATH '
+          ],
+          'libraries': [
+            '-L<(module_root_dir)/<@(core_library)',
+            '-lledger-core'
           ],
           'xcode_settings': {
             'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
@@ -52,13 +46,33 @@
       [
         'OS=="win"', {
           'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
-          'OTHER_CFLAGS': ['-std=c++14']
+          'OTHER_CFLAGS': ['-std=c++14'],
+          "copies": [
+            {
+              'files': [ '<(module_root_dir)/<(core_library)/<(lib_name)<(SHARED_LIB_SUFFIX)' ],
+              'destination': '<(module_root_dir)/build/Release/',
+            },
+            {
+              'files': [ '<(module_root_dir)/<(core_library)/crypto<(SHARED_LIB_SUFFIX)' ],
+              'destination': '<(module_root_dir)/build/Release/',
+            },
+            {
+              'files': [ '<(module_root_dir)/<(core_library)/<(lib_name).lib' ],
+              'destination': '<(module_root_dir)/build/',
+            },
+          ],
+          'include_dirs': ['$(UCRT_BASED_PATH)'],
+          'libraries': ['ledger-core'],
         }
       ],
       ['OS=="linux"', {
           'ldflags': [
             '-Wl,-R,\'$$ORIGIN\''
-          ]
+          ],
+          'libraries': [
+            '-L<(module_root_dir)/<@(core_library)',
+            '-lledger-core'
+          ],
         }
       ]
     ],

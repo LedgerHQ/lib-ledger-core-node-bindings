@@ -3,7 +3,7 @@ const path = require('path')
 const axios = require('axios')
 const fs = require('fs')
 
-const binding = require('bindings')('ledger-core')
+const binding = require('bindings')('ledger-core-node')
 
 const MAX_RANDOM = 2684869021
 
@@ -297,7 +297,7 @@ exports.instanciateWalletPool = ({ dbPath }) => {
    * @return: resolved path
    */
   NJSPathResolverImpl.resolvePreferencesPath = pathToResolve => {
-    let hash = pathToResolve.replace(/\//g, '__')
+    let hash = `${pathToResolve.replace(/\//g, '__')}_${process.pid}`
     return path.resolve(dbPath, `./preferences_${hash}`)
   }
 
@@ -406,7 +406,9 @@ exports.syncAccount = function syncAccount(account) {
         code === EVENT_CODE.SYNCHRONIZATION_SUCCEED ||
         code === EVENT_CODE.SYNCHRONIZATION_SUCCEED_ON_PREVIOUSLY_EMPTY_ACCOUNT
       ) {
-        resolve()
+        resolve(() => {
+          eventBus.unsubscribe(eventReceiver)
+        })
       }
     })
     const eventBus = account.synchronize()
