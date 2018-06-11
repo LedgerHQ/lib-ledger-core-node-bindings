@@ -22,14 +22,20 @@ else:
 
 opener = urllib.URLopener()
 
-endpointURL = baseURL + "/" + filePath + "/" + bucketFile
+endpointURL = baseURL + "/" + filePath
 finalFile = "lib/" + bucketFile
 
 if not os.path.exists("lib"):
     os.makedirs("lib")
 
-print('Downloading ' + endpointURL + ' ...')
-opener.retrieve(endpointURL, finalFile)
+print('Downloading ' + endpointURL + "/" + bucketFile + ' ...')
+opener.retrieve(endpointURL + "/" + bucketFile, finalFile)
+
+if userPlatform == "Windows":
+    print('Downloading ' + endpointURL + "/ledger-core.lib" + ' ...')
+    opener.retrieve(endpointURL + "/ledger-core.lib", "lib/ledger-core.lib")
+    print('Downloading ' + endpointURL + "/crypto.dll" + ' ...')
+    opener.retrieve(endpointURL + "/crypto.dll", "lib/crypto.dll")
 
 if userPlatform != "Windows":
     os.chmod(finalFile, 0755)
