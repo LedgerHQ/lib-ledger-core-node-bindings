@@ -149,7 +149,7 @@ const NJSHttpClientImpl = {
     })
     let res
     try {
-      res = await axios({ method: METHODS[method], url, headers, data })
+      res = await httpQueryImplementation({ method: METHODS[method], url, headers, data })
       const urlConnection = createHttpConnection(res)
       r.complete(urlConnection, null)
     } catch (err) {
@@ -400,6 +400,7 @@ exports.syncAccount = function syncAccount(account) {
     const eventReceiver = createEventReceiver(e => {
       const code = e.getCode()
       if (code === EVENT_CODE.UNDEFINED || code === EVENT_CODE.SYNCHRONIZATION_FAILED) {
+        // TODO we need to recover the err.message that was provided in HTTP error case..
         return reject(new Error('Sync failed'))
       }
       if (
