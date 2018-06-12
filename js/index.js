@@ -111,6 +111,26 @@ const OPERATION_TYPES = {
   RECEIVE: 1,
 }
 
+let httpQueryImplementation = async arg => {
+  try {
+    const res = await axios(arg)
+    return res
+  } catch (err) {
+    let strErr = ''
+    // handle axios err
+    if (err.response && err.response.data && err.response.data.error) {
+      strErr = err.response.data.error
+    } else {
+      strErr = 'something went wrong'
+    }
+    throw new Error(strErr)
+  }
+}
+
+exports.setHttpQueryImplementation = axiosLikeFunction => {
+  httpQueryImplementation = axiosLikeFunction
+}
+
 const NJSHttpClientImpl = {
   execute: async r => {
     const method = r.getMethod()
@@ -129,19 +149,12 @@ const NJSHttpClientImpl = {
     })
     let res
     try {
-      res = await axios({ method: METHODS[method], url, headers, data })
+      res = await httpQueryImplementation({ method: METHODS[method], url, headers, data })
       const urlConnection = createHttpConnection(res)
       r.complete(urlConnection, null)
     } catch (err) {
-      let strErr = ''
-      // handle axios err
-      if (err.response && err.response.data && err.response.data.error) {
-        strErr = err.response.data.error
-      } else {
-        strErr = 'something went wrong'
-      }
-      const urlConnection = createHttpConnection(res, strErr)
-      r.complete(urlConnection, { code: 0, message: strErr })
+      const urlConnection = createHttpConnection(res, err.message)
+      r.complete(urlConnection, { code: 0, message: err.message })
     }
   },
 }
@@ -387,6 +400,7 @@ exports.syncAccount = function syncAccount(account) {
     const eventReceiver = createEventReceiver(e => {
       const code = e.getCode()
       if (code === EVENT_CODE.UNDEFINED || code === EVENT_CODE.SYNCHRONIZATION_FAILED) {
+        // TODO we need to recover the err.message that was provided in HTTP error case..
         return reject(new Error('Sync failed'))
       }
       if (

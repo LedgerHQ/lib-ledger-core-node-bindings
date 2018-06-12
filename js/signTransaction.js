@@ -8,6 +8,7 @@ async function signTransaction({
   isSegwit = true,
   hasTimestamp = false,
 }) {
+  console.warn('signTransaction in @ledgerhq/ledger-core is deprecated')
   const rawInputs = transaction.getInputs()
 
   const inputs = await Promise.all(
