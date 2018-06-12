@@ -17,6 +17,12 @@
     'all_dependent_settings': {
       'include_dirs': ["<!(node -e \"require('nan')\")"],
     },
+    "copies": [
+      {
+        'files': [ '<(module_root_dir)/<(core_library)/<(lib_name)<(SHARED_LIB_SUFFIX)' ],
+        'destination': '<(module_root_dir)/build/Release/',
+      },
+    ],
     'conditions': [
       ['OS=="mac"', {
         'LDFLAGS': [
