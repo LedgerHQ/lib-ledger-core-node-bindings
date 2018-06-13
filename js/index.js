@@ -400,8 +400,12 @@ exports.syncAccount = function syncAccount(account) {
     const eventReceiver = createEventReceiver(e => {
       const code = e.getCode()
       if (code === EVENT_CODE.UNDEFINED || code === EVENT_CODE.SYNCHRONIZATION_FAILED) {
-        // TODO we need to recover the err.message that was provided in HTTP error case..
-        return reject(new Error('Sync failed'))
+        const payload = e.getPayload()
+        const message = (
+          (payload && payload.getString('EV_SYNC_ERROR_MESSAGE')) ||
+          'Sync failed'
+        ).replace(' (EC_PRIV_KEY_INVALID_FORMAT)', '')
+        return reject(new Error(message))
       }
       if (
         code === EVENT_CODE.SYNCHRONIZATION_SUCCEED ||
