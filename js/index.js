@@ -340,6 +340,7 @@ exports.OPERATION_TYPES = OPERATION_TYPES
 
 exports.NJSLedgerCore = binding.NJSLedgerCore
 exports.NJSAmount = binding.NJSAmount
+exports.NJSAddress = binding.NJSAddress
 
 // TODO in future we will deprecate usage of following functions
 // and prefer using the NJSWalletPool object returned from instanciateWalletPool
