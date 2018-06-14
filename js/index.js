@@ -297,7 +297,7 @@ exports.instanciateWalletPool = ({ dbPath }) => {
    * @return: resolved path
    */
   NJSPathResolverImpl.resolvePreferencesPath = pathToResolve => {
-    let hash = `${pathToResolve.replace(/\//g, '__')}_${process.pid}`
+    let hash = pathToResolve.replace(/\//g, '__')
     return path.resolve(dbPath, `./preferences_${hash}`)
   }
 
