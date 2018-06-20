@@ -9,6 +9,7 @@
   },
   "gypfile": true,
   "scripts": {
+    "preinstall": "python preinstall.py",
     "gypinstall": "prebuild-install || node-gyp rebuild",
     "prebuild": "prebuild -t 1.8.4 -r electron --verbose --include-regex '\\.(node|so|dylib|dll)$'",
     "prebuild-upload": "yarn prebuild --upload",
