@@ -1,6 +1,6 @@
 {
   "name": "@ledgerhq/ledger-core",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "description": "Ledger Core Library cross-platform C++ bindings for NodeJs",
   "main": "js/index.js",
   "repository": {
@@ -9,7 +9,6 @@
   },
   "gypfile": true,
   "scripts": {
-    "preinstall": "python preinstall.py",
     "gypinstall": "prebuild-install || node-gyp rebuild",
     "prebuild": "prebuild -t 1.8.4 -r electron --verbose --include-regex '\\.(node|so|dylib|dll)$'",
     "prebuild-upload": "yarn prebuild --upload",
