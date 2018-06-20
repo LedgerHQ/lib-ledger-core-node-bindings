@@ -16,6 +16,7 @@ class AmountCallback;
 class AmountListCallback;
 class BitcoinLikeAccount;
 class BlockCallback;
+class ErrorCodeCallback;
 class EventBus;
 class Logger;
 class OperationQuery;
@@ -36,6 +37,8 @@ public:
 
     /**Key of the synchronization error code. The code is a stringified version of the value in the ErrorCode enum. */
     static std::string const EV_SYNC_ERROR_CODE;
+
+    static std::string const EV_SYNC_ERROR_CODE_INT;
 
     /**Key of the synchronization error message. The message is stored as a string. */
     static std::string const EV_SYNC_ERROR_MESSAGE;
@@ -173,7 +176,7 @@ public:
      *Erase data (in user's DB) relative to wallet since given date
      *@param date, start date of data deletion
      */
-    virtual void eraseDataSince(const std::chrono::system_clock::time_point & date) = 0;
+    virtual void eraseDataSince(const std::chrono::system_clock::time_point & date, const std::shared_ptr<ErrorCodeCallback> & callback) = 0;
 };
 
 } } }  // namespace ledger::core::api
