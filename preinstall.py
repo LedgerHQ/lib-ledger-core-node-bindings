@@ -2,6 +2,7 @@ import platform
 import urllib
 import os
 
+libCoreVersion = "1.0.0"
 baseURL = "https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core"
 filePath = ""
 
@@ -9,13 +10,13 @@ userPlatform = platform.system()
 
 bucketFile = ""
 if userPlatform == "Linux":
-    filePath = "latest/linux"
+    filePath = libCoreVersion + "/linux"
     bucketFile = "libledger-core.so"
 elif userPlatform == "Darwin":
-    filePath = "latest/macos"
+    filePath = libCoreVersion + "/macos"
     bucketFile = "libledger-core.dylib"
 elif userPlatform == "Windows":
-    filePath = "latest/win/vs2015"
+    filePath = libCoreVersion + "/win/vs2015"
     bucketFile = "ledger-core.dll"
 else:
     raise Exception('Unsupported platform ' + userPlatform)
