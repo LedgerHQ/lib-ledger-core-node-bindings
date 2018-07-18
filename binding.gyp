@@ -43,7 +43,7 @@
           'OTHER_LDFLAGS': [
             '-framework IOKit',
             '-framework CoreFoundation',
-            '-Xlinker -rpath -Xlinker @loader_path'
+            '-Xlinker -rpath -Xlinker @loader_path/'
           ],
         },
       }],
