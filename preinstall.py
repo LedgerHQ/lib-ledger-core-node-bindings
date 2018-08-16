@@ -39,4 +39,4 @@ if userPlatform == "Windows":
     opener.retrieve(endpointURL + "/crypto.dll", "lib/crypto.dll")
 
 if userPlatform != "Windows":
-    os.chmod(finalFile, 0755)
+    os.chmod(finalFile, 0o755)
