@@ -10,14 +10,12 @@
   "gypfile": true,
   "scripts": {
     "preinstall": "python preinstall.py",
-    "gypinstall": "prebuild-install || node-gyp rebuild",
-    "prebuild": "prebuild -t 1.8.4 -r electron --verbose --include-regex '\\.(node|so|dylib|dll)$'",
-    "prebuild-upload": "yarn prebuild --upload",
+    "gypinstall": "node-gyp rebuild",
     "gypclean": "node-gyp clean",
     "gypconfig": "node-gyp configure",
     "gypbuild": "node-gyp build",
     "gypbuildd": "node-gyp build --debug",
-    "clean": "rimraf build node_modules prebuilds",
+    "clean": "rimraf build",
     "gypconfigx": "node-gyp configure -- -f xcode",
     "lint": "eslint js",
     "prettier": "prettier --write \"js/**/*.js\""
@@ -39,9 +37,7 @@
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "bindings": "^1.3.0",
-    "nan": "^2.6.2",
-    "npm": "^5.7.1",
-    "prebuild-install": "^2.2.2"
+    "nan": "^2.6.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
@@ -49,7 +45,6 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "node-gyp": "^3.6.2",
-    "prebuild": "^7.6.0",
     "prettier": "^1.12.1",
     "rimraf": "^2.5.3"
   }
