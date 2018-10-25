@@ -19,7 +19,7 @@ NAN_METHOD(NJSWalletPool::newInstance) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = std::experimental::optional<std::string>();
-    if(!info[1]->IsNull())
+    if(!info[1]->IsNull() && !info[1]->IsUndefined())
     {
         String::Utf8Value string_opt_arg_1(info[1]->ToString());
         auto opt_arg_1 = std::string(*string_opt_arg_1);
@@ -298,7 +298,7 @@ NAN_METHOD(NJSWalletPool::createWallet) {
 
     auto field_arg_1_6 = Nan::Get(info[1]->ToObject(), Nan::New<String>("bitcoinLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
     auto arg_1_6 = std::experimental::optional<BitcoinLikeNetworkParameters>();
-    if(!field_arg_1_6->IsNull())
+    if(!field_arg_1_6->IsNull() && !field_arg_1_6->IsUndefined())
     {
 
         auto field_opt_arg_1_6_1 = Nan::Get(field_arg_1_6->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
@@ -574,7 +574,7 @@ NAN_METHOD(NJSWalletPool::New) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = std::experimental::optional<std::string>();
-    if(!info[1]->IsNull())
+    if(!info[1]->IsNull() && !info[1]->IsUndefined())
     {
         String::Utf8Value string_opt_arg_1(info[1]->ToString());
         auto opt_arg_1 = std::string(*string_opt_arg_1);

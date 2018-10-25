@@ -134,7 +134,7 @@ NAN_METHOD(NJSHttpRequest::complete) {
 
     //Check if parameters have correct types
     std::shared_ptr<NJSHttpUrlConnection> arg_0 = nullptr;
-    if(!info[0]->IsNull())
+    if(!info[0]->IsNull() && !info[0]->IsUndefined())
     {
         Local<Object> njs_opt_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
         NJSHttpUrlConnection *njs_ptr_opt_arg_0 = static_cast<NJSHttpUrlConnection *>(Nan::GetInternalFieldPointer(njs_opt_arg_0,0));
@@ -144,7 +144,7 @@ NAN_METHOD(NJSHttpRequest::complete) {
     }
 
     auto arg_1 = std::experimental::optional<Error>();
-    if(!info[1]->IsNull())
+    if(!info[1]->IsNull() && !info[1]->IsUndefined())
     {
 
         auto field_opt_arg_1_1 = Nan::Get(info[1]->ToObject(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();

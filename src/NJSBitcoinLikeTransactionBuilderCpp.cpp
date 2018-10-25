@@ -455,9 +455,9 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::reset) {
 NAN_METHOD(NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction) {
 
     //Check if method called with right number of arguments
-    if(info.Length() != 2)
+    if(info.Length() != 3)
     {
-        return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction needs 2 arguments");
+        return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction needs 3 arguments");
     }
 
     //Check if parameters have correct types
@@ -507,7 +507,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction) {
 
     auto field_arg_0_6 = Nan::Get(info[0]->ToObject(), Nan::New<String>("bitcoinLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
     auto arg_0_6 = std::experimental::optional<BitcoinLikeNetworkParameters>();
-    if(!field_arg_0_6->IsNull())
+    if(!field_arg_0_6->IsNull() && !field_arg_0_6->IsUndefined())
     {
 
         auto field_opt_arg_0_6_1 = Nan::Get(field_arg_0_6->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
@@ -613,16 +613,23 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction) {
         }
     }
 
+    auto arg_2 = std::experimental::optional<int32_t>();
+    if(!info[2]->IsNull() && !info[2]->IsUndefined())
+    {
+        auto opt_arg_2 = Nan::To<int32_t>(info[2]).FromJust();
+        arg_2.emplace(opt_arg_2);
+    }
 
-    auto result = BitcoinLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1);
+
+    auto result = BitcoinLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1,arg_2);
 
     //Wrap result in node object
-    auto arg_2_wrap = NJSBitcoinLikeTransaction::wrap(result);
-    auto arg_2 = Nan::ObjectWrap::Unwrap<NJSBitcoinLikeTransaction>(arg_2_wrap)->handle();
+    auto arg_3_wrap = NJSBitcoinLikeTransaction::wrap(result);
+    auto arg_3 = Nan::ObjectWrap::Unwrap<NJSBitcoinLikeTransaction>(arg_3_wrap)->handle();
 
 
     //Return result
-    info.GetReturnValue().Set(arg_2);
+    info.GetReturnValue().Set(arg_3);
 }
 
 NAN_METHOD(NJSBitcoinLikeTransactionBuilder::New) {

@@ -359,7 +359,7 @@ NAN_METHOD(NJSAmount::format) {
     Locale arg_0(arg_0_1, arg_0_2, arg_0_3);
 
     auto arg_1 = std::experimental::optional<FormatRules>();
-    if(!info[1]->IsNull())
+    if(!info[1]->IsNull() && !info[1]->IsUndefined())
     {
 
         auto field_opt_arg_1_1 = Nan::Get(info[1]->ToObject(), Nan::New<String>("roundingMode").ToLocalChecked()).ToLocalChecked();
@@ -444,7 +444,7 @@ NAN_METHOD(NJSAmount::fromHex) {
 
     auto field_arg_0_6 = Nan::Get(info[0]->ToObject(), Nan::New<String>("bitcoinLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
     auto arg_0_6 = std::experimental::optional<BitcoinLikeNetworkParameters>();
-    if(!field_arg_0_6->IsNull())
+    if(!field_arg_0_6->IsNull() && !field_arg_0_6->IsUndefined())
     {
 
         auto field_opt_arg_0_6_1 = Nan::Get(field_arg_0_6->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
@@ -607,7 +607,7 @@ NAN_METHOD(NJSAmount::fromLong) {
 
     auto field_arg_0_6 = Nan::Get(info[0]->ToObject(), Nan::New<String>("bitcoinLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
     auto arg_0_6 = std::experimental::optional<BitcoinLikeNetworkParameters>();
-    if(!field_arg_0_6->IsNull())
+    if(!field_arg_0_6->IsNull() && !field_arg_0_6->IsUndefined())
     {
 
         auto field_opt_arg_0_6_1 = Nan::Get(field_arg_0_6->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
@@ -775,7 +775,7 @@ NAN_METHOD(NJSAmount::New) {
 
     auto field_arg_0_6 = Nan::Get(info[0]->ToObject(), Nan::New<String>("bitcoinLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
     auto arg_0_6 = std::experimental::optional<BitcoinLikeNetworkParameters>();
-    if(!field_arg_0_6->IsNull())
+    if(!field_arg_0_6->IsNull() && !field_arg_0_6->IsUndefined())
     {
 
         auto field_opt_arg_0_6_1 = Nan::Get(field_arg_0_6->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
