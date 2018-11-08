@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSBITCOINLIKETRANSACTIONBUILDER_HPP
 
 
+#include "../include/../utils/optional.hpp"
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/BitcoinLikePickingStrategy.hpp"
 #include "../include/Currency.hpp"
@@ -27,16 +28,14 @@ using namespace node;
 using namespace std;
 using namespace ledger::core::api;
 
-class NJSBitcoinLikeTransactionBuilder: public Nan::ObjectWrap {
+class NJSBitcoinLikeTransactionBuilder final {
 public:
 
     static void Initialize(Local<Object> target);
-    virtual ~NJSBitcoinLikeTransactionBuilder() {};
-    NJSBitcoinLikeTransactionBuilder(const std::shared_ptr<ledger::core::api::BitcoinLikeTransactionBuilder> &iBitcoinLikeTransactionBuilder):_BitcoinLikeTransactionBuilder(iBitcoinLikeTransactionBuilder){};
+    NJSBitcoinLikeTransactionBuilder() = delete;
 
-    static Handle<Object> wrap(const std::shared_ptr<ledger::core::api::BitcoinLikeTransactionBuilder> &object);
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::BitcoinLikeTransactionBuilder> &object);
     static Nan::Persistent<ObjectTemplate> BitcoinLikeTransactionBuilder_prototype;
-    std::shared_ptr<ledger::core::api::BitcoinLikeTransactionBuilder> getCppImpl(){return _BitcoinLikeTransactionBuilder;};
 
 private:
     /**
@@ -126,11 +125,14 @@ private:
     /** Reset the current instance to its initial state */
     static NAN_METHOD(reset);
 
+    /**
+     * Parsing unsigned transaction
+     * parsing a tx might change depending on block height we are on (if an update is effective starting from a given hight)
+     */
     static NAN_METHOD(parseRawUnsignedTransaction);
 
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);
-    std::shared_ptr<ledger::core::api::BitcoinLikeTransactionBuilder> _BitcoinLikeTransactionBuilder;
 };
 #endif //DJINNI_GENERATED_NJSBITCOINLIKETRANSACTIONBUILDER_HPP
