@@ -108,7 +108,7 @@ HttpReadBodyResult NJSHttpUrlConnection::readBody()
 
     auto field_fResult_readBody_1 = Nan::Get(checkedResult_readBody->ToObject(), Nan::New<String>("error").ToLocalChecked()).ToLocalChecked();
     auto fResult_readBody_1 = std::experimental::optional<Error>();
-    if(!field_fResult_readBody_1->IsNull())
+    if(!field_fResult_readBody_1->IsNull() && !field_fResult_readBody_1->IsUndefined())
     {
 
         auto field_opt_fResult_readBody_1_1 = Nan::Get(field_fResult_readBody_1->ToObject(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
@@ -125,7 +125,7 @@ HttpReadBodyResult NJSHttpUrlConnection::readBody()
 
     auto field_fResult_readBody_2 = Nan::Get(checkedResult_readBody->ToObject(), Nan::New<String>("data").ToLocalChecked()).ToLocalChecked();
     auto fResult_readBody_2 = std::experimental::optional<std::vector<uint8_t>>();
-    if(!field_fResult_readBody_2->IsNull())
+    if(!field_fResult_readBody_2->IsNull() && !field_fResult_readBody_2->IsUndefined())
     {
         vector<uint8_t> opt_fResult_readBody_2;
         Local<Array> opt_fResult_readBody_2_container = Local<Array>::Cast(field_fResult_readBody_2);

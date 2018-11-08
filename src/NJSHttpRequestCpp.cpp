@@ -140,7 +140,7 @@ NAN_METHOD(NJSHttpRequest::complete) {
     }
 
     auto arg_1 = std::experimental::optional<Error>();
-    if(!info[1]->IsNull())
+    if(!info[1]->IsNull() && !info[1]->IsUndefined())
     {
 
         auto field_opt_arg_1_1 = Nan::Get(info[1]->ToObject(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
