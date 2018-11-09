@@ -10,7 +10,7 @@ namespace djinni {
 namespace js {
 
 template<typename T>
-class ObjectWrapper: protected Nan::ObjectWrap {
+class ObjectWrapper: public Nan::ObjectWrap {
 public:
     static void Wrap(const std::shared_ptr<T>& realObjectPtr, v8::Local<v8::Object> newHandleExposedToJS) {
 		auto wrapper = new ObjectWrapper(realObjectPtr);
