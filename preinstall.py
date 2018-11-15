@@ -2,7 +2,7 @@ import platform
 import urllib
 import os
 
-libCoreVersion = "1.1.4"
+libCoreVersion = "1.1.6"
 baseURL = "https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core"
 filePath = ""
 
