@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSBITCOINLIKEACCOUNT_HPP
 
 
+#include "../include/../utils/optional.hpp"
 #include "NJSBitcoinLikeOutputListCallback.hpp"
 #include "NJSBitcoinLikeTransactionBuilderCpp.hpp"
 #include "NJSBitcoinLikeTransactionCpp.hpp"

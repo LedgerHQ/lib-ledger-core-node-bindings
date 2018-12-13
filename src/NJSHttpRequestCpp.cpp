@@ -131,7 +131,7 @@ NAN_METHOD(NJSHttpRequest::complete) {
 
     //Check if parameters have correct types
     std::shared_ptr<HttpUrlConnection> arg_0 = nullptr;
-    if(!info[0]->IsNull())
+    if(!info[0]->IsNull() && !info[0]->IsUndefined())
     {
         Local<Object> njs_opt_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
         auto opt_arg_0 = djinni::js::ObjectWrapper<HttpUrlConnection>::Unwrap(njs_opt_arg_0);

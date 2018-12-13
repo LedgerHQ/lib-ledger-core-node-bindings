@@ -583,7 +583,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction) {
     }
 
     auto arg_2 = std::experimental::optional<int32_t>();
-    if(!info[2]->IsNull())
+    if(!info[2]->IsNull() && !info[2]->IsUndefined())
     {
         auto opt_arg_2 = Nan::To<int32_t>(info[2]).FromJust();
         arg_2.emplace(opt_arg_2);
@@ -594,6 +594,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction) {
 
     //Wrap result in node object
     auto arg_3 = NJSBitcoinLikeTransaction::wrap(result);
+
 
     //Return result
     info.GetReturnValue().Set(arg_3);
