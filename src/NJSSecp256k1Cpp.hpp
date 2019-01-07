@@ -43,6 +43,13 @@ private:
     static NAN_METHOD(computePubKey);
 
     /**
+     * Generates uncompressed public key from compressed public key.
+     * @param pubKey 33 byte private key (starting with 02 or 03)
+     * @return uncompressed public key (65 bytes starting with 04)
+     */
+    static NAN_METHOD(computeUncompressedPubKey);
+
+    /**
      * Signs message using a given private key
      * @param privKey 32 bytes private key
      * @param data 32 bytes message to sign

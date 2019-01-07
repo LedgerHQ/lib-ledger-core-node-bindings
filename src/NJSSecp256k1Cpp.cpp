@@ -70,6 +70,48 @@ NAN_METHOD(NJSSecp256k1::computePubKey) {
     //Return result
     info.GetReturnValue().Set(arg_2);
 }
+NAN_METHOD(NJSSecp256k1::computeUncompressedPubKey) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSSecp256k1::computeUncompressedPubKey needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    vector<uint8_t> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    {
+        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        {
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            arg_0.emplace_back(arg_0_elem);
+        }
+    }
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<Secp256k1>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSSecp256k1::computeUncompressedPubKey : implementation of Secp256k1 is not valid");
+    }
+
+    auto result = cpp_impl->computeUncompressedPubKey(arg_0);
+
+    //Wrap result in node object
+    Local<Array> arg_1 = Nan::New<Array>();
+    for(size_t arg_1_id = 0; arg_1_id < result.size(); arg_1_id++)
+    {
+        auto arg_1_elem = Nan::New<Uint32>(result[arg_1_id]);
+        arg_1->Set((int)arg_1_id,arg_1_elem);
+    }
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_1);
+}
 NAN_METHOD(NJSSecp256k1::sign) {
 
     //Check if method called with right number of arguments
@@ -260,6 +302,7 @@ void NJSSecp256k1::Initialize(Local<Object> target) {
     //SetPrototypeMethod all methods
     Nan::SetPrototypeMethod(func_template,"createInstance", createInstance);
     Nan::SetPrototypeMethod(func_template,"computePubKey", computePubKey);
+    Nan::SetPrototypeMethod(func_template,"computeUncompressedPubKey", computeUncompressedPubKey);
     Nan::SetPrototypeMethod(func_template,"sign", sign);
     Nan::SetPrototypeMethod(func_template,"verify", verify);
     Nan::SetPrototypeMethod(func_template,"newInstance", newInstance);

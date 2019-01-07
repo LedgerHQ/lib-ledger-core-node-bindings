@@ -9,6 +9,7 @@
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
+#include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/FormatRules.hpp"
 #include "../include/Locale.hpp"
 #include "NJSBigIntCpp.hpp"
