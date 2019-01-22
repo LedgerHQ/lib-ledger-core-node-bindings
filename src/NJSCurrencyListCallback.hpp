@@ -10,6 +10,7 @@
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
 #include "../include/Error.hpp"
+#include "../include/EthereumLikeNetworkParameters.hpp"
 #include <string>
 #include <vector>
 

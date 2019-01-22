@@ -9,6 +9,7 @@
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
+#include "../include/EthereumLikeNetworkParameters.hpp"
 #include "NJSBlockCallback.hpp"
 #include "NJSCurrencyCallback.hpp"
 #include "NJSCurrencyListCallback.hpp"

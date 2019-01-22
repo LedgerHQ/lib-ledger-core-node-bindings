@@ -9,10 +9,12 @@
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
+#include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/OperationType.hpp"
 #include "../include/WalletType.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSBitcoinLikeOperationCpp.hpp"
+#include "NJSEthereumLikeOperationCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
 #include "NJSTrustIndicatorCpp.hpp"
 #include <chrono>
@@ -111,6 +113,12 @@ private:
      *@return BitcoinLikeOperation object
      */
     static NAN_METHOD(asBitcoinLikeOperation);
+
+    /**
+     *Convert operation as Ethereum operation
+     *@return EthereumLikeOperation object
+     */
+    static NAN_METHOD(asEthereumLikeOperation);
 
     static NAN_METHOD(isInstanceOfBitcoinLikeOperation);
 

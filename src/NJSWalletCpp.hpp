@@ -9,6 +9,7 @@
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
+#include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/ExtendedKeyAccountCreationInfo.hpp"
 #include "../include/WalletType.hpp"
 #include "NJSAccountCallback.hpp"

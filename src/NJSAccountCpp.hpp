@@ -13,6 +13,7 @@
 #include "NJSBitcoinLikeAccountCpp.hpp"
 #include "NJSBlockCallback.hpp"
 #include "NJSErrorCodeCallback.hpp"
+#include "NJSEthereumLikeAccountCpp.hpp"
 #include "NJSEventBusCpp.hpp"
 #include "NJSLoggerCpp.hpp"
 #include "NJSOperationQueryCpp.hpp"
@@ -99,6 +100,8 @@ private:
     static NAN_METHOD(getOperationPreferences);
 
     static NAN_METHOD(asBitcoinLikeAccount);
+
+    static NAN_METHOD(asEthereumLikeAccount);
 
     /**
      * asEthereumLikeAccount(): Callback<EthereumLikeAccount>;
