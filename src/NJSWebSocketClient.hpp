@@ -23,6 +23,9 @@ class NJSWebSocketClient: public ledger::core::api::WebSocketClient {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::WebSocketClient> &object);
+    static Nan::Persistent<ObjectTemplate> WebSocketClient_prototype;
     ~NJSWebSocketClient()
     {
         njs_impl.Reset();

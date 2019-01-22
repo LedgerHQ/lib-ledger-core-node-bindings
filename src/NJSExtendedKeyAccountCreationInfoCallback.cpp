@@ -86,6 +86,26 @@ NAN_METHOD(NJSExtendedKeyAccountCreationInfoCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSExtendedKeyAccountCreationInfoCallback::ExtendedKeyAccountCreationInfoCallback_prototype;
+
+Local<Object> NJSExtendedKeyAccountCreationInfoCallback::wrap(const std::shared_ptr<ledger::core::api::ExtendedKeyAccountCreationInfoCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(ExtendedKeyAccountCreationInfoCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::ExtendedKeyAccountCreationInfoCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSExtendedKeyAccountCreationInfoCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSExtendedKeyAccountCreationInfoCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -94,6 +114,9 @@ void NJSExtendedKeyAccountCreationInfoCallback::Initialize(Local<Object> target)
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSExtendedKeyAccountCreationInfoCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    ExtendedKeyAccountCreationInfoCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSExtendedKeyAccountCreationInfoCallback").ToLocalChecked(), func_template->GetFunction());

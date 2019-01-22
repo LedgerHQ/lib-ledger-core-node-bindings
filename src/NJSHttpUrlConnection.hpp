@@ -25,6 +25,9 @@ class NJSHttpUrlConnection: public ledger::core::api::HttpUrlConnection {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::HttpUrlConnection> &object);
+    static Nan::Persistent<ObjectTemplate> HttpUrlConnection_prototype;
     ~NJSHttpUrlConnection()
     {
         njs_impl.Reset();

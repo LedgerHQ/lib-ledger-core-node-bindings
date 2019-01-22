@@ -184,9 +184,9 @@ void NJSEthereumLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"broadcastTransaction", broadcastTransaction);
     Nan::SetPrototypeMethod(func_template,"buildTransaction", buildTransaction);
     Nan::SetPrototypeMethod(func_template,"getERC20Accounts", getERC20Accounts);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeAccount_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEthereumLikeAccount").ToLocalChecked(), func_template->GetFunction());

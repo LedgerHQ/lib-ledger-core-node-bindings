@@ -138,6 +138,26 @@ NAN_METHOD(NJSHashAlgorithmHelper::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSHashAlgorithmHelper::HashAlgorithmHelper_prototype;
+
+Local<Object> NJSHashAlgorithmHelper::wrap(const std::shared_ptr<ledger::core::api::HashAlgorithmHelper> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(HashAlgorithmHelper_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::HashAlgorithmHelper>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSHashAlgorithmHelper::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSHashAlgorithmHelper::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -146,6 +166,9 @@ void NJSHashAlgorithmHelper::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSHashAlgorithmHelper").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    HashAlgorithmHelper_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSHashAlgorithmHelper").ToLocalChecked(), func_template->GetFunction());

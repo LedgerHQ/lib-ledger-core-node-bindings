@@ -164,9 +164,9 @@ void NJSTrustIndicator::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getTrustLevel", getTrustLevel);
     Nan::SetPrototypeMethod(func_template,"getConflictingOperationUids", getConflictingOperationUids);
     Nan::SetPrototypeMethod(func_template,"getOrigin", getOrigin);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     TrustIndicator_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSTrustIndicator").ToLocalChecked(), func_template->GetFunction());

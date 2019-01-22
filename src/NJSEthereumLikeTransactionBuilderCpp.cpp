@@ -745,9 +745,9 @@ void NJSEthereumLikeTransactionBuilder::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"reset", reset);
     Nan::SetPrototypeMethod(func_template,"parseRawUnsignedTransaction", parseRawUnsignedTransaction);
     Nan::SetPrototypeMethod(func_template,"parseRawSignedTransaction", parseRawSignedTransaction);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeTransactionBuilder_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEthereumLikeTransactionBuilder").ToLocalChecked(), func_template->GetFunction());

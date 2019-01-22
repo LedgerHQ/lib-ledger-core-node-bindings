@@ -54,6 +54,26 @@ NAN_METHOD(NJSAccountCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSAccountCallback::AccountCallback_prototype;
+
+Local<Object> NJSAccountCallback::wrap(const std::shared_ptr<ledger::core::api::AccountCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(AccountCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::AccountCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSAccountCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSAccountCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -62,6 +82,9 @@ void NJSAccountCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSAccountCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    AccountCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSAccountCallback").ToLocalChecked(), func_template->GetFunction());

@@ -25,6 +25,9 @@ class NJSBitcoinLikeOutputListCallback: public ledger::core::api::BitcoinLikeOut
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::BitcoinLikeOutputListCallback> &object);
+    static Nan::Persistent<ObjectTemplate> BitcoinLikeOutputListCallback_prototype;
     ~NJSBitcoinLikeOutputListCallback()
     {
         pers_resolver.Reset();

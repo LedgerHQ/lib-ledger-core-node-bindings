@@ -24,6 +24,9 @@ class NJSAccountCallback: public ledger::core::api::AccountCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::AccountCallback> &object);
+    static Nan::Persistent<ObjectTemplate> AccountCallback_prototype;
     ~NJSAccountCallback()
     {
         pers_resolver.Reset();

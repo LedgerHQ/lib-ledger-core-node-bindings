@@ -22,6 +22,9 @@ class NJSI32Callback: public ledger::core::api::I32Callback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::I32Callback> &object);
+    static Nan::Persistent<ObjectTemplate> I32Callback_prototype;
     ~NJSI32Callback()
     {
         pers_resolver.Reset();

@@ -559,9 +559,9 @@ void NJSBitcoinLikeInput::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getSequence", getSequence);
     Nan::SetPrototypeMethod(func_template,"getPreviousTransaction", getPreviousTransaction);
     Nan::SetPrototypeMethod(func_template,"setP2PKHSigScript", setP2PKHSigScript);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeInput_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeInput").ToLocalChecked(), func_template->GetFunction());

@@ -22,6 +22,9 @@ class NJSErrorCodeCallback: public ledger::core::api::ErrorCodeCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::ErrorCodeCallback> &object);
+    static Nan::Persistent<ObjectTemplate> ErrorCodeCallback_prototype;
     ~NJSErrorCodeCallback()
     {
         pers_resolver.Reset();

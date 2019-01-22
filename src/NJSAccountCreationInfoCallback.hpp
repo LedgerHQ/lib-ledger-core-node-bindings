@@ -25,6 +25,9 @@ class NJSAccountCreationInfoCallback: public ledger::core::api::AccountCreationI
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::AccountCreationInfoCallback> &object);
+    static Nan::Persistent<ObjectTemplate> AccountCreationInfoCallback_prototype;
     ~NJSAccountCreationInfoCallback()
     {
         pers_resolver.Reset();

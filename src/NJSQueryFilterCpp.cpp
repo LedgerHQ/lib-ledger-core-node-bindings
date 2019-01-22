@@ -1044,9 +1044,9 @@ void NJSQueryFilter::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"op_or", op_or);
     Nan::SetPrototypeMethod(func_template,"op_and_not", op_and_not);
     Nan::SetPrototypeMethod(func_template,"op_or_not", op_or_not);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     QueryFilter_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSQueryFilter").ToLocalChecked(), func_template->GetFunction());

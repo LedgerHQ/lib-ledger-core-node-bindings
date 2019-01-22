@@ -162,6 +162,26 @@ NAN_METHOD(NJSHttpUrlConnection::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSHttpUrlConnection::HttpUrlConnection_prototype;
+
+Local<Object> NJSHttpUrlConnection::wrap(const std::shared_ptr<ledger::core::api::HttpUrlConnection> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(HttpUrlConnection_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::HttpUrlConnection>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSHttpUrlConnection::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSHttpUrlConnection::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -170,6 +190,9 @@ void NJSHttpUrlConnection::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSHttpUrlConnection").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    HttpUrlConnection_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSHttpUrlConnection").ToLocalChecked(), func_template->GetFunction());

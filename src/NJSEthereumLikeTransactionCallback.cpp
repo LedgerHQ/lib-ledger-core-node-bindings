@@ -54,6 +54,26 @@ NAN_METHOD(NJSEthereumLikeTransactionCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSEthereumLikeTransactionCallback::EthereumLikeTransactionCallback_prototype;
+
+Local<Object> NJSEthereumLikeTransactionCallback::wrap(const std::shared_ptr<ledger::core::api::EthereumLikeTransactionCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(EthereumLikeTransactionCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSEthereumLikeTransactionCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSEthereumLikeTransactionCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -62,6 +82,9 @@ void NJSEthereumLikeTransactionCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSEthereumLikeTransactionCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    EthereumLikeTransactionCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEthereumLikeTransactionCallback").ToLocalChecked(), func_template->GetFunction());

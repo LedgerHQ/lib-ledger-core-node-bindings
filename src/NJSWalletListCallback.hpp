@@ -25,6 +25,9 @@ class NJSWalletListCallback: public ledger::core::api::WalletListCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::WalletListCallback> &object);
+    static Nan::Persistent<ObjectTemplate> WalletListCallback_prototype;
     ~NJSWalletListCallback()
     {
         pers_resolver.Reset();

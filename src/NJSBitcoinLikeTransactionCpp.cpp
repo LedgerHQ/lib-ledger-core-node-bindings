@@ -447,9 +447,9 @@ void NJSBitcoinLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"serializeOutputs", serializeOutputs);
     Nan::SetPrototypeMethod(func_template,"getWitness", getWitness);
     Nan::SetPrototypeMethod(func_template,"getEstimatedSize", getEstimatedSize);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeTransaction_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeTransaction").ToLocalChecked(), func_template->GetFunction());

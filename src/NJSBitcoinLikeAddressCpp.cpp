@@ -275,9 +275,9 @@ void NJSBitcoinLikeAddress::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"toBase58", toBase58);
     Nan::SetPrototypeMethod(func_template,"isP2SH", isP2SH);
     Nan::SetPrototypeMethod(func_template,"isP2PKH", isP2PKH);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeAddress_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeAddress").ToLocalChecked(), func_template->GetFunction());

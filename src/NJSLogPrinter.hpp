@@ -23,6 +23,9 @@ class NJSLogPrinter: public ledger::core::api::LogPrinter {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::LogPrinter> &object);
+    static Nan::Persistent<ObjectTemplate> LogPrinter_prototype;
     ~NJSLogPrinter()
     {
         njs_impl.Reset();

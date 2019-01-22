@@ -212,9 +212,9 @@ void NJSBitcoinLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"broadcastRawTransaction", broadcastRawTransaction);
     Nan::SetPrototypeMethod(func_template,"broadcastTransaction", broadcastTransaction);
     Nan::SetPrototypeMethod(func_template,"buildTransaction", buildTransaction);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeAccount_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeAccount").ToLocalChecked(), func_template->GetFunction());

@@ -23,6 +23,9 @@ class NJSExecutionContext: public ledger::core::api::ExecutionContext {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::ExecutionContext> &object);
+    static Nan::Persistent<ObjectTemplate> ExecutionContext_prototype;
     ~NJSExecutionContext()
     {
         njs_impl.Reset();

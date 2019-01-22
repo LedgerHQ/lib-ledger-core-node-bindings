@@ -66,6 +66,26 @@ NAN_METHOD(NJSOperationListCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSOperationListCallback::OperationListCallback_prototype;
+
+Local<Object> NJSOperationListCallback::wrap(const std::shared_ptr<ledger::core::api::OperationListCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(OperationListCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::OperationListCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSOperationListCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSOperationListCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -74,6 +94,9 @@ void NJSOperationListCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSOperationListCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    OperationListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSOperationListCallback").ToLocalChecked(), func_template->GetFunction());

@@ -203,9 +203,9 @@ void NJSBitcoinLikeExtendedPublicKey::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"deriveHash160", deriveHash160);
     Nan::SetPrototypeMethod(func_template,"toBase58", toBase58);
     Nan::SetPrototypeMethod(func_template,"getRootPath", getRootPath);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeExtendedPublicKey_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeExtendedPublicKey").ToLocalChecked(), func_template->GetFunction());

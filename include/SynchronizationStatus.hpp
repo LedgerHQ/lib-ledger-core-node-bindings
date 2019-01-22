@@ -5,11 +5,18 @@
 #define DJINNI_GENERATED_SYNCHRONIZATIONSTATUS_HPP
 
 #include <cstdint>
+#ifndef LIBCORE_EXPORT
+    #if defined(_MSC_VER) && _MSC_VER <= 1900
+       #include <libcore_export.h>
+    #else
+       #define LIBCORE_EXPORT
+    #endif
+#endif
 
 namespace ledger { namespace core { namespace api {
 
 /**Class of synchronization status constants */
-class SynchronizationStatus {
+class LIBCORE_EXPORT SynchronizationStatus {
 public:
     virtual ~SynchronizationStatus() {}
 

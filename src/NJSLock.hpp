@@ -18,6 +18,9 @@ class NJSLock: public ledger::core::api::Lock {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::Lock> &object);
+    static Nan::Persistent<ObjectTemplate> Lock_prototype;
     ~NJSLock()
     {
         njs_impl.Reset();

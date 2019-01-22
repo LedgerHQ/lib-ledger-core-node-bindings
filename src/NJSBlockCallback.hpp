@@ -22,6 +22,9 @@ class NJSBlockCallback: public ledger::core::api::BlockCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::BlockCallback> &object);
+    static Nan::Persistent<ObjectTemplate> BlockCallback_prototype;
     ~NJSBlockCallback()
     {
         pers_resolver.Reset();

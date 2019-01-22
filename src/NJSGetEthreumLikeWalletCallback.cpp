@@ -66,6 +66,26 @@ NAN_METHOD(NJSGetEthreumLikeWalletCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSGetEthreumLikeWalletCallback::GetEthreumLikeWalletCallback_prototype;
+
+Local<Object> NJSGetEthreumLikeWalletCallback::wrap(const std::shared_ptr<ledger::core::api::GetEthreumLikeWalletCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(GetEthreumLikeWalletCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::GetEthreumLikeWalletCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSGetEthreumLikeWalletCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSGetEthreumLikeWalletCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -74,6 +94,9 @@ void NJSGetEthreumLikeWalletCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSGetEthreumLikeWalletCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    GetEthreumLikeWalletCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSGetEthreumLikeWalletCallback").ToLocalChecked(), func_template->GetFunction());

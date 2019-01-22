@@ -23,6 +23,9 @@ class NJSExtendedKeyAccountCreationInfoCallback: public ledger::core::api::Exten
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::ExtendedKeyAccountCreationInfoCallback> &object);
+    static Nan::Persistent<ObjectTemplate> ExtendedKeyAccountCreationInfoCallback_prototype;
     ~NJSExtendedKeyAccountCreationInfoCallback()
     {
         pers_resolver.Reset();

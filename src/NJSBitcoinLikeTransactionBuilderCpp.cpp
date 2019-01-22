@@ -712,9 +712,9 @@ void NJSBitcoinLikeTransactionBuilder::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"clone", clone);
     Nan::SetPrototypeMethod(func_template,"reset", reset);
     Nan::SetPrototypeMethod(func_template,"parseRawUnsignedTransaction", parseRawUnsignedTransaction);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeTransactionBuilder_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeTransactionBuilder").ToLocalChecked(), func_template->GetFunction());

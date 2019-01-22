@@ -54,9 +54,9 @@ void NJSKeychainEngines::Initialize(Local<Object> target) {
     func_template->SetClassName(Nan::New<String>("NJSKeychainEngines").ToLocalChecked());
 
     //SetPrototypeMethod all methods
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     KeychainEngines_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSKeychainEngines").ToLocalChecked(), func_template->GetFunction());

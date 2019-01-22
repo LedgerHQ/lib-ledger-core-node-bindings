@@ -54,6 +54,26 @@ NAN_METHOD(NJSWalletPoolCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSWalletPoolCallback::WalletPoolCallback_prototype;
+
+Local<Object> NJSWalletPoolCallback::wrap(const std::shared_ptr<ledger::core::api::WalletPoolCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(WalletPoolCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::WalletPoolCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSWalletPoolCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSWalletPoolCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -62,6 +82,9 @@ void NJSWalletPoolCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSWalletPoolCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    WalletPoolCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSWalletPoolCallback").ToLocalChecked(), func_template->GetFunction());

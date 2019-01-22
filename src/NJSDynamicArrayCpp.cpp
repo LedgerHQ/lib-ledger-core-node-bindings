@@ -838,9 +838,9 @@ void NJSDynamicArray::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"isReadOnly", isReadOnly);
     Nan::SetPrototypeMethod(func_template,"newInstance", newInstance);
     Nan::SetPrototypeMethod(func_template,"load", load);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     DynamicArray_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSDynamicArray").ToLocalChecked(), func_template->GetFunction());

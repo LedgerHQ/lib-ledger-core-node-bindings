@@ -952,9 +952,9 @@ void NJSAddress::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getCurrency", getCurrency);
     Nan::SetPrototypeMethod(func_template,"parse", parse);
     Nan::SetPrototypeMethod(func_template,"isValid", isValid);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Address_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSAddress").ToLocalChecked(), func_template->GetFunction());

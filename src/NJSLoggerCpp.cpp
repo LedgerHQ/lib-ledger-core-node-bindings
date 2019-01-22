@@ -169,9 +169,9 @@ void NJSLogger::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"e", e);
     Nan::SetPrototypeMethod(func_template,"w", w);
     Nan::SetPrototypeMethod(func_template,"c", c);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Logger_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSLogger").ToLocalChecked(), func_template->GetFunction());

@@ -22,6 +22,9 @@ class NJSHttpClient: public ledger::core::api::HttpClient {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::HttpClient> &object);
+    static Nan::Persistent<ObjectTemplate> HttpClient_prototype;
     ~NJSHttpClient()
     {
         njs_impl.Reset();

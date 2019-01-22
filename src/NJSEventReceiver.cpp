@@ -44,6 +44,26 @@ NAN_METHOD(NJSEventReceiver::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSEventReceiver::EventReceiver_prototype;
+
+Local<Object> NJSEventReceiver::wrap(const std::shared_ptr<ledger::core::api::EventReceiver> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(EventReceiver_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::EventReceiver>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSEventReceiver::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSEventReceiver::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -52,6 +72,9 @@ void NJSEventReceiver::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSEventReceiver").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    EventReceiver_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEventReceiver").ToLocalChecked(), func_template->GetFunction());

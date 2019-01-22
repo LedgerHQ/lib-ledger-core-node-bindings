@@ -161,9 +161,9 @@ void NJSBitcoinLikeScript::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"head", head);
     Nan::SetPrototypeMethod(func_template,"toString", toString);
     Nan::SetPrototypeMethod(func_template,"parse", parse);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeScript_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeScript").ToLocalChecked(), func_template->GetFunction());

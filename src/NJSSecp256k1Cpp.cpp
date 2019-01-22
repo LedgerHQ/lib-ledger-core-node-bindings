@@ -306,9 +306,9 @@ void NJSSecp256k1::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"sign", sign);
     Nan::SetPrototypeMethod(func_template,"verify", verify);
     Nan::SetPrototypeMethod(func_template,"newInstance", newInstance);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Secp256k1_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSSecp256k1").ToLocalChecked(), func_template->GetFunction());

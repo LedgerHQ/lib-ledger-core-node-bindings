@@ -236,9 +236,9 @@ void NJSBitcoinLikeScriptChunk::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getPushedData", getPushedData);
     Nan::SetPrototypeMethod(func_template,"next", next);
     Nan::SetPrototypeMethod(func_template,"hasNext", hasNext);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeScriptChunk_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeScriptChunk").ToLocalChecked(), func_template->GetFunction());

@@ -304,9 +304,9 @@ void NJSPreferencesEditor::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"putData", putData);
     Nan::SetPrototypeMethod(func_template,"remove", remove);
     Nan::SetPrototypeMethod(func_template,"commit", commit);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     PreferencesEditor_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSPreferencesEditor").ToLocalChecked(), func_template->GetFunction());

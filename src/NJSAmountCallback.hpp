@@ -24,6 +24,9 @@ class NJSAmountCallback: public ledger::core::api::AmountCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::AmountCallback> &object);
+    static Nan::Persistent<ObjectTemplate> AmountCallback_prototype;
     ~NJSAmountCallback()
     {
         pers_resolver.Reset();

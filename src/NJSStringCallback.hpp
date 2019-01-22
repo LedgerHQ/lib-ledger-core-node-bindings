@@ -22,6 +22,9 @@ class NJSStringCallback: public ledger::core::api::StringCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::StringCallback> &object);
+    static Nan::Persistent<ObjectTemplate> StringCallback_prototype;
     ~NJSStringCallback()
     {
         pers_resolver.Reset();

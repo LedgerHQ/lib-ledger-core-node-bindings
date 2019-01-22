@@ -41,6 +41,15 @@
 #include "NJSConfigurationDefaultsCpp.hpp"
 #include "NJSConfigurationCpp.hpp"
 #include "NJSPoolConfigurationCpp.hpp"
+#include "NJSDatabaseError.hpp"
+#include "NJSDatabaseBlob.hpp"
+#include "NJSDatabaseColumn.hpp"
+#include "NJSDatabaseResultRow.hpp"
+#include "NJSDatabaseResultSet.hpp"
+#include "NJSDatabaseStatement.hpp"
+#include "NJSDatabaseConnection.hpp"
+#include "NJSDatabaseConnectionPool.hpp"
+#include "NJSDatabaseEngine.hpp"
 #include "NJSDatabaseBackendCpp.hpp"
 #include "NJSRandomNumberGenerator.hpp"
 #include "NJSEthereumPublicKeyProvider.hpp"
@@ -141,6 +150,15 @@ static void initAll(Local<Object> target)
     NJSConfigurationDefaults::Initialize(target);
     NJSConfiguration::Initialize(target);
     NJSPoolConfiguration::Initialize(target);
+    NJSDatabaseError::Initialize(target);
+    NJSDatabaseBlob::Initialize(target);
+    NJSDatabaseColumn::Initialize(target);
+    NJSDatabaseResultRow::Initialize(target);
+    NJSDatabaseResultSet::Initialize(target);
+    NJSDatabaseStatement::Initialize(target);
+    NJSDatabaseConnection::Initialize(target);
+    NJSDatabaseConnectionPool::Initialize(target);
+    NJSDatabaseEngine::Initialize(target);
     NJSDatabaseBackend::Initialize(target);
     NJSRandomNumberGenerator::Initialize(target);
     NJSEthereumPublicKeyProvider::Initialize(target);

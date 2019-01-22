@@ -461,9 +461,9 @@ void NJSBigInt::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"fromDecimalString", fromDecimalString);
     Nan::SetPrototypeMethod(func_template,"fromIntegerString", fromIntegerString);
     Nan::SetPrototypeMethod(func_template,"fromLong", fromLong);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BigInt_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBigInt").ToLocalChecked(), func_template->GetFunction());

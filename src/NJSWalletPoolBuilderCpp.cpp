@@ -418,9 +418,9 @@ void NJSWalletPoolBuilder::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"setConfiguration", setConfiguration);
     Nan::SetPrototypeMethod(func_template,"build", build);
     Nan::SetPrototypeMethod(func_template,"createInstance", createInstance);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     WalletPoolBuilder_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSWalletPoolBuilder").ToLocalChecked(), func_template->GetFunction());

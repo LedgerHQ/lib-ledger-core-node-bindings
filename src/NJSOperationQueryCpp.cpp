@@ -246,9 +246,9 @@ void NJSOperationQuery::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"complete", complete);
     Nan::SetPrototypeMethod(func_template,"partial", partial);
     Nan::SetPrototypeMethod(func_template,"execute", execute);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     OperationQuery_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSOperationQuery").ToLocalChecked(), func_template->GetFunction());

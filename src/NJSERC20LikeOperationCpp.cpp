@@ -378,9 +378,9 @@ void NJSERC20LikeOperation::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getTime", getTime);
     Nan::SetPrototypeMethod(func_template,"getOperationType", getOperationType);
     Nan::SetPrototypeMethod(func_template,"getStatus", getStatus);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     ERC20LikeOperation_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSERC20LikeOperation").ToLocalChecked(), func_template->GetFunction());

@@ -18,6 +18,9 @@ class NJSEthereumPublicKeyProvider: public ledger::core::api::EthereumPublicKeyP
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::EthereumPublicKeyProvider> &object);
+    static Nan::Persistent<ObjectTemplate> EthereumPublicKeyProvider_prototype;
     ~NJSEthereumPublicKeyProvider()
     {
         njs_impl.Reset();

@@ -23,6 +23,9 @@ class NJSBinaryCallback: public ledger::core::api::BinaryCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::BinaryCallback> &object);
+    static Nan::Persistent<ObjectTemplate> BinaryCallback_prototype;
     ~NJSBinaryCallback()
     {
         pers_resolver.Reset();

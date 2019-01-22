@@ -81,6 +81,26 @@ NAN_METHOD(NJSLock::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSLock::Lock_prototype;
+
+Local<Object> NJSLock::wrap(const std::shared_ptr<ledger::core::api::Lock> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(Lock_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::Lock>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSLock::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSLock::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -89,6 +109,9 @@ void NJSLock::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSLock").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    Lock_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSLock").ToLocalChecked(), func_template->GetFunction());

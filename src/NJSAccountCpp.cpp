@@ -655,9 +655,9 @@ void NJSAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getLastBlock", getLastBlock);
     Nan::SetPrototypeMethod(func_template,"getRestoreKey", getRestoreKey);
     Nan::SetPrototypeMethod(func_template,"eraseDataSince", eraseDataSince);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Account_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSAccount").ToLocalChecked(), func_template->GetFunction());

@@ -198,9 +198,9 @@ void NJSEventPublisher::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"postSticky", postSticky);
     Nan::SetPrototypeMethod(func_template,"relay", relay);
     Nan::SetPrototypeMethod(func_template,"newInstance", newInstance);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EventPublisher_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEventPublisher").ToLocalChecked(), func_template->GetFunction());

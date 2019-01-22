@@ -24,6 +24,9 @@ class NJSBitcoinLikeTransactionCallback: public ledger::core::api::BitcoinLikeTr
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::BitcoinLikeTransactionCallback> &object);
+    static Nan::Persistent<ObjectTemplate> BitcoinLikeTransactionCallback_prototype;
     ~NJSBitcoinLikeTransactionCallback()
     {
         pers_resolver.Reset();

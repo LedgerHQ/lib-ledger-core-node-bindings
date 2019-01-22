@@ -23,6 +23,9 @@ class NJSGetEthreumLikeWalletCallback: public ledger::core::api::GetEthreumLikeW
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::GetEthreumLikeWalletCallback> &object);
+    static Nan::Persistent<ObjectTemplate> GetEthreumLikeWalletCallback_prototype;
     ~NJSGetEthreumLikeWalletCallback()
     {
         njs_impl.Reset();

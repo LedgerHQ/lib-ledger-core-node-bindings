@@ -317,9 +317,9 @@ void NJSPreferences::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getData", getData);
     Nan::SetPrototypeMethod(func_template,"contains", contains);
     Nan::SetPrototypeMethod(func_template,"edit", edit);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Preferences_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSPreferences").ToLocalChecked(), func_template->GetFunction());
