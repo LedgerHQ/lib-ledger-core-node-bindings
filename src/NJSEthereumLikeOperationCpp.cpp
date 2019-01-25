@@ -81,9 +81,9 @@ void NJSEthereumLikeOperation::Initialize(Local<Object> target) {
 
     //SetPrototypeMethod all methods
     Nan::SetPrototypeMethod(func_template,"getTransaction", getTransaction);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeOperation_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEthereumLikeOperation").ToLocalChecked(), func_template->GetFunction());

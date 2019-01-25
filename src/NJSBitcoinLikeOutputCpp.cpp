@@ -253,9 +253,9 @@ void NJSBitcoinLikeOutput::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"parseScript", parseScript);
     Nan::SetPrototypeMethod(func_template,"getAddress", getAddress);
     Nan::SetPrototypeMethod(func_template,"getDerivationPath", getDerivationPath);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeOutput_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeOutput").ToLocalChecked(), func_template->GetFunction());

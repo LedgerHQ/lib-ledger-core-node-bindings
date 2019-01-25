@@ -24,6 +24,9 @@ class NJSEthereumLikeTransactionCallback: public ledger::core::api::EthereumLike
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::EthereumLikeTransactionCallback> &object);
+    static Nan::Persistent<ObjectTemplate> EthereumLikeTransactionCallback_prototype;
     ~NJSEthereumLikeTransactionCallback()
     {
         pers_resolver.Reset();

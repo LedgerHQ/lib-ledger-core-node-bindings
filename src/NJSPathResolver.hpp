@@ -20,6 +20,9 @@ class NJSPathResolver: public ledger::core::api::PathResolver {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::PathResolver> &object);
+    static Nan::Persistent<ObjectTemplate> PathResolver_prototype;
     ~NJSPathResolver()
     {
         njs_impl.Reset();

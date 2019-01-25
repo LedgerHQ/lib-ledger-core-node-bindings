@@ -282,9 +282,9 @@ void NJSDerivationPath::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getParent", getParent);
     Nan::SetPrototypeMethod(func_template,"toArray", toArray);
     Nan::SetPrototypeMethod(func_template,"parse", parse);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     DerivationPath_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSDerivationPath").ToLocalChecked(), func_template->GetFunction());

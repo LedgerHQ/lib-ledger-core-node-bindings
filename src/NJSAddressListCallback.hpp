@@ -25,6 +25,9 @@ class NJSAddressListCallback: public ledger::core::api::AddressListCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::AddressListCallback> &object);
+    static Nan::Persistent<ObjectTemplate> AddressListCallback_prototype;
     ~NJSAddressListCallback()
     {
         pers_resolver.Reset();

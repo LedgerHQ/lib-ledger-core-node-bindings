@@ -5,11 +5,18 @@
 #define DJINNI_GENERATED_SYNCHRONIZERENGINES_HPP
 
 #include <string>
+#ifndef LIBCORE_EXPORT
+    #if defined(_MSC_VER) && _MSC_VER <= 1900
+       #include <libcore_export.h>
+    #else
+       #define LIBCORE_EXPORT
+    #endif
+#endif
 
 namespace ledger { namespace core { namespace api {
 
 /**Class of constants representing the engines to rely on for synchronization */
-class SynchronizerEngines {
+class LIBCORE_EXPORT SynchronizerEngines {
 public:
     virtual ~SynchronizerEngines() {}
 

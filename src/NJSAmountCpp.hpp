@@ -72,7 +72,7 @@ private:
 
     /**
      *Get amount as long
-     *@reutrn 64 bits integer
+     *@return 64 bits integer
      */
     static NAN_METHOD(toLong);
 

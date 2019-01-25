@@ -8,284 +8,30 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-NAN_METHOD(NJSDatabaseBackend::setUsername) {
+NAN_METHOD(NJSDatabaseBackend::getConnectionPoolSize) {
 
     //Check if method called with right number of arguments
-    if(info.Length() != 1)
+    if(info.Length() != 0)
     {
-        return Nan::ThrowError("NJSDatabaseBackend::setUsername needs 1 arguments");
+        return Nan::ThrowError("NJSDatabaseBackend::getConnectionPoolSize needs 0 arguments");
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
     auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
     if(!cpp_impl)
     {
-        return Nan::ThrowError("NJSDatabaseBackend::setUsername : implementation of DatabaseBackend is not valid");
+        return Nan::ThrowError("NJSDatabaseBackend::getConnectionPoolSize : implementation of DatabaseBackend is not valid");
     }
 
-    auto result = cpp_impl->setUsername(arg_0);
+    auto result = cpp_impl->getConnectionPoolSize();
 
     //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setPassword) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setPassword needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setPassword : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setPassword(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
+    auto arg_0 = Nan::New<Int32>(result);
 
     //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setHost) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setHost needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setHost : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setHost(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setHostAddr) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setHostAddr needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setHostAddr : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setHostAddr(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setPort) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setPort needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setPort : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setPort(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setOptions) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setOptions needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setOptions : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setOptions(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setSslMode) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setSslMode needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setSslMode : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setSslMode(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setKerberosName) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setKerberosName needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setKerberosName : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setKerberosName(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setService) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setService needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
-    auto arg_0 = std::string(*string_arg_0);
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setService : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setService(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::setConnectionPoolSize) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setConnectionPoolSize needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::setConnectionPoolSize : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->setConnectionPoolSize(arg_0);
-
-    //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_1);
+    info.GetReturnValue().Set(arg_0);
 }
 NAN_METHOD(NJSDatabaseBackend::enableQueryLogging) {
 
@@ -313,256 +59,6 @@ NAN_METHOD(NJSDatabaseBackend::enableQueryLogging) {
 
     //Return result
     info.GetReturnValue().Set(arg_1);
-}
-NAN_METHOD(NJSDatabaseBackend::getUsername) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getUsername needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getUsername : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getUsername();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getPassword) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getPassword needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getPassword : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getPassword();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getHost) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getHost needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getHost : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getHost();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getHostAddr) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getHostAddr needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getHostAddr : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getHostAddr();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getPort) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getPort needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getPort : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getPort();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getOptions) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getOptions needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getOptions : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getOptions();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getSslMode) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getSslMode needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getSslMode : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getSslMode();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getKerberosName) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getKerberosName needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getKerberosName : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getKerberosName();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getService) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getService needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getService : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getService();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
-NAN_METHOD(NJSDatabaseBackend::getConnectionPoolSize) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getConnectionPoolSize needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSDatabaseBackend::getConnectionPoolSize : implementation of DatabaseBackend is not valid");
-    }
-
-    auto result = cpp_impl->getConnectionPoolSize();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<Int32>(result);
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
 }
 NAN_METHOD(NJSDatabaseBackend::isLoggingEnabled) {
 
@@ -608,24 +104,27 @@ NAN_METHOD(NJSDatabaseBackend::getSqlite3Backend) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
-NAN_METHOD(NJSDatabaseBackend::getPostgreSQLBackend) {
+NAN_METHOD(NJSDatabaseBackend::createBackendFromEngine) {
 
     //Check if method called with right number of arguments
-    if(info.Length() != 0)
+    if(info.Length() != 1)
     {
-        return Nan::ThrowError("NJSDatabaseBackend::getPostgreSQLBackend needs 0 arguments");
+        return Nan::ThrowError("NJSDatabaseBackend::createBackendFromEngine needs 1 arguments");
     }
 
     //Check if parameters have correct types
+    Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
+    auto arg_0 = djinni::js::ObjectWrapper<DatabaseEngine>::Unwrap(njs_arg_0);
 
-    auto result = DatabaseBackend::getPostgreSQLBackend();
+
+    auto result = DatabaseBackend::createBackendFromEngine(arg_0);
 
     //Wrap result in node object
-    auto arg_0 = NJSDatabaseBackend::wrap(result);
+    auto arg_1 = NJSDatabaseBackend::wrap(result);
 
 
     //Return result
-    info.GetReturnValue().Set(arg_0);
+    info.GetReturnValue().Set(arg_1);
 }
 
 NAN_METHOD(NJSDatabaseBackend::New) {
@@ -685,33 +184,14 @@ void NJSDatabaseBackend::Initialize(Local<Object> target) {
     func_template->SetClassName(Nan::New<String>("NJSDatabaseBackend").ToLocalChecked());
 
     //SetPrototypeMethod all methods
-    Nan::SetPrototypeMethod(func_template,"setUsername", setUsername);
-    Nan::SetPrototypeMethod(func_template,"setPassword", setPassword);
-    Nan::SetPrototypeMethod(func_template,"setHost", setHost);
-    Nan::SetPrototypeMethod(func_template,"setHostAddr", setHostAddr);
-    Nan::SetPrototypeMethod(func_template,"setPort", setPort);
-    Nan::SetPrototypeMethod(func_template,"setOptions", setOptions);
-    Nan::SetPrototypeMethod(func_template,"setSslMode", setSslMode);
-    Nan::SetPrototypeMethod(func_template,"setKerberosName", setKerberosName);
-    Nan::SetPrototypeMethod(func_template,"setService", setService);
-    Nan::SetPrototypeMethod(func_template,"setConnectionPoolSize", setConnectionPoolSize);
-    Nan::SetPrototypeMethod(func_template,"enableQueryLogging", enableQueryLogging);
-    Nan::SetPrototypeMethod(func_template,"getUsername", getUsername);
-    Nan::SetPrototypeMethod(func_template,"getPassword", getPassword);
-    Nan::SetPrototypeMethod(func_template,"getHost", getHost);
-    Nan::SetPrototypeMethod(func_template,"getHostAddr", getHostAddr);
-    Nan::SetPrototypeMethod(func_template,"getPort", getPort);
-    Nan::SetPrototypeMethod(func_template,"getOptions", getOptions);
-    Nan::SetPrototypeMethod(func_template,"getSslMode", getSslMode);
-    Nan::SetPrototypeMethod(func_template,"getKerberosName", getKerberosName);
-    Nan::SetPrototypeMethod(func_template,"getService", getService);
     Nan::SetPrototypeMethod(func_template,"getConnectionPoolSize", getConnectionPoolSize);
+    Nan::SetPrototypeMethod(func_template,"enableQueryLogging", enableQueryLogging);
     Nan::SetPrototypeMethod(func_template,"isLoggingEnabled", isLoggingEnabled);
     Nan::SetPrototypeMethod(func_template,"getSqlite3Backend", getSqlite3Backend);
-    Nan::SetPrototypeMethod(func_template,"getPostgreSQLBackend", getPostgreSQLBackend);
+    Nan::SetPrototypeMethod(func_template,"createBackendFromEngine", createBackendFromEngine);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     DatabaseBackend_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSDatabaseBackend").ToLocalChecked(), func_template->GetFunction());

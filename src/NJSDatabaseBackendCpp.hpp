@@ -5,9 +5,9 @@
 #define DJINNI_GENERATED_NJSDATABASEBACKEND_HPP
 
 
+#include "NJSDatabaseEngine.hpp"
 #include <cstdint>
 #include <memory>
-#include <string>
 
 #include <nan.h>
 #include <node.h>
@@ -29,134 +29,31 @@ public:
 
 private:
     /**
-     *Set database's user name
-     *@param username, string
-     *@return DatabaseBackend object, databse with user name set
+     * Get the maximum number of concurrent connection that the backend is able to open on a single database.
+     * @return the size of the connection pool.
      */
-    static NAN_METHOD(setUsername);
+    static NAN_METHOD(getConnectionPoolSize);
 
     /**
-     *Set database's password
-     *@param password, string
-     *@return DatabaseBackend object, database with password set
+     * Enable or disable query logging. By default logging is disabled. Query logging will record every SQL query in log streams.
+     * @return this database backend (to chain configuration calls)
      */
-    static NAN_METHOD(setPassword);
-
-    /**
-     *Set database's host which storing database
-     *@param host, string
-     *@return DatabaseBackend object, database with host set
-     */
-    static NAN_METHOD(setHost);
-
-    /**
-     *Set database's host's address
-     *@param hostAddr, string, host's address
-     *@return DatabaseBackend object, database with host's address set
-     */
-    static NAN_METHOD(setHostAddr);
-
-    /**
-     *Set database's port on which it connects to host
-     *@param port, string
-     *@return DatabaseBackend object, database with port set
-     */
-    static NAN_METHOD(setPort);
-
-    /**
-     *Set database's specific options
-     *@param opts, string
-     *@return DatabaseBackend object, database with options set
-     */
-    static NAN_METHOD(setOptions);
-
-    /**
-     *Set database's mode (SSL) of security interaction of type databse/server
-     *@param mode, string
-     *@return DatabaseBackend object, database with mode set
-     */
-    static NAN_METHOD(setSslMode);
-
-    /**
-     *Set database's Kerberos name used to secure (authentication) user/databse interaction
-     *@param name, string
-     *@return DatabaseBackend object, database with Kerberos name set
-     */
-    static NAN_METHOD(setKerberosName);
-
-    /**TODO */
-    static NAN_METHOD(setService);
-
-    static NAN_METHOD(setConnectionPoolSize);
-
     static NAN_METHOD(enableQueryLogging);
 
     /**
-     *Return database's name
-     *@return string
+     * Return true if query logging is enabled.
+     * @return trye if query logging is enabled, false otherwise.
      */
-    static NAN_METHOD(getUsername);
-
-    /**
-     *Return database's password
-     *@return string
-     */
-    static NAN_METHOD(getPassword);
-
-    /**
-     *Return database's host
-     *@return string
-     */
-    static NAN_METHOD(getHost);
-
-    /**
-     *Return database's host's address
-     *@return string
-     */
-    static NAN_METHOD(getHostAddr);
-
-    /**
-     *Return database's port
-     *@return string
-     */
-    static NAN_METHOD(getPort);
-
-    /**
-     *Return database's options
-     *@return string
-     */
-    static NAN_METHOD(getOptions);
-
-    /**
-     *Return database's SSL mode
-     *@return string
-     */
-    static NAN_METHOD(getSslMode);
-
-    /**
-     *Return database's Kerberos name
-     *@return string
-     */
-    static NAN_METHOD(getKerberosName);
-
-    /**TODO */
-    static NAN_METHOD(getService);
-
-    static NAN_METHOD(getConnectionPoolSize);
-
     static NAN_METHOD(isLoggingEnabled);
 
     /**
-     *Create an instance of SQLite3 database
-     *@return DatabaseBackend object
+     * Create an instance of SQLite3 database
+     * @return DatabaseBackend object
      */
     static NAN_METHOD(getSqlite3Backend);
 
-    /**
-     *Create an instance of PostgreSQL database
-     *@return DatabaseBackend object
-     */
-    static NAN_METHOD(getPostgreSQLBackend);
+    /** Create an instance of PostgreSQL database */
+    static NAN_METHOD(createBackendFromEngine);
 
     static NAN_METHOD(New);
 

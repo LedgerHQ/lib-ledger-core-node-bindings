@@ -7,6 +7,13 @@
 #include <functional>
 #include <iostream>
 #include <string>
+#ifndef LIBCORE_EXPORT
+    #if defined(_MSC_VER) && _MSC_VER <= 1900
+       #include <libcore_export.h>
+    #else
+       #define LIBCORE_EXPORT
+    #endif
+#endif
 
 namespace ledger { namespace core { namespace api {
 
@@ -85,6 +92,8 @@ enum class ErrorCode : int {
     UNKNOWN_BLOCKCHAIN_EXPLORER_ENGINE,
     UNKNOWN_BLOCKCHAIN_OBSERVER_ENGINE,
     UNKNOWN_SYNCHRONIZATION_ENGINE,
+    /** Database error */
+    DATABASE_EXCEPTION,
     /** Wallet transaction */
     NOT_ENOUGH_FUNDS,
     /** Bad cast */
@@ -92,8 +101,8 @@ enum class ErrorCode : int {
     /** Query build */
     LINK_NON_TAIL_FILTER,
 };
-std::string to_string(const ErrorCode& errorCode);
-std::ostream &operator<<(std::ostream &os, const ErrorCode &o);
+LIBCORE_EXPORT  std::string to_string(const ErrorCode& errorCode);
+LIBCORE_EXPORT  std::ostream &operator<<(std::ostream &os, const ErrorCode &o);
 
 } } }  // namespace ledger::core::api
 

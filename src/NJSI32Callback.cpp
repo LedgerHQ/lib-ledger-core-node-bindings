@@ -59,6 +59,26 @@ NAN_METHOD(NJSI32Callback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSI32Callback::I32Callback_prototype;
+
+Local<Object> NJSI32Callback::wrap(const std::shared_ptr<ledger::core::api::I32Callback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(I32Callback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::I32Callback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSI32Callback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSI32Callback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -67,6 +87,9 @@ void NJSI32Callback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSI32Callback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    I32Callback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSI32Callback").ToLocalChecked(), func_template->GetFunction());

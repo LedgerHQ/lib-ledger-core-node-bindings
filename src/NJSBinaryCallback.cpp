@@ -65,6 +65,26 @@ NAN_METHOD(NJSBinaryCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSBinaryCallback::BinaryCallback_prototype;
+
+Local<Object> NJSBinaryCallback::wrap(const std::shared_ptr<ledger::core::api::BinaryCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(BinaryCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::BinaryCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSBinaryCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSBinaryCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -73,6 +93,9 @@ void NJSBinaryCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSBinaryCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    BinaryCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBinaryCallback").ToLocalChecked(), func_template->GetFunction());

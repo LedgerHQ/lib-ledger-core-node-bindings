@@ -24,6 +24,26 @@ NAN_METHOD(NJSEthereumPublicKeyProvider::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSEthereumPublicKeyProvider::EthereumPublicKeyProvider_prototype;
+
+Local<Object> NJSEthereumPublicKeyProvider::wrap(const std::shared_ptr<ledger::core::api::EthereumPublicKeyProvider> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(EthereumPublicKeyProvider_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::EthereumPublicKeyProvider>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSEthereumPublicKeyProvider::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSEthereumPublicKeyProvider::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -32,6 +52,9 @@ void NJSEthereumPublicKeyProvider::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSEthereumPublicKeyProvider").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    EthereumPublicKeyProvider_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEthereumPublicKeyProvider").ToLocalChecked(), func_template->GetFunction());

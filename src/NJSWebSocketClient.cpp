@@ -86,6 +86,26 @@ NAN_METHOD(NJSWebSocketClient::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSWebSocketClient::WebSocketClient_prototype;
+
+Local<Object> NJSWebSocketClient::wrap(const std::shared_ptr<ledger::core::api::WebSocketClient> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(WebSocketClient_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::WebSocketClient>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSWebSocketClient::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSWebSocketClient::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -94,6 +114,9 @@ void NJSWebSocketClient::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSWebSocketClient").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    WebSocketClient_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSWebSocketClient").ToLocalChecked(), func_template->GetFunction());

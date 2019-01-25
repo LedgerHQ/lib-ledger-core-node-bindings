@@ -8,6 +8,13 @@
 #include <cstdint>
 #include <memory>
 #include <string>
+#ifndef LIBCORE_EXPORT
+    #if defined(_MSC_VER) && _MSC_VER <= 1900
+       #include <libcore_export.h>
+    #else
+       #define LIBCORE_EXPORT
+    #endif
+#endif
 
 namespace ledger { namespace core { namespace api {
 
@@ -18,7 +25,7 @@ struct FormatRules;
 struct Locale;
 
 /**Class representing amount of transaction, output, inputs ... */
-class Amount {
+class LIBCORE_EXPORT Amount {
 public:
     virtual ~Amount() {}
 
@@ -58,7 +65,7 @@ public:
 
     /**
      *Get amount as long
-     *@reutrn 64 bits integer
+     *@return 64 bits integer
      */
     virtual int64_t toLong() = 0;
 

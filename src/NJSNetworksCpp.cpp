@@ -170,9 +170,9 @@ void NJSNetworks::Initialize(Local<Object> target) {
     //SetPrototypeMethod all methods
     Nan::SetPrototypeMethod(func_template,"bitcoin", bitcoin);
     Nan::SetPrototypeMethod(func_template,"ethereum", ethereum);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Networks_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSNetworks").ToLocalChecked(), func_template->GetFunction());

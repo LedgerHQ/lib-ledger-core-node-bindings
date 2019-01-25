@@ -44,6 +44,26 @@ NAN_METHOD(NJSHttpClient::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSHttpClient::HttpClient_prototype;
+
+Local<Object> NJSHttpClient::wrap(const std::shared_ptr<ledger::core::api::HttpClient> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(HttpClient_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::HttpClient>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSHttpClient::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSHttpClient::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -52,6 +72,9 @@ void NJSHttpClient::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSHttpClient").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    HttpClient_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSHttpClient").ToLocalChecked(), func_template->GetFunction());

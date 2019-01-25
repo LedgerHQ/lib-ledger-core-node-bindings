@@ -243,9 +243,9 @@ void NJSERC20LikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getOperations", getOperations);
     Nan::SetPrototypeMethod(func_template,"getTransferToAddressData", getTransferToAddressData);
     Nan::SetPrototypeMethod(func_template,"queryOperations", queryOperations);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     ERC20LikeAccount_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSERC20LikeAccount").ToLocalChecked(), func_template->GetFunction());

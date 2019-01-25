@@ -22,6 +22,9 @@ class NJSEventReceiver: public ledger::core::api::EventReceiver {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::EventReceiver> &object);
+    static Nan::Persistent<ObjectTemplate> EventReceiver_prototype;
     ~NJSEventReceiver()
     {
         njs_impl.Reset();

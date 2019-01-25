@@ -54,9 +54,9 @@ void NJSConfigurationDefaults::Initialize(Local<Object> target) {
     func_template->SetClassName(Nan::New<String>("NJSConfigurationDefaults").ToLocalChecked());
 
     //SetPrototypeMethod all methods
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     ConfigurationDefaults_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSConfigurationDefaults").ToLocalChecked(), func_template->GetFunction());

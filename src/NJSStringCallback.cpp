@@ -59,6 +59,26 @@ NAN_METHOD(NJSStringCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSStringCallback::StringCallback_prototype;
+
+Local<Object> NJSStringCallback::wrap(const std::shared_ptr<ledger::core::api::StringCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(StringCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::StringCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSStringCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSStringCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -67,6 +87,9 @@ void NJSStringCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSStringCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    StringCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSStringCallback").ToLocalChecked(), func_template->GetFunction());

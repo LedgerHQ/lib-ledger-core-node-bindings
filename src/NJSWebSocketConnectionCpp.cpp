@@ -162,9 +162,9 @@ void NJSWebSocketConnection::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"onMessage", onMessage);
     Nan::SetPrototypeMethod(func_template,"onError", onError);
     Nan::SetPrototypeMethod(func_template,"getConnectionId", getConnectionId);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     WebSocketConnection_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSWebSocketConnection").ToLocalChecked(), func_template->GetFunction());

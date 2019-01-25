@@ -133,9 +133,9 @@ void NJSEthereumLikeBlock::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getHash", getHash);
     Nan::SetPrototypeMethod(func_template,"getHeight", getHeight);
     Nan::SetPrototypeMethod(func_template,"getTime", getTime);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeBlock_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEthereumLikeBlock").ToLocalChecked(), func_template->GetFunction());

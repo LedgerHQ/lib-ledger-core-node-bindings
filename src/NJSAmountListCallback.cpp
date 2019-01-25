@@ -66,6 +66,26 @@ NAN_METHOD(NJSAmountListCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSAmountListCallback::AmountListCallback_prototype;
+
+Local<Object> NJSAmountListCallback::wrap(const std::shared_ptr<ledger::core::api::AmountListCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(AmountListCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::AmountListCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSAmountListCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSAmountListCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -74,6 +94,9 @@ void NJSAmountListCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSAmountListCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    AmountListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSAmountListCallback").ToLocalChecked(), func_template->GetFunction());

@@ -697,9 +697,9 @@ void NJSOperation::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"isComplete", isComplete);
     Nan::SetPrototypeMethod(func_template,"getWalletType", getWalletType);
     Nan::SetPrototypeMethod(func_template,"getCurrency", getCurrency);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Operation_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSOperation").ToLocalChecked(), func_template->GetFunction());

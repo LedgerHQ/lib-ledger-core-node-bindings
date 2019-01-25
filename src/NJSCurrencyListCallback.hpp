@@ -27,6 +27,9 @@ class NJSCurrencyListCallback: public ledger::core::api::CurrencyListCallback {
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::CurrencyListCallback> &object);
+    static Nan::Persistent<ObjectTemplate> CurrencyListCallback_prototype;
     ~NJSCurrencyListCallback()
     {
         pers_resolver.Reset();

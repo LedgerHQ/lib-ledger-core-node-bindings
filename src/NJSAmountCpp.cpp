@@ -1103,9 +1103,9 @@ void NJSAmount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"format", format);
     Nan::SetPrototypeMethod(func_template,"fromHex", fromHex);
     Nan::SetPrototypeMethod(func_template,"fromLong", fromLong);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Amount_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSAmount").ToLocalChecked(), func_template->GetFunction());

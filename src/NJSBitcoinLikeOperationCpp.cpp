@@ -81,9 +81,9 @@ void NJSBitcoinLikeOperation::Initialize(Local<Object> target) {
 
     //SetPrototypeMethod all methods
     Nan::SetPrototypeMethod(func_template,"getTransaction", getTransaction);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeOperation_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBitcoinLikeOperation").ToLocalChecked(), func_template->GetFunction());

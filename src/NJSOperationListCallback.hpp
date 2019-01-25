@@ -25,6 +25,9 @@ class NJSOperationListCallback: public ledger::core::api::OperationListCallback 
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::OperationListCallback> &object);
+    static Nan::Persistent<ObjectTemplate> OperationListCallback_prototype;
     ~NJSOperationListCallback()
     {
         pers_resolver.Reset();

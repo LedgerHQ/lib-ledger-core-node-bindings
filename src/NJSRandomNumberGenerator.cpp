@@ -119,6 +119,26 @@ NAN_METHOD(NJSRandomNumberGenerator::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSRandomNumberGenerator::RandomNumberGenerator_prototype;
+
+Local<Object> NJSRandomNumberGenerator::wrap(const std::shared_ptr<ledger::core::api::RandomNumberGenerator> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(RandomNumberGenerator_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::RandomNumberGenerator>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSRandomNumberGenerator::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSRandomNumberGenerator::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -127,6 +147,9 @@ void NJSRandomNumberGenerator::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSRandomNumberGenerator").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    RandomNumberGenerator_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSRandomNumberGenerator").ToLocalChecked(), func_template->GetFunction());

@@ -5,10 +5,17 @@
 #define DJINNI_GENERATED_CONFIGURATION_HPP
 
 #include <string>
+#ifndef LIBCORE_EXPORT
+    #if defined(_MSC_VER) && _MSC_VER <= 1900
+       #include <libcore_export.h>
+    #else
+       #define LIBCORE_EXPORT
+    #endif
+#endif
 
 namespace ledger { namespace core { namespace api {
 
-class Configuration {
+class LIBCORE_EXPORT Configuration {
 public:
     virtual ~Configuration() {}
 

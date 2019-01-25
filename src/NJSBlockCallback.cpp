@@ -71,6 +71,26 @@ NAN_METHOD(NJSBlockCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSBlockCallback::BlockCallback_prototype;
+
+Local<Object> NJSBlockCallback::wrap(const std::shared_ptr<ledger::core::api::BlockCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(BlockCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::BlockCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSBlockCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSBlockCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -79,6 +99,9 @@ void NJSBlockCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSBlockCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    BlockCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSBlockCallback").ToLocalChecked(), func_template->GetFunction());

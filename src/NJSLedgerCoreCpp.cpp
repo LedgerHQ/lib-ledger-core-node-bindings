@@ -92,9 +92,9 @@ void NJSLedgerCore::Initialize(Local<Object> target) {
     //SetPrototypeMethod all methods
     Nan::SetPrototypeMethod(func_template,"getStringVersion", getStringVersion);
     Nan::SetPrototypeMethod(func_template,"getIntVersion", getIntVersion);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     LedgerCore_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSLedgerCore").ToLocalChecked(), func_template->GetFunction());

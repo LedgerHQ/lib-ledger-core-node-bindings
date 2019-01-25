@@ -195,9 +195,9 @@ void NJSEthereumLikeAddress::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getKeccakHash", getKeccakHash);
     Nan::SetPrototypeMethod(func_template,"getNetworkParameters", getNetworkParameters);
     Nan::SetPrototypeMethod(func_template,"toEIP55", toEIP55);
+    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeAddress_prototype.Reset(objectTemplate);
-    Nan::SetPrototypeMethod(func_template,"isNull", isNull);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSEthereumLikeAddress").ToLocalChecked(), func_template->GetFunction());

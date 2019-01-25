@@ -187,6 +187,26 @@ NAN_METHOD(NJSCurrencyListCallback::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSCurrencyListCallback::CurrencyListCallback_prototype;
+
+Local<Object> NJSCurrencyListCallback::wrap(const std::shared_ptr<ledger::core::api::CurrencyListCallback> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(CurrencyListCallback_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::CurrencyListCallback>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSCurrencyListCallback::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSCurrencyListCallback::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -195,6 +215,9 @@ void NJSCurrencyListCallback::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSCurrencyListCallback").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    CurrencyListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSCurrencyListCallback").ToLocalChecked(), func_template->GetFunction());

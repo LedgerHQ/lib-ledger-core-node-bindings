@@ -93,6 +93,26 @@ NAN_METHOD(NJSPathResolver::New) {
     info.GetReturnValue().Set(info.This());
 }
 
+
+Nan::Persistent<ObjectTemplate> NJSPathResolver::PathResolver_prototype;
+
+Local<Object> NJSPathResolver::wrap(const std::shared_ptr<ledger::core::api::PathResolver> &object) {
+    Nan::EscapableHandleScope scope;
+    Local<ObjectTemplate> local_prototype = Nan::New(PathResolver_prototype);
+
+    Local<Object> obj;
+    if(!local_prototype.IsEmpty())
+    {
+        obj = local_prototype->NewInstance();
+        djinni::js::ObjectWrapper<ledger::core::api::PathResolver>::Wrap(object, obj);
+    }
+    else
+    {
+        Nan::ThrowError("NJSPathResolver::wrap: object template not valid");
+    }
+    return scope.Escape(obj);
+}
+
 void NJSPathResolver::Initialize(Local<Object> target) {
     Nan::HandleScope scope;
 
@@ -101,6 +121,9 @@ void NJSPathResolver::Initialize(Local<Object> target) {
     objectTemplate->SetInternalFieldCount(1);
 
     func_template->SetClassName(Nan::New<String>("NJSPathResolver").ToLocalChecked());
+    Nan::SetPrototypeMethod(func_template,"New", New);
+    //Set object prototype
+    PathResolver_prototype.Reset(objectTemplate);
 
     //Add template to target
     target->Set(Nan::New<String>("NJSPathResolver").ToLocalChecked(), func_template->GetFunction());

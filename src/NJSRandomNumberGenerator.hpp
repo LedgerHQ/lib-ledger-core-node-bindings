@@ -21,6 +21,9 @@ class NJSRandomNumberGenerator: public ledger::core::api::RandomNumberGenerator 
 public:
 
     static void Initialize(Local<Object> target);
+
+    static Local<Object> wrap(const std::shared_ptr<ledger::core::api::RandomNumberGenerator> &object);
+    static Nan::Persistent<ObjectTemplate> RandomNumberGenerator_prototype;
     ~NJSRandomNumberGenerator()
     {
         njs_impl.Reset();
