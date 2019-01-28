@@ -1856,6 +1856,8 @@ declare class NJSPreferencesEditor
     declare function remove(key: string): NJSPreferencesEditor;
     /** Persists the changes to the Preferences. */
     declare function commit();
+    /** Clear all preferences. */
+    declare function clear();
 }
 /**Class of constants to set Bitcoin like wallet configurations */
 declare class NJSBitcoinLikeWalletConfiguration
@@ -2249,6 +2251,25 @@ declare class NJSWalletPool
      *@param date, start date of data deletion
      */
     declare function eraseDataSince(date: Date, callback: NJSErrorCodeCallback);
+    /**
+     * Reset wallet pool.
+     *
+     * Resetting the wallet pool is an irreversible fresh reset of the whole wallet pool
+     * and all of its created (sub-)objects (wallets, accounts, transactions, etc.). Please
+     * consider a less destructive option before opting to use this. However, if you’re
+     * looking for a way to end up as if you were in a “fresh install” situation, this is
+     * the function to go to.
+     *
+     * Final warning: this function effectively swipes off everything. You’ve been warned.
+     *
+     * > Note: when calling that function, you must re-create a WalletPool as all objects
+     * > got destroyed. Consider restarting / exiting your application right after calling
+     * > that function. You are also highly advised to run that function on a code path
+     * > that doesn’t include having lots of objects in memory.
+     *
+     * The return value is always true and doesn’t convey any useful information for now.
+     */
+    declare function freshResetAll(callback: NJSErrorCodeCallback);
 }
 /**
  *Callback triggered by main completed task,
