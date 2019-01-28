@@ -87,6 +87,9 @@ private:
     /** Persists the changes to the Preferences. */
     static NAN_METHOD(commit);
 
+    /** Clear all preferences. */
+    static NAN_METHOD(clear);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

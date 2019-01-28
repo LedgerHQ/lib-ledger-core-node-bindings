@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #ifndef LIBCORE_EXPORT
-    #if defined(_MSC_VER) && _MSC_VER <= 1900
+    #if defined(_MSC_VER)
        #include <libcore_export.h>
     #else
        #define LIBCORE_EXPORT
@@ -80,6 +80,9 @@ public:
 
     /** Persists the changes to the Preferences. */
     virtual void commit() = 0;
+
+    /** Clear all preferences. */
+    virtual void clear() = 0;
 };
 
 } } }  // namespace ledger::core::api

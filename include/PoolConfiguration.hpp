@@ -6,7 +6,7 @@
 
 #include <string>
 #ifndef LIBCORE_EXPORT
-    #if defined(_MSC_VER) && _MSC_VER <= 1900
+    #if defined(_MSC_VER)
        #include <libcore_export.h>
     #else
        #define LIBCORE_EXPORT
@@ -21,6 +21,13 @@ public:
     virtual ~PoolConfiguration() {}
 
     static std::string const DATABASE_NAME;
+
+    /**
+     * Enable internal logging.
+     *
+     * Set to true by default.
+     */
+    static std::string const ENABLE_INTERNAL_LOGGING;
 };
 
 } } }  // namespace ledger::core::api

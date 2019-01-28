@@ -584,6 +584,31 @@ NAN_METHOD(NJSWalletPool::eraseDataSince) {
     cpp_impl->eraseDataSince(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSWalletPool::freshResetAll) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSWalletPool::freshResetAll needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSErrorCodeCallback *njs_ptr_arg_0 = new NJSErrorCodeCallback(arg_0_resolver);
+    std::shared_ptr<NJSErrorCodeCallback> arg_0(njs_ptr_arg_0);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWalletPool::freshResetAll : implementation of WalletPool is not valid");
+    }
+    cpp_impl->freshResetAll(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
+}
 
 NAN_METHOD(NJSWalletPool::New) {
     //Only new allowed
@@ -697,6 +722,7 @@ void NJSWalletPool::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getLastBlock", getLastBlock);
     Nan::SetPrototypeMethod(func_template,"getEventBus", getEventBus);
     Nan::SetPrototypeMethod(func_template,"eraseDataSince", eraseDataSince);
+    Nan::SetPrototypeMethod(func_template,"freshResetAll", freshResetAll);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     WalletPool_prototype.Reset(objectTemplate);

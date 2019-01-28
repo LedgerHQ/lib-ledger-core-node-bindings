@@ -250,6 +250,24 @@ NAN_METHOD(NJSPreferencesEditor::commit) {
     }
     cpp_impl->commit();
 }
+NAN_METHOD(NJSPreferencesEditor::clear) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSPreferencesEditor::clear needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSPreferencesEditor::clear : implementation of PreferencesEditor is not valid");
+    }
+    cpp_impl->clear();
+}
 
 NAN_METHOD(NJSPreferencesEditor::New) {
     //Only new allowed
@@ -304,6 +322,7 @@ void NJSPreferencesEditor::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"putData", putData);
     Nan::SetPrototypeMethod(func_template,"remove", remove);
     Nan::SetPrototypeMethod(func_template,"commit", commit);
+    Nan::SetPrototypeMethod(func_template,"clear", clear);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     PreferencesEditor_prototype.Reset(objectTemplate);
