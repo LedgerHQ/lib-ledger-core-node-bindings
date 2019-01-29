@@ -9,7 +9,7 @@
   },
   "gypfile": true,
   "scripts": {
-    "preinstall": "python preinstall.py",
+    "preinstall": "python2 preinstall.py",
     "gypinstall": "node-gyp rebuild",
     "gypclean": "node-gyp clean",
     "gypconfig": "node-gyp configure",
