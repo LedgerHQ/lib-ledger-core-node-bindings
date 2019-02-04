@@ -37,34 +37,34 @@ private:
     /** Get the hash of the transaction. */
     static NAN_METHOD(getHash);
 
-    /** Get the nonce of the transaction : sequence number issued by originating EOA */
+    /** Get the nonce of the transaction : sequence number issued by originating EOA. */
     static NAN_METHOD(getNonce);
 
-    /** Get Gas price (in wei) */
+    /** Get Gas price (in wei). */
     static NAN_METHOD(getGasPrice);
 
-    /** Get start gas (in wei) : maximum amount of gas the originator is willing to pay */
+    /** Get start gas (in wei) : maximum amount of gas the originator is willing to pay. */
     static NAN_METHOD(getGasLimit);
 
-    /** Effective used gas */
+    /** Effective used gas. */
     static NAN_METHOD(getGasUsed);
 
-    /** Get destination ETH address */
+    /** Get destination ETH address. */
     static NAN_METHOD(getReceiver);
 
-    /** Get ETH sender address */
+    /** Get ETH sender address. */
     static NAN_METHOD(getSender);
 
-    /** Get amount of ether to send */
+    /** Get amount of ether to send. */
     static NAN_METHOD(getValue);
 
-    /** Get binary data payload */
+    /** Get binary data payload. */
     static NAN_METHOD(getData);
 
     /** Serialize the transaction to its raw format. */
     static NAN_METHOD(serialize);
 
-    /** Set signature of transaction, when a signature is set serialize method gives back serialized Tx */
+    /** Set signature of transaction, when a signature is set serialize method gives back serialized Tx. */
     static NAN_METHOD(setSignature);
 
     static NAN_METHOD(setDERSignature);
@@ -72,12 +72,12 @@ private:
     static NAN_METHOD(setVSignature);
 
     /**
-     * Get the time when the transaction was issued or the time of the block including
-     * this transaction
+     * Get the time when the transaction was issued or the time of the block including this
+     * transaction.
      */
     static NAN_METHOD(getDate);
 
-    /** Get block to which transaction belongs (was mined in) */
+    /** Get block to which transaction belongs (was mined in). */
     static NAN_METHOD(getBlock);
 
     static NAN_METHOD(New);

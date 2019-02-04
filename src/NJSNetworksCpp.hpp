@@ -29,8 +29,10 @@ public:
     static Nan::Persistent<ObjectTemplate> Networks_prototype;
 
 private:
+    /** The Bitcoin network parameters. */
     static NAN_METHOD(bitcoin);
 
+    /** The Ethereum network parameters. */
     static NAN_METHOD(ethereum);
 
     static NAN_METHOD(New);

@@ -28,8 +28,8 @@ public:
 
 private:
     /**
-     *Get operation's transaction
-     *@return EthereumLikeTransaction object
+     * Get operation's transaction.
+     * @return EthereumLikeTransaction object
      */
     static NAN_METHOD(getTransaction);
 

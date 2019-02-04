@@ -35,33 +35,33 @@ public:
 
 private:
     /**
-     *Get method of request
-     *@return HttpMethod enum entry
+     * Get method of request.
+     * @return HttpMethod enum entry
      */
     static NAN_METHOD(getMethod);
 
     /**
-     *Get headers set in the request
-     *@return Map with key and value of type string
+     * Get headers set in the request.
+     * @return Map with key and value of type string
      */
     static NAN_METHOD(getHeaders);
 
     /**
-     *Get body of request
-     *@return binary
+     * Get body of request.
+     * @return binary
      */
     static NAN_METHOD(getBody);
 
     /**
-     *Get Url of request
-     *@return string
+     * Get Url of request.
+     * @return string
      */
     static NAN_METHOD(getUrl);
 
     /**
-     *Method called when reauest is completed
-     *@param response, Optional HttpUrlConnection object, response of request if succeed
-     *@param error, optional Error structure, error returned in case of request failure
+     * Method called when reauest is completed.
+     * @param response, Optional HttpUrlConnection object, response of request if succeed
+     * @param error, optional Error structure, error returned in case of request failure
      */
     static NAN_METHOD(complete);
 

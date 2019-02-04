@@ -28,37 +28,37 @@ public:
 
 private:
     /**
-     *Print debug message to console
-     *@param tag, string
-     *@param message, string
+     * Print debug message to console.
+     * @param tag, string
+     * @param message, string
      */
     static NAN_METHOD(d);
 
     /**
-     *Print information message to console
-     *@param tag, string
-     *@param message, string
+     * Print information message to console.
+     * @param tag, string
+     * @param message, string
      */
     static NAN_METHOD(i);
 
     /**
-     *Print error message to console
-     *@param tag, string
-     *@param message, string
+     * Print error message to console.
+     * @param tag, string
+     * @param message, string
      */
     static NAN_METHOD(e);
 
     /**
-     *Print warning message to console
-     *@param tag, string
-     *@param message, string
+     * Print warning message to console.
+     * @param tag, string
+     * @param message, string
      */
     static NAN_METHOD(w);
 
     /**
-     *Print critical error message to console
-     *@param tag, string
-     *@param message, string
+     * Print critical error message to console.
+     * @param tag, string
+     * @param message, string
      */
     static NAN_METHOD(c);
 

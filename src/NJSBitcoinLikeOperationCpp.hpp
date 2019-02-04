@@ -28,8 +28,8 @@ public:
 
 private:
     /**
-     *Get operation's transaction
-     *@return BitcoinLikeTransaction object
+     * Get operation's transaction.
+     * @return BitcoinLikeTransaction object
      */
     static NAN_METHOD(getTransaction);
 

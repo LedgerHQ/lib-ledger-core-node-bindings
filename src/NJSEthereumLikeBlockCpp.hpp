@@ -30,20 +30,20 @@ public:
 
 private:
     /**
-     *Hash of block
-     *@return string representing hash of this block
+     * Hash of block.
+     * @return string representing hash of this block
      */
     static NAN_METHOD(getHash);
 
     /**
-     *Height of block in blockchain
-     *@return 64 bits integer, height of block
+     * Height of block in blockchain.
+     * @return 64 bits integer, height of block
      */
     static NAN_METHOD(getHeight);
 
     /**
-     *Timestamp when block was mined
-     *@return Date object, date when block was appended to blockchain
+     * Timestamp when block was mined.
+     * @return Date object, date when block was appended to blockchain
      */
     static NAN_METHOD(getTime);
 

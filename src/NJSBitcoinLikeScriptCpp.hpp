@@ -30,10 +30,16 @@ public:
     static Nan::Persistent<ObjectTemplate> BitcoinLikeScript_prototype;
 
 private:
+    /**
+     * Get the head of the script. Scripts are organized by chunks, so you get an iterator-like
+     * interface.
+     */
     static NAN_METHOD(head);
 
+    /** Turn the script into a string representation. */
     static NAN_METHOD(toString);
 
+    /** Parse data into a script. */
     static NAN_METHOD(parse);
 
     static NAN_METHOD(New);

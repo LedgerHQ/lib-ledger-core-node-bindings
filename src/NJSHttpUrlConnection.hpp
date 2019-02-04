@@ -35,19 +35,19 @@ public:
     NJSHttpUrlConnection(Local<Object> njs_implementation){njs_impl.Reset(njs_implementation);};
 
     /**
-     * Gets the HTTP response status code
+     * Gets the HTTP response status code.
      * @return The HTTP response status code
      */
     int32_t getStatusCode();
 
     /**
-     * Gets the HTTP response status text
+     * Gets the HTTP response status text.
      * @return The HTTP response status text
      */
     std::string getStatusText();
 
     /**
-     * Gets the HTTP response headers
+     * Gets the HTTP response headers.
      * @return The HTTP response headers
      */
     std::unordered_map<std::string, std::string> getHeaders();
@@ -60,19 +60,19 @@ public:
 
 private:
     /**
-     * Gets the HTTP response status code
+     * Gets the HTTP response status code.
      * @return The HTTP response status code
      */
     static NAN_METHOD(getStatusCode);
 
     /**
-     * Gets the HTTP response status text
+     * Gets the HTTP response status text.
      * @return The HTTP response status text
      */
     static NAN_METHOD(getStatusText);
 
     /**
-     * Gets the HTTP response headers
+     * Gets the HTTP response headers.
      * @return The HTTP response headers
      */
     static NAN_METHOD(getHeaders);

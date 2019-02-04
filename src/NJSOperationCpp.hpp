@@ -43,111 +43,105 @@ public:
 
 private:
     /**
-     *Get id's operation
-     *@return string
+     * Get id's operation.
+     * @return string
      */
     static NAN_METHOD(getUid);
 
     /**
-     *Get account's index in user's wallet
-     *@return 32 bits integer
+     * Get account's index in user's wallet.
+     * @return 32-bit integer
      */
     static NAN_METHOD(getAccountIndex);
 
     /**
-     *Get type of operation
-     *@return OperationType object (for more details refer to OperationType)
+     * Get type of operation.
+     * @return OperationType object (for more details refer to OperationType)
      */
     static NAN_METHOD(getOperationType);
 
     /**
-     *Return date on which operation was issued
-     *@return date object
+     * Return date on which operation was issued.
+     * @return date object
      */
     static NAN_METHOD(getDate);
 
     /**
-     *Get senders of operation
-     *@return List of string, list of all senders
+     * Get senders of operation.
+     * @return List of string, list of all senders
      */
     static NAN_METHOD(getSenders);
 
     /**
-     *Get recipients of operation
-     *@return List of string, list of all recipients
+     * Get recipients of operation.
+     * @return List of string, list of all recipients
      */
     static NAN_METHOD(getRecipients);
 
     /**
-     *Get amount of operation
-     *@return Amount object
+     * Get amount of operation.
+     * @return Amount object
      */
     static NAN_METHOD(getAmount);
 
     /**
-     *Get fees of operation
-     *@return Optional Amount object
+     * Get fees of operation.
+     * @return Optional Amount object
      */
     static NAN_METHOD(getFees);
 
     /**
-     *Get preferences of operation
-     *@return Prefences object
+     * Get preferences of operation.
+     * @return Prefences object
      */
     static NAN_METHOD(getPreferences);
 
     /**
-     *Get trust indicator of operation
-     *@return TrustIndicator object
+     * Get trust indicator of operation.
+     * @return TrustIndicator object
      */
     static NAN_METHOD(getTrust);
 
     /**
-     *Get block height on which operation was included
-     *@return Optional 64 bits integer, height of block in which operation was validated
+     * Get block height on which operation was included.
+     * @return Optional 64-bit integer, height of block in which operation was validated
      */
     static NAN_METHOD(getBlockHeight);
 
     /**
-     *Convert operation as Bitcoin operation
-     *@return BitcoinLikeOperation object
+     * Convert operation as Bitcoin operation.
+     * @return BitcoinLikeOperation object
      */
     static NAN_METHOD(asBitcoinLikeOperation);
 
     /**
-     *Convert operation as Ethereum operation
-     *@return EthereumLikeOperation object
+     * Convert operation as Ethereum operation.
+     * @return EthereumLikeOperation object
      */
     static NAN_METHOD(asEthereumLikeOperation);
 
+    /** Is this an instance of a Bitcoin-like operation? */
     static NAN_METHOD(isInstanceOfBitcoinLikeOperation);
 
-    /**
-     *Same as asBitcoinLikeOperation for ethereum
-     *# asEthereumLikeOperation(): Callback<EthereumLikeOperation>;
-     *Same as isInstanceOfBitcoinLikeOperation for ethereum
-     */
+    /** Same as isInstanceOfBitcoinLikeOperation for ethereum. */
     static NAN_METHOD(isInstanceOfEthereumLikeOperation);
 
-    /**
-     *Same as asBitcoinLikeOperation for ripple
-     *# asRippleLikeOperation(): Callback<RippleLikeOperation>;
-     *Same as isInstanceOfBitcoinLikeOperation for ripple
-     */
+    /** Same as isInstanceOfBitcoinLikeOperation for ripple. */
     static NAN_METHOD(isInstanceOfRippleLikeOperation);
 
     /**
-     *Tells if the operation is complete
-     *@return boolean
+     * Tells if the operation is complete.
+     * @return boolean
      */
     static NAN_METHOD(isComplete);
 
     /**
-     *Get type of wallet from which operation was issued
-     *@return WalletType object
+     * Get type of wallet from which operation was issued.
+     * @return WalletType object
      */
     static NAN_METHOD(getWalletType);
 
+    /** Get the currency this operation is about. */
     static NAN_METHOD(getCurrency);
 
     static NAN_METHOD(New);

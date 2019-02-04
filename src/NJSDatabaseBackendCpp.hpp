@@ -47,12 +47,12 @@ private:
     static NAN_METHOD(isLoggingEnabled);
 
     /**
-     * Create an instance of SQLite3 database
+     * Create an instance of SQLite3 database.
      * @return DatabaseBackend object
      */
     static NAN_METHOD(getSqlite3Backend);
 
-    /** Create an instance of PostgreSQL database */
+    /** Create a database backend instance from the given DatabaseEngine implementation. */
     static NAN_METHOD(createBackendFromEngine);
 
     static NAN_METHOD(New);

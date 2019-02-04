@@ -32,15 +32,15 @@ public:
     NJSHttpClient(Local<Object> njs_implementation){njs_impl.Reset(njs_implementation);};
 
     /**
-     *Execute a giver Http request\
-     *@param request, HttpRequest object, requestr to execute
+     * Execute a giver Http request.
+     * @param request, HttpRequest object, requestr to execute
      */
     void execute(const std::shared_ptr<HttpRequest> & request);
 
 private:
     /**
-     *Execute a giver Http request\
-     *@param request, HttpRequest object, requestr to execute
+     * Execute a giver Http request.
+     * @param request, HttpRequest object, requestr to execute
      */
     static NAN_METHOD(execute);
 

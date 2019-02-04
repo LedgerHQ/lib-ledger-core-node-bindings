@@ -32,12 +32,16 @@ public:
     static Nan::Persistent<ObjectTemplate> EthereumLikeAccount_prototype;
 
 private:
+    /** Send a raw (binary) transaction on the Ethereum blockchain. */
     static NAN_METHOD(broadcastRawTransaction);
 
+    /** Send a transaction on the Ethereum blockchain. */
     static NAN_METHOD(broadcastTransaction);
 
+    /** Get a builder object to construct transactions. */
     static NAN_METHOD(buildTransaction);
 
+    /** Get the list of ERC20 accounts associated with this Ethereum account. */
     static NAN_METHOD(getERC20Accounts);
 
     static NAN_METHOD(New);
