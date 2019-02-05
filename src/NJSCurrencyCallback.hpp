@@ -36,7 +36,7 @@ public:
     NJSCurrencyCallback(Local<Promise::Resolver> resolver){pers_resolver.Reset(resolver);};
 
     /**
-     * Method triggered when main task complete
+     * Method triggered when main task complete.
      * @params result optional of type T, non null if main task failed
      * @params error optional of type Error, non null if main task succeeded
      */
@@ -44,7 +44,7 @@ public:
 
 private:
     /**
-     * Method triggered when main task complete
+     * Method triggered when main task complete.
      * @params result optional of type T, non null if main task failed
      * @params error optional of type Error, non null if main task succeeded
      */

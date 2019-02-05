@@ -29,7 +29,7 @@ public:
 
 private:
     /**
-     * Create an instance of Secp256k1
+     * Create an instance of Secp256k1.
      * @return Secp256k1 instance
      */
     static NAN_METHOD(createInstance);
@@ -50,7 +50,7 @@ private:
     static NAN_METHOD(computeUncompressedPubKey);
 
     /**
-     * Signs message using a given private key
+     * Signs message using a given private key.
      * @param privKey 32 bytes private key
      * @param data 32 bytes message to sign
      * @return 32 bytes signed message
@@ -58,7 +58,7 @@ private:
     static NAN_METHOD(sign);
 
     /**
-     * Check if message was signed with given signature and public key
+     * Check if message was signed with given signature and public key.
      * @param data 32 bytes signed message
      * @param signature 32 bytes signature (generated from private key)
      * @param oubkey 32 bytes public key

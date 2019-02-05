@@ -33,14 +33,19 @@ public:
     static Nan::Persistent<ObjectTemplate> ERC20LikeAccount_prototype;
 
 private:
+    /** Get an ERC20 token. */
     static NAN_METHOD(getToken);
 
+    /** Get the address of this ERC20 account. */
     static NAN_METHOD(getAddress);
 
+    /** Get the current balance of this ERC20 account. */
     static NAN_METHOD(getBalance);
 
+    /** Get the list of operations performed on this ERC20 account. */
     static NAN_METHOD(getOperations);
 
+    /** Retrieve raw data concerning a transaction of a given amount to a given address. */
     static NAN_METHOD(getTransferToAddressData);
 
     static NAN_METHOD(queryOperations);

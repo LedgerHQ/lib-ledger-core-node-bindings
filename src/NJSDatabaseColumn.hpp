@@ -31,7 +31,7 @@ public:
     NJSDatabaseColumn(Local<Object> njs_implementation){njs_impl.Reset(njs_implementation);};
 
     /**
-     * Get the type of the underlying SQL value
+     * Get the type of the underlying SQL value.
      * @return The type of th
      */
     DatabaseValueType getType();
@@ -40,7 +40,7 @@ public:
 
 private:
     /**
-     * Get the type of the underlying SQL value
+     * Get the type of the underlying SQL value.
      * @return The type of th
      */
     static NAN_METHOD(getType);

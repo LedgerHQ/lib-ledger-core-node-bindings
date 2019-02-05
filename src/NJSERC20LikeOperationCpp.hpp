@@ -35,40 +35,40 @@ private:
     /** Get the hash of the transaction. */
     static NAN_METHOD(getHash);
 
-    /** Get the nonce of the transaction : sequence number issued by originating EOA */
+    /** Get the nonce of the transaction : sequence number issued by originating EOA. */
     static NAN_METHOD(getNonce);
 
-    /** Get Gas price (in wei) */
+    /** Get Gas price (in wei). */
     static NAN_METHOD(getGasPrice);
 
-    /** Get start gas (in wei) : maximum amount of gas the originator is willing to pay */
+    /** Get start gas (in wei) : maximum amount of gas the originator is willing to pay. */
     static NAN_METHOD(getGasLimit);
 
-    /** Used gas (in wei) : used gas during this transaction */
+    /** Used gas (in wei) : used gas during this transaction: */
     static NAN_METHOD(getUsedGas);
 
-    /** Get source ETH address */
+    /** Get source ETH address. */
     static NAN_METHOD(getSender);
 
-    /** Get destination ETH address */
+    /** Get destination ETH address. */
     static NAN_METHOD(getReceiver);
 
-    /** Get amount of ether to send */
+    /** Get amount of ether to send. */
     static NAN_METHOD(getValue);
 
-    /** Get binary data payload */
+    /** Get binary data payload. */
     static NAN_METHOD(getData);
 
     /**
-     * Get the time when the transaction was issued or the time of the block including
-     * this transaction
+     * Get the time when the transaction was issued or the time of the block including this
+     * this transaction.
      */
     static NAN_METHOD(getTime);
 
-    /** Get operation type : whether it is a SEND or RECEIVE */
+    /** Get operation type : whether it is a SEND or RECEIVE. */
     static NAN_METHOD(getOperationType);
 
-    /** Get opration status : pending or confirmed */
+    /** Get opration status : pending or confirmed. */
     static NAN_METHOD(getStatus);
 
     static NAN_METHOD(New);

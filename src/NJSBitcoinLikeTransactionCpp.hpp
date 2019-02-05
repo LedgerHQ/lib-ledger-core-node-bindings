@@ -39,10 +39,10 @@ private:
     /** Get the hash of the transaction. */
     static NAN_METHOD(getHash);
 
-    /** Get the input of the transaction */
+    /** Get the input of the transaction. */
     static NAN_METHOD(getInputs);
 
-    /** Get the output of the transaction */
+    /** Get the output of the transaction. */
     static NAN_METHOD(getOutputs);
 
     /** Get the block in which the transaction is inserted if the transaction is confirmed. */
@@ -56,14 +56,14 @@ private:
 
     /**
      * Get the time when the transaction was issued or the time of the block including
-     * this transaction
+     * this transaction.
      */
     static NAN_METHOD(getTime);
 
     /** Get the timestamps serialized in the raw transaction if the underlying currency handles it. */
     static NAN_METHOD(getTimestamp);
 
-    /** Get Transaction version */
+    /** Get Transaction version. */
     static NAN_METHOD(getVersion);
 
     /** Serialize the transaction to its raw format. */

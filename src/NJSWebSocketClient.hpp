@@ -32,17 +32,45 @@ public:
     };
     NJSWebSocketClient(Local<Object> njs_implementation){njs_impl.Reset(njs_implementation);};
 
+    /**
+     * Connect to a given URL via a Web Socket connection.
+     * @param url, the URL to connect to
+     * @connection, the Web Socket connection to use
+     */
     void connect(const std::string & url, const std::shared_ptr<WebSocketConnection> & connection);
 
+    /**
+     * Send a message to a given client.
+     * @connection, the Web Socket connection to use
+     * @data, the message to send
+     */
     void send(const std::shared_ptr<WebSocketConnection> & connection, const std::string & data);
 
+    /**
+     * Disconnect a client.
+     * @connection, the Web Socket connection to use
+     */
     void disconnect(const std::shared_ptr<WebSocketConnection> & connection);
 
 private:
+    /**
+     * Connect to a given URL via a Web Socket connection.
+     * @param url, the URL to connect to
+     * @connection, the Web Socket connection to use
+     */
     static NAN_METHOD(connect);
 
+    /**
+     * Send a message to a given client.
+     * @connection, the Web Socket connection to use
+     * @data, the message to send
+     */
     static NAN_METHOD(send);
 
+    /**
+     * Disconnect a client.
+     * @connection, the Web Socket connection to use
+     */
     static NAN_METHOD(disconnect);
 
     static NAN_METHOD(New);

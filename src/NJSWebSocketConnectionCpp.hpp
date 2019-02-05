@@ -29,12 +29,26 @@ public:
     static Nan::Persistent<ObjectTemplate> WebSocketConnection_prototype;
 
 private:
+    /**
+     * Callback to call upon successful connection.
+     * @param connectionId, the ID of the Web Socket connection
+     */
     static NAN_METHOD(onConnect);
 
+    /** Callback to call upon successful disconnection. */
     static NAN_METHOD(onClose);
 
+    /**
+     * Callback to call upon each incoming message.
+     * @param data, the attached data to the input message
+     */
     static NAN_METHOD(onMessage);
 
+    /**
+     * Callback to call when a Web Socket error occurs.
+     * @param code, the error code
+     * @param message, a description of the reason of the error
+     */
     static NAN_METHOD(onError);
 
     static NAN_METHOD(getConnectionId);

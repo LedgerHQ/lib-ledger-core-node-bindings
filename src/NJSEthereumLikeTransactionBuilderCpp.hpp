@@ -52,25 +52,25 @@ private:
     static NAN_METHOD(wipeToAddress);
 
     /**
-     * Set gas price (in wei) the originator is willing to pay
+     * Set gas price (in wei) the originator is willing to pay.
      * @return A reference on the same builder in order to chain calls.
      */
     static NAN_METHOD(setGasPrice);
 
     /**
-     * Set gas limit (in wei) the originator is not willing to exceed
+     * Set gas limit (in wei) the originator is not willing to exceed.
      * @return A reference on the same builder in order to chain calls.
      */
     static NAN_METHOD(setGasLimit);
 
-    /** Set input data the originator wants to embed in transaction */
+    /** Set input data the originator wants to embed in transaction. */
     static NAN_METHOD(setInputData);
 
     /** Build a transaction from the given builder parameters. */
     static NAN_METHOD(build);
 
     /**
-     * Creates a clone of this builder.
+     * Create a clone of this builder.
      * @return A copy of the current builder instance.
      */
     static NAN_METHOD(clone);
@@ -78,8 +78,10 @@ private:
     /** Reset the current instance to its initial state */
     static NAN_METHOD(reset);
 
+    /** Create an unsigned transaction for the Ethereum blockchain out of a raw binary. */
     static NAN_METHOD(parseRawUnsignedTransaction);
 
+    /** Create a signed transaction for the Ethereum blockchain out of a raw binary. */
     static NAN_METHOD(parseRawSignedTransaction);
 
     static NAN_METHOD(New);

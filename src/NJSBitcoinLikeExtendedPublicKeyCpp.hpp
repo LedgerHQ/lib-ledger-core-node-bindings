@@ -30,14 +30,19 @@ public:
     static Nan::Persistent<ObjectTemplate> BitcoinLikeExtendedPublicKey_prototype;
 
 private:
+    /** Derive an address from an xPUB and a path. */
     static NAN_METHOD(derive);
 
+    /** Derive a public key from an xPUB and a path. */
     static NAN_METHOD(derivePublicKey);
 
+    /** Derive a shorten version of a public key (SHA256 + RIPEMD160) from an xPUB and a path. */
     static NAN_METHOD(deriveHash160);
 
+    /** Get the xPUB in base 58. */
     static NAN_METHOD(toBase58);
 
+    /** Get the root path of the xPUB. */
     static NAN_METHOD(getRootPath);
 
     static NAN_METHOD(New);

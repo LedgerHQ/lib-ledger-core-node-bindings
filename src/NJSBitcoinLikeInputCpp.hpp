@@ -35,7 +35,7 @@ public:
     static Nan::Persistent<ObjectTemplate> BitcoinLikeInput_prototype;
 
 private:
-    /** Returns the address of the input (if an address can be computed) */
+    /** Returns the address of the input (if an address can be computed). */
     static NAN_METHOD(getAddress);
 
     /**
@@ -44,7 +44,7 @@ private:
      */
     static NAN_METHOD(getPublicKeys);
 
-    /** Returns the derivation path of this input if the address is owned by the wallet */
+    /** Returns the derivation path of this input if the address is owned by the wallet. */
     static NAN_METHOD(getDerivationPath);
 
     /**
@@ -55,27 +55,25 @@ private:
 
     /**
      * Get the transaction hash of the output spent by this input. The result can be NULL if the output is not owned by
-     * the wallet
+     * the wallet.
      */
     static NAN_METHOD(getPreviousTxHash);
 
     /**
-     * Get the index at which the output is located in the transaction output spent by this input. The result can be
-     * NULL if the input does not belong to the wallet
-     *Check whether input
-     *@return Boolean, true if input belongs to coinbase transaction (reward for mining a block)
+     * Check whether input is for a coinbase.
+     * @return Boolean, true if input belongs to coinbase transaction (reward for mining a block)
      */
     static NAN_METHOD(isCoinbase);
 
     /**
-     *Stored data cointained in coinbase
-     *@return Optional String
+     * Stored data cointained in coinbase.
+     * @return Optional String
      */
     static NAN_METHOD(getCoinbase);
 
     /**
-     *Get output index, it identifies which UTXO from tht transaction to spend
-     *@return Optional 32 bits integer, index of previous transaction
+     * Get output index, it identifies which UTXO from tht transaction to spend.
+     * @return Optional 32 bits integer, index of previous transaction
      */
     static NAN_METHOD(getPreviousOutputIndex);
 
@@ -90,27 +88,28 @@ private:
     /** Get ScriptSig of this input. The scriptsig is the first half of a script necessary to spend a previous output. */
     static NAN_METHOD(getScriptSig);
 
-    /** Parse the script sig to a [[BitcoinLikeScript]] */
+    /** Parse the script sig to a [[BitcoinLikeScript]]. */
     static NAN_METHOD(parseScriptSig);
 
     /**
-     * Set the ScriptS to the given value
+     * Set the ScriptS to the given value.
      * @param scriptSig The ScriptSig to use for this input
      */
     static NAN_METHOD(setScriptSig);
 
-    /** Push data to the end of the current ScriptSig */
+    /** Push data to the end of the current ScriptSig. */
     static NAN_METHOD(pushToScriptSig);
 
-    /** Set the sequence number of this input */
+    /** Set the sequence number of this input. */
     static NAN_METHOD(setSequence);
 
-    /** Get the sequence number of this input */
+    /** Get the sequence number of this input. */
     static NAN_METHOD(getSequence);
 
+    /** Get the previous transaction associated with the input. */
     static NAN_METHOD(getPreviousTransaction);
 
-    /** Easy way to set the P2PKH script signature. Shorthand for input.pushToScriptSig(input.getPublicKeys()[0], signature) */
+    /** Easy way to set the P2PKH script signature. Shorthand for input.pushToScriptSig(input.getPublicKeys()[0], signature). */
     static NAN_METHOD(setP2PKHSigScript);
 
     static NAN_METHOD(New);

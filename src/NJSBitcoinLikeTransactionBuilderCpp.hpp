@@ -49,7 +49,7 @@ private:
     static NAN_METHOD(addInput);
 
     /**
-     * Add the given output to the final transaction
+     * Add the given output to the final transaction.
      * @return A reference on the same builder in order to chain calls.
      */
     static NAN_METHOD(addOutput);
@@ -69,7 +69,10 @@ private:
      */
     static NAN_METHOD(excludeUtxo);
 
-    /** @return A reference on the same builder in order to chain calls. */
+    /**
+     * Set the the number of change addresses in the transaction builder.
+     * @return A reference on the same builder in order to chain calls.
+     */
     static NAN_METHOD(setNumberOfChangeAddresses);
 
     /**
@@ -123,11 +126,11 @@ private:
      */
     static NAN_METHOD(clone);
 
-    /** Reset the current instance to its initial state */
+    /** Reset the current instance to its initial state. */
     static NAN_METHOD(reset);
 
     /**
-     * Parsing unsigned transaction
+     * Parsing unsigned transaction.
      * parsing a tx might change depending on block height we are on (if an update is effective starting from a given hight)
      */
     static NAN_METHOD(parseRawUnsignedTransaction);

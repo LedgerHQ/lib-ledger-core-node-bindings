@@ -34,14 +34,14 @@ public:
 
 private:
     /**
-     * Gets an optional derivation path (if the address is owned by an account)
+     * Gets an optional derivation path (if the address is owned by an account).
      * @return The derivation path of the address
      */
     static NAN_METHOD(getDerivationPath);
 
     /**
      * Serialize the address to a string. The serialization method depends of the underlying currency and
-     * format (Base58, Bech32, Ethereum...)
+     * format (Base58, Bech32, Ethereum...).
      */
     static NAN_METHOD(toString);
 
@@ -53,7 +53,7 @@ private:
 
     /**
      * Attempt to parse a string address. If the address can be parse return it otherwise return a NONE
-     * (depending on you host this may be a null, nil, None...)
+     * (depending on you host this may be a null, nil, None...).
      * @param address The string to parse
      * @param currency The currency used to parse the address
      * @return If successful returns the address object otherwise null.

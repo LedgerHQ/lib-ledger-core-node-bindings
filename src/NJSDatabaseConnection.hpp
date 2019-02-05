@@ -38,17 +38,17 @@ public:
      * Prepare a statement object using the given SQL query. The statement object will then be responsible of executing
      * the query and handle results. Statement objects may be reused over time if their `repeatable` flag is set to true.
      * @param query A SQL query to execute (e.g. "SELECT * FROM users WHERE name = 'Joe'")
-     * @param repeatable A flag to indicate whether or not the
+     * @param repeatable A flag to indicate whether or not the statement is repeatable
      */
     std::shared_ptr<DatabaseStatement> prepareStatement(const std::string & query, bool repeatable);
 
-    /** Begin a SQL transaction on this connection */
+    /** Begin a SQL transaction on this connection. */
     void begin();
 
-    /** End the current transaction and rollback all changes that occurred between the call of `begin` and `rollback` */
+    /** End the current transaction and rollback all changes that occurred between the call of `begin` and `rollback`. */
     void rollback();
 
-    /** End the current transaction and persist all changes that occurred between the call of `begin` and `commit` */
+    /** End the current transaction and persist all changes that occurred between the call of `begin` and `commit`. */
     void commit();
 
     /** Close the current connection. After this call the connection should never be called again. */
@@ -56,7 +56,7 @@ public:
 
     /**
      * Create a new empty blob.
-     * @return An empty blob.
+     * @return An empty blob
      */
     std::shared_ptr<DatabaseBlob> newBlob();
 
@@ -65,17 +65,17 @@ private:
      * Prepare a statement object using the given SQL query. The statement object will then be responsible of executing
      * the query and handle results. Statement objects may be reused over time if their `repeatable` flag is set to true.
      * @param query A SQL query to execute (e.g. "SELECT * FROM users WHERE name = 'Joe'")
-     * @param repeatable A flag to indicate whether or not the
+     * @param repeatable A flag to indicate whether or not the statement is repeatable
      */
     static NAN_METHOD(prepareStatement);
 
-    /** Begin a SQL transaction on this connection */
+    /** Begin a SQL transaction on this connection. */
     static NAN_METHOD(begin);
 
-    /** End the current transaction and rollback all changes that occurred between the call of `begin` and `rollback` */
+    /** End the current transaction and rollback all changes that occurred between the call of `begin` and `rollback`. */
     static NAN_METHOD(rollback);
 
-    /** End the current transaction and persist all changes that occurred between the call of `begin` and `commit` */
+    /** End the current transaction and persist all changes that occurred between the call of `begin` and `commit`. */
     static NAN_METHOD(commit);
 
     /** Close the current connection. After this call the connection should never be called again. */
@@ -83,7 +83,7 @@ private:
 
     /**
      * Create a new empty blob.
-     * @return An empty blob.
+     * @return An empty blob
      */
     static NAN_METHOD(newBlob);
 

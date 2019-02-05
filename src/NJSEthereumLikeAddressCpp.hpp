@@ -31,25 +31,25 @@ public:
 
 private:
     /**
-     * Gets the version of the address
+     * Gets the version of the address.
      * @return The version of the address
      */
     static NAN_METHOD(getVersion);
 
     /**
-     * Gets the raw keccak hash of the public key (truncated to 20 bytes)
+     * Gets the raw keccak hash of the public key (truncated to 20 bytes).
      * @return The 20 bytes of the public key keccak hash
      */
     static NAN_METHOD(getKeccakHash);
 
     /**
-     * Gets the network parameters used for serializing the address
+     * Gets the network parameters used for serializing the address.
      * @return The network parameters of the address
      */
     static NAN_METHOD(getNetworkParameters);
 
     /**
-     * Encodes keccak with respect to EIP55
+     * Encodes keccak with respect to EIP55.
      * @return The EIP55 encoding
      */
     static NAN_METHOD(toEIP55);

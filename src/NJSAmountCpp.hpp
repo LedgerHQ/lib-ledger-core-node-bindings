@@ -37,56 +37,58 @@ public:
 
 private:
     /**
-     *Get amount as a BitInt
-     *@return BitInt
+     * Get amount as a BigInt.
+     * @return BigInt
      */
     static NAN_METHOD(toBigInt);
 
     /**
-     *Get currency in which amount was computed
-     *@return Currency object
+     * Get currency in which amount was computed.
+     * @return Currency object
      */
     static NAN_METHOD(getCurrency);
 
     /**
-     *Get currency unit in which amount was computed
-     *@return CurrencyUnit object
+     * Get currency unit in which amount was computed.
+     * @return CurrencyUnit object
      */
     static NAN_METHOD(getUnit);
 
     /**
-     *Convert amount in another currency unit
-     *@param CurrencyUnit object, target currency unit
-     *@return Amount object, amount in target currency unit
+     * Convert amount in another currency unit.
+     * @param CurrencyUnit object, target currency unit
+     * @return Amount object, amount in target currency unit
      */
     static NAN_METHOD(toUnit);
 
-    /**TODO */
+    /** Get an amount that is equal to the given magnitude in the units system. */
     static NAN_METHOD(toMagnitude);
 
     /**
-     *Get amount as string
-     *@return string
+     * Get amount as string
+     * @return string
      */
     static NAN_METHOD(toString);
 
     /**
-     *Get amount as long
-     *@return 64 bits integer
+     * Get amount as long
+     * @return 64 bits integer
      */
     static NAN_METHOD(toLong);
 
     /**
-     *Get amount as double
-     *@return double
+     * Get amount as double
+     * @return double
      */
     static NAN_METHOD(toDouble);
 
-    /**TODO */
+    /** Format an amount with a locale and some formatting rules. */
     static NAN_METHOD(format);
 
+    /** Transform an hexadecimal string into an amount (expressed in the given currency). */
     static NAN_METHOD(fromHex);
 
+    /** Transform a 64-bit number into an amount (expressed in the given currency). */
     static NAN_METHOD(fromLong);
 
     static NAN_METHOD(New);
