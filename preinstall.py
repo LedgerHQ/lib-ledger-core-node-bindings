@@ -1,6 +1,8 @@
 import platform
 import urllib
 import os
+import sys
+import shutil
 
 libCoreVersion = "2.5.0-rc"
 
@@ -29,6 +31,13 @@ finalFile = "lib/" + bucketFile
 
 if not os.path.exists("lib"):
     os.makedirs("lib")
+
+local_build = os.environ.get('LEDGER_CORE_LOCAL_BUILD', None)
+
+if local_build:
+    print('Copying ' + local_build)
+    shutil.copyfile(local_build, finalFile)
+    sys.exit(0)
 
 print('Downloading ' + endpointURL + "/" + bucketFile + ' ...')
 opener.retrieve(endpointURL + "/" + bucketFile, finalFile)
