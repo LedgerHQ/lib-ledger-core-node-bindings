@@ -609,6 +609,35 @@ NAN_METHOD(NJSWalletPool::freshResetAll) {
     cpp_impl->freshResetAll(arg_0);
     info.GetReturnValue().Set(arg_0_resolver->GetPromise());
 }
+NAN_METHOD(NJSWalletPool::changePassword) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSWalletPool::changePassword needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    String::Utf8Value string_arg_0(info[0]->ToString());
+    auto arg_0 = std::string(*string_arg_0);
+    String::Utf8Value string_arg_1(info[1]->ToString());
+    auto arg_1 = std::string(*string_arg_1);
+
+    //Create promise and set it into Callback
+    auto arg_2_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSErrorCodeCallback *njs_ptr_arg_2 = new NJSErrorCodeCallback(arg_2_resolver);
+    std::shared_ptr<NJSErrorCodeCallback> arg_2(njs_ptr_arg_2);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWalletPool::changePassword : implementation of WalletPool is not valid");
+    }
+    cpp_impl->changePassword(arg_0,arg_1,arg_2);
+    info.GetReturnValue().Set(arg_2_resolver->GetPromise());
+}
 
 NAN_METHOD(NJSWalletPool::New) {
     //Only new allowed
@@ -723,6 +752,7 @@ void NJSWalletPool::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getEventBus", getEventBus);
     Nan::SetPrototypeMethod(func_template,"eraseDataSince", eraseDataSince);
     Nan::SetPrototypeMethod(func_template,"freshResetAll", freshResetAll);
+    Nan::SetPrototypeMethod(func_template,"changePassword", changePassword);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     WalletPool_prototype.Reset(objectTemplate);

@@ -168,6 +168,17 @@ private:
      */
     static NAN_METHOD(freshResetAll);
 
+    /**
+     * Change Database password.
+     *
+     * Allow to change password of database holding all informations about
+     * accounts, wallets, transactions ...
+     *
+     * WARNING: be carefull to have no other instances of WalletPool using
+     * same database
+     */
+    static NAN_METHOD(changePassword);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);
