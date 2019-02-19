@@ -44,28 +44,22 @@ public:
     int32_t getUpdateCount();
 
     /**
-     * Get the number of row retrieved
-     * @return The number of rows retrieved by the query
-     */
-    int32_t getRowNumber();
-
-    /**
-     * Returns the number of remaining rows to get before the end of the result set.
-     * @return The number of rows remaining rows to get before the end of the result set.
-     */
-    int32_t available();
-
-    /**
      * Returns true if the result set has at least one remaining row to get.
      * @return true if the result set has at least one remaining row to get, false otherwise.
      */
     bool hasNext();
 
     /**
-     * Move the result set to the next available result. This method may fail if there is now further row to fetch.
+     * Returns the number of remaining rows before the result set needs to load more rows
+     * @return The number of remaining rows before the result set needs to load more rows.
+     */
+    int32_t available();
+
+    /**
+     * Internally move the result set to the next available row. This method may fail if there is no further row to fetch.
      * @return Return a result set pointing to the next row.
      */
-    std::shared_ptr<DatabaseResultSet> next();
+    void next();
 
     /** Close the result set. */
     void close();
@@ -84,25 +78,19 @@ private:
     static NAN_METHOD(getUpdateCount);
 
     /**
-     * Get the number of row retrieved
-     * @return The number of rows retrieved by the query
-     */
-    static NAN_METHOD(getRowNumber);
-
-    /**
-     * Returns the number of remaining rows to get before the end of the result set.
-     * @return The number of rows remaining rows to get before the end of the result set.
-     */
-    static NAN_METHOD(available);
-
-    /**
      * Returns true if the result set has at least one remaining row to get.
      * @return true if the result set has at least one remaining row to get, false otherwise.
      */
     static NAN_METHOD(hasNext);
 
     /**
-     * Move the result set to the next available result. This method may fail if there is now further row to fetch.
+     * Returns the number of remaining rows before the result set needs to load more rows
+     * @return The number of remaining rows before the result set needs to load more rows.
+     */
+    static NAN_METHOD(available);
+
+    /**
+     * Internally move the result set to the next available row. This method may fail if there is no further row to fetch.
      * @return Return a result set pointing to the next row.
      */
     static NAN_METHOD(next);

@@ -52,7 +52,7 @@ int32_t NJSDatabaseResultSet::getUpdateCount()
     return fResult_getUpdateCount;
 }
 
-int32_t NJSDatabaseResultSet::getRowNumber()
+bool NJSDatabaseResultSet::hasNext()
 {
     Nan::HandleScope scope;
     //Wrap parameters
@@ -60,17 +60,17 @@ int32_t NJSDatabaseResultSet::getRowNumber()
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
-        Nan::ThrowError("NJSDatabaseResultSet::getRowNumber fail to retrieve node implementation");
+        Nan::ThrowError("NJSDatabaseResultSet::hasNext fail to retrieve node implementation");
     }
-    auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getRowNumber").ToLocalChecked()).ToLocalChecked();
-    auto result_getRowNumber = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
-    if(result_getRowNumber.IsEmpty())
+    auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("hasNext").ToLocalChecked()).ToLocalChecked();
+    auto result_hasNext = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    if(result_hasNext.IsEmpty())
     {
-        Nan::ThrowError("NJSDatabaseResultSet::getRowNumber call failed");
+        Nan::ThrowError("NJSDatabaseResultSet::hasNext call failed");
     }
-    auto checkedResult_getRowNumber = result_getRowNumber.ToLocalChecked();
-    auto fResult_getRowNumber = Nan::To<int32_t>(checkedResult_getRowNumber).FromJust();
-    return fResult_getRowNumber;
+    auto checkedResult_hasNext = result_hasNext.ToLocalChecked();
+    auto fResult_hasNext = Nan::To<bool>(checkedResult_hasNext).FromJust();
+    return fResult_hasNext;
 }
 
 int32_t NJSDatabaseResultSet::available()
@@ -94,28 +94,7 @@ int32_t NJSDatabaseResultSet::available()
     return fResult_available;
 }
 
-bool NJSDatabaseResultSet::hasNext()
-{
-    Nan::HandleScope scope;
-    //Wrap parameters
-    Handle<Value> args[1];
-    Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
-    if(!local_njs_impl->IsObject())
-    {
-        Nan::ThrowError("NJSDatabaseResultSet::hasNext fail to retrieve node implementation");
-    }
-    auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("hasNext").ToLocalChecked()).ToLocalChecked();
-    auto result_hasNext = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
-    if(result_hasNext.IsEmpty())
-    {
-        Nan::ThrowError("NJSDatabaseResultSet::hasNext call failed");
-    }
-    auto checkedResult_hasNext = result_hasNext.ToLocalChecked();
-    auto fResult_hasNext = Nan::To<bool>(checkedResult_hasNext).FromJust();
-    return fResult_hasNext;
-}
-
-std::shared_ptr<DatabaseResultSet> NJSDatabaseResultSet::next()
+void NJSDatabaseResultSet::next()
 {
     Nan::HandleScope scope;
     //Wrap parameters
@@ -131,11 +110,6 @@ std::shared_ptr<DatabaseResultSet> NJSDatabaseResultSet::next()
     {
         Nan::ThrowError("NJSDatabaseResultSet::next call failed");
     }
-    auto checkedResult_next = result_next.ToLocalChecked();
-    Local<Object> njs_fResult_next = checkedResult_next->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_next = djinni::js::ObjectWrapper<DatabaseResultSet>::Unwrap(njs_fResult_next);
-
-    return fResult_next;
 }
 
 void NJSDatabaseResultSet::close()
