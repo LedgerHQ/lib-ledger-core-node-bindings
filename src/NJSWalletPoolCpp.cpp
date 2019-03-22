@@ -225,6 +225,40 @@ NAN_METHOD(NJSWalletPool::getWallet) {
     cpp_impl->getWallet(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSWalletPool::updateWalletConfig) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSWalletPool::updateWalletConfig needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    String::Utf8Value string_arg_0(info[0]->ToString());
+    auto arg_0 = std::string(*string_arg_0);
+    Local<Object> njs_arg_1 = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
+    auto arg_1 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_1);
+    if(!arg_1)
+    {
+        return Nan::ThrowError("NodeJs Object to NJSDynamicObject failed");
+    }
+
+
+    //Create promise and set it into Callback
+    auto arg_2_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSErrorCodeCallback *njs_ptr_arg_2 = new NJSErrorCodeCallback(arg_2_resolver);
+    std::shared_ptr<NJSErrorCodeCallback> arg_2(njs_ptr_arg_2);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWalletPool::updateWalletConfig : implementation of WalletPool is not valid");
+    }
+    cpp_impl->updateWalletConfig(arg_0,arg_1,arg_2);
+    info.GetReturnValue().Set(arg_2_resolver->GetPromise());
+}
 NAN_METHOD(NJSWalletPool::createWallet) {
 
     //Check if method called with right number of arguments
@@ -427,7 +461,55 @@ NAN_METHOD(NJSWalletPool::createWallet) {
         arg_1_7.emplace(opt_arg_1_7);
     }
 
-    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7);
+
+    auto field_arg_1_8 = Nan::Get(info[1]->ToObject(), Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_8 = std::experimental::optional<RippleLikeNetworkParameters>();
+    if(!field_arg_1_8->IsNull() && !field_arg_1_8->IsUndefined())
+    {
+
+        auto field_opt_arg_1_8_1 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_1_8_1(field_opt_arg_1_8_1->ToString());
+        auto opt_arg_1_8_1 = std::string(*string_opt_arg_1_8_1);
+
+        auto field_opt_arg_1_8_2 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_1_8_2(field_opt_arg_1_8_2->ToString());
+        auto opt_arg_1_8_2 = std::string(*string_opt_arg_1_8_2);
+
+        auto field_opt_arg_1_8_3 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_1_8_3;
+        Local<Array> opt_arg_1_8_3_container = Local<Array>::Cast(field_opt_arg_1_8_3);
+        for(uint32_t opt_arg_1_8_3_id = 0; opt_arg_1_8_3_id < opt_arg_1_8_3_container->Length(); opt_arg_1_8_3_id++)
+        {
+            if(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)->IsUint32())
+            {
+                auto opt_arg_1_8_3_elem = Nan::To<uint32_t>(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)).FromJust();
+                opt_arg_1_8_3.emplace_back(opt_arg_1_8_3_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_8_4 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("AdditionalRIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_1_8_4;
+        Local<Array> opt_arg_1_8_4_container = Local<Array>::Cast(field_opt_arg_1_8_4);
+        for(uint32_t opt_arg_1_8_4_id = 0; opt_arg_1_8_4_id < opt_arg_1_8_4_container->Length(); opt_arg_1_8_4_id++)
+        {
+            if(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->IsString())
+            {
+                String::Utf8Value string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->ToString());
+                auto opt_arg_1_8_4_elem = std::string(*string_opt_arg_1_8_4_elem);
+                opt_arg_1_8_4.emplace_back(opt_arg_1_8_4_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_8_5 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_8_5 = Nan::To<int64_t>(field_opt_arg_1_8_5).FromJust();
+        RippleLikeNetworkParameters opt_arg_1_8(opt_arg_1_8_1, opt_arg_1_8_2, opt_arg_1_8_3, opt_arg_1_8_4, opt_arg_1_8_5);
+
+        arg_1_8.emplace(opt_arg_1_8);
+    }
+
+    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8);
 
     Local<Object> njs_arg_2 = info[2]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
     auto arg_2 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_2);
@@ -745,6 +827,7 @@ void NJSWalletPool::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getWalletCount", getWalletCount);
     Nan::SetPrototypeMethod(func_template,"getWallets", getWallets);
     Nan::SetPrototypeMethod(func_template,"getWallet", getWallet);
+    Nan::SetPrototypeMethod(func_template,"updateWalletConfig", updateWalletConfig);
     Nan::SetPrototypeMethod(func_template,"createWallet", createWallet);
     Nan::SetPrototypeMethod(func_template,"getCurrencies", getCurrencies);
     Nan::SetPrototypeMethod(func_template,"getCurrency", getCurrency);

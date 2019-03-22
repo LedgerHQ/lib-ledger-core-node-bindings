@@ -11,6 +11,7 @@
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
+#include "../include/RippleLikeNetworkParameters.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSBitcoinLikeScriptCpp.hpp"
 #include "NJSBitcoinLikeTransactionCallback.hpp"

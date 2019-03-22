@@ -61,6 +61,9 @@ private:
     /** Get binary data payload. */
     static NAN_METHOD(getData);
 
+    /** Get status of transaction: equals to 1 if succeeded, 0 otherwise */
+    static NAN_METHOD(getStatus);
+
     /** Serialize the transaction to its raw format. */
     static NAN_METHOD(serialize);
 

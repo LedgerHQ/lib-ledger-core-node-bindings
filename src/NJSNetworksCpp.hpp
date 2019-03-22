@@ -7,6 +7,7 @@
 
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
+#include "../include/RippleLikeNetworkParameters.hpp"
 #include <memory>
 #include <string>
 
@@ -34,6 +35,9 @@ private:
 
     /** The Ethereum network parameters. */
     static NAN_METHOD(ethereum);
+
+    /** The Ripple network parameters. */
+    static NAN_METHOD(ripple);
 
     static NAN_METHOD(New);
 

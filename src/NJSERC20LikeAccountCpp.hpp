@@ -6,9 +6,11 @@
 
 
 #include "../include/ERC20Token.hpp"
+#include "../include/TimePeriod.hpp"
 #include "NJSBigIntCpp.hpp"
 #include "NJSERC20LikeOperationCpp.hpp"
 #include "NJSOperationQueryCpp.hpp"
+#include <chrono>
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -41,6 +43,12 @@ private:
 
     /** Get the current balance of this ERC20 account. */
     static NAN_METHOD(getBalance);
+
+    /**
+     * Get the balance history of this ERC20 account from a starting date (included) to an ending
+     * date (included).
+     */
+    static NAN_METHOD(getBalanceHistoryFor);
 
     /** Get the list of operations performed on this ERC20 account. */
     static NAN_METHOD(getOperations);

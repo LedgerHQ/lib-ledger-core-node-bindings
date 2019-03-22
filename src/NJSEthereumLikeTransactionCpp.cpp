@@ -252,6 +252,31 @@ NAN_METHOD(NJSEthereumLikeTransaction::getData) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSEthereumLikeTransaction::getStatus) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSEthereumLikeTransaction::getStatus needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSEthereumLikeTransaction::getStatus : implementation of EthereumLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getStatus();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Int32>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSEthereumLikeTransaction::serialize) {
 
     //Check if method called with right number of arguments
@@ -500,6 +525,7 @@ void NJSEthereumLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getSender", getSender);
     Nan::SetPrototypeMethod(func_template,"getValue", getValue);
     Nan::SetPrototypeMethod(func_template,"getData", getData);
+    Nan::SetPrototypeMethod(func_template,"getStatus", getStatus);
     Nan::SetPrototypeMethod(func_template,"serialize", serialize);
     Nan::SetPrototypeMethod(func_template,"setSignature", setSignature);
     Nan::SetPrototypeMethod(func_template,"setDERSignature", setDERSignature);

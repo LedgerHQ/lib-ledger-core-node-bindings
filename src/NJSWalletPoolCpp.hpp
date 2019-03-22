@@ -10,6 +10,7 @@
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
+#include "../include/RippleLikeNetworkParameters.hpp"
 #include "NJSBlockCallback.hpp"
 #include "NJSCurrencyCallback.hpp"
 #include "NJSCurrencyListCallback.hpp"
@@ -108,6 +109,16 @@ private:
     static NAN_METHOD(getWallet);
 
     /**
+     * Update wallet configuration
+     * @param name, string, name of wallet to update
+     * @param configuration, DynamicObject object, configuration object with fields to update
+     * @param callback, Callback object returns the error code, returns ErrorCode::FUTURE_WAS_SUCCESSFULL if everything is fine
+     * > Note: other fields that are not passed in 'configuration' parameter
+     * > that might have been created before remain intact
+     */
+    static NAN_METHOD(updateWalletConfig);
+
+    /**
      * Instanciate a new wallet under wallet pool.
      * @param name, string, name of newly created wallet
      * @param currency, Currency object, currency of the wallet
@@ -172,10 +183,10 @@ private:
      * Change Database password.
      *
      * Allow to change password of database holding all informations about
-     * accounts, wallets, transactions ...
+     * accounts, wallets, transactions etc. and the wallet pool preferences.
      *
-     * WARNING: be carefull to have no other instances of WalletPool using
-     * same database
+     * WARNING: be careful to have no other instances of WalletPool using
+     * same database / preferences.
      */
     static NAN_METHOD(changePassword);
 

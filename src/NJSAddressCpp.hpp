@@ -10,6 +10,7 @@
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
+#include "../include/RippleLikeNetworkParameters.hpp"
 #include "NJSBitcoinLikeAddressCpp.hpp"
 #include <memory>
 #include <string>
