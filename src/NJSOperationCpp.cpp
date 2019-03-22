@@ -360,6 +360,32 @@ NAN_METHOD(NJSOperation::asEthereumLikeOperation) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSOperation::asRippleLikeOperation) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSOperation::asRippleLikeOperation needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSOperation::asRippleLikeOperation : implementation of Operation is not valid");
+    }
+
+    auto result = cpp_impl->asRippleLikeOperation();
+
+    //Wrap result in node object
+    auto arg_0 = NJSRippleLikeOperation::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSOperation::isInstanceOfBitcoinLikeOperation) {
 
     //Check if method called with right number of arguments
@@ -627,6 +653,38 @@ NAN_METHOD(NJSOperation::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("ethereumLikeNetworkParameters").ToLocalChecked(), arg_0_7);
+    Local<Value> arg_0_8;
+    if(result.rippleLikeNetworkParameters)
+    {
+        auto arg_0_8_optional = (result.rippleLikeNetworkParameters).value();
+        auto arg_0_8_tmp = Nan::New<Object>();
+        auto arg_0_8_tmp_1 = Nan::New<String>(arg_0_8_optional.Identifier).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_8_tmp_1);
+        auto arg_0_8_tmp_2 = Nan::New<String>(arg_0_8_optional.MessagePrefix).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_8_tmp_2);
+        Local<Array> arg_0_8_tmp_3 = Nan::New<Array>();
+        for(size_t arg_0_8_tmp_3_id = 0; arg_0_8_tmp_3_id < arg_0_8_optional.XPUBVersion.size(); arg_0_8_tmp_3_id++)
+        {
+            auto arg_0_8_tmp_3_elem = Nan::New<Uint32>(arg_0_8_optional.XPUBVersion[arg_0_8_tmp_3_id]);
+            arg_0_8_tmp_3->Set((int)arg_0_8_tmp_3_id,arg_0_8_tmp_3_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_8_tmp_3);
+        Local<Array> arg_0_8_tmp_4 = Nan::New<Array>();
+        for(size_t arg_0_8_tmp_4_id = 0; arg_0_8_tmp_4_id < arg_0_8_optional.AdditionalRIPs.size(); arg_0_8_tmp_4_id++)
+        {
+            auto arg_0_8_tmp_4_elem = Nan::New<String>(arg_0_8_optional.AdditionalRIPs[arg_0_8_tmp_4_id]).ToLocalChecked();
+            arg_0_8_tmp_4->Set((int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_8_tmp_4);
+        auto arg_0_8_tmp_5 = Nan::New<Number>(arg_0_8_optional.TimestampDelay);
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_8_tmp_5);
+
+        arg_0_8 = arg_0_8_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked(), arg_0_8);
 
 
     //Return result
@@ -691,6 +749,7 @@ void NJSOperation::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getBlockHeight", getBlockHeight);
     Nan::SetPrototypeMethod(func_template,"asBitcoinLikeOperation", asBitcoinLikeOperation);
     Nan::SetPrototypeMethod(func_template,"asEthereumLikeOperation", asEthereumLikeOperation);
+    Nan::SetPrototypeMethod(func_template,"asRippleLikeOperation", asRippleLikeOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeOperation", isInstanceOfBitcoinLikeOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfEthereumLikeOperation", isInstanceOfEthereumLikeOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfRippleLikeOperation", isInstanceOfRippleLikeOperation);

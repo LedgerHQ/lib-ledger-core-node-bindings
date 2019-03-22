@@ -4,6 +4,14 @@
 #include <nan.h>
 #include <node.h>
 
+#include "NJSRippleLikeTransactionCpp.hpp"
+#include "NJSRippleLikeOperationCpp.hpp"
+#include "NJSRippleLikeBlockCpp.hpp"
+#include "NJSRippleLikeTransactionBuilderCpp.hpp"
+#include "NJSRippleLikeTransactionCallback.hpp"
+#include "NJSRippleLikeAccountCpp.hpp"
+#include "NJSStringCallback.hpp"
+#include "NJSRippleConfigurationDefaultsCpp.hpp"
 #include "NJSSecp256k1Cpp.hpp"
 #include "NJSNetworksCpp.hpp"
 #include "NJSHashAlgorithmHelper.hpp"
@@ -63,9 +71,10 @@
 #include "NJSEthereumLikeTransactionBuilderCpp.hpp"
 #include "NJSEthereumLikeTransactionCallback.hpp"
 #include "NJSEthereumLikeAccountCpp.hpp"
-#include "NJSStringCallback.hpp"
 #include "NJSBitcoinLikeScriptChunkCpp.hpp"
 #include "NJSBitcoinLikeScriptCpp.hpp"
+#include "NJSRippleLikeAddressCpp.hpp"
+#include "NJSRippleLikeExtendedPublicKeyCpp.hpp"
 #include "NJSEthereumLikeAddressCpp.hpp"
 #include "NJSEthereumLikeExtendedPublicKeyCpp.hpp"
 #include "NJSBitcoinLikeAddressCpp.hpp"
@@ -113,6 +122,14 @@ using namespace node;
 static void initAll(Local<Object> target)
 {
     Nan::HandleScope scope;
+    NJSRippleLikeTransaction::Initialize(target);
+    NJSRippleLikeOperation::Initialize(target);
+    NJSRippleLikeBlock::Initialize(target);
+    NJSRippleLikeTransactionBuilder::Initialize(target);
+    NJSRippleLikeTransactionCallback::Initialize(target);
+    NJSRippleLikeAccount::Initialize(target);
+    NJSStringCallback::Initialize(target);
+    NJSRippleConfigurationDefaults::Initialize(target);
     NJSSecp256k1::Initialize(target);
     NJSNetworks::Initialize(target);
     NJSHashAlgorithmHelper::Initialize(target);
@@ -172,9 +189,10 @@ static void initAll(Local<Object> target)
     NJSEthereumLikeTransactionBuilder::Initialize(target);
     NJSEthereumLikeTransactionCallback::Initialize(target);
     NJSEthereumLikeAccount::Initialize(target);
-    NJSStringCallback::Initialize(target);
     NJSBitcoinLikeScriptChunk::Initialize(target);
     NJSBitcoinLikeScript::Initialize(target);
+    NJSRippleLikeAddress::Initialize(target);
+    NJSRippleLikeExtendedPublicKey::Initialize(target);
     NJSEthereumLikeAddress::Initialize(target);
     NJSEthereumLikeExtendedPublicKey::Initialize(target);
     NJSBitcoinLikeAddress::Initialize(target);

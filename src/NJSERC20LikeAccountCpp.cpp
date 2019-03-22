@@ -93,6 +93,43 @@ NAN_METHOD(NJSERC20LikeAccount::getBalance) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSERC20LikeAccount::getBalanceHistoryFor) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 3)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getBalanceHistoryFor needs 3 arguments");
+    }
+
+    //Check if parameters have correct types
+    auto time_arg_0 = Nan::To<int32_t>(info[0]).FromJust();
+    auto arg_0 = chrono::system_clock::time_point(chrono::milliseconds(time_arg_0));
+    auto time_arg_1 = Nan::To<int32_t>(info[1]).FromJust();
+    auto arg_1 = chrono::system_clock::time_point(chrono::milliseconds(time_arg_1));
+    auto arg_2 = (ledger::core::api::TimePeriod)Nan::To<int>(info[2]).FromJust();
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getBalanceHistoryFor : implementation of ERC20LikeAccount is not valid");
+    }
+
+    auto result = cpp_impl->getBalanceHistoryFor(arg_0,arg_1,arg_2);
+
+    //Wrap result in node object
+    Local<Array> arg_3 = Nan::New<Array>();
+    for(size_t arg_3_id = 0; arg_3_id < result.size(); arg_3_id++)
+    {
+        auto arg_3_elem = NJSBigInt::wrap(result[arg_3_id]);
+
+        arg_3->Set((int)arg_3_id,arg_3_elem);
+    }
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_3);
+}
 NAN_METHOD(NJSERC20LikeAccount::getOperations) {
 
     //Check if method called with right number of arguments
@@ -240,6 +277,7 @@ void NJSERC20LikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getToken", getToken);
     Nan::SetPrototypeMethod(func_template,"getAddress", getAddress);
     Nan::SetPrototypeMethod(func_template,"getBalance", getBalance);
+    Nan::SetPrototypeMethod(func_template,"getBalanceHistoryFor", getBalanceHistoryFor);
     Nan::SetPrototypeMethod(func_template,"getOperations", getOperations);
     Nan::SetPrototypeMethod(func_template,"getTransferToAddressData", getTransferToAddressData);
     Nan::SetPrototypeMethod(func_template,"queryOperations", queryOperations);

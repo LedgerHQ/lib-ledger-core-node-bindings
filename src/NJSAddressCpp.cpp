@@ -259,6 +259,38 @@ NAN_METHOD(NJSAddress::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("ethereumLikeNetworkParameters").ToLocalChecked(), arg_0_7);
+    Local<Value> arg_0_8;
+    if(result.rippleLikeNetworkParameters)
+    {
+        auto arg_0_8_optional = (result.rippleLikeNetworkParameters).value();
+        auto arg_0_8_tmp = Nan::New<Object>();
+        auto arg_0_8_tmp_1 = Nan::New<String>(arg_0_8_optional.Identifier).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_8_tmp_1);
+        auto arg_0_8_tmp_2 = Nan::New<String>(arg_0_8_optional.MessagePrefix).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_8_tmp_2);
+        Local<Array> arg_0_8_tmp_3 = Nan::New<Array>();
+        for(size_t arg_0_8_tmp_3_id = 0; arg_0_8_tmp_3_id < arg_0_8_optional.XPUBVersion.size(); arg_0_8_tmp_3_id++)
+        {
+            auto arg_0_8_tmp_3_elem = Nan::New<Uint32>(arg_0_8_optional.XPUBVersion[arg_0_8_tmp_3_id]);
+            arg_0_8_tmp_3->Set((int)arg_0_8_tmp_3_id,arg_0_8_tmp_3_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_8_tmp_3);
+        Local<Array> arg_0_8_tmp_4 = Nan::New<Array>();
+        for(size_t arg_0_8_tmp_4_id = 0; arg_0_8_tmp_4_id < arg_0_8_optional.AdditionalRIPs.size(); arg_0_8_tmp_4_id++)
+        {
+            auto arg_0_8_tmp_4_elem = Nan::New<String>(arg_0_8_optional.AdditionalRIPs[arg_0_8_tmp_4_id]).ToLocalChecked();
+            arg_0_8_tmp_4->Set((int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_8_tmp_4);
+        auto arg_0_8_tmp_5 = Nan::New<Number>(arg_0_8_optional.TimestampDelay);
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_8_tmp_5);
+
+        arg_0_8 = arg_0_8_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked(), arg_0_8);
 
 
     //Return result
@@ -466,7 +498,55 @@ NAN_METHOD(NJSAddress::parse) {
         arg_1_7.emplace(opt_arg_1_7);
     }
 
-    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7);
+
+    auto field_arg_1_8 = Nan::Get(info[1]->ToObject(), Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_8 = std::experimental::optional<RippleLikeNetworkParameters>();
+    if(!field_arg_1_8->IsNull() && !field_arg_1_8->IsUndefined())
+    {
+
+        auto field_opt_arg_1_8_1 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_1_8_1(field_opt_arg_1_8_1->ToString());
+        auto opt_arg_1_8_1 = std::string(*string_opt_arg_1_8_1);
+
+        auto field_opt_arg_1_8_2 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_1_8_2(field_opt_arg_1_8_2->ToString());
+        auto opt_arg_1_8_2 = std::string(*string_opt_arg_1_8_2);
+
+        auto field_opt_arg_1_8_3 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_1_8_3;
+        Local<Array> opt_arg_1_8_3_container = Local<Array>::Cast(field_opt_arg_1_8_3);
+        for(uint32_t opt_arg_1_8_3_id = 0; opt_arg_1_8_3_id < opt_arg_1_8_3_container->Length(); opt_arg_1_8_3_id++)
+        {
+            if(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)->IsUint32())
+            {
+                auto opt_arg_1_8_3_elem = Nan::To<uint32_t>(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)).FromJust();
+                opt_arg_1_8_3.emplace_back(opt_arg_1_8_3_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_8_4 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("AdditionalRIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_1_8_4;
+        Local<Array> opt_arg_1_8_4_container = Local<Array>::Cast(field_opt_arg_1_8_4);
+        for(uint32_t opt_arg_1_8_4_id = 0; opt_arg_1_8_4_id < opt_arg_1_8_4_container->Length(); opt_arg_1_8_4_id++)
+        {
+            if(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->IsString())
+            {
+                String::Utf8Value string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->ToString());
+                auto opt_arg_1_8_4_elem = std::string(*string_opt_arg_1_8_4_elem);
+                opt_arg_1_8_4.emplace_back(opt_arg_1_8_4_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_8_5 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_8_5 = Nan::To<int64_t>(field_opt_arg_1_8_5).FromJust();
+        RippleLikeNetworkParameters opt_arg_1_8(opt_arg_1_8_1, opt_arg_1_8_2, opt_arg_1_8_3, opt_arg_1_8_4, opt_arg_1_8_5);
+
+        arg_1_8.emplace(opt_arg_1_8);
+    }
+
+    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8);
 
 
     auto result = Address::parse(arg_0,arg_1);
@@ -681,7 +761,55 @@ NAN_METHOD(NJSAddress::isValid) {
         arg_1_7.emplace(opt_arg_1_7);
     }
 
-    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7);
+
+    auto field_arg_1_8 = Nan::Get(info[1]->ToObject(), Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_8 = std::experimental::optional<RippleLikeNetworkParameters>();
+    if(!field_arg_1_8->IsNull() && !field_arg_1_8->IsUndefined())
+    {
+
+        auto field_opt_arg_1_8_1 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_1_8_1(field_opt_arg_1_8_1->ToString());
+        auto opt_arg_1_8_1 = std::string(*string_opt_arg_1_8_1);
+
+        auto field_opt_arg_1_8_2 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_1_8_2(field_opt_arg_1_8_2->ToString());
+        auto opt_arg_1_8_2 = std::string(*string_opt_arg_1_8_2);
+
+        auto field_opt_arg_1_8_3 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_1_8_3;
+        Local<Array> opt_arg_1_8_3_container = Local<Array>::Cast(field_opt_arg_1_8_3);
+        for(uint32_t opt_arg_1_8_3_id = 0; opt_arg_1_8_3_id < opt_arg_1_8_3_container->Length(); opt_arg_1_8_3_id++)
+        {
+            if(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)->IsUint32())
+            {
+                auto opt_arg_1_8_3_elem = Nan::To<uint32_t>(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)).FromJust();
+                opt_arg_1_8_3.emplace_back(opt_arg_1_8_3_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_8_4 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("AdditionalRIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_1_8_4;
+        Local<Array> opt_arg_1_8_4_container = Local<Array>::Cast(field_opt_arg_1_8_4);
+        for(uint32_t opt_arg_1_8_4_id = 0; opt_arg_1_8_4_id < opt_arg_1_8_4_container->Length(); opt_arg_1_8_4_id++)
+        {
+            if(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->IsString())
+            {
+                String::Utf8Value string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->ToString());
+                auto opt_arg_1_8_4_elem = std::string(*string_opt_arg_1_8_4_elem);
+                opt_arg_1_8_4.emplace_back(opt_arg_1_8_4_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_8_5 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_8_5 = Nan::To<int64_t>(field_opt_arg_1_8_5).FromJust();
+        RippleLikeNetworkParameters opt_arg_1_8(opt_arg_1_8_1, opt_arg_1_8_2, opt_arg_1_8_3, opt_arg_1_8_4, opt_arg_1_8_5);
+
+        arg_1_8.emplace(opt_arg_1_8);
+    }
+
+    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8);
 
 
     auto result = Address::isValid(arg_0,arg_1);
@@ -900,7 +1028,55 @@ NAN_METHOD(NJSAddress::New) {
         arg_1_7.emplace(opt_arg_1_7);
     }
 
-    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7);
+
+    auto field_arg_1_8 = Nan::Get(info[1]->ToObject(), Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_8 = std::experimental::optional<RippleLikeNetworkParameters>();
+    if(!field_arg_1_8->IsNull() && !field_arg_1_8->IsUndefined())
+    {
+
+        auto field_opt_arg_1_8_1 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_1_8_1(field_opt_arg_1_8_1->ToString());
+        auto opt_arg_1_8_1 = std::string(*string_opt_arg_1_8_1);
+
+        auto field_opt_arg_1_8_2 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_1_8_2(field_opt_arg_1_8_2->ToString());
+        auto opt_arg_1_8_2 = std::string(*string_opt_arg_1_8_2);
+
+        auto field_opt_arg_1_8_3 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_1_8_3;
+        Local<Array> opt_arg_1_8_3_container = Local<Array>::Cast(field_opt_arg_1_8_3);
+        for(uint32_t opt_arg_1_8_3_id = 0; opt_arg_1_8_3_id < opt_arg_1_8_3_container->Length(); opt_arg_1_8_3_id++)
+        {
+            if(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)->IsUint32())
+            {
+                auto opt_arg_1_8_3_elem = Nan::To<uint32_t>(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)).FromJust();
+                opt_arg_1_8_3.emplace_back(opt_arg_1_8_3_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_8_4 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("AdditionalRIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_1_8_4;
+        Local<Array> opt_arg_1_8_4_container = Local<Array>::Cast(field_opt_arg_1_8_4);
+        for(uint32_t opt_arg_1_8_4_id = 0; opt_arg_1_8_4_id < opt_arg_1_8_4_container->Length(); opt_arg_1_8_4_id++)
+        {
+            if(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->IsString())
+            {
+                String::Utf8Value string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->ToString());
+                auto opt_arg_1_8_4_elem = std::string(*string_opt_arg_1_8_4_elem);
+                opt_arg_1_8_4.emplace_back(opt_arg_1_8_4_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_8_5 = Nan::Get(field_arg_1_8->ToObject(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_8_5 = Nan::To<int64_t>(field_opt_arg_1_8_5).FromJust();
+        RippleLikeNetworkParameters opt_arg_1_8(opt_arg_1_8_1, opt_arg_1_8_2, opt_arg_1_8_3, opt_arg_1_8_4, opt_arg_1_8_5);
+
+        arg_1_8.emplace(opt_arg_1_8);
+    }
+
+    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8);
 
 
     //Call factory

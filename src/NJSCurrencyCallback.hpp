@@ -11,6 +11,7 @@
 #include "../include/CurrencyUnit.hpp"
 #include "../include/Error.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
+#include "../include/RippleLikeNetworkParameters.hpp"
 #include <string>
 
 #include <nan.h>

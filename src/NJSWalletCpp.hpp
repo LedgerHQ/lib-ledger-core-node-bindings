@@ -11,6 +11,7 @@
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/ExtendedKeyAccountCreationInfo.hpp"
+#include "../include/RippleLikeNetworkParameters.hpp"
 #include "../include/WalletType.hpp"
 #include "NJSAccountCallback.hpp"
 #include "NJSAccountCreationInfoCallback.hpp"

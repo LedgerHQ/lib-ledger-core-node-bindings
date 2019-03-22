@@ -173,6 +173,31 @@ NAN_METHOD(NJSBitcoinLikeAddress::toBase58) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSBitcoinLikeAddress::toBech32) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAddress::toBech32 needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAddress::toBech32 : implementation of BitcoinLikeAddress is not valid");
+    }
+
+    auto result = cpp_impl->toBech32();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSBitcoinLikeAddress::isP2SH) {
 
     //Check if method called with right number of arguments
@@ -216,6 +241,56 @@ NAN_METHOD(NJSBitcoinLikeAddress::isP2PKH) {
     }
 
     auto result = cpp_impl->isP2PKH();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSBitcoinLikeAddress::isP2WSH) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAddress::isP2WSH needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAddress::isP2WSH : implementation of BitcoinLikeAddress is not valid");
+    }
+
+    auto result = cpp_impl->isP2WSH();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSBitcoinLikeAddress::isP2WPKH) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAddress::isP2WPKH needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAddress::isP2WPKH : implementation of BitcoinLikeAddress is not valid");
+    }
+
+    auto result = cpp_impl->isP2WPKH();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Boolean>(result);
@@ -273,8 +348,11 @@ void NJSBitcoinLikeAddress::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getHash160", getHash160);
     Nan::SetPrototypeMethod(func_template,"getNetworkParameters", getNetworkParameters);
     Nan::SetPrototypeMethod(func_template,"toBase58", toBase58);
+    Nan::SetPrototypeMethod(func_template,"toBech32", toBech32);
     Nan::SetPrototypeMethod(func_template,"isP2SH", isP2SH);
     Nan::SetPrototypeMethod(func_template,"isP2PKH", isP2PKH);
+    Nan::SetPrototypeMethod(func_template,"isP2WSH", isP2WSH);
+    Nan::SetPrototypeMethod(func_template,"isP2WPKH", isP2WPKH);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeAddress_prototype.Reset(objectTemplate);

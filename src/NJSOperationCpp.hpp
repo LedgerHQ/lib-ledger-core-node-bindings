@@ -11,11 +11,13 @@
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/OperationType.hpp"
+#include "../include/RippleLikeNetworkParameters.hpp"
 #include "../include/WalletType.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSBitcoinLikeOperationCpp.hpp"
 #include "NJSEthereumLikeOperationCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
+#include "NJSRippleLikeOperationCpp.hpp"
 #include "NJSTrustIndicatorCpp.hpp"
 #include <chrono>
 #include <cstdint>
@@ -120,7 +122,12 @@ private:
      */
     static NAN_METHOD(asEthereumLikeOperation);
 
-    /** Is this an instance of a Bitcoin-like operation? */
+    /**
+     *Convert operation as Ripple operation
+     *@return RippleLikeOperation object
+     */
+    static NAN_METHOD(asRippleLikeOperation);
+
     static NAN_METHOD(isInstanceOfBitcoinLikeOperation);
 
     /** Same as isInstanceOfBitcoinLikeOperation for ethereum. */
