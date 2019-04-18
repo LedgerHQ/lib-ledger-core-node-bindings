@@ -9,6 +9,7 @@
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
+#include "../include/RippleLikeMemo.hpp"
 #include "../include/RippleLikeNetworkParameters.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSRippleLikeTransactionCallback.hpp"
@@ -57,6 +58,12 @@ private:
      * @return A reference on the same builder in order to chain calls.
      */
     static NAN_METHOD(setFees);
+
+    /**
+     * Add a memo.
+     * @return A reference on the same builder in order to chain calls.
+     */
+    static NAN_METHOD(addMemo);
 
     /** Build a transaction from the given builder parameters. */
     static NAN_METHOD(build);

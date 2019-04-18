@@ -19,14 +19,8 @@ NAN_METHOD(NJSWalletPool::newInstance) {
     //Check if parameters have correct types
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
-    auto arg_1 = std::experimental::optional<std::string>();
-    if(!info[1]->IsNull() && !info[1]->IsUndefined())
-    {
-        String::Utf8Value string_opt_arg_1(info[1]->ToString());
-        auto opt_arg_1 = std::string(*string_opt_arg_1);
-        arg_1.emplace(opt_arg_1);
-    }
-
+    String::Utf8Value string_arg_1(info[1]->ToString());
+    auto arg_1 = std::string(*string_arg_1);
     Local<Object> njs_arg_2 = info[2]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
     auto arg_2 = djinni::js::ObjectWrapper<HttpClient>::Unwrap(njs_arg_2);
 
@@ -737,14 +731,8 @@ NAN_METHOD(NJSWalletPool::New) {
     //Unwrap objects to get C++ classes
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
-    auto arg_1 = std::experimental::optional<std::string>();
-    if(!info[1]->IsNull() && !info[1]->IsUndefined())
-    {
-        String::Utf8Value string_opt_arg_1(info[1]->ToString());
-        auto opt_arg_1 = std::string(*string_opt_arg_1);
-        arg_1.emplace(opt_arg_1);
-    }
-
+    String::Utf8Value string_arg_1(info[1]->ToString());
+    auto arg_1 = std::string(*string_arg_1);
     Local<Object> njs_arg_2 = info[2]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
     auto arg_2 = djinni::js::ObjectWrapper<HttpClient>::Unwrap(njs_arg_2);
 

@@ -927,6 +927,32 @@ NAN_METHOD(NJSWallet::eraseDataSince) {
     cpp_impl->eraseDataSince(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSWallet::getConfiguration) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSWallet::getConfiguration needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWallet::getConfiguration : implementation of Wallet is not valid");
+    }
+
+    auto result = cpp_impl->getConfiguration();
+
+    //Wrap result in node object
+    auto arg_0 = NJSDynamicObject::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSWallet::New) {
     //Only new allowed
@@ -998,6 +1024,7 @@ void NJSWallet::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"newAccountWithInfo", newAccountWithInfo);
     Nan::SetPrototypeMethod(func_template,"newAccountWithExtendedKeyInfo", newAccountWithExtendedKeyInfo);
     Nan::SetPrototypeMethod(func_template,"eraseDataSince", eraseDataSince);
+    Nan::SetPrototypeMethod(func_template,"getConfiguration", getConfiguration);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Wallet_prototype.Reset(objectTemplate);

@@ -38,6 +38,10 @@ declare class NJSRippleLikeTransaction
     declare function getLedgerSequence(): NJSBigInt;
     /** Get Signing public Key */
     declare function getSigningPubKey(): Object;
+    /** Get all memos associated with the transaction. */
+    declare function getMemos(): Array<RippleLikeMemo>;
+    /** Add a memo to a transaction. */
+    declare function addMemo(memo: RippleLikeMemo);
 }
 /**Class representing a Ripple Operation */
 declare class NJSRippleLikeOperation
@@ -87,6 +91,11 @@ declare class NJSRippleLikeTransactionBuilder
      * @return A reference on the same builder in order to chain calls.
      */
     declare function setFees(fees: NJSAmount): NJSRippleLikeTransactionBuilder;
+    /**
+     * Add a memo.
+     * @return A reference on the same builder in order to chain calls.
+     */
+    declare function addMemo(memo: RippleLikeMemo): NJSRippleLikeTransactionBuilder;
     /** Build a transaction from the given builder parameters. */
     declare function build(callback: NJSRippleLikeTransactionCallback);
     /**
@@ -816,6 +825,8 @@ declare class NJSWallet
      * @param date, start date of data deletion
      */
     declare function eraseDataSince(date: Date, callback: NJSErrorCodeCallback);
+    /** Return wallet's configuration */
+    declare function getConfiguration(): NJSDynamicObject;
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSAccountCallback
@@ -1580,6 +1591,11 @@ declare class NJSERC20LikeOperation
     declare function getOperationType(): OperationType;
     /** Get opration status : pending or confirmed. */
     declare function getStatus(): number;
+    /**
+     * Get block height on which operation was included.
+     * @return Optional 64-bit integer, height of block in which operation was validated
+     */
+    declare function getBlockHeight(): ?number;
 }
 /** A callback called when an Ethereum-like wallet is available after issuing a get command. */
 declare class NJSGetEthreumLikeWalletCallback
@@ -2320,6 +2336,14 @@ declare class NJSBitcoinLikeAccount
     declare function broadcastRawTransaction(transaction: Object, callback: NJSStringCallback);
     declare function broadcastTransaction(transaction: NJSBitcoinLikeTransaction, callback: NJSStringCallback);
     declare function buildTransaction(partial: ?boolean): NJSBitcoinLikeTransactionBuilder;
+    /**
+     * Get fees from network, fees are ordered in descending order (i.e. fastest to slowest confirmation)
+     * Note: it would have been better to have this method on BitcoinLikeWallet
+     * but since BitcoinLikeWallet is not used anywhere, it's better to keep all
+     * specific methods under the same specific class so it will be easy to segratate
+     * when the right time comes !
+     */
+    declare function getFees(callback: NJSBigIntListCallback);
 }
 /** Callback triggered by main completed task, returning optional result as list of template type T. */
 declare class NJSBitcoinLikeOutputListCallback
@@ -2331,6 +2355,16 @@ declare class NJSBitcoinLikeOutputListCallback
      */
     declare function onCallback(result: ?Array<NJSBitcoinLikeOutput>, error: ?Error);
 }
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSBigIntListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<NJSBigInt>, error: ?Error);
+}
 /** A bitcoin-like wallet. */
 declare class NJSBitcoinLikeWallet
 {
@@ -2341,7 +2375,7 @@ declare class NJSWalletPool
     /**
      * Create a new instance of WalletPool object.
      * @param name, string, name of the wallet pool
-     * @param password, optional string, password to lock wallet pool
+     * @param password, string, password to lock wallet pool (empty string means no password)
      * @param http, HttpClient object, http client used for all calls made by wallet pool (and aggregated wallets)
      * @param webSocketClient, WebSocketClient object, socket through which wallet pool observe and get notified (explorer, DBs ...)
      * @param pathResolver, PathResolver Object, resolve paths to logs, databases, preferences ...
@@ -2352,7 +2386,7 @@ declare class NJSWalletPool
      * @param configuration, DynamicObject object, desired configuration for this wallet pool
      * @return WalletPool object, instance of WalletPool
      */
-    static declare function newInstance(name: string, password: ?string, httpClient: NJSHttpClient, webSocketClient: NJSWebSocketClient, pathResolver: NJSPathResolver, logPrinter: NJSLogPrinter, dispatcher: NJSThreadDispatcher, rng: NJSRandomNumberGenerator, backend: NJSDatabaseBackend, configuration: NJSDynamicObject): NJSWalletPool;
+    static declare function newInstance(name: string, password: string, httpClient: NJSHttpClient, webSocketClient: NJSWebSocketClient, pathResolver: NJSPathResolver, logPrinter: NJSLogPrinter, dispatcher: NJSThreadDispatcher, rng: NJSRandomNumberGenerator, backend: NJSDatabaseBackend, configuration: NJSDynamicObject): NJSWalletPool;
     /**
      * Return used logger to dump logs in defined log path by PathResolver.
      * @return Logger object

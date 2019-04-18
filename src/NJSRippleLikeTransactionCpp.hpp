@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSRIPPLELIKETRANSACTION_HPP
 
 
+#include "../include/RippleLikeMemo.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSBigIntCpp.hpp"
 #include "NJSRippleLikeAddressCpp.hpp"
@@ -74,6 +75,12 @@ private:
 
     /** Get Signing public Key */
     static NAN_METHOD(getSigningPubKey);
+
+    /** Get all memos associated with the transaction. */
+    static NAN_METHOD(getMemos);
+
+    /** Add a memo to a transaction. */
+    static NAN_METHOD(addMemo);
 
     static NAN_METHOD(New);
 

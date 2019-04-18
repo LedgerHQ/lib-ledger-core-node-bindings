@@ -93,6 +93,7 @@
 #include "NJSBitcoinLikeTransactionCallback.hpp"
 #include "NJSBitcoinLikeAccountCpp.hpp"
 #include "NJSBitcoinLikeOutputListCallback.hpp"
+#include "NJSBigIntListCallback.hpp"
 #include "NJSBitcoinLikeWalletCpp.hpp"
 #include "NJSWalletPoolCpp.hpp"
 #include "NJSWalletListCallback.hpp"
@@ -211,6 +212,7 @@ static void initAll(Local<Object> target)
     NJSBitcoinLikeTransactionCallback::Initialize(target);
     NJSBitcoinLikeAccount::Initialize(target);
     NJSBitcoinLikeOutputListCallback::Initialize(target);
+    NJSBigIntListCallback::Initialize(target);
     NJSBitcoinLikeWallet::Initialize(target);
     NJSWalletPool::Initialize(target);
     NJSWalletListCallback::Initialize(target);
