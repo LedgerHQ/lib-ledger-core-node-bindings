@@ -346,6 +346,76 @@ NAN_METHOD(NJSRippleLikeTransaction::getSigningPubKey) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSRippleLikeTransaction::getMemos) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSRippleLikeTransaction::getMemos needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSRippleLikeTransaction::getMemos : implementation of RippleLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getMemos();
+
+    //Wrap result in node object
+    Local<Array> arg_0 = Nan::New<Array>();
+    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
+    {
+        auto arg_0_elem = Nan::New<Object>();
+        auto arg_0_elem_1 = Nan::New<String>(result[arg_0_id].data).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_elem, Nan::New<String>("data").ToLocalChecked(), arg_0_elem_1);
+        auto arg_0_elem_2 = Nan::New<String>(result[arg_0_id].fmt).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_elem, Nan::New<String>("fmt").ToLocalChecked(), arg_0_elem_2);
+        auto arg_0_elem_3 = Nan::New<String>(result[arg_0_id].ty).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_elem, Nan::New<String>("ty").ToLocalChecked(), arg_0_elem_3);
+
+        arg_0->Set((int)arg_0_id,arg_0_elem);
+    }
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSRippleLikeTransaction::addMemo) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSRippleLikeTransaction::addMemo needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    auto field_arg_0_1 = Nan::Get(info[0]->ToObject(), Nan::New<String>("data").ToLocalChecked()).ToLocalChecked();
+    String::Utf8Value string_arg_0_1(field_arg_0_1->ToString());
+    auto arg_0_1 = std::string(*string_arg_0_1);
+
+    auto field_arg_0_2 = Nan::Get(info[0]->ToObject(), Nan::New<String>("fmt").ToLocalChecked()).ToLocalChecked();
+    String::Utf8Value string_arg_0_2(field_arg_0_2->ToString());
+    auto arg_0_2 = std::string(*string_arg_0_2);
+
+    auto field_arg_0_3 = Nan::Get(info[0]->ToObject(), Nan::New<String>("ty").ToLocalChecked()).ToLocalChecked();
+    String::Utf8Value string_arg_0_3(field_arg_0_3->ToString());
+    auto arg_0_3 = std::string(*string_arg_0_3);
+    RippleLikeMemo arg_0(arg_0_1, arg_0_2, arg_0_3);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSRippleLikeTransaction::addMemo : implementation of RippleLikeTransaction is not valid");
+    }
+    cpp_impl->addMemo(arg_0);
+}
 
 NAN_METHOD(NJSRippleLikeTransaction::New) {
     //Only new allowed
@@ -404,6 +474,8 @@ void NJSRippleLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getSequence", getSequence);
     Nan::SetPrototypeMethod(func_template,"getLedgerSequence", getLedgerSequence);
     Nan::SetPrototypeMethod(func_template,"getSigningPubKey", getSigningPubKey);
+    Nan::SetPrototypeMethod(func_template,"getMemos", getMemos);
+    Nan::SetPrototypeMethod(func_template,"addMemo", addMemo);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     RippleLikeTransaction_prototype.Reset(objectTemplate);

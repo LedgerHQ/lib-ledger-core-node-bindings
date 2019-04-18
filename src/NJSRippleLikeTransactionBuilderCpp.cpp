@@ -104,6 +104,46 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::setFees) {
     //Return result
     info.GetReturnValue().Set(arg_1);
 }
+NAN_METHOD(NJSRippleLikeTransactionBuilder::addMemo) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSRippleLikeTransactionBuilder::addMemo needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    auto field_arg_0_1 = Nan::Get(info[0]->ToObject(), Nan::New<String>("data").ToLocalChecked()).ToLocalChecked();
+    String::Utf8Value string_arg_0_1(field_arg_0_1->ToString());
+    auto arg_0_1 = std::string(*string_arg_0_1);
+
+    auto field_arg_0_2 = Nan::Get(info[0]->ToObject(), Nan::New<String>("fmt").ToLocalChecked()).ToLocalChecked();
+    String::Utf8Value string_arg_0_2(field_arg_0_2->ToString());
+    auto arg_0_2 = std::string(*string_arg_0_2);
+
+    auto field_arg_0_3 = Nan::Get(info[0]->ToObject(), Nan::New<String>("ty").ToLocalChecked()).ToLocalChecked();
+    String::Utf8Value string_arg_0_3(field_arg_0_3->ToString());
+    auto arg_0_3 = std::string(*string_arg_0_3);
+    RippleLikeMemo arg_0(arg_0_1, arg_0_2, arg_0_3);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSRippleLikeTransactionBuilder::addMemo : implementation of RippleLikeTransactionBuilder is not valid");
+    }
+
+    auto result = cpp_impl->addMemo(arg_0);
+
+    //Wrap result in node object
+    auto arg_1 = NJSRippleLikeTransactionBuilder::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_1);
+}
 NAN_METHOD(NJSRippleLikeTransactionBuilder::build) {
 
     //Check if method called with right number of arguments
@@ -764,6 +804,7 @@ void NJSRippleLikeTransactionBuilder::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"sendToAddress", sendToAddress);
     Nan::SetPrototypeMethod(func_template,"wipeToAddress", wipeToAddress);
     Nan::SetPrototypeMethod(func_template,"setFees", setFees);
+    Nan::SetPrototypeMethod(func_template,"addMemo", addMemo);
     Nan::SetPrototypeMethod(func_template,"build", build);
     Nan::SetPrototypeMethod(func_template,"clone", clone);
     Nan::SetPrototypeMethod(func_template,"reset", reset);

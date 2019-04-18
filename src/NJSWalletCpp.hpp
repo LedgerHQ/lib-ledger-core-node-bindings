@@ -18,6 +18,7 @@
 #include "NJSAccountListCallback.hpp"
 #include "NJSBitcoinLikeWalletCpp.hpp"
 #include "NJSBlockCallback.hpp"
+#include "NJSDynamicObjectCpp.hpp"
 #include "NJSErrorCodeCallback.hpp"
 #include "NJSEventBusCpp.hpp"
 #include "NJSExtendedKeyAccountCreationInfoCallback.hpp"
@@ -195,6 +196,9 @@ private:
      * @param date, start date of data deletion
      */
     static NAN_METHOD(eraseDataSince);
+
+    /** Return wallet's configuration */
+    static NAN_METHOD(getConfiguration);
 
     static NAN_METHOD(New);
 

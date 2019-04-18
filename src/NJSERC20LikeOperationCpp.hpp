@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSERC20LIKEOPERATION_HPP
 
 
+#include "../include/../utils/optional.hpp"
 #include "../include/OperationType.hpp"
 #include "NJSBigIntCpp.hpp"
 #include <chrono>
@@ -70,6 +71,12 @@ private:
 
     /** Get opration status : pending or confirmed. */
     static NAN_METHOD(getStatus);
+
+    /**
+     * Get block height on which operation was included.
+     * @return Optional 64-bit integer, height of block in which operation was validated
+     */
+    static NAN_METHOD(getBlockHeight);
 
     static NAN_METHOD(New);
 
