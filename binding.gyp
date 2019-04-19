@@ -9,7 +9,7 @@
   },
   'targets': [{
     'target_name': 'ledger-core-node',
-    'sources': ["<!@(python2 glob.py <@(source_path) *.cpp *.hpp)"],
+    'sources': ["<!@(python glob.py <@(source_path) *.cpp *.hpp)"],
     'include_dirs': [
       "<!(node -e \"require('nan')\")",
       "<(module_root_dir)/include",

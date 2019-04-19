@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # a helper for gyp to do file globbing cross platform
 # Usage: python glob.py root_dir pattern [pattern...]
 
