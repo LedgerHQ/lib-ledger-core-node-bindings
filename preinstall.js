@@ -16,7 +16,7 @@ const perPlatform = {
   },
   win32: {
     dir: 'win/vs2015',
-    file: ['ledger-core.dll', 'ledger-core.lib', 'crypto.dll'],
+    files: ['ledger-core.dll', 'ledger-core.lib', 'crypto.dll'],
   },
 }
 
