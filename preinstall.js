@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-var request = require('request')
+const https = require('https');
 const { libcoreVersion } = require('./package.json')
 
 const perPlatform = {
@@ -63,13 +63,15 @@ function get(file) {
         console.log(`${file} downloaded.`)
         f.close(resolve)
       })
-      request
-        .get(url)
+      
+      https
+        .get(url, res => {
+          res.pipe(f);
+        })
         .on('error', err => {
           fs.unlink(dest)
           reject(err)
         })
-        .pipe(f)
     }
   })
 }
