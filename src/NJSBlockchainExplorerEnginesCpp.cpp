@@ -39,7 +39,7 @@ Local<Object> NJSBlockchainExplorerEngines::wrap(const std::shared_ptr<ledger::c
 }
 
 NAN_METHOD(NJSBlockchainExplorerEngines::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BlockchainExplorerEngines>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BlockchainExplorerEngines>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

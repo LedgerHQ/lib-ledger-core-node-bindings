@@ -27,7 +27,7 @@ std::shared_ptr<ExecutionContext> NJSThreadDispatcher::getSerialExecutionContext
     }
     auto checkedResult_getSerialExecutionContext = result_getSerialExecutionContext.ToLocalChecked();
     Local<Object> njs_fResult_getSerialExecutionContext = checkedResult_getSerialExecutionContext->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_getSerialExecutionContext = djinni::js::ObjectWrapper<ExecutionContext>::Unwrap(njs_fResult_getSerialExecutionContext);
+    auto fResult_getSerialExecutionContext = djinni::js::ObjectWrapper<ledger::core::api::ExecutionContext>::Unwrap(njs_fResult_getSerialExecutionContext);
 
     return fResult_getSerialExecutionContext;
 }
@@ -51,7 +51,7 @@ std::shared_ptr<ExecutionContext> NJSThreadDispatcher::getThreadPoolExecutionCon
     }
     auto checkedResult_getThreadPoolExecutionContext = result_getThreadPoolExecutionContext.ToLocalChecked();
     Local<Object> njs_fResult_getThreadPoolExecutionContext = checkedResult_getThreadPoolExecutionContext->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_getThreadPoolExecutionContext = djinni::js::ObjectWrapper<ExecutionContext>::Unwrap(njs_fResult_getThreadPoolExecutionContext);
+    auto fResult_getThreadPoolExecutionContext = djinni::js::ObjectWrapper<ledger::core::api::ExecutionContext>::Unwrap(njs_fResult_getThreadPoolExecutionContext);
 
     return fResult_getThreadPoolExecutionContext;
 }
@@ -74,7 +74,7 @@ std::shared_ptr<ExecutionContext> NJSThreadDispatcher::getMainExecutionContext()
     }
     auto checkedResult_getMainExecutionContext = result_getMainExecutionContext.ToLocalChecked();
     Local<Object> njs_fResult_getMainExecutionContext = checkedResult_getMainExecutionContext->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_getMainExecutionContext = djinni::js::ObjectWrapper<ExecutionContext>::Unwrap(njs_fResult_getMainExecutionContext);
+    auto fResult_getMainExecutionContext = djinni::js::ObjectWrapper<ledger::core::api::ExecutionContext>::Unwrap(njs_fResult_getMainExecutionContext);
 
     return fResult_getMainExecutionContext;
 }
@@ -97,7 +97,7 @@ std::shared_ptr<Lock> NJSThreadDispatcher::newLock()
     }
     auto checkedResult_newLock = result_newLock.ToLocalChecked();
     Local<Object> njs_fResult_newLock = checkedResult_newLock->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_newLock = djinni::js::ObjectWrapper<Lock>::Unwrap(njs_fResult_newLock);
+    auto fResult_newLock = djinni::js::ObjectWrapper<ledger::core::api::Lock>::Unwrap(njs_fResult_newLock);
 
     return fResult_newLock;
 }

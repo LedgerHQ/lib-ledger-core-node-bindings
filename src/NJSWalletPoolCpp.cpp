@@ -22,39 +22,39 @@ NAN_METHOD(NJSWalletPool::newInstance) {
     String::Utf8Value string_arg_1(info[1]->ToString());
     auto arg_1 = std::string(*string_arg_1);
     Local<Object> njs_arg_2 = info[2]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_2 = djinni::js::ObjectWrapper<HttpClient>::Unwrap(njs_arg_2);
+    auto arg_2 = djinni::js::ObjectWrapper<ledger::core::api::HttpClient>::Unwrap(njs_arg_2);
 
     Local<Object> njs_arg_3 = info[3]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_3 = djinni::js::ObjectWrapper<WebSocketClient>::Unwrap(njs_arg_3);
+    auto arg_3 = djinni::js::ObjectWrapper<ledger::core::api::WebSocketClient>::Unwrap(njs_arg_3);
 
     Local<Object> njs_arg_4 = info[4]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_4 = djinni::js::ObjectWrapper<PathResolver>::Unwrap(njs_arg_4);
+    auto arg_4 = djinni::js::ObjectWrapper<ledger::core::api::PathResolver>::Unwrap(njs_arg_4);
 
     Local<Object> njs_arg_5 = info[5]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_5 = djinni::js::ObjectWrapper<LogPrinter>::Unwrap(njs_arg_5);
+    auto arg_5 = djinni::js::ObjectWrapper<ledger::core::api::LogPrinter>::Unwrap(njs_arg_5);
 
     Local<Object> njs_arg_6 = info[6]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_6 = djinni::js::ObjectWrapper<ThreadDispatcher>::Unwrap(njs_arg_6);
+    auto arg_6 = djinni::js::ObjectWrapper<ledger::core::api::ThreadDispatcher>::Unwrap(njs_arg_6);
 
     Local<Object> njs_arg_7 = info[7]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_7 = djinni::js::ObjectWrapper<RandomNumberGenerator>::Unwrap(njs_arg_7);
+    auto arg_7 = djinni::js::ObjectWrapper<ledger::core::api::RandomNumberGenerator>::Unwrap(njs_arg_7);
 
     Local<Object> njs_arg_8 = info[8]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_8 = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(njs_arg_8);
+    auto arg_8 = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBackend>::Unwrap(njs_arg_8);
     if(!arg_8)
     {
         return Nan::ThrowError("NodeJs Object to NJSDatabaseBackend failed");
     }
 
     Local<Object> njs_arg_9 = info[9]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_9 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_9);
+    auto arg_9 = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(njs_arg_9);
     if(!arg_9)
     {
         return Nan::ThrowError("NodeJs Object to NJSDynamicObject failed");
     }
 
 
-    auto result = WalletPool::newInstance(arg_0,arg_1,arg_2,arg_3,arg_4,arg_5,arg_6,arg_7,arg_8,arg_9);
+    auto result = ledger::core::api::WalletPool::newInstance(arg_0,arg_1,arg_2,arg_3,arg_4,arg_5,arg_6,arg_7,arg_8,arg_9);
 
     //Wrap result in node object
     auto arg_10 = NJSWalletPool::wrap(result);
@@ -74,7 +74,7 @@ NAN_METHOD(NJSWalletPool::getLogger) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getLogger : implementation of WalletPool is not valid");
@@ -100,7 +100,7 @@ NAN_METHOD(NJSWalletPool::getName) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getName : implementation of WalletPool is not valid");
@@ -125,7 +125,7 @@ NAN_METHOD(NJSWalletPool::getPreferences) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getPreferences : implementation of WalletPool is not valid");
@@ -157,7 +157,7 @@ NAN_METHOD(NJSWalletPool::getWalletCount) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getWalletCount : implementation of WalletPool is not valid");
@@ -184,7 +184,7 @@ NAN_METHOD(NJSWalletPool::getWallets) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getWallets : implementation of WalletPool is not valid");
@@ -211,7 +211,7 @@ NAN_METHOD(NJSWalletPool::getWallet) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getWallet : implementation of WalletPool is not valid");
@@ -231,7 +231,7 @@ NAN_METHOD(NJSWalletPool::updateWalletConfig) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
     Local<Object> njs_arg_1 = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_1 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_1);
+    auto arg_1 = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(njs_arg_1);
     if(!arg_1)
     {
         return Nan::ThrowError("NodeJs Object to NJSDynamicObject failed");
@@ -245,7 +245,7 @@ NAN_METHOD(NJSWalletPool::updateWalletConfig) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::updateWalletConfig : implementation of WalletPool is not valid");
@@ -506,7 +506,7 @@ NAN_METHOD(NJSWalletPool::createWallet) {
     Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8);
 
     Local<Object> njs_arg_2 = info[2]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_2 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_2);
+    auto arg_2 = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(njs_arg_2);
     if(!arg_2)
     {
         return Nan::ThrowError("NodeJs Object to NJSDynamicObject failed");
@@ -520,7 +520,7 @@ NAN_METHOD(NJSWalletPool::createWallet) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::createWallet : implementation of WalletPool is not valid");
@@ -545,7 +545,7 @@ NAN_METHOD(NJSWalletPool::getCurrencies) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getCurrencies : implementation of WalletPool is not valid");
@@ -572,7 +572,7 @@ NAN_METHOD(NJSWalletPool::getCurrency) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getCurrency : implementation of WalletPool is not valid");
@@ -599,7 +599,7 @@ NAN_METHOD(NJSWalletPool::getLastBlock) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getLastBlock : implementation of WalletPool is not valid");
@@ -618,7 +618,7 @@ NAN_METHOD(NJSWalletPool::getEventBus) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::getEventBus : implementation of WalletPool is not valid");
@@ -652,7 +652,7 @@ NAN_METHOD(NJSWalletPool::eraseDataSince) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::eraseDataSince : implementation of WalletPool is not valid");
@@ -677,7 +677,7 @@ NAN_METHOD(NJSWalletPool::freshResetAll) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::freshResetAll : implementation of WalletPool is not valid");
@@ -706,7 +706,7 @@ NAN_METHOD(NJSWalletPool::changePassword) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWalletPool::changePassword : implementation of WalletPool is not valid");
@@ -734,32 +734,32 @@ NAN_METHOD(NJSWalletPool::New) {
     String::Utf8Value string_arg_1(info[1]->ToString());
     auto arg_1 = std::string(*string_arg_1);
     Local<Object> njs_arg_2 = info[2]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_2 = djinni::js::ObjectWrapper<HttpClient>::Unwrap(njs_arg_2);
+    auto arg_2 = djinni::js::ObjectWrapper<ledger::core::api::HttpClient>::Unwrap(njs_arg_2);
 
     Local<Object> njs_arg_3 = info[3]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_3 = djinni::js::ObjectWrapper<WebSocketClient>::Unwrap(njs_arg_3);
+    auto arg_3 = djinni::js::ObjectWrapper<ledger::core::api::WebSocketClient>::Unwrap(njs_arg_3);
 
     Local<Object> njs_arg_4 = info[4]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_4 = djinni::js::ObjectWrapper<PathResolver>::Unwrap(njs_arg_4);
+    auto arg_4 = djinni::js::ObjectWrapper<ledger::core::api::PathResolver>::Unwrap(njs_arg_4);
 
     Local<Object> njs_arg_5 = info[5]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_5 = djinni::js::ObjectWrapper<LogPrinter>::Unwrap(njs_arg_5);
+    auto arg_5 = djinni::js::ObjectWrapper<ledger::core::api::LogPrinter>::Unwrap(njs_arg_5);
 
     Local<Object> njs_arg_6 = info[6]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_6 = djinni::js::ObjectWrapper<ThreadDispatcher>::Unwrap(njs_arg_6);
+    auto arg_6 = djinni::js::ObjectWrapper<ledger::core::api::ThreadDispatcher>::Unwrap(njs_arg_6);
 
     Local<Object> njs_arg_7 = info[7]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_7 = djinni::js::ObjectWrapper<RandomNumberGenerator>::Unwrap(njs_arg_7);
+    auto arg_7 = djinni::js::ObjectWrapper<ledger::core::api::RandomNumberGenerator>::Unwrap(njs_arg_7);
 
     Local<Object> njs_arg_8 = info[8]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_8 = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(njs_arg_8);
+    auto arg_8 = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBackend>::Unwrap(njs_arg_8);
     if(!arg_8)
     {
         return Nan::ThrowError("NodeJs Object to NJSDatabaseBackend failed");
     }
 
     Local<Object> njs_arg_9 = info[9]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_9 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_9);
+    auto arg_9 = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(njs_arg_9);
     if(!arg_9)
     {
         return Nan::ThrowError("NodeJs Object to NJSDynamicObject failed");
@@ -793,7 +793,7 @@ Local<Object> NJSWalletPool::wrap(const std::shared_ptr<ledger::core::api::Walle
 }
 
 NAN_METHOD(NJSWalletPool::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<WalletPool>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::WalletPool>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

@@ -26,7 +26,7 @@ std::shared_ptr<DatabaseResultRow> NJSDatabaseResultSet::getRow()
     }
     auto checkedResult_getRow = result_getRow.ToLocalChecked();
     Local<Object> njs_fResult_getRow = checkedResult_getRow->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_getRow = djinni::js::ObjectWrapper<DatabaseResultRow>::Unwrap(njs_fResult_getRow);
+    auto fResult_getRow = djinni::js::ObjectWrapper<ledger::core::api::DatabaseResultRow>::Unwrap(njs_fResult_getRow);
 
     return fResult_getRow;
 }
@@ -148,7 +148,7 @@ std::shared_ptr<DatabaseError> NJSDatabaseResultSet::getError()
     }
     auto checkedResult_getError = result_getError.ToLocalChecked();
     Local<Object> njs_fResult_getError = checkedResult_getError->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_getError = djinni::js::ObjectWrapper<DatabaseError>::Unwrap(njs_fResult_getError);
+    auto fResult_getError = djinni::js::ObjectWrapper<ledger::core::api::DatabaseError>::Unwrap(njs_fResult_getError);
 
     return fResult_getError;
 }

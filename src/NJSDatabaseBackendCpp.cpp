@@ -19,7 +19,7 @@ NAN_METHOD(NJSDatabaseBackend::getConnectionPoolSize) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBackend>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDatabaseBackend::getConnectionPoolSize : implementation of DatabaseBackend is not valid");
@@ -45,7 +45,7 @@ NAN_METHOD(NJSDatabaseBackend::enableQueryLogging) {
     auto arg_0 = Nan::To<bool>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBackend>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDatabaseBackend::enableQueryLogging : implementation of DatabaseBackend is not valid");
@@ -71,7 +71,7 @@ NAN_METHOD(NJSDatabaseBackend::isLoggingEnabled) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBackend>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDatabaseBackend::isLoggingEnabled : implementation of DatabaseBackend is not valid");
@@ -95,7 +95,7 @@ NAN_METHOD(NJSDatabaseBackend::getSqlite3Backend) {
 
     //Check if parameters have correct types
 
-    auto result = DatabaseBackend::getSqlite3Backend();
+    auto result = ledger::core::api::DatabaseBackend::getSqlite3Backend();
 
     //Wrap result in node object
     auto arg_0 = NJSDatabaseBackend::wrap(result);
@@ -114,10 +114,10 @@ NAN_METHOD(NJSDatabaseBackend::createBackendFromEngine) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<DatabaseEngine>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::DatabaseEngine>::Unwrap(njs_arg_0);
 
 
-    auto result = DatabaseBackend::createBackendFromEngine(arg_0);
+    auto result = ledger::core::api::DatabaseBackend::createBackendFromEngine(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSDatabaseBackend::wrap(result);
@@ -169,7 +169,7 @@ Local<Object> NJSDatabaseBackend::wrap(const std::shared_ptr<ledger::core::api::
 }
 
 NAN_METHOD(NJSDatabaseBackend::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<DatabaseBackend>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBackend>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

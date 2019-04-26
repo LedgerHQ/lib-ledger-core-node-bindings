@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optional<AccountCreationInfo> & result, const std::experimental::optional<Error> & error)
+void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optional<::ledger::core::api::AccountCreationInfo> & result, const std::experimental::optional<::ledger::core::api::Error> & error)
 {
     Nan::HandleScope scope;
     //Wrap parameters

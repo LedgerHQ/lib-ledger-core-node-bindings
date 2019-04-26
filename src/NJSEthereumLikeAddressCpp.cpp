@@ -19,7 +19,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getVersion) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeAddress::getVersion : implementation of EthereumLikeAddress is not valid");
@@ -50,7 +50,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getKeccakHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeAddress::getKeccakHash : implementation of EthereumLikeAddress is not valid");
@@ -81,7 +81,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getNetworkParameters) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeAddress::getNetworkParameters : implementation of EthereumLikeAddress is not valid");
@@ -131,7 +131,7 @@ NAN_METHOD(NJSEthereumLikeAddress::toEIP55) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeAddress::toEIP55 : implementation of EthereumLikeAddress is not valid");
@@ -176,7 +176,7 @@ Local<Object> NJSEthereumLikeAddress::wrap(const std::shared_ptr<ledger::core::a
 }
 
 NAN_METHOD(NJSEthereumLikeAddress::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EthereumLikeAddress>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAddress>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

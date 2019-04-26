@@ -71,6 +71,7 @@
 #include "NJSEthereumLikeTransactionBuilderCpp.hpp"
 #include "NJSEthereumLikeTransactionCallback.hpp"
 #include "NJSEthereumLikeAccountCpp.hpp"
+#include "NJSBigIntCallback.hpp"
 #include "NJSBitcoinLikeScriptChunkCpp.hpp"
 #include "NJSBitcoinLikeScriptCpp.hpp"
 #include "NJSRippleLikeAddressCpp.hpp"
@@ -190,6 +191,7 @@ static void initAll(Local<Object> target)
     NJSEthereumLikeTransactionBuilder::Initialize(target);
     NJSEthereumLikeTransactionCallback::Initialize(target);
     NJSEthereumLikeAccount::Initialize(target);
+    NJSBigIntCallback::Initialize(target);
     NJSBitcoinLikeScriptChunk::Initialize(target);
     NJSBitcoinLikeScript::Initialize(target);
     NJSRippleLikeAddress::Initialize(target);

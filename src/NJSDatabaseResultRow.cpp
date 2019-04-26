@@ -205,7 +205,7 @@ std::shared_ptr<DatabaseBlob> NJSDatabaseResultRow::getBlobByPos(int32_t pos)
     }
     auto checkedResult_getBlobByPos = result_getBlobByPos.ToLocalChecked();
     Local<Object> njs_fResult_getBlobByPos = checkedResult_getBlobByPos->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_getBlobByPos = djinni::js::ObjectWrapper<DatabaseBlob>::Unwrap(njs_fResult_getBlobByPos);
+    auto fResult_getBlobByPos = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBlob>::Unwrap(njs_fResult_getBlobByPos);
 
     return fResult_getBlobByPos;
 }

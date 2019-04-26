@@ -19,7 +19,7 @@ NAN_METHOD(NJSHttpRequest::getMethod) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<HttpRequest>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::HttpRequest>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSHttpRequest::getMethod : implementation of HttpRequest is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSHttpRequest::getHeaders) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<HttpRequest>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::HttpRequest>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSHttpRequest::getHeaders : implementation of HttpRequest is not valid");
@@ -76,7 +76,7 @@ NAN_METHOD(NJSHttpRequest::getBody) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<HttpRequest>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::HttpRequest>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSHttpRequest::getBody : implementation of HttpRequest is not valid");
@@ -107,7 +107,7 @@ NAN_METHOD(NJSHttpRequest::getUrl) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<HttpRequest>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::HttpRequest>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSHttpRequest::getUrl : implementation of HttpRequest is not valid");
@@ -134,7 +134,7 @@ NAN_METHOD(NJSHttpRequest::complete) {
     if(!info[0]->IsNull() && !info[0]->IsUndefined())
     {
         Local<Object> njs_opt_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-        auto opt_arg_0 = djinni::js::ObjectWrapper<HttpUrlConnection>::Unwrap(njs_opt_arg_0);
+        auto opt_arg_0 = djinni::js::ObjectWrapper<ledger::core::api::HttpUrlConnection>::Unwrap(njs_opt_arg_0);
 
         arg_0 = opt_arg_0;
     }
@@ -156,7 +156,7 @@ NAN_METHOD(NJSHttpRequest::complete) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<HttpRequest>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::HttpRequest>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSHttpRequest::complete : implementation of HttpRequest is not valid");
@@ -194,7 +194,7 @@ Local<Object> NJSHttpRequest::wrap(const std::shared_ptr<ledger::core::api::Http
 }
 
 NAN_METHOD(NJSHttpRequest::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<HttpRequest>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::HttpRequest>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

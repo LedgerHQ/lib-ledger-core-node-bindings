@@ -19,7 +19,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getAddress) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getAddress : implementation of BitcoinLikeInput is not valid");
@@ -51,7 +51,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getPublicKeys) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getPublicKeys : implementation of BitcoinLikeInput is not valid");
@@ -88,7 +88,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getDerivationPath) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getDerivationPath : implementation of BitcoinLikeInput is not valid");
@@ -120,7 +120,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getValue) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getValue : implementation of BitcoinLikeInput is not valid");
@@ -147,7 +147,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getPreviousTxHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getPreviousTxHash : implementation of BitcoinLikeInput is not valid");
@@ -179,7 +179,7 @@ NAN_METHOD(NJSBitcoinLikeInput::isCoinbase) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::isCoinbase : implementation of BitcoinLikeInput is not valid");
@@ -204,7 +204,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getCoinbase) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getCoinbase : implementation of BitcoinLikeInput is not valid");
@@ -236,7 +236,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getPreviousOutputIndex) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getPreviousOutputIndex : implementation of BitcoinLikeInput is not valid");
@@ -268,7 +268,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getPreviousOuput) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getPreviousOuput : implementation of BitcoinLikeInput is not valid");
@@ -294,7 +294,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getScriptSig) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getScriptSig : implementation of BitcoinLikeInput is not valid");
@@ -325,7 +325,7 @@ NAN_METHOD(NJSBitcoinLikeInput::parseScriptSig) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::parseScriptSig : implementation of BitcoinLikeInput is not valid");
@@ -362,7 +362,7 @@ NAN_METHOD(NJSBitcoinLikeInput::setScriptSig) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::setScriptSig : implementation of BitcoinLikeInput is not valid");
@@ -391,7 +391,7 @@ NAN_METHOD(NJSBitcoinLikeInput::pushToScriptSig) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::pushToScriptSig : implementation of BitcoinLikeInput is not valid");
@@ -410,7 +410,7 @@ NAN_METHOD(NJSBitcoinLikeInput::setSequence) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::setSequence : implementation of BitcoinLikeInput is not valid");
@@ -428,7 +428,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getSequence) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getSequence : implementation of BitcoinLikeInput is not valid");
@@ -459,7 +459,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getPreviousTransaction) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::getPreviousTransaction : implementation of BitcoinLikeInput is not valid");
@@ -489,7 +489,7 @@ NAN_METHOD(NJSBitcoinLikeInput::setP2PKHSigScript) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeInput::setP2PKHSigScript : implementation of BitcoinLikeInput is not valid");
@@ -527,7 +527,7 @@ Local<Object> NJSBitcoinLikeInput::wrap(const std::shared_ptr<ledger::core::api:
 }
 
 NAN_METHOD(NJSBitcoinLikeInput::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeInput>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeInput>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

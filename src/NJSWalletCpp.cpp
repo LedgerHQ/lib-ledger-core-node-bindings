@@ -19,7 +19,7 @@ NAN_METHOD(NJSWallet::getName) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getName : implementation of Wallet is not valid");
@@ -51,7 +51,7 @@ NAN_METHOD(NJSWallet::getAccount) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getAccount : implementation of Wallet is not valid");
@@ -76,7 +76,7 @@ NAN_METHOD(NJSWallet::getAccountCount) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getAccountCount : implementation of Wallet is not valid");
@@ -103,7 +103,7 @@ NAN_METHOD(NJSWallet::getAccounts) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getAccounts : implementation of Wallet is not valid");
@@ -128,7 +128,7 @@ NAN_METHOD(NJSWallet::getNextAccountIndex) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getNextAccountIndex : implementation of Wallet is not valid");
@@ -147,7 +147,7 @@ NAN_METHOD(NJSWallet::getEventBus) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getEventBus : implementation of Wallet is not valid");
@@ -173,7 +173,7 @@ NAN_METHOD(NJSWallet::isSynchronizing) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::isSynchronizing : implementation of Wallet is not valid");
@@ -198,7 +198,7 @@ NAN_METHOD(NJSWallet::synchronize) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::synchronize : implementation of Wallet is not valid");
@@ -224,7 +224,7 @@ NAN_METHOD(NJSWallet::getPreferences) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getPreferences : implementation of Wallet is not valid");
@@ -250,7 +250,7 @@ NAN_METHOD(NJSWallet::getLogger) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getLogger : implementation of Wallet is not valid");
@@ -277,7 +277,7 @@ NAN_METHOD(NJSWallet::getAccountPreferences) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getAccountPreferences : implementation of Wallet is not valid");
@@ -303,7 +303,7 @@ NAN_METHOD(NJSWallet::asBitcoinLikeWallet) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::asBitcoinLikeWallet : implementation of Wallet is not valid");
@@ -329,7 +329,7 @@ NAN_METHOD(NJSWallet::getCurrency) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getCurrency : implementation of Wallet is not valid");
@@ -508,7 +508,7 @@ NAN_METHOD(NJSWallet::isInstanceOfBitcoinLikeWallet) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::isInstanceOfBitcoinLikeWallet : implementation of Wallet is not valid");
@@ -533,7 +533,7 @@ NAN_METHOD(NJSWallet::isInstanceOfEthereumLikeWallet) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::isInstanceOfEthereumLikeWallet : implementation of Wallet is not valid");
@@ -558,7 +558,7 @@ NAN_METHOD(NJSWallet::isInstanceOfRippleLikeWallet) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::isInstanceOfRippleLikeWallet : implementation of Wallet is not valid");
@@ -583,7 +583,7 @@ NAN_METHOD(NJSWallet::getWalletType) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getWalletType : implementation of Wallet is not valid");
@@ -614,7 +614,7 @@ NAN_METHOD(NJSWallet::getLastBlock) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getLastBlock : implementation of Wallet is not valid");
@@ -640,7 +640,7 @@ NAN_METHOD(NJSWallet::getAccountCreationInfo) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getAccountCreationInfo : implementation of Wallet is not valid");
@@ -666,7 +666,7 @@ NAN_METHOD(NJSWallet::getExtendedKeyAccountCreationInfo) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getExtendedKeyAccountCreationInfo : implementation of Wallet is not valid");
@@ -691,7 +691,7 @@ NAN_METHOD(NJSWallet::getNextAccountCreationInfo) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getNextAccountCreationInfo : implementation of Wallet is not valid");
@@ -716,7 +716,7 @@ NAN_METHOD(NJSWallet::getNextExtendedKeyAccountCreationInfo) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getNextExtendedKeyAccountCreationInfo : implementation of Wallet is not valid");
@@ -820,7 +820,7 @@ NAN_METHOD(NJSWallet::newAccountWithInfo) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::newAccountWithInfo : implementation of Wallet is not valid");
@@ -892,7 +892,7 @@ NAN_METHOD(NJSWallet::newAccountWithExtendedKeyInfo) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::newAccountWithExtendedKeyInfo : implementation of Wallet is not valid");
@@ -919,7 +919,7 @@ NAN_METHOD(NJSWallet::eraseDataSince) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::eraseDataSince : implementation of Wallet is not valid");
@@ -938,7 +938,7 @@ NAN_METHOD(NJSWallet::getConfiguration) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWallet::getConfiguration : implementation of Wallet is not valid");
@@ -984,7 +984,7 @@ Local<Object> NJSWallet::wrap(const std::shared_ptr<ledger::core::api::Wallet> &
 }
 
 NAN_METHOD(NJSWallet::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Wallet>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

@@ -18,7 +18,7 @@ NAN_METHOD(NJSLedgerCore::getStringVersion) {
 
     //Check if parameters have correct types
 
-    auto result = LedgerCore::getStringVersion();
+    auto result = ledger::core::api::LedgerCore::getStringVersion();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<String>(result).ToLocalChecked();
@@ -36,7 +36,7 @@ NAN_METHOD(NJSLedgerCore::getIntVersion) {
 
     //Check if parameters have correct types
 
-    auto result = LedgerCore::getIntVersion();
+    auto result = ledger::core::api::LedgerCore::getIntVersion();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Int32>(result);
@@ -75,7 +75,7 @@ Local<Object> NJSLedgerCore::wrap(const std::shared_ptr<ledger::core::api::Ledge
 }
 
 NAN_METHOD(NJSLedgerCore::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<LedgerCore>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::LedgerCore>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

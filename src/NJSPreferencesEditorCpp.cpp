@@ -23,7 +23,7 @@ NAN_METHOD(NJSPreferencesEditor::putString) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::putString : implementation of PreferencesEditor is not valid");
@@ -52,7 +52,7 @@ NAN_METHOD(NJSPreferencesEditor::putInt) {
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::putInt : implementation of PreferencesEditor is not valid");
@@ -81,7 +81,7 @@ NAN_METHOD(NJSPreferencesEditor::putLong) {
     auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::putLong : implementation of PreferencesEditor is not valid");
@@ -110,7 +110,7 @@ NAN_METHOD(NJSPreferencesEditor::putBoolean) {
     auto arg_1 = Nan::To<bool>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::putBoolean : implementation of PreferencesEditor is not valid");
@@ -150,7 +150,7 @@ NAN_METHOD(NJSPreferencesEditor::putStringArray) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::putStringArray : implementation of PreferencesEditor is not valid");
@@ -189,7 +189,7 @@ NAN_METHOD(NJSPreferencesEditor::putData) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::putData : implementation of PreferencesEditor is not valid");
@@ -217,7 +217,7 @@ NAN_METHOD(NJSPreferencesEditor::remove) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::remove : implementation of PreferencesEditor is not valid");
@@ -243,7 +243,7 @@ NAN_METHOD(NJSPreferencesEditor::commit) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::commit : implementation of PreferencesEditor is not valid");
@@ -261,7 +261,7 @@ NAN_METHOD(NJSPreferencesEditor::clear) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferencesEditor::clear : implementation of PreferencesEditor is not valid");
@@ -299,7 +299,7 @@ Local<Object> NJSPreferencesEditor::wrap(const std::shared_ptr<ledger::core::api
 }
 
 NAN_METHOD(NJSPreferencesEditor::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<PreferencesEditor>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

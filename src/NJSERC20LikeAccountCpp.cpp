@@ -19,7 +19,7 @@ NAN_METHOD(NJSERC20LikeAccount::getToken) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::getToken : implementation of ERC20LikeAccount is not valid");
@@ -53,7 +53,7 @@ NAN_METHOD(NJSERC20LikeAccount::getAddress) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::getAddress : implementation of ERC20LikeAccount is not valid");
@@ -78,7 +78,7 @@ NAN_METHOD(NJSERC20LikeAccount::getBalance) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::getBalance : implementation of ERC20LikeAccount is not valid");
@@ -109,7 +109,7 @@ NAN_METHOD(NJSERC20LikeAccount::getBalanceHistoryFor) {
     auto arg_2 = (ledger::core::api::TimePeriod)Nan::To<int>(info[2]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::getBalanceHistoryFor : implementation of ERC20LikeAccount is not valid");
@@ -141,7 +141,7 @@ NAN_METHOD(NJSERC20LikeAccount::getOperations) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::getOperations : implementation of ERC20LikeAccount is not valid");
@@ -172,7 +172,7 @@ NAN_METHOD(NJSERC20LikeAccount::getTransferToAddressData) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<BigInt>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSBigInt failed");
@@ -182,7 +182,7 @@ NAN_METHOD(NJSERC20LikeAccount::getTransferToAddressData) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::getTransferToAddressData : implementation of ERC20LikeAccount is not valid");
@@ -213,7 +213,7 @@ NAN_METHOD(NJSERC20LikeAccount::queryOperations) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::queryOperations : implementation of ERC20LikeAccount is not valid");
@@ -259,7 +259,7 @@ Local<Object> NJSERC20LikeAccount::wrap(const std::shared_ptr<ledger::core::api:
 }
 
 NAN_METHOD(NJSERC20LikeAccount::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<ERC20LikeAccount>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

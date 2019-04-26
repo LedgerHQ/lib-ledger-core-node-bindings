@@ -19,7 +19,7 @@ NAN_METHOD(NJSRippleLikeBlock::getHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeBlock::getHash : implementation of RippleLikeBlock is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSRippleLikeBlock::getHeight) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeBlock::getHeight : implementation of RippleLikeBlock is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSRippleLikeBlock::getTime) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeBlock::getTime : implementation of RippleLikeBlock is not valid");
@@ -115,7 +115,7 @@ Local<Object> NJSRippleLikeBlock::wrap(const std::shared_ptr<ledger::core::api::
 }
 
 NAN_METHOD(NJSRippleLikeBlock::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<RippleLikeBlock>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeBlock>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

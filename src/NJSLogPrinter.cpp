@@ -140,7 +140,7 @@ std::shared_ptr<ExecutionContext> NJSLogPrinter::getContext()
     }
     auto checkedResult_getContext = result_getContext.ToLocalChecked();
     Local<Object> njs_fResult_getContext = checkedResult_getContext->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_getContext = djinni::js::ObjectWrapper<ExecutionContext>::Unwrap(njs_fResult_getContext);
+    auto fResult_getContext = djinni::js::ObjectWrapper<ledger::core::api::ExecutionContext>::Unwrap(njs_fResult_getContext);
 
     return fResult_getContext;
 }

@@ -19,7 +19,7 @@ NAN_METHOD(NJSERC20LikeOperation::getHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getHash : implementation of ERC20LikeOperation is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSERC20LikeOperation::getNonce) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getNonce : implementation of ERC20LikeOperation is not valid");
@@ -70,7 +70,7 @@ NAN_METHOD(NJSERC20LikeOperation::getGasPrice) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getGasPrice : implementation of ERC20LikeOperation is not valid");
@@ -96,7 +96,7 @@ NAN_METHOD(NJSERC20LikeOperation::getGasLimit) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getGasLimit : implementation of ERC20LikeOperation is not valid");
@@ -122,7 +122,7 @@ NAN_METHOD(NJSERC20LikeOperation::getUsedGas) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getUsedGas : implementation of ERC20LikeOperation is not valid");
@@ -148,7 +148,7 @@ NAN_METHOD(NJSERC20LikeOperation::getSender) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getSender : implementation of ERC20LikeOperation is not valid");
@@ -173,7 +173,7 @@ NAN_METHOD(NJSERC20LikeOperation::getReceiver) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getReceiver : implementation of ERC20LikeOperation is not valid");
@@ -198,7 +198,7 @@ NAN_METHOD(NJSERC20LikeOperation::getValue) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getValue : implementation of ERC20LikeOperation is not valid");
@@ -224,7 +224,7 @@ NAN_METHOD(NJSERC20LikeOperation::getData) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getData : implementation of ERC20LikeOperation is not valid");
@@ -255,7 +255,7 @@ NAN_METHOD(NJSERC20LikeOperation::getTime) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getTime : implementation of ERC20LikeOperation is not valid");
@@ -281,7 +281,7 @@ NAN_METHOD(NJSERC20LikeOperation::getOperationType) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getOperationType : implementation of ERC20LikeOperation is not valid");
@@ -306,7 +306,7 @@ NAN_METHOD(NJSERC20LikeOperation::getStatus) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getStatus : implementation of ERC20LikeOperation is not valid");
@@ -331,7 +331,7 @@ NAN_METHOD(NJSERC20LikeOperation::getBlockHeight) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeOperation::getBlockHeight : implementation of ERC20LikeOperation is not valid");
@@ -383,7 +383,7 @@ Local<Object> NJSERC20LikeOperation::wrap(const std::shared_ptr<ledger::core::ap
 }
 
 NAN_METHOD(NJSERC20LikeOperation::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<ERC20LikeOperation>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

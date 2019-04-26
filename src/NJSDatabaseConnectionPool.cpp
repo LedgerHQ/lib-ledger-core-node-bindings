@@ -26,7 +26,7 @@ std::shared_ptr<DatabaseConnection> NJSDatabaseConnectionPool::getConnection()
     }
     auto checkedResult_getConnection = result_getConnection.ToLocalChecked();
     Local<Object> njs_fResult_getConnection = checkedResult_getConnection->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_getConnection = djinni::js::ObjectWrapper<DatabaseConnection>::Unwrap(njs_fResult_getConnection);
+    auto fResult_getConnection = djinni::js::ObjectWrapper<ledger::core::api::DatabaseConnection>::Unwrap(njs_fResult_getConnection);
 
     return fResult_getConnection;
 }

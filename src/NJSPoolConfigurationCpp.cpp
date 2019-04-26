@@ -39,7 +39,7 @@ Local<Object> NJSPoolConfiguration::wrap(const std::shared_ptr<ledger::core::api
 }
 
 NAN_METHOD(NJSPoolConfiguration::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<PoolConfiguration>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::PoolConfiguration>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

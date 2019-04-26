@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSGetEthreumLikeWalletCallback::onSuccess(const std::shared_ptr<EthereumLikeWallet> & wallet, bool isCreated)
+void NJSGetEthreumLikeWalletCallback::onSuccess(const std::shared_ptr<::ledger::core::api::EthereumLikeWallet> & wallet, bool isCreated)
 {
     Nan::HandleScope scope;
     //Wrap parameters
@@ -29,7 +29,7 @@ void NJSGetEthreumLikeWalletCallback::onSuccess(const std::shared_ptr<EthereumLi
     }
 }
 
-void NJSGetEthreumLikeWalletCallback::onError(const Error & error)
+void NJSGetEthreumLikeWalletCallback::onError(const ::ledger::core::api::Error & error)
 {
     Nan::HandleScope scope;
     //Wrap parameters

@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSCurrencyListCallback::onCallback(const std::experimental::optional<std::vector<Currency>> & result, const std::experimental::optional<Error> & error)
+void NJSCurrencyListCallback::onCallback(const std::experimental::optional<std::vector<::ledger::core::api::Currency>> & result, const std::experimental::optional<::ledger::core::api::Error> & error)
 {
     Nan::HandleScope scope;
     //Wrap parameters

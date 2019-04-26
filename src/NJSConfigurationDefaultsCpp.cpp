@@ -39,7 +39,7 @@ Local<Object> NJSConfigurationDefaults::wrap(const std::shared_ptr<ledger::core:
 }
 
 NAN_METHOD(NJSConfigurationDefaults::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<ConfigurationDefaults>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::ConfigurationDefaults>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

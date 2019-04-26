@@ -19,7 +19,7 @@ NAN_METHOD(NJSEventPublisher::getEventBus) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EventPublisher>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EventPublisher>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEventPublisher::getEventBus : implementation of EventPublisher is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSEventPublisher::post) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Event>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Event>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSEvent failed");
@@ -52,7 +52,7 @@ NAN_METHOD(NJSEventPublisher::post) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EventPublisher>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EventPublisher>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEventPublisher::post : implementation of EventPublisher is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSEventPublisher::postSticky) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Event>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Event>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSEvent failed");
@@ -78,7 +78,7 @@ NAN_METHOD(NJSEventPublisher::postSticky) {
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EventPublisher>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EventPublisher>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEventPublisher::postSticky : implementation of EventPublisher is not valid");
@@ -95,7 +95,7 @@ NAN_METHOD(NJSEventPublisher::relay) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<EventBus>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::EventBus>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSEventBus failed");
@@ -103,7 +103,7 @@ NAN_METHOD(NJSEventPublisher::relay) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EventPublisher>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EventPublisher>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEventPublisher::relay : implementation of EventPublisher is not valid");
@@ -120,10 +120,10 @@ NAN_METHOD(NJSEventPublisher::newInstance) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<ExecutionContext>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::ExecutionContext>::Unwrap(njs_arg_0);
 
 
-    auto result = EventPublisher::newInstance(arg_0);
+    auto result = ledger::core::api::EventPublisher::newInstance(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSEventPublisher::wrap(result);
@@ -148,7 +148,7 @@ NAN_METHOD(NJSEventPublisher::New) {
 
     //Unwrap objects to get C++ classes
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<ExecutionContext>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::ExecutionContext>::Unwrap(njs_arg_0);
 
 
     //Call factory
@@ -178,7 +178,7 @@ Local<Object> NJSEventPublisher::wrap(const std::shared_ptr<ledger::core::api::E
 }
 
 NAN_METHOD(NJSEventPublisher::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EventPublisher>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EventPublisher>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

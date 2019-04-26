@@ -19,7 +19,7 @@ NAN_METHOD(NJSRippleLikeAddress::getVersion) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeAddress::getVersion : implementation of RippleLikeAddress is not valid");
@@ -50,7 +50,7 @@ NAN_METHOD(NJSRippleLikeAddress::getHash160) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeAddress::getHash160 : implementation of RippleLikeAddress is not valid");
@@ -81,7 +81,7 @@ NAN_METHOD(NJSRippleLikeAddress::getNetworkParameters) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeAddress::getNetworkParameters : implementation of RippleLikeAddress is not valid");
@@ -129,7 +129,7 @@ NAN_METHOD(NJSRippleLikeAddress::toBase58) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeAddress::toBase58 : implementation of RippleLikeAddress is not valid");
@@ -174,7 +174,7 @@ Local<Object> NJSRippleLikeAddress::wrap(const std::shared_ptr<ledger::core::api
 }
 
 NAN_METHOD(NJSRippleLikeAddress::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<RippleLikeAddress>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAddress>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

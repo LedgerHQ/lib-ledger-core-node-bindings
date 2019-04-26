@@ -128,7 +128,7 @@ void NJSDatabaseStatement::bindString(int32_t pos, const std::string & value)
     }
 }
 
-void NJSDatabaseStatement::bindBlob(int32_t pos, const std::shared_ptr<DatabaseBlob> & value)
+void NJSDatabaseStatement::bindBlob(int32_t pos, const std::shared_ptr<::ledger::core::api::DatabaseBlob> & value)
 {
     Nan::HandleScope scope;
     //Wrap parameters
@@ -187,7 +187,7 @@ std::shared_ptr<DatabaseColumn> NJSDatabaseStatement::describeColumn(int32_t col
     }
     auto checkedResult_describeColumn = result_describeColumn.ToLocalChecked();
     Local<Object> njs_fResult_describeColumn = checkedResult_describeColumn->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_describeColumn = djinni::js::ObjectWrapper<DatabaseColumn>::Unwrap(njs_fResult_describeColumn);
+    auto fResult_describeColumn = djinni::js::ObjectWrapper<ledger::core::api::DatabaseColumn>::Unwrap(njs_fResult_describeColumn);
 
     return fResult_describeColumn;
 }
@@ -231,7 +231,7 @@ std::shared_ptr<DatabaseResultSet> NJSDatabaseStatement::execute()
     }
     auto checkedResult_execute = result_execute.ToLocalChecked();
     Local<Object> njs_fResult_execute = checkedResult_execute->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_execute = djinni::js::ObjectWrapper<DatabaseResultSet>::Unwrap(njs_fResult_execute);
+    auto fResult_execute = djinni::js::ObjectWrapper<ledger::core::api::DatabaseResultSet>::Unwrap(njs_fResult_execute);
 
     return fResult_execute;
 }

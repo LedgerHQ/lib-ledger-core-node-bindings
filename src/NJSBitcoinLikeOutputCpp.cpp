@@ -19,7 +19,7 @@ NAN_METHOD(NJSBitcoinLikeOutput::getTransactionHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeOutput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeOutput::getTransactionHash : implementation of BitcoinLikeOutput is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSBitcoinLikeOutput::getOutputIndex) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeOutput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeOutput::getOutputIndex : implementation of BitcoinLikeOutput is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSBitcoinLikeOutput::getValue) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeOutput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeOutput::getValue : implementation of BitcoinLikeOutput is not valid");
@@ -95,7 +95,7 @@ NAN_METHOD(NJSBitcoinLikeOutput::getScript) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeOutput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeOutput::getScript : implementation of BitcoinLikeOutput is not valid");
@@ -126,7 +126,7 @@ NAN_METHOD(NJSBitcoinLikeOutput::parseScript) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeOutput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeOutput::parseScript : implementation of BitcoinLikeOutput is not valid");
@@ -152,7 +152,7 @@ NAN_METHOD(NJSBitcoinLikeOutput::getAddress) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeOutput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeOutput::getAddress : implementation of BitcoinLikeOutput is not valid");
@@ -184,7 +184,7 @@ NAN_METHOD(NJSBitcoinLikeOutput::getDerivationPath) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeOutput>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeOutput::getDerivationPath : implementation of BitcoinLikeOutput is not valid");
@@ -231,7 +231,7 @@ Local<Object> NJSBitcoinLikeOutput::wrap(const std::shared_ptr<ledger::core::api
 }
 
 NAN_METHOD(NJSBitcoinLikeOutput::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeOutput>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

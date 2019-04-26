@@ -18,7 +18,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::sendToAddress) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -28,7 +28,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::sendToAddress) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransactionBuilder::sendToAddress : implementation of RippleLikeTransactionBuilder is not valid");
@@ -56,7 +56,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::wipeToAddress) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransactionBuilder::wipeToAddress : implementation of RippleLikeTransactionBuilder is not valid");
@@ -81,7 +81,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::setFees) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -89,7 +89,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::setFees) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransactionBuilder::setFees : implementation of RippleLikeTransactionBuilder is not valid");
@@ -129,7 +129,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::addMemo) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransactionBuilder::addMemo : implementation of RippleLikeTransactionBuilder is not valid");
@@ -161,7 +161,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::build) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransactionBuilder::build : implementation of RippleLikeTransactionBuilder is not valid");
@@ -180,7 +180,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::clone) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransactionBuilder::clone : implementation of RippleLikeTransactionBuilder is not valid");
@@ -206,7 +206,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::reset) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransactionBuilder::reset : implementation of RippleLikeTransactionBuilder is not valid");
@@ -475,7 +475,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
     }
 
 
-    auto result = RippleLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1);
+    auto result = ledger::core::api::RippleLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSRippleLikeTransaction::wrap(result);
@@ -746,7 +746,7 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
     }
 
 
-    auto result = RippleLikeTransactionBuilder::parseRawSignedTransaction(arg_0,arg_1);
+    auto result = ledger::core::api::RippleLikeTransactionBuilder::parseRawSignedTransaction(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSRippleLikeTransaction::wrap(result);
@@ -786,7 +786,7 @@ Local<Object> NJSRippleLikeTransactionBuilder::wrap(const std::shared_ptr<ledger
 }
 
 NAN_METHOD(NJSRippleLikeTransactionBuilder::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<RippleLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransactionBuilder>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

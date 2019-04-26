@@ -19,7 +19,7 @@ NAN_METHOD(NJSBitcoinLikeScript::head) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeScript>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScript>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeScript::head : implementation of BitcoinLikeScript is not valid");
@@ -45,7 +45,7 @@ NAN_METHOD(NJSBitcoinLikeScript::toString) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeScript>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScript>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeScript::toString : implementation of BitcoinLikeScript is not valid");
@@ -80,7 +80,7 @@ NAN_METHOD(NJSBitcoinLikeScript::parse) {
     }
 
 
-    auto result = BitcoinLikeScript::parse(arg_0);
+    auto result = ledger::core::api::BitcoinLikeScript::parse(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSBitcoinLikeScript::wrap(result);
@@ -143,7 +143,7 @@ Local<Object> NJSBitcoinLikeScript::wrap(const std::shared_ptr<ledger::core::api
 }
 
 NAN_METHOD(NJSBitcoinLikeScript::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeScript>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScript>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

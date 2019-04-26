@@ -19,7 +19,7 @@ NAN_METHOD(NJSOperation::getUid) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getUid : implementation of Operation is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSOperation::getAccountIndex) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getAccountIndex : implementation of Operation is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSOperation::getOperationType) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getOperationType : implementation of Operation is not valid");
@@ -94,7 +94,7 @@ NAN_METHOD(NJSOperation::getDate) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getDate : implementation of Operation is not valid");
@@ -120,7 +120,7 @@ NAN_METHOD(NJSOperation::getSenders) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getSenders : implementation of Operation is not valid");
@@ -151,7 +151,7 @@ NAN_METHOD(NJSOperation::getRecipients) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getRecipients : implementation of Operation is not valid");
@@ -182,7 +182,7 @@ NAN_METHOD(NJSOperation::getAmount) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getAmount : implementation of Operation is not valid");
@@ -208,7 +208,7 @@ NAN_METHOD(NJSOperation::getFees) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getFees : implementation of Operation is not valid");
@@ -235,7 +235,7 @@ NAN_METHOD(NJSOperation::getPreferences) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getPreferences : implementation of Operation is not valid");
@@ -261,7 +261,7 @@ NAN_METHOD(NJSOperation::getTrust) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getTrust : implementation of Operation is not valid");
@@ -287,7 +287,7 @@ NAN_METHOD(NJSOperation::getBlockHeight) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getBlockHeight : implementation of Operation is not valid");
@@ -319,7 +319,7 @@ NAN_METHOD(NJSOperation::asBitcoinLikeOperation) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::asBitcoinLikeOperation : implementation of Operation is not valid");
@@ -345,7 +345,7 @@ NAN_METHOD(NJSOperation::asEthereumLikeOperation) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::asEthereumLikeOperation : implementation of Operation is not valid");
@@ -371,7 +371,7 @@ NAN_METHOD(NJSOperation::asRippleLikeOperation) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::asRippleLikeOperation : implementation of Operation is not valid");
@@ -397,7 +397,7 @@ NAN_METHOD(NJSOperation::isInstanceOfBitcoinLikeOperation) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::isInstanceOfBitcoinLikeOperation : implementation of Operation is not valid");
@@ -422,7 +422,7 @@ NAN_METHOD(NJSOperation::isInstanceOfEthereumLikeOperation) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::isInstanceOfEthereumLikeOperation : implementation of Operation is not valid");
@@ -447,7 +447,7 @@ NAN_METHOD(NJSOperation::isInstanceOfRippleLikeOperation) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::isInstanceOfRippleLikeOperation : implementation of Operation is not valid");
@@ -472,7 +472,7 @@ NAN_METHOD(NJSOperation::isComplete) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::isComplete : implementation of Operation is not valid");
@@ -497,7 +497,7 @@ NAN_METHOD(NJSOperation::getWalletType) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getWalletType : implementation of Operation is not valid");
@@ -522,7 +522,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperation::getCurrency : implementation of Operation is not valid");
@@ -721,7 +721,7 @@ Local<Object> NJSOperation::wrap(const std::shared_ptr<ledger::core::api::Operat
 }
 
 NAN_METHOD(NJSOperation::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Operation>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

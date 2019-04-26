@@ -5,12 +5,14 @@
 #define DJINNI_GENERATED_NJSETHEREUMLIKEACCOUNT_HPP
 
 
+#include "NJSBigIntCallback.hpp"
 #include "NJSERC20LikeAccountCpp.hpp"
 #include "NJSEthereumLikeTransactionBuilderCpp.hpp"
 #include "NJSEthereumLikeTransactionCpp.hpp"
 #include "NJSStringCallback.hpp"
 #include <cstdint>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include <nan.h>
@@ -43,6 +45,20 @@ private:
 
     /** Get the list of ERC20 accounts associated with this Ethereum account. */
     static NAN_METHOD(getERC20Accounts);
+
+    /**
+     * Get gas price from network
+     * Note: same note as for getFees method on BitcoinLikeAccount
+     */
+    static NAN_METHOD(getGasPrice);
+
+    /**
+     * Get estimated gas limit to set so the transaction will succeed
+     * The passed address could be EOA or contract
+     * This estimation is based on X last incoming txs (to address) that succeeded
+     * Note: same note as for getFees method on BitcoinLikeAccount
+     */
+    static NAN_METHOD(getEstimatedGasLimit);
 
     static NAN_METHOD(New);
 

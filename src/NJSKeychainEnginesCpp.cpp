@@ -39,7 +39,7 @@ Local<Object> NJSKeychainEngines::wrap(const std::shared_ptr<ledger::core::api::
 }
 
 NAN_METHOD(NJSKeychainEngines::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<KeychainEngines>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::KeychainEngines>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

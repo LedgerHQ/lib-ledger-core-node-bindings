@@ -19,7 +19,7 @@ NAN_METHOD(NJSRunnable::run) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Runnable>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Runnable>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRunnable::run : implementation of Runnable is not valid");
@@ -57,7 +57,7 @@ Local<Object> NJSRunnable::wrap(const std::shared_ptr<ledger::core::api::Runnabl
 }
 
 NAN_METHOD(NJSRunnable::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Runnable>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Runnable>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

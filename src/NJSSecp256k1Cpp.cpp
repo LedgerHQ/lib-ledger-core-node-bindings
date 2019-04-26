@@ -18,7 +18,7 @@ NAN_METHOD(NJSSecp256k1::createInstance) {
 
     //Check if parameters have correct types
 
-    auto result = Secp256k1::createInstance();
+    auto result = ledger::core::api::Secp256k1::createInstance();
 
     //Wrap result in node object
     auto arg_0 = NJSSecp256k1::wrap(result);
@@ -50,7 +50,7 @@ NAN_METHOD(NJSSecp256k1::computePubKey) {
     auto arg_1 = Nan::To<bool>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Secp256k1>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Secp256k1>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSSecp256k1::computePubKey : implementation of Secp256k1 is not valid");
@@ -92,7 +92,7 @@ NAN_METHOD(NJSSecp256k1::computeUncompressedPubKey) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Secp256k1>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Secp256k1>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSSecp256k1::computeUncompressedPubKey : implementation of Secp256k1 is not valid");
@@ -145,7 +145,7 @@ NAN_METHOD(NJSSecp256k1::sign) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Secp256k1>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Secp256k1>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSSecp256k1::sign : implementation of Secp256k1 is not valid");
@@ -209,7 +209,7 @@ NAN_METHOD(NJSSecp256k1::verify) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Secp256k1>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Secp256k1>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSSecp256k1::verify : implementation of Secp256k1 is not valid");
@@ -233,7 +233,7 @@ NAN_METHOD(NJSSecp256k1::newInstance) {
 
     //Check if parameters have correct types
 
-    auto result = Secp256k1::newInstance();
+    auto result = ledger::core::api::Secp256k1::newInstance();
 
     //Wrap result in node object
     auto arg_0 = NJSSecp256k1::wrap(result);
@@ -285,7 +285,7 @@ Local<Object> NJSSecp256k1::wrap(const std::shared_ptr<ledger::core::api::Secp25
 }
 
 NAN_METHOD(NJSSecp256k1::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Secp256k1>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Secp256k1>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

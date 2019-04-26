@@ -23,7 +23,7 @@ NAN_METHOD(NJSLogger::d) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Logger>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Logger>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSLogger::d : implementation of Logger is not valid");
@@ -45,7 +45,7 @@ NAN_METHOD(NJSLogger::i) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Logger>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Logger>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSLogger::i : implementation of Logger is not valid");
@@ -67,7 +67,7 @@ NAN_METHOD(NJSLogger::e) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Logger>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Logger>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSLogger::e : implementation of Logger is not valid");
@@ -89,7 +89,7 @@ NAN_METHOD(NJSLogger::w) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Logger>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Logger>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSLogger::w : implementation of Logger is not valid");
@@ -111,7 +111,7 @@ NAN_METHOD(NJSLogger::c) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Logger>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Logger>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSLogger::c : implementation of Logger is not valid");
@@ -149,7 +149,7 @@ Local<Object> NJSLogger::wrap(const std::shared_ptr<ledger::core::api::Logger> &
 }
 
 NAN_METHOD(NJSLogger::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Logger>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Logger>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

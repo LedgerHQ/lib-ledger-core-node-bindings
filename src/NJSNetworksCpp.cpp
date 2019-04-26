@@ -18,7 +18,7 @@ NAN_METHOD(NJSNetworks::bitcoin) {
 
     //Check if parameters have correct types
 
-    auto result = Networks::bitcoin();
+    auto result = ledger::core::api::Networks::bitcoin();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Object>();
@@ -89,7 +89,7 @@ NAN_METHOD(NJSNetworks::ethereum) {
 
     //Check if parameters have correct types
 
-    auto result = Networks::ethereum();
+    auto result = ledger::core::api::Networks::ethereum();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Object>();
@@ -132,7 +132,7 @@ NAN_METHOD(NJSNetworks::ripple) {
 
     //Check if parameters have correct types
 
-    auto result = Networks::ripple();
+    auto result = ledger::core::api::Networks::ripple();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Object>();
@@ -194,7 +194,7 @@ Local<Object> NJSNetworks::wrap(const std::shared_ptr<ledger::core::api::Network
 }
 
 NAN_METHOD(NJSNetworks::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Networks>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Networks>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

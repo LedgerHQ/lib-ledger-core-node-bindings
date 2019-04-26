@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSAddressListCallback::onCallback(const std::experimental::optional<std::vector<std::shared_ptr<Address>>> & result, const std::experimental::optional<Error> & error)
+void NJSAddressListCallback::onCallback(const std::experimental::optional<std::vector<std::shared_ptr<::ledger::core::api::Address>>> & result, const std::experimental::optional<::ledger::core::api::Error> & error)
 {
     Nan::HandleScope scope;
     //Wrap parameters

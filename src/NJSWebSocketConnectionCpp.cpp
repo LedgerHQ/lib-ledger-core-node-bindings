@@ -20,7 +20,7 @@ NAN_METHOD(NJSWebSocketConnection::onConnect) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WebSocketConnection>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WebSocketConnection>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWebSocketConnection::onConnect : implementation of WebSocketConnection is not valid");
@@ -38,7 +38,7 @@ NAN_METHOD(NJSWebSocketConnection::onClose) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WebSocketConnection>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WebSocketConnection>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWebSocketConnection::onClose : implementation of WebSocketConnection is not valid");
@@ -58,7 +58,7 @@ NAN_METHOD(NJSWebSocketConnection::onMessage) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WebSocketConnection>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WebSocketConnection>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWebSocketConnection::onMessage : implementation of WebSocketConnection is not valid");
@@ -79,7 +79,7 @@ NAN_METHOD(NJSWebSocketConnection::onError) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WebSocketConnection>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WebSocketConnection>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWebSocketConnection::onError : implementation of WebSocketConnection is not valid");
@@ -97,7 +97,7 @@ NAN_METHOD(NJSWebSocketConnection::getConnectionId) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<WebSocketConnection>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WebSocketConnection>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSWebSocketConnection::getConnectionId : implementation of WebSocketConnection is not valid");
@@ -142,7 +142,7 @@ Local<Object> NJSWebSocketConnection::wrap(const std::shared_ptr<ledger::core::a
 }
 
 NAN_METHOD(NJSWebSocketConnection::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<WebSocketConnection>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::WebSocketConnection>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

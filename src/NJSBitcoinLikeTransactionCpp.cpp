@@ -19,7 +19,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getHash : implementation of BitcoinLikeTransaction is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getInputs) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getInputs : implementation of BitcoinLikeTransaction is not valid");
@@ -76,7 +76,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getOutputs) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getOutputs : implementation of BitcoinLikeTransaction is not valid");
@@ -108,7 +108,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getBlock) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getBlock : implementation of BitcoinLikeTransaction is not valid");
@@ -135,7 +135,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getLockTime) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getLockTime : implementation of BitcoinLikeTransaction is not valid");
@@ -160,7 +160,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getFees) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getFees : implementation of BitcoinLikeTransaction is not valid");
@@ -186,7 +186,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getTime) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getTime : implementation of BitcoinLikeTransaction is not valid");
@@ -212,7 +212,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getTimestamp) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getTimestamp : implementation of BitcoinLikeTransaction is not valid");
@@ -244,7 +244,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getVersion) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getVersion : implementation of BitcoinLikeTransaction is not valid");
@@ -269,7 +269,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::serialize) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::serialize : implementation of BitcoinLikeTransaction is not valid");
@@ -300,7 +300,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::serializeOutputs) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::serializeOutputs : implementation of BitcoinLikeTransaction is not valid");
@@ -331,7 +331,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getWitness) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getWitness : implementation of BitcoinLikeTransaction is not valid");
@@ -369,7 +369,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getEstimatedSize) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransaction::getEstimatedSize : implementation of BitcoinLikeTransaction is not valid");
@@ -419,7 +419,7 @@ Local<Object> NJSBitcoinLikeTransaction::wrap(const std::shared_ptr<ledger::core
 }
 
 NAN_METHOD(NJSBitcoinLikeTransaction::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

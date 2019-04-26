@@ -19,7 +19,7 @@ NAN_METHOD(NJSTrustIndicator::getTrustWeight) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<TrustIndicator>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TrustIndicator>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSTrustIndicator::getTrustWeight : implementation of TrustIndicator is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSTrustIndicator::getTrustLevel) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<TrustIndicator>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TrustIndicator>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSTrustIndicator::getTrustLevel : implementation of TrustIndicator is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSTrustIndicator::getConflictingOperationUids) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<TrustIndicator>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TrustIndicator>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSTrustIndicator::getConflictingOperationUids : implementation of TrustIndicator is not valid");
@@ -100,7 +100,7 @@ NAN_METHOD(NJSTrustIndicator::getOrigin) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<TrustIndicator>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TrustIndicator>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSTrustIndicator::getOrigin : implementation of TrustIndicator is not valid");
@@ -145,7 +145,7 @@ Local<Object> NJSTrustIndicator::wrap(const std::shared_ptr<ledger::core::api::T
 }
 
 NAN_METHOD(NJSTrustIndicator::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<TrustIndicator>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::TrustIndicator>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

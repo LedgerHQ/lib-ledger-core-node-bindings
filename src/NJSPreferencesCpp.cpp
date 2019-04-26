@@ -23,7 +23,7 @@ NAN_METHOD(NJSPreferences::getString) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferences::getString : implementation of Preferences is not valid");
@@ -51,7 +51,7 @@ NAN_METHOD(NJSPreferences::getInt) {
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferences::getInt : implementation of Preferences is not valid");
@@ -79,7 +79,7 @@ NAN_METHOD(NJSPreferences::getLong) {
     auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferences::getLong : implementation of Preferences is not valid");
@@ -107,7 +107,7 @@ NAN_METHOD(NJSPreferences::getBoolean) {
     auto arg_1 = Nan::To<bool>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferences::getBoolean : implementation of Preferences is not valid");
@@ -146,7 +146,7 @@ NAN_METHOD(NJSPreferences::getStringArray) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferences::getStringArray : implementation of Preferences is not valid");
@@ -190,7 +190,7 @@ NAN_METHOD(NJSPreferences::getData) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferences::getData : implementation of Preferences is not valid");
@@ -223,7 +223,7 @@ NAN_METHOD(NJSPreferences::contains) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferences::contains : implementation of Preferences is not valid");
@@ -248,7 +248,7 @@ NAN_METHOD(NJSPreferences::edit) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSPreferences::edit : implementation of Preferences is not valid");
@@ -294,7 +294,7 @@ Local<Object> NJSPreferences::wrap(const std::shared_ptr<ledger::core::api::Pref
 }
 
 NAN_METHOD(NJSPreferences::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Preferences>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Preferences>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

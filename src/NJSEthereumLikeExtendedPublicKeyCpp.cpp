@@ -21,7 +21,7 @@ NAN_METHOD(NJSEthereumLikeExtendedPublicKey::derive) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeExtendedPublicKey::derive : implementation of EthereumLikeExtendedPublicKey is not valid");
@@ -49,7 +49,7 @@ NAN_METHOD(NJSEthereumLikeExtendedPublicKey::derivePublicKey) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeExtendedPublicKey::derivePublicKey : implementation of EthereumLikeExtendedPublicKey is not valid");
@@ -82,7 +82,7 @@ NAN_METHOD(NJSEthereumLikeExtendedPublicKey::deriveHash160) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeExtendedPublicKey::deriveHash160 : implementation of EthereumLikeExtendedPublicKey is not valid");
@@ -113,7 +113,7 @@ NAN_METHOD(NJSEthereumLikeExtendedPublicKey::toBase58) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeExtendedPublicKey::toBase58 : implementation of EthereumLikeExtendedPublicKey is not valid");
@@ -138,7 +138,7 @@ NAN_METHOD(NJSEthereumLikeExtendedPublicKey::getRootPath) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeExtendedPublicKey::getRootPath : implementation of EthereumLikeExtendedPublicKey is not valid");
@@ -183,7 +183,7 @@ Local<Object> NJSEthereumLikeExtendedPublicKey::wrap(const std::shared_ptr<ledge
 }
 
 NAN_METHOD(NJSEthereumLikeExtendedPublicKey::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EthereumLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeExtendedPublicKey>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

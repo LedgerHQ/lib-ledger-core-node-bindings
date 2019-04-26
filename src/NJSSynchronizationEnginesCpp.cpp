@@ -39,7 +39,7 @@ Local<Object> NJSSynchronizationEngines::wrap(const std::shared_ptr<ledger::core
 }
 
 NAN_METHOD(NJSSynchronizationEngines::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<SynchronizationEngines>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::SynchronizationEngines>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

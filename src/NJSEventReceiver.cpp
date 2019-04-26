@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSEventReceiver::onEvent(const std::shared_ptr<Event> & event)
+void NJSEventReceiver::onEvent(const std::shared_ptr<::ledger::core::api::Event> & event)
 {
     Nan::HandleScope scope;
     //Wrap parameters
