@@ -36,7 +36,7 @@ NAN_METHOD(NJSRippleLikeAccount::broadcastRawTransaction) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeAccount::broadcastRawTransaction : implementation of RippleLikeAccount is not valid");
@@ -54,7 +54,7 @@ NAN_METHOD(NJSRippleLikeAccount::broadcastTransaction) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSRippleLikeTransaction failed");
@@ -68,7 +68,7 @@ NAN_METHOD(NJSRippleLikeAccount::broadcastTransaction) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeAccount::broadcastTransaction : implementation of RippleLikeAccount is not valid");
@@ -87,7 +87,7 @@ NAN_METHOD(NJSRippleLikeAccount::buildTransaction) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeAccount::buildTransaction : implementation of RippleLikeAccount is not valid");
@@ -133,7 +133,7 @@ Local<Object> NJSRippleLikeAccount::wrap(const std::shared_ptr<ledger::core::api
 }
 
 NAN_METHOD(NJSRippleLikeAccount::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<RippleLikeAccount>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAccount>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

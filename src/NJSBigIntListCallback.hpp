@@ -39,7 +39,7 @@ public:
      * @params result optional of type list<T>, non null if main task failed
      * @params error optional of type Error, non null if main task succeeded
      */
-    void onCallback(const std::experimental::optional<std::vector<std::shared_ptr<BigInt>>> & result, const std::experimental::optional<Error> & error);
+    void onCallback(const std::experimental::optional<std::vector<std::shared_ptr<::ledger::core::api::BigInt>>> & result, const std::experimental::optional<::ledger::core::api::Error> & error);
 
 private:
     /**

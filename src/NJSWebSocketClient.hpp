@@ -37,20 +37,20 @@ public:
      * @param url, the URL to connect to
      * @connection, the Web Socket connection to use
      */
-    void connect(const std::string & url, const std::shared_ptr<WebSocketConnection> & connection);
+    void connect(const std::string & url, const std::shared_ptr<::ledger::core::api::WebSocketConnection> & connection);
 
     /**
      * Send a message to a given client.
      * @connection, the Web Socket connection to use
      * @data, the message to send
      */
-    void send(const std::shared_ptr<WebSocketConnection> & connection, const std::string & data);
+    void send(const std::shared_ptr<::ledger::core::api::WebSocketConnection> & connection, const std::string & data);
 
     /**
      * Disconnect a client.
      * @connection, the Web Socket connection to use
      */
-    void disconnect(const std::shared_ptr<WebSocketConnection> & connection);
+    void disconnect(const std::shared_ptr<::ledger::core::api::WebSocketConnection> & connection);
 
 private:
     /**

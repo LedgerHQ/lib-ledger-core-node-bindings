@@ -23,7 +23,7 @@ NAN_METHOD(NJSDynamicObject::putString) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::putString : implementation of DynamicObject is not valid");
@@ -52,7 +52,7 @@ NAN_METHOD(NJSDynamicObject::putInt) {
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::putInt : implementation of DynamicObject is not valid");
@@ -81,7 +81,7 @@ NAN_METHOD(NJSDynamicObject::putLong) {
     auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::putLong : implementation of DynamicObject is not valid");
@@ -110,7 +110,7 @@ NAN_METHOD(NJSDynamicObject::putDouble) {
     auto arg_1 = Nan::To<double>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::putDouble : implementation of DynamicObject is not valid");
@@ -149,7 +149,7 @@ NAN_METHOD(NJSDynamicObject::putData) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::putData : implementation of DynamicObject is not valid");
@@ -178,7 +178,7 @@ NAN_METHOD(NJSDynamicObject::putBoolean) {
     auto arg_1 = Nan::To<bool>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::putBoolean : implementation of DynamicObject is not valid");
@@ -205,7 +205,7 @@ NAN_METHOD(NJSDynamicObject::putObject) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
     Local<Object> njs_arg_1 = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_1 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_1);
+    auto arg_1 = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(njs_arg_1);
     if(!arg_1)
     {
         return Nan::ThrowError("NodeJs Object to NJSDynamicObject failed");
@@ -213,7 +213,7 @@ NAN_METHOD(NJSDynamicObject::putObject) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::putObject : implementation of DynamicObject is not valid");
@@ -240,7 +240,7 @@ NAN_METHOD(NJSDynamicObject::putArray) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
     Local<Object> njs_arg_1 = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_1 = djinni::js::ObjectWrapper<DynamicArray>::Unwrap(njs_arg_1);
+    auto arg_1 = djinni::js::ObjectWrapper<ledger::core::api::DynamicArray>::Unwrap(njs_arg_1);
     if(!arg_1)
     {
         return Nan::ThrowError("NodeJs Object to NJSDynamicArray failed");
@@ -248,7 +248,7 @@ NAN_METHOD(NJSDynamicObject::putArray) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::putArray : implementation of DynamicObject is not valid");
@@ -276,7 +276,7 @@ NAN_METHOD(NJSDynamicObject::getString) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getString : implementation of DynamicObject is not valid");
@@ -310,7 +310,7 @@ NAN_METHOD(NJSDynamicObject::getInt) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getInt : implementation of DynamicObject is not valid");
@@ -344,7 +344,7 @@ NAN_METHOD(NJSDynamicObject::getLong) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getLong : implementation of DynamicObject is not valid");
@@ -378,7 +378,7 @@ NAN_METHOD(NJSDynamicObject::getDouble) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getDouble : implementation of DynamicObject is not valid");
@@ -412,7 +412,7 @@ NAN_METHOD(NJSDynamicObject::getData) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getData : implementation of DynamicObject is not valid");
@@ -452,7 +452,7 @@ NAN_METHOD(NJSDynamicObject::getBoolean) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getBoolean : implementation of DynamicObject is not valid");
@@ -486,7 +486,7 @@ NAN_METHOD(NJSDynamicObject::getObject) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getObject : implementation of DynamicObject is not valid");
@@ -515,7 +515,7 @@ NAN_METHOD(NJSDynamicObject::getArray) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getArray : implementation of DynamicObject is not valid");
@@ -544,7 +544,7 @@ NAN_METHOD(NJSDynamicObject::contains) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::contains : implementation of DynamicObject is not valid");
@@ -571,7 +571,7 @@ NAN_METHOD(NJSDynamicObject::remove) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::remove : implementation of DynamicObject is not valid");
@@ -596,7 +596,7 @@ NAN_METHOD(NJSDynamicObject::getKeys) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getKeys : implementation of DynamicObject is not valid");
@@ -629,7 +629,7 @@ NAN_METHOD(NJSDynamicObject::getType) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::getType : implementation of DynamicObject is not valid");
@@ -661,7 +661,7 @@ NAN_METHOD(NJSDynamicObject::dump) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::dump : implementation of DynamicObject is not valid");
@@ -686,7 +686,7 @@ NAN_METHOD(NJSDynamicObject::serialize) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::serialize : implementation of DynamicObject is not valid");
@@ -717,7 +717,7 @@ NAN_METHOD(NJSDynamicObject::isReadOnly) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::isReadOnly : implementation of DynamicObject is not valid");
@@ -742,7 +742,7 @@ NAN_METHOD(NJSDynamicObject::size) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDynamicObject::size : implementation of DynamicObject is not valid");
@@ -766,7 +766,7 @@ NAN_METHOD(NJSDynamicObject::newInstance) {
 
     //Check if parameters have correct types
 
-    auto result = DynamicObject::newInstance();
+    auto result = ledger::core::api::DynamicObject::newInstance();
 
     //Wrap result in node object
     auto arg_0 = NJSDynamicObject::wrap(result);
@@ -796,7 +796,7 @@ NAN_METHOD(NJSDynamicObject::load) {
     }
 
 
-    auto result = DynamicObject::load(arg_0);
+    auto result = ledger::core::api::DynamicObject::load(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSDynamicObject::wrap(result);
@@ -849,7 +849,7 @@ Local<Object> NJSDynamicObject::wrap(const std::shared_ptr<ledger::core::api::Dy
 }
 
 NAN_METHOD(NJSDynamicObject::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

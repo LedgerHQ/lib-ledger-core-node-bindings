@@ -19,7 +19,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getHash : implementation of EthereumLikeTransaction is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getNonce) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getNonce : implementation of EthereumLikeTransaction is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getGasPrice) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getGasPrice : implementation of EthereumLikeTransaction is not valid");
@@ -95,7 +95,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getGasLimit) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getGasLimit : implementation of EthereumLikeTransaction is not valid");
@@ -121,7 +121,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getGasUsed) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getGasUsed : implementation of EthereumLikeTransaction is not valid");
@@ -147,7 +147,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getReceiver) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getReceiver : implementation of EthereumLikeTransaction is not valid");
@@ -173,7 +173,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getSender) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getSender : implementation of EthereumLikeTransaction is not valid");
@@ -199,7 +199,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getValue) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getValue : implementation of EthereumLikeTransaction is not valid");
@@ -225,7 +225,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getData) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getData : implementation of EthereumLikeTransaction is not valid");
@@ -263,7 +263,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getStatus) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getStatus : implementation of EthereumLikeTransaction is not valid");
@@ -288,7 +288,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::serialize) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::serialize : implementation of EthereumLikeTransaction is not valid");
@@ -352,7 +352,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::setSignature) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::setSignature : implementation of EthereumLikeTransaction is not valid");
@@ -381,7 +381,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::setDERSignature) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::setDERSignature : implementation of EthereumLikeTransaction is not valid");
@@ -410,7 +410,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::setVSignature) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::setVSignature : implementation of EthereumLikeTransaction is not valid");
@@ -428,7 +428,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getDate) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getDate : implementation of EthereumLikeTransaction is not valid");
@@ -454,7 +454,7 @@ NAN_METHOD(NJSEthereumLikeTransaction::getBlock) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransaction::getBlock : implementation of EthereumLikeTransaction is not valid");
@@ -501,7 +501,7 @@ Local<Object> NJSEthereumLikeTransaction::wrap(const std::shared_ptr<ledger::cor
 }
 
 NAN_METHOD(NJSEthereumLikeTransaction::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

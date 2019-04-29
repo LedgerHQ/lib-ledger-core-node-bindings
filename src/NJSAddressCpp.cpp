@@ -19,7 +19,7 @@ NAN_METHOD(NJSAddress::getDerivationPath) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Address>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Address>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAddress::getDerivationPath : implementation of Address is not valid");
@@ -51,7 +51,7 @@ NAN_METHOD(NJSAddress::toString) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Address>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Address>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAddress::toString : implementation of Address is not valid");
@@ -76,7 +76,7 @@ NAN_METHOD(NJSAddress::asBitcoinLikeAddress) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Address>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Address>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAddress::asBitcoinLikeAddress : implementation of Address is not valid");
@@ -103,7 +103,7 @@ NAN_METHOD(NJSAddress::isInstanceOfBitcoinLikeAddress) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Address>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Address>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAddress::isInstanceOfBitcoinLikeAddress : implementation of Address is not valid");
@@ -128,7 +128,7 @@ NAN_METHOD(NJSAddress::getCurrency) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Address>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Address>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAddress::getCurrency : implementation of Address is not valid");
@@ -549,7 +549,7 @@ NAN_METHOD(NJSAddress::parse) {
     Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8);
 
 
-    auto result = Address::parse(arg_0,arg_1);
+    auto result = ledger::core::api::Address::parse(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSAddress::wrap(result);
@@ -812,7 +812,7 @@ NAN_METHOD(NJSAddress::isValid) {
     Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8);
 
 
-    auto result = Address::isValid(arg_0,arg_1);
+    auto result = ledger::core::api::Address::isValid(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = Nan::New<Boolean>(result);
@@ -1106,7 +1106,7 @@ Local<Object> NJSAddress::wrap(const std::shared_ptr<ledger::core::api::Address>
 }
 
 NAN_METHOD(NJSAddress::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Address>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Address>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

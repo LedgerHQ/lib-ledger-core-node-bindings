@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSHttpClient::execute(const std::shared_ptr<HttpRequest> & request)
+void NJSHttpClient::execute(const std::shared_ptr<::ledger::core::api::HttpRequest> & request)
 {
     Nan::HandleScope scope;
     //Wrap parameters

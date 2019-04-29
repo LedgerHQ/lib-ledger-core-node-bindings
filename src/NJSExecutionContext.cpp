@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSExecutionContext::execute(const std::shared_ptr<Runnable> & runnable)
+void NJSExecutionContext::execute(const std::shared_ptr<::ledger::core::api::Runnable> & runnable)
 {
     Nan::HandleScope scope;
     //Wrap parameters
@@ -28,7 +28,7 @@ void NJSExecutionContext::execute(const std::shared_ptr<Runnable> & runnable)
     }
 }
 
-void NJSExecutionContext::delay(const std::shared_ptr<Runnable> & runnable, int64_t millis)
+void NJSExecutionContext::delay(const std::shared_ptr<::ledger::core::api::Runnable> & runnable, int64_t millis)
 {
     Nan::HandleScope scope;
     //Wrap parameters

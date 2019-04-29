@@ -32,9 +32,9 @@ public:
     };
     NJSGetEthreumLikeWalletCallback(Local<Object> njs_implementation){njs_impl.Reset(njs_implementation);};
 
-    void onSuccess(const std::shared_ptr<EthereumLikeWallet> & wallet, bool isCreated);
+    void onSuccess(const std::shared_ptr<::ledger::core::api::EthereumLikeWallet> & wallet, bool isCreated);
 
-    void onError(const Error & error);
+    void onError(const ::ledger::core::api::Error & error);
 
 private:
     static NAN_METHOD(onSuccess);

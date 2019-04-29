@@ -19,7 +19,7 @@ NAN_METHOD(NJSBitcoinLikeBlock::getHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeBlock::getHash : implementation of BitcoinLikeBlock is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSBitcoinLikeBlock::getHeight) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeBlock::getHeight : implementation of BitcoinLikeBlock is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSBitcoinLikeBlock::getTime) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeBlock::getTime : implementation of BitcoinLikeBlock is not valid");
@@ -115,7 +115,7 @@ Local<Object> NJSBitcoinLikeBlock::wrap(const std::shared_ptr<ledger::core::api:
 }
 
 NAN_METHOD(NJSBitcoinLikeBlock::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeBlock>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeBlock>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

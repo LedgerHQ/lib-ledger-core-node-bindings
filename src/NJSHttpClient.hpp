@@ -35,7 +35,7 @@ public:
      * Execute a giver Http request.
      * @param request, HttpRequest object, requestr to execute
      */
-    void execute(const std::shared_ptr<HttpRequest> & request);
+    void execute(const std::shared_ptr<::ledger::core::api::HttpRequest> & request);
 
 private:
     /**

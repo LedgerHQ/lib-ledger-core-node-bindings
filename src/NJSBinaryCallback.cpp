@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSBinaryCallback::onCallback(const std::experimental::optional<std::vector<uint8_t>> & result, const std::experimental::optional<Error> & error)
+void NJSBinaryCallback::onCallback(const std::experimental::optional<std::vector<uint8_t>> & result, const std::experimental::optional<::ledger::core::api::Error> & error)
 {
     Nan::HandleScope scope;
     //Wrap parameters

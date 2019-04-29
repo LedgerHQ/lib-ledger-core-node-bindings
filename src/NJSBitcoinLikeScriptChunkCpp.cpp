@@ -19,7 +19,7 @@ NAN_METHOD(NJSBitcoinLikeScriptChunk::isOperator) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeScriptChunk>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScriptChunk>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeScriptChunk::isOperator : implementation of BitcoinLikeScriptChunk is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSBitcoinLikeScriptChunk::isPushedData) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeScriptChunk>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScriptChunk>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeScriptChunk::isPushedData : implementation of BitcoinLikeScriptChunk is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSBitcoinLikeScriptChunk::getOperator) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeScriptChunk>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScriptChunk>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeScriptChunk::getOperator : implementation of BitcoinLikeScriptChunk is not valid");
@@ -106,7 +106,7 @@ NAN_METHOD(NJSBitcoinLikeScriptChunk::getPushedData) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeScriptChunk>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScriptChunk>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeScriptChunk::getPushedData : implementation of BitcoinLikeScriptChunk is not valid");
@@ -144,7 +144,7 @@ NAN_METHOD(NJSBitcoinLikeScriptChunk::next) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeScriptChunk>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScriptChunk>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeScriptChunk::next : implementation of BitcoinLikeScriptChunk is not valid");
@@ -170,7 +170,7 @@ NAN_METHOD(NJSBitcoinLikeScriptChunk::hasNext) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeScriptChunk>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScriptChunk>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeScriptChunk::hasNext : implementation of BitcoinLikeScriptChunk is not valid");
@@ -215,7 +215,7 @@ Local<Object> NJSBitcoinLikeScriptChunk::wrap(const std::shared_ptr<ledger::core
 }
 
 NAN_METHOD(NJSBitcoinLikeScriptChunk::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeScriptChunk>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScriptChunk>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

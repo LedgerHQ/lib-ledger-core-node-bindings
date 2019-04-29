@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSWalletPoolCallback::onCallback(const std::shared_ptr<WalletPool> & result, const std::experimental::optional<Error> & error)
+void NJSWalletPoolCallback::onCallback(const std::shared_ptr<::ledger::core::api::WalletPool> & result, const std::experimental::optional<::ledger::core::api::Error> & error)
 {
     Nan::HandleScope scope;
     //Wrap parameters

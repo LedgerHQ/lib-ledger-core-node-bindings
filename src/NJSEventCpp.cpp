@@ -19,7 +19,7 @@ NAN_METHOD(NJSEvent::getCode) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Event>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Event>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEvent::getCode : implementation of Event is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSEvent::getPayload) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Event>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Event>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEvent::getPayload : implementation of Event is not valid");
@@ -70,7 +70,7 @@ NAN_METHOD(NJSEvent::isSticky) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Event>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Event>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEvent::isSticky : implementation of Event is not valid");
@@ -95,7 +95,7 @@ NAN_METHOD(NJSEvent::getStickyTag) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Event>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Event>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEvent::getStickyTag : implementation of Event is not valid");
@@ -120,14 +120,14 @@ NAN_METHOD(NJSEvent::newInstance) {
     //Check if parameters have correct types
     auto arg_0 = (ledger::core::api::EventCode)Nan::To<int>(info[0]).FromJust();
     Local<Object> njs_arg_1 = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_1 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_1);
+    auto arg_1 = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(njs_arg_1);
     if(!arg_1)
     {
         return Nan::ThrowError("NodeJs Object to NJSDynamicObject failed");
     }
 
 
-    auto result = Event::newInstance(arg_0,arg_1);
+    auto result = ledger::core::api::Event::newInstance(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSEvent::wrap(result);
@@ -153,7 +153,7 @@ NAN_METHOD(NJSEvent::New) {
     //Unwrap objects to get C++ classes
     auto arg_0 = (ledger::core::api::EventCode)Nan::To<int>(info[0]).FromJust();
     Local<Object> njs_arg_1 = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_1 = djinni::js::ObjectWrapper<DynamicObject>::Unwrap(njs_arg_1);
+    auto arg_1 = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(njs_arg_1);
     if(!arg_1)
     {
         return Nan::ThrowError("NodeJs Object to NJSDynamicObject failed");
@@ -187,7 +187,7 @@ Local<Object> NJSEvent::wrap(const std::shared_ptr<ledger::core::api::Event> &ob
 }
 
 NAN_METHOD(NJSEvent::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Event>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Event>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

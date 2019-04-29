@@ -19,7 +19,7 @@ NAN_METHOD(NJSAmount::toBigInt) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::toBigInt : implementation of Amount is not valid");
@@ -45,7 +45,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::getCurrency : implementation of Amount is not valid");
@@ -224,7 +224,7 @@ NAN_METHOD(NJSAmount::getUnit) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::getUnit : implementation of Amount is not valid");
@@ -275,7 +275,7 @@ NAN_METHOD(NJSAmount::toUnit) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::toUnit : implementation of Amount is not valid");
@@ -302,7 +302,7 @@ NAN_METHOD(NJSAmount::toMagnitude) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::toMagnitude : implementation of Amount is not valid");
@@ -328,7 +328,7 @@ NAN_METHOD(NJSAmount::toString) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::toString : implementation of Amount is not valid");
@@ -353,7 +353,7 @@ NAN_METHOD(NJSAmount::toLong) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::toLong : implementation of Amount is not valid");
@@ -378,7 +378,7 @@ NAN_METHOD(NJSAmount::toDouble) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::toDouble : implementation of Amount is not valid");
@@ -430,7 +430,7 @@ NAN_METHOD(NJSAmount::format) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAmount::format : implementation of Amount is not valid");
@@ -697,7 +697,7 @@ NAN_METHOD(NJSAmount::fromHex) {
     String::Utf8Value string_arg_1(info[1]->ToString());
     auto arg_1 = std::string(*string_arg_1);
 
-    auto result = Amount::fromHex(arg_0,arg_1);
+    auto result = ledger::core::api::Amount::fromHex(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSAmount::wrap(result);
@@ -958,7 +958,7 @@ NAN_METHOD(NJSAmount::fromLong) {
 
     auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
 
-    auto result = Amount::fromLong(arg_0,arg_1);
+    auto result = ledger::core::api::Amount::fromLong(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSAmount::wrap(result);
@@ -1253,7 +1253,7 @@ Local<Object> NJSAmount::wrap(const std::shared_ptr<ledger::core::api::Amount> &
 }
 
 NAN_METHOD(NJSAmount::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Amount>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

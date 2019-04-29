@@ -1739,6 +1739,28 @@ declare class NJSEthereumLikeAccount
     declare function buildTransaction(): NJSEthereumLikeTransactionBuilder;
     /** Get the list of ERC20 accounts associated with this Ethereum account. */
     declare function getERC20Accounts(): Array<NJSERC20LikeAccount>;
+    /**
+     * Get gas price from network
+     * Note: same note as for getFees method on BitcoinLikeAccount
+     */
+    declare function getGasPrice(callback: NJSBigIntCallback);
+    /**
+     * Get estimated gas limit to set so the transaction will succeed
+     * The passed address could be EOA or contract
+     * This estimation is based on X last incoming txs (to address) that succeeded
+     * Note: same note as for getFees method on BitcoinLikeAccount
+     */
+    declare function getEstimatedGasLimit(address: string, callback: NJSBigIntCallback);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSBigIntCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?NJSBigInt, error: ?Error);
 }
 declare class NJSBitcoinLikeScriptChunk
 {

@@ -35,7 +35,7 @@ public:
      * Method triggered when an event occurs.
      * @param event, Event object that triggers this method
      */
-    void onEvent(const std::shared_ptr<Event> & event);
+    void onEvent(const std::shared_ptr<::ledger::core::api::Event> & event);
 
 private:
     /**

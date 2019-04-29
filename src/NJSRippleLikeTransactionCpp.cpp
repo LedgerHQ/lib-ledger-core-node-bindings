@@ -19,7 +19,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getHash : implementation of RippleLikeTransaction is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getFees) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getFees : implementation of RippleLikeTransaction is not valid");
@@ -70,7 +70,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getReceiver) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getReceiver : implementation of RippleLikeTransaction is not valid");
@@ -96,7 +96,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getSender) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getSender : implementation of RippleLikeTransaction is not valid");
@@ -122,7 +122,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getValue) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getValue : implementation of RippleLikeTransaction is not valid");
@@ -148,7 +148,7 @@ NAN_METHOD(NJSRippleLikeTransaction::serialize) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::serialize : implementation of RippleLikeTransaction is not valid");
@@ -201,7 +201,7 @@ NAN_METHOD(NJSRippleLikeTransaction::setSignature) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::setSignature : implementation of RippleLikeTransaction is not valid");
@@ -230,7 +230,7 @@ NAN_METHOD(NJSRippleLikeTransaction::setDERSignature) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::setDERSignature : implementation of RippleLikeTransaction is not valid");
@@ -248,7 +248,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getDate) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getDate : implementation of RippleLikeTransaction is not valid");
@@ -274,7 +274,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getSequence) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getSequence : implementation of RippleLikeTransaction is not valid");
@@ -300,7 +300,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getLedgerSequence) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getLedgerSequence : implementation of RippleLikeTransaction is not valid");
@@ -326,7 +326,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getSigningPubKey) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getSigningPubKey : implementation of RippleLikeTransaction is not valid");
@@ -357,7 +357,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getMemos) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::getMemos : implementation of RippleLikeTransaction is not valid");
@@ -409,7 +409,7 @@ NAN_METHOD(NJSRippleLikeTransaction::addMemo) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeTransaction::addMemo : implementation of RippleLikeTransaction is not valid");
@@ -447,7 +447,7 @@ Local<Object> NJSRippleLikeTransaction::wrap(const std::shared_ptr<ledger::core:
 }
 
 NAN_METHOD(NJSRippleLikeTransaction::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<RippleLikeTransaction>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

@@ -41,7 +41,7 @@ public:
      * @params result optional of type T, non null if main task failed
      * @params error optional of type Error, non null if main task succeeded
      */
-    void onCallback(const std::experimental::optional<Currency> & result, const std::experimental::optional<Error> & error);
+    void onCallback(const std::experimental::optional<::ledger::core::api::Currency> & result, const std::experimental::optional<::ledger::core::api::Error> & error);
 
 private:
     /**

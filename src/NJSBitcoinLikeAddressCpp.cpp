@@ -19,7 +19,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getVersion) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::getVersion : implementation of BitcoinLikeAddress is not valid");
@@ -50,7 +50,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getHash160) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::getHash160 : implementation of BitcoinLikeAddress is not valid");
@@ -81,7 +81,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getNetworkParameters) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::getNetworkParameters : implementation of BitcoinLikeAddress is not valid");
@@ -159,7 +159,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::toBase58) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::toBase58 : implementation of BitcoinLikeAddress is not valid");
@@ -184,7 +184,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::toBech32) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::toBech32 : implementation of BitcoinLikeAddress is not valid");
@@ -209,7 +209,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::isP2SH) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::isP2SH : implementation of BitcoinLikeAddress is not valid");
@@ -234,7 +234,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::isP2PKH) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::isP2PKH : implementation of BitcoinLikeAddress is not valid");
@@ -259,7 +259,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::isP2WSH) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::isP2WSH : implementation of BitcoinLikeAddress is not valid");
@@ -284,7 +284,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::isP2WPKH) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAddress::isP2WPKH : implementation of BitcoinLikeAddress is not valid");
@@ -329,7 +329,7 @@ Local<Object> NJSBitcoinLikeAddress::wrap(const std::shared_ptr<ledger::core::ap
 }
 
 NAN_METHOD(NJSBitcoinLikeAddress::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeAddress>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

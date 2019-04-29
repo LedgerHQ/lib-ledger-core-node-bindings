@@ -18,14 +18,14 @@ NAN_METHOD(NJSEventBus::subscribe) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<ExecutionContext>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::ExecutionContext>::Unwrap(njs_arg_0);
 
     Local<Object> njs_arg_1 = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_1 = djinni::js::ObjectWrapper<EventReceiver>::Unwrap(njs_arg_1);
+    auto arg_1 = djinni::js::ObjectWrapper<ledger::core::api::EventReceiver>::Unwrap(njs_arg_1);
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EventBus>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EventBus>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEventBus::subscribe : implementation of EventBus is not valid");
@@ -42,11 +42,11 @@ NAN_METHOD(NJSEventBus::unsubscribe) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<EventReceiver>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::EventReceiver>::Unwrap(njs_arg_0);
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EventBus>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EventBus>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEventBus::unsubscribe : implementation of EventBus is not valid");
@@ -84,7 +84,7 @@ Local<Object> NJSEventBus::wrap(const std::shared_ptr<ledger::core::api::EventBu
 }
 
 NAN_METHOD(NJSEventBus::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EventBus>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EventBus>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

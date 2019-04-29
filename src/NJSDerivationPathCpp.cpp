@@ -19,7 +19,7 @@ NAN_METHOD(NJSDerivationPath::getDepth) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DerivationPath>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDerivationPath::getDepth : implementation of DerivationPath is not valid");
@@ -45,7 +45,7 @@ NAN_METHOD(NJSDerivationPath::getChildNum) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DerivationPath>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDerivationPath::getChildNum : implementation of DerivationPath is not valid");
@@ -71,7 +71,7 @@ NAN_METHOD(NJSDerivationPath::getUnhardenedChildNum) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DerivationPath>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDerivationPath::getUnhardenedChildNum : implementation of DerivationPath is not valid");
@@ -97,7 +97,7 @@ NAN_METHOD(NJSDerivationPath::isHardened) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DerivationPath>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDerivationPath::isHardened : implementation of DerivationPath is not valid");
@@ -122,7 +122,7 @@ NAN_METHOD(NJSDerivationPath::toString) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DerivationPath>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDerivationPath::toString : implementation of DerivationPath is not valid");
@@ -147,7 +147,7 @@ NAN_METHOD(NJSDerivationPath::getParent) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DerivationPath>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDerivationPath::getParent : implementation of DerivationPath is not valid");
@@ -173,7 +173,7 @@ NAN_METHOD(NJSDerivationPath::toArray) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<DerivationPath>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSDerivationPath::toArray : implementation of DerivationPath is not valid");
@@ -205,7 +205,7 @@ NAN_METHOD(NJSDerivationPath::parse) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
 
-    auto result = DerivationPath::parse(arg_0);
+    auto result = ledger::core::api::DerivationPath::parse(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSDerivationPath::wrap(result);
@@ -259,7 +259,7 @@ Local<Object> NJSDerivationPath::wrap(const std::shared_ptr<ledger::core::api::D
 }
 
 NAN_METHOD(NJSDerivationPath::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<DerivationPath>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

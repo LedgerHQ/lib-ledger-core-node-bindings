@@ -39,7 +39,7 @@ Local<Object> NJSBitcoinLikeWalletConfiguration::wrap(const std::shared_ptr<ledg
 }
 
 NAN_METHOD(NJSBitcoinLikeWalletConfiguration::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeWalletConfiguration>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeWalletConfiguration>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

@@ -21,7 +21,7 @@ NAN_METHOD(NJSRippleLikeExtendedPublicKey::derive) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeExtendedPublicKey::derive : implementation of RippleLikeExtendedPublicKey is not valid");
@@ -49,7 +49,7 @@ NAN_METHOD(NJSRippleLikeExtendedPublicKey::derivePublicKey) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeExtendedPublicKey::derivePublicKey : implementation of RippleLikeExtendedPublicKey is not valid");
@@ -82,7 +82,7 @@ NAN_METHOD(NJSRippleLikeExtendedPublicKey::deriveHash160) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeExtendedPublicKey::deriveHash160 : implementation of RippleLikeExtendedPublicKey is not valid");
@@ -113,7 +113,7 @@ NAN_METHOD(NJSRippleLikeExtendedPublicKey::toBase58) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeExtendedPublicKey::toBase58 : implementation of RippleLikeExtendedPublicKey is not valid");
@@ -138,7 +138,7 @@ NAN_METHOD(NJSRippleLikeExtendedPublicKey::getRootPath) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<RippleLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSRippleLikeExtendedPublicKey::getRootPath : implementation of RippleLikeExtendedPublicKey is not valid");
@@ -183,7 +183,7 @@ Local<Object> NJSRippleLikeExtendedPublicKey::wrap(const std::shared_ptr<ledger:
 }
 
 NAN_METHOD(NJSRippleLikeExtendedPublicKey::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<RippleLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeExtendedPublicKey>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

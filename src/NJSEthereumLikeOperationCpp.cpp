@@ -19,7 +19,7 @@ NAN_METHOD(NJSEthereumLikeOperation::getTransaction) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeOperation>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeOperation::getTransaction : implementation of EthereumLikeOperation is not valid");
@@ -65,7 +65,7 @@ Local<Object> NJSEthereumLikeOperation::wrap(const std::shared_ptr<ledger::core:
 }
 
 NAN_METHOD(NJSEthereumLikeOperation::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EthereumLikeOperation>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeOperation>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

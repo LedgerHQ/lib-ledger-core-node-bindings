@@ -39,7 +39,7 @@ Local<Object> NJSEthereumLikeWallet::wrap(const std::shared_ptr<ledger::core::ap
 }
 
 NAN_METHOD(NJSEthereumLikeWallet::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EthereumLikeWallet>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeWallet>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

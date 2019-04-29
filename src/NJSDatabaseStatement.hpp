@@ -84,7 +84,7 @@ public:
      * @param pos The position of the parameter in the query
      * @param value The value to bind
      */
-    void bindBlob(int32_t pos, const std::shared_ptr<DatabaseBlob> & value);
+    void bindBlob(int32_t pos, const std::shared_ptr<::ledger::core::api::DatabaseBlob> & value);
 
     /**
      * Bind the designated parameter to the NULL value in SQL.

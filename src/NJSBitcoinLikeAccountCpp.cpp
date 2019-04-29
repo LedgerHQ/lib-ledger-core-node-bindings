@@ -27,7 +27,7 @@ NAN_METHOD(NJSBitcoinLikeAccount::getUTXO) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAccount::getUTXO : implementation of BitcoinLikeAccount is not valid");
@@ -52,7 +52,7 @@ NAN_METHOD(NJSBitcoinLikeAccount::getUTXOCount) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAccount::getUTXOCount : implementation of BitcoinLikeAccount is not valid");
@@ -88,7 +88,7 @@ NAN_METHOD(NJSBitcoinLikeAccount::broadcastRawTransaction) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAccount::broadcastRawTransaction : implementation of BitcoinLikeAccount is not valid");
@@ -106,7 +106,7 @@ NAN_METHOD(NJSBitcoinLikeAccount::broadcastTransaction) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<BitcoinLikeTransaction>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSBitcoinLikeTransaction failed");
@@ -120,7 +120,7 @@ NAN_METHOD(NJSBitcoinLikeAccount::broadcastTransaction) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAccount::broadcastTransaction : implementation of BitcoinLikeAccount is not valid");
@@ -146,7 +146,7 @@ NAN_METHOD(NJSBitcoinLikeAccount::buildTransaction) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAccount::buildTransaction : implementation of BitcoinLikeAccount is not valid");
@@ -178,7 +178,7 @@ NAN_METHOD(NJSBitcoinLikeAccount::getFees) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeAccount::getFees : implementation of BitcoinLikeAccount is not valid");
@@ -217,7 +217,7 @@ Local<Object> NJSBitcoinLikeAccount::wrap(const std::shared_ptr<ledger::core::ap
 }
 
 NAN_METHOD(NJSBitcoinLikeAccount::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeAccount>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

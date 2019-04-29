@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSExtendedKeyAccountCreationInfoCallback::onCallback(const std::experimental::optional<ExtendedKeyAccountCreationInfo> & result, const std::experimental::optional<Error> & error)
+void NJSExtendedKeyAccountCreationInfoCallback::onCallback(const std::experimental::optional<::ledger::core::api::ExtendedKeyAccountCreationInfo> & result, const std::experimental::optional<::ledger::core::api::Error> & error)
 {
     Nan::HandleScope scope;
     //Wrap parameters

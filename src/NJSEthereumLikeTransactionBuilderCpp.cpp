@@ -18,7 +18,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::sendToAddress) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -28,7 +28,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::sendToAddress) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransactionBuilder::sendToAddress : implementation of EthereumLikeTransactionBuilder is not valid");
@@ -56,7 +56,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::wipeToAddress) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransactionBuilder::wipeToAddress : implementation of EthereumLikeTransactionBuilder is not valid");
@@ -81,7 +81,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::setGasPrice) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -89,7 +89,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::setGasPrice) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransactionBuilder::setGasPrice : implementation of EthereumLikeTransactionBuilder is not valid");
@@ -114,7 +114,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::setGasLimit) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -122,7 +122,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::setGasLimit) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransactionBuilder::setGasLimit : implementation of EthereumLikeTransactionBuilder is not valid");
@@ -159,7 +159,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::setInputData) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransactionBuilder::setInputData : implementation of EthereumLikeTransactionBuilder is not valid");
@@ -191,7 +191,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::build) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransactionBuilder::build : implementation of EthereumLikeTransactionBuilder is not valid");
@@ -210,7 +210,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::clone) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransactionBuilder::clone : implementation of EthereumLikeTransactionBuilder is not valid");
@@ -236,7 +236,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::reset) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeTransactionBuilder::reset : implementation of EthereumLikeTransactionBuilder is not valid");
@@ -505,7 +505,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawUnsignedTransaction) {
     }
 
 
-    auto result = EthereumLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1);
+    auto result = ledger::core::api::EthereumLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSEthereumLikeTransaction::wrap(result);
@@ -776,7 +776,7 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawSignedTransaction) {
     }
 
 
-    auto result = EthereumLikeTransactionBuilder::parseRawSignedTransaction(arg_0,arg_1);
+    auto result = ledger::core::api::EthereumLikeTransactionBuilder::parseRawSignedTransaction(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSEthereumLikeTransaction::wrap(result);
@@ -816,7 +816,7 @@ Local<Object> NJSEthereumLikeTransactionBuilder::wrap(const std::shared_ptr<ledg
 }
 
 NAN_METHOD(NJSEthereumLikeTransactionBuilder::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EthereumLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransactionBuilder>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

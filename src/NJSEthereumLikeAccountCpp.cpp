@@ -36,7 +36,7 @@ NAN_METHOD(NJSEthereumLikeAccount::broadcastRawTransaction) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeAccount::broadcastRawTransaction : implementation of EthereumLikeAccount is not valid");
@@ -54,7 +54,7 @@ NAN_METHOD(NJSEthereumLikeAccount::broadcastTransaction) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<EthereumLikeTransaction>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeTransaction>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSEthereumLikeTransaction failed");
@@ -68,7 +68,7 @@ NAN_METHOD(NJSEthereumLikeAccount::broadcastTransaction) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeAccount::broadcastTransaction : implementation of EthereumLikeAccount is not valid");
@@ -87,7 +87,7 @@ NAN_METHOD(NJSEthereumLikeAccount::buildTransaction) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeAccount::buildTransaction : implementation of EthereumLikeAccount is not valid");
@@ -113,7 +113,7 @@ NAN_METHOD(NJSEthereumLikeAccount::getERC20Accounts) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeAccount>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeAccount::getERC20Accounts : implementation of EthereumLikeAccount is not valid");
@@ -133,6 +133,58 @@ NAN_METHOD(NJSEthereumLikeAccount::getERC20Accounts) {
 
     //Return result
     info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSEthereumLikeAccount::getGasPrice) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getGasPrice needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntCallback *njs_ptr_arg_0 = new NJSBigIntCallback(arg_0_resolver);
+    std::shared_ptr<NJSBigIntCallback> arg_0(njs_ptr_arg_0);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getGasPrice : implementation of EthereumLikeAccount is not valid");
+    }
+    cpp_impl->getGasPrice(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
+}
+NAN_METHOD(NJSEthereumLikeAccount::getEstimatedGasLimit) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getEstimatedGasLimit needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    String::Utf8Value string_arg_0(info[0]->ToString());
+    auto arg_0 = std::string(*string_arg_0);
+
+    //Create promise and set it into Callback
+    auto arg_1_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntCallback *njs_ptr_arg_1 = new NJSBigIntCallback(arg_1_resolver);
+    std::shared_ptr<NJSBigIntCallback> arg_1(njs_ptr_arg_1);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getEstimatedGasLimit : implementation of EthereumLikeAccount is not valid");
+    }
+    cpp_impl->getEstimatedGasLimit(arg_0,arg_1);
+    info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
 
 NAN_METHOD(NJSEthereumLikeAccount::New) {
@@ -165,7 +217,7 @@ Local<Object> NJSEthereumLikeAccount::wrap(const std::shared_ptr<ledger::core::a
 }
 
 NAN_METHOD(NJSEthereumLikeAccount::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EthereumLikeAccount>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }
@@ -184,6 +236,8 @@ void NJSEthereumLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"broadcastTransaction", broadcastTransaction);
     Nan::SetPrototypeMethod(func_template,"buildTransaction", buildTransaction);
     Nan::SetPrototypeMethod(func_template,"getERC20Accounts", getERC20Accounts);
+    Nan::SetPrototypeMethod(func_template,"getGasPrice", getGasPrice);
+    Nan::SetPrototypeMethod(func_template,"getEstimatedGasLimit", getEstimatedGasLimit);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeAccount_prototype.Reset(objectTemplate);

@@ -18,7 +18,7 @@ NAN_METHOD(NJSBigInt::add) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<BigInt>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSBigInt failed");
@@ -26,7 +26,7 @@ NAN_METHOD(NJSBigInt::add) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::add : implementation of BigInt is not valid");
@@ -51,7 +51,7 @@ NAN_METHOD(NJSBigInt::subtract) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<BigInt>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSBigInt failed");
@@ -59,7 +59,7 @@ NAN_METHOD(NJSBigInt::subtract) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::subtract : implementation of BigInt is not valid");
@@ -84,7 +84,7 @@ NAN_METHOD(NJSBigInt::multiply) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<BigInt>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSBigInt failed");
@@ -92,7 +92,7 @@ NAN_METHOD(NJSBigInt::multiply) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::multiply : implementation of BigInt is not valid");
@@ -117,7 +117,7 @@ NAN_METHOD(NJSBigInt::divide) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<BigInt>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSBigInt failed");
@@ -125,7 +125,7 @@ NAN_METHOD(NJSBigInt::divide) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::divide : implementation of BigInt is not valid");
@@ -150,7 +150,7 @@ NAN_METHOD(NJSBigInt::divideAndRemainder) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<BigInt>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSBigInt failed");
@@ -158,7 +158,7 @@ NAN_METHOD(NJSBigInt::divideAndRemainder) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::divideAndRemainder : implementation of BigInt is not valid");
@@ -191,7 +191,7 @@ NAN_METHOD(NJSBigInt::pow) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::pow : implementation of BigInt is not valid");
@@ -222,7 +222,7 @@ NAN_METHOD(NJSBigInt::toDecimalString) {
     auto arg_2 = std::string(*string_arg_2);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::toDecimalString : implementation of BigInt is not valid");
@@ -248,7 +248,7 @@ NAN_METHOD(NJSBigInt::toString) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::toString : implementation of BigInt is not valid");
@@ -273,7 +273,7 @@ NAN_METHOD(NJSBigInt::intValue) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::intValue : implementation of BigInt is not valid");
@@ -297,7 +297,7 @@ NAN_METHOD(NJSBigInt::compare) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<BigInt>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSBigInt failed");
@@ -305,7 +305,7 @@ NAN_METHOD(NJSBigInt::compare) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBigInt::compare : implementation of BigInt is not valid");
@@ -334,7 +334,7 @@ NAN_METHOD(NJSBigInt::fromDecimalString) {
     String::Utf8Value string_arg_2(info[2]->ToString());
     auto arg_2 = std::string(*string_arg_2);
 
-    auto result = BigInt::fromDecimalString(arg_0,arg_1,arg_2);
+    auto result = ledger::core::api::BigInt::fromDecimalString(arg_0,arg_1,arg_2);
 
     //Wrap result in node object
     auto arg_3 = NJSBigInt::wrap(result);
@@ -356,7 +356,7 @@ NAN_METHOD(NJSBigInt::fromIntegerString) {
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
-    auto result = BigInt::fromIntegerString(arg_0,arg_1);
+    auto result = ledger::core::api::BigInt::fromIntegerString(arg_0,arg_1);
 
     //Wrap result in node object
     auto arg_2 = NJSBigInt::wrap(result);
@@ -376,7 +376,7 @@ NAN_METHOD(NJSBigInt::fromLong) {
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
-    auto result = BigInt::fromLong(arg_0);
+    auto result = ledger::core::api::BigInt::fromLong(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSBigInt::wrap(result);
@@ -433,7 +433,7 @@ Local<Object> NJSBigInt::wrap(const std::shared_ptr<ledger::core::api::BigInt> &
 }
 
 NAN_METHOD(NJSBigInt::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BigInt>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

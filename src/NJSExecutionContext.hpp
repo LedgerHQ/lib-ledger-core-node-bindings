@@ -36,14 +36,14 @@ public:
      *Execute a given runnable
      *@param runnalbe, Runnable object
      */
-    void execute(const std::shared_ptr<Runnable> & runnable);
+    void execute(const std::shared_ptr<::ledger::core::api::Runnable> & runnable);
 
     /**
      *Execute a given runnable with a delay
      *@param runnalbe, Runnable object
      *@param millis, 64 bits integer, delay in milli-seconds
      */
-    void delay(const std::shared_ptr<Runnable> & runnable, int64_t millis);
+    void delay(const std::shared_ptr<::ledger::core::api::Runnable> & runnable, int64_t millis);
 
 private:
     /**

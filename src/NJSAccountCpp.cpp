@@ -19,7 +19,7 @@ NAN_METHOD(NJSAccount::getIndex) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getIndex : implementation of Account is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSAccount::queryOperations) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::queryOperations : implementation of Account is not valid");
@@ -76,7 +76,7 @@ NAN_METHOD(NJSAccount::getBalance) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getBalance : implementation of Account is not valid");
@@ -106,7 +106,7 @@ NAN_METHOD(NJSAccount::getBalanceHistory) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getBalanceHistory : implementation of Account is not valid");
@@ -125,7 +125,7 @@ NAN_METHOD(NJSAccount::isSynchronizing) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::isSynchronizing : implementation of Account is not valid");
@@ -150,7 +150,7 @@ NAN_METHOD(NJSAccount::synchronize) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::synchronize : implementation of Account is not valid");
@@ -176,7 +176,7 @@ NAN_METHOD(NJSAccount::getPreferences) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getPreferences : implementation of Account is not valid");
@@ -202,7 +202,7 @@ NAN_METHOD(NJSAccount::getLogger) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getLogger : implementation of Account is not valid");
@@ -230,7 +230,7 @@ NAN_METHOD(NJSAccount::getOperationPreferences) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getOperationPreferences : implementation of Account is not valid");
@@ -256,7 +256,7 @@ NAN_METHOD(NJSAccount::asBitcoinLikeAccount) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::asBitcoinLikeAccount : implementation of Account is not valid");
@@ -282,7 +282,7 @@ NAN_METHOD(NJSAccount::asEthereumLikeAccount) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::asEthereumLikeAccount : implementation of Account is not valid");
@@ -308,7 +308,7 @@ NAN_METHOD(NJSAccount::isInstanceOfBitcoinLikeAccount) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::isInstanceOfBitcoinLikeAccount : implementation of Account is not valid");
@@ -333,7 +333,7 @@ NAN_METHOD(NJSAccount::isInstanceOfEthereumLikeAccount) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::isInstanceOfEthereumLikeAccount : implementation of Account is not valid");
@@ -358,7 +358,7 @@ NAN_METHOD(NJSAccount::isInstanceOfRippleLikeAccount) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::isInstanceOfRippleLikeAccount : implementation of Account is not valid");
@@ -389,7 +389,7 @@ NAN_METHOD(NJSAccount::getFreshPublicAddresses) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getFreshPublicAddresses : implementation of Account is not valid");
@@ -408,7 +408,7 @@ NAN_METHOD(NJSAccount::getWalletType) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getWalletType : implementation of Account is not valid");
@@ -433,7 +433,7 @@ NAN_METHOD(NJSAccount::getEventBus) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getEventBus : implementation of Account is not valid");
@@ -459,7 +459,7 @@ NAN_METHOD(NJSAccount::startBlockchainObservation) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::startBlockchainObservation : implementation of Account is not valid");
@@ -477,7 +477,7 @@ NAN_METHOD(NJSAccount::stopBlockchainObservation) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::stopBlockchainObservation : implementation of Account is not valid");
@@ -495,7 +495,7 @@ NAN_METHOD(NJSAccount::isObservingBlockchain) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::isObservingBlockchain : implementation of Account is not valid");
@@ -526,7 +526,7 @@ NAN_METHOD(NJSAccount::getLastBlock) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getLastBlock : implementation of Account is not valid");
@@ -545,7 +545,7 @@ NAN_METHOD(NJSAccount::getRestoreKey) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::getRestoreKey : implementation of Account is not valid");
@@ -578,7 +578,7 @@ NAN_METHOD(NJSAccount::eraseDataSince) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSAccount::eraseDataSince : implementation of Account is not valid");
@@ -617,7 +617,7 @@ Local<Object> NJSAccount::wrap(const std::shared_ptr<ledger::core::api::Account>
 }
 
 NAN_METHOD(NJSAccount::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<Account>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

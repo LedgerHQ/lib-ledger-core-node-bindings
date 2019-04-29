@@ -21,7 +21,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::derive) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeExtendedPublicKey::derive : implementation of BitcoinLikeExtendedPublicKey is not valid");
@@ -49,7 +49,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::derivePublicKey) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeExtendedPublicKey::derivePublicKey : implementation of BitcoinLikeExtendedPublicKey is not valid");
@@ -82,7 +82,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::deriveHash160) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeExtendedPublicKey::deriveHash160 : implementation of BitcoinLikeExtendedPublicKey is not valid");
@@ -113,7 +113,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::toBase58) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeExtendedPublicKey::toBase58 : implementation of BitcoinLikeExtendedPublicKey is not valid");
@@ -138,7 +138,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::getRootPath) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeExtendedPublicKey::getRootPath : implementation of BitcoinLikeExtendedPublicKey is not valid");
@@ -183,7 +183,7 @@ Local<Object> NJSBitcoinLikeExtendedPublicKey::wrap(const std::shared_ptr<ledger
 }
 
 NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeExtendedPublicKey>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

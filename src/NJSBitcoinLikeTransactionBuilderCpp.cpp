@@ -23,7 +23,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::addInput) {
     auto arg_2 = Nan::To<int32_t>(info[2]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::addInput : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -48,14 +48,14 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::addOutput) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
     Local<Object> njs_arg_1 = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_1 = djinni::js::ObjectWrapper<BitcoinLikeScript>::Unwrap(njs_arg_1);
+    auto arg_1 = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeScript>::Unwrap(njs_arg_1);
     if(!arg_1)
     {
         return Nan::ThrowError("NodeJs Object to NJSBitcoinLikeScript failed");
@@ -63,7 +63,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::addOutput) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::addOutput : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -91,7 +91,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::addChangePath) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::addChangePath : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -120,7 +120,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::excludeUtxo) {
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::excludeUtxo : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -147,7 +147,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::setNumberOfChangeAddresses) {
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::setNumberOfChangeAddresses : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -172,7 +172,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::setMaxAmountOnChange) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -180,7 +180,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::setMaxAmountOnChange) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::setMaxAmountOnChange : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -205,7 +205,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::setMinAmountOnChange) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -213,7 +213,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::setMinAmountOnChange) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::setMinAmountOnChange : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -241,7 +241,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::pickInputs) {
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::pickInputs : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -266,7 +266,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::sendToAddress) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -276,7 +276,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::sendToAddress) {
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::sendToAddress : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -304,7 +304,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::wipeToAddress) {
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::wipeToAddress : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -329,7 +329,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::setFeesPerByte) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
@@ -337,7 +337,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::setFeesPerByte) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::setFeesPerByte : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -369,7 +369,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::build) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::build : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -388,7 +388,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::clone) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::clone : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -414,7 +414,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::reset) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSBitcoinLikeTransactionBuilder::reset : implementation of BitcoinLikeTransactionBuilder is not valid");
@@ -690,7 +690,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction) {
     }
 
 
-    auto result = BitcoinLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1,arg_2);
+    auto result = ledger::core::api::BitcoinLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1,arg_2);
 
     //Wrap result in node object
     auto arg_3 = NJSBitcoinLikeTransaction::wrap(result);
@@ -730,7 +730,7 @@ Local<Object> NJSBitcoinLikeTransactionBuilder::wrap(const std::shared_ptr<ledge
 }
 
 NAN_METHOD(NJSBitcoinLikeTransactionBuilder::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<BitcoinLikeTransactionBuilder>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionBuilder>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

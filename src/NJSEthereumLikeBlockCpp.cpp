@@ -19,7 +19,7 @@ NAN_METHOD(NJSEthereumLikeBlock::getHash) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeBlock::getHash : implementation of EthereumLikeBlock is not valid");
@@ -44,7 +44,7 @@ NAN_METHOD(NJSEthereumLikeBlock::getHeight) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeBlock::getHeight : implementation of EthereumLikeBlock is not valid");
@@ -69,7 +69,7 @@ NAN_METHOD(NJSEthereumLikeBlock::getTime) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<EthereumLikeBlock>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeBlock>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSEthereumLikeBlock::getTime : implementation of EthereumLikeBlock is not valid");
@@ -115,7 +115,7 @@ Local<Object> NJSEthereumLikeBlock::wrap(const std::shared_ptr<ledger::core::api
 }
 
 NAN_METHOD(NJSEthereumLikeBlock::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<EthereumLikeBlock>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeBlock>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

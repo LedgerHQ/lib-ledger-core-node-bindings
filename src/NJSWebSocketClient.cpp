@@ -8,7 +8,7 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
-void NJSWebSocketClient::connect(const std::string & url, const std::shared_ptr<WebSocketConnection> & connection)
+void NJSWebSocketClient::connect(const std::string & url, const std::shared_ptr<::ledger::core::api::WebSocketConnection> & connection)
 {
     Nan::HandleScope scope;
     //Wrap parameters
@@ -29,7 +29,7 @@ void NJSWebSocketClient::connect(const std::string & url, const std::shared_ptr<
     }
 }
 
-void NJSWebSocketClient::send(const std::shared_ptr<WebSocketConnection> & connection, const std::string & data)
+void NJSWebSocketClient::send(const std::shared_ptr<::ledger::core::api::WebSocketConnection> & connection, const std::string & data)
 {
     Nan::HandleScope scope;
     //Wrap parameters
@@ -50,7 +50,7 @@ void NJSWebSocketClient::send(const std::shared_ptr<WebSocketConnection> & conne
     }
 }
 
-void NJSWebSocketClient::disconnect(const std::shared_ptr<WebSocketConnection> & connection)
+void NJSWebSocketClient::disconnect(const std::shared_ptr<::ledger::core::api::WebSocketConnection> & connection)
 {
     Nan::HandleScope scope;
     //Wrap parameters

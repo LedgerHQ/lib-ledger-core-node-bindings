@@ -28,7 +28,7 @@ std::shared_ptr<DatabaseStatement> NJSDatabaseConnection::prepareStatement(const
     }
     auto checkedResult_prepareStatement = result_prepareStatement.ToLocalChecked();
     Local<Object> njs_fResult_prepareStatement = checkedResult_prepareStatement->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_prepareStatement = djinni::js::ObjectWrapper<DatabaseStatement>::Unwrap(njs_fResult_prepareStatement);
+    auto fResult_prepareStatement = djinni::js::ObjectWrapper<ledger::core::api::DatabaseStatement>::Unwrap(njs_fResult_prepareStatement);
 
     return fResult_prepareStatement;
 }
@@ -123,7 +123,7 @@ std::shared_ptr<DatabaseBlob> NJSDatabaseConnection::newBlob()
     }
     auto checkedResult_newBlob = result_newBlob.ToLocalChecked();
     Local<Object> njs_fResult_newBlob = checkedResult_newBlob->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto fResult_newBlob = djinni::js::ObjectWrapper<DatabaseBlob>::Unwrap(njs_fResult_newBlob);
+    auto fResult_newBlob = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBlob>::Unwrap(njs_fResult_newBlob);
 
     return fResult_newBlob;
 }

@@ -20,7 +20,7 @@ NAN_METHOD(NJSQueryFilter::accountEq) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
 
-    auto result = QueryFilter::accountEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::accountEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -41,7 +41,7 @@ NAN_METHOD(NJSQueryFilter::accountNeq) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
 
-    auto result = QueryFilter::accountNeq(arg_0);
+    auto result = ledger::core::api::QueryFilter::accountNeq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -62,7 +62,7 @@ NAN_METHOD(NJSQueryFilter::dateLte) {
     auto time_arg_0 = Nan::To<int32_t>(info[0]).FromJust();
     auto arg_0 = chrono::system_clock::time_point(chrono::milliseconds(time_arg_0));
 
-    auto result = QueryFilter::dateLte(arg_0);
+    auto result = ledger::core::api::QueryFilter::dateLte(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -83,7 +83,7 @@ NAN_METHOD(NJSQueryFilter::dateLt) {
     auto time_arg_0 = Nan::To<int32_t>(info[0]).FromJust();
     auto arg_0 = chrono::system_clock::time_point(chrono::milliseconds(time_arg_0));
 
-    auto result = QueryFilter::dateLt(arg_0);
+    auto result = ledger::core::api::QueryFilter::dateLt(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -104,7 +104,7 @@ NAN_METHOD(NJSQueryFilter::dateGt) {
     auto time_arg_0 = Nan::To<int32_t>(info[0]).FromJust();
     auto arg_0 = chrono::system_clock::time_point(chrono::milliseconds(time_arg_0));
 
-    auto result = QueryFilter::dateGt(arg_0);
+    auto result = ledger::core::api::QueryFilter::dateGt(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -125,7 +125,7 @@ NAN_METHOD(NJSQueryFilter::dateGte) {
     auto time_arg_0 = Nan::To<int32_t>(info[0]).FromJust();
     auto arg_0 = chrono::system_clock::time_point(chrono::milliseconds(time_arg_0));
 
-    auto result = QueryFilter::dateGte(arg_0);
+    auto result = ledger::core::api::QueryFilter::dateGte(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -146,7 +146,7 @@ NAN_METHOD(NJSQueryFilter::dateEq) {
     auto time_arg_0 = Nan::To<int32_t>(info[0]).FromJust();
     auto arg_0 = chrono::system_clock::time_point(chrono::milliseconds(time_arg_0));
 
-    auto result = QueryFilter::dateEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::dateEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -167,7 +167,7 @@ NAN_METHOD(NJSQueryFilter::dateNeq) {
     auto time_arg_0 = Nan::To<int32_t>(info[0]).FromJust();
     auto arg_0 = chrono::system_clock::time_point(chrono::milliseconds(time_arg_0));
 
-    auto result = QueryFilter::dateNeq(arg_0);
+    auto result = ledger::core::api::QueryFilter::dateNeq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -188,7 +188,7 @@ NAN_METHOD(NJSQueryFilter::containsRecipient) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
 
-    auto result = QueryFilter::containsRecipient(arg_0);
+    auto result = ledger::core::api::QueryFilter::containsRecipient(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -209,7 +209,7 @@ NAN_METHOD(NJSQueryFilter::containsSender) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
 
-    auto result = QueryFilter::containsSender(arg_0);
+    auto result = ledger::core::api::QueryFilter::containsSender(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -230,7 +230,7 @@ NAN_METHOD(NJSQueryFilter::currencyEq) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
 
-    auto result = QueryFilter::currencyEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::currencyEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -251,7 +251,7 @@ NAN_METHOD(NJSQueryFilter::operationUidEq) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
 
-    auto result = QueryFilter::operationUidEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::operationUidEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -272,7 +272,7 @@ NAN_METHOD(NJSQueryFilter::operationUidNeq) {
     String::Utf8Value string_arg_0(info[0]->ToString());
     auto arg_0 = std::string(*string_arg_0);
 
-    auto result = QueryFilter::operationUidNeq(arg_0);
+    auto result = ledger::core::api::QueryFilter::operationUidNeq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -292,7 +292,7 @@ NAN_METHOD(NJSQueryFilter::trustEq) {
     //Check if parameters have correct types
     auto arg_0 = (ledger::core::api::TrustLevel)Nan::To<int>(info[0]).FromJust();
 
-    auto result = QueryFilter::trustEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::trustEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -312,7 +312,7 @@ NAN_METHOD(NJSQueryFilter::trustNeq) {
     //Check if parameters have correct types
     auto arg_0 = (ledger::core::api::TrustLevel)Nan::To<int>(info[0]).FromJust();
 
-    auto result = QueryFilter::trustNeq(arg_0);
+    auto result = ledger::core::api::QueryFilter::trustNeq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -331,14 +331,14 @@ NAN_METHOD(NJSQueryFilter::feesEq) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::feesEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::feesEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -357,14 +357,14 @@ NAN_METHOD(NJSQueryFilter::feesNeq) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::feesNeq(arg_0);
+    auto result = ledger::core::api::QueryFilter::feesNeq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -383,14 +383,14 @@ NAN_METHOD(NJSQueryFilter::feesGte) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::feesGte(arg_0);
+    auto result = ledger::core::api::QueryFilter::feesGte(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -409,14 +409,14 @@ NAN_METHOD(NJSQueryFilter::feesGt) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::feesGt(arg_0);
+    auto result = ledger::core::api::QueryFilter::feesGt(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -435,14 +435,14 @@ NAN_METHOD(NJSQueryFilter::feesLte) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::feesLte(arg_0);
+    auto result = ledger::core::api::QueryFilter::feesLte(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -461,14 +461,14 @@ NAN_METHOD(NJSQueryFilter::feesLt) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::feesLt(arg_0);
+    auto result = ledger::core::api::QueryFilter::feesLt(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -487,14 +487,14 @@ NAN_METHOD(NJSQueryFilter::amountEq) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::amountEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::amountEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -513,14 +513,14 @@ NAN_METHOD(NJSQueryFilter::amountNeq) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::amountNeq(arg_0);
+    auto result = ledger::core::api::QueryFilter::amountNeq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -539,14 +539,14 @@ NAN_METHOD(NJSQueryFilter::amountGte) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::amountGte(arg_0);
+    auto result = ledger::core::api::QueryFilter::amountGte(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -565,14 +565,14 @@ NAN_METHOD(NJSQueryFilter::amountGt) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::amountGt(arg_0);
+    auto result = ledger::core::api::QueryFilter::amountGt(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -591,14 +591,14 @@ NAN_METHOD(NJSQueryFilter::amountLte) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::amountLte(arg_0);
+    auto result = ledger::core::api::QueryFilter::amountLte(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -617,14 +617,14 @@ NAN_METHOD(NJSQueryFilter::amountLt) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<Amount>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::Amount>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSAmount failed");
     }
 
 
-    auto result = QueryFilter::amountLt(arg_0);
+    auto result = ledger::core::api::QueryFilter::amountLt(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -644,7 +644,7 @@ NAN_METHOD(NJSQueryFilter::blockHeightEq) {
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
-    auto result = QueryFilter::blockHeightEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::blockHeightEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -664,7 +664,7 @@ NAN_METHOD(NJSQueryFilter::blockHeightNeq) {
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
-    auto result = QueryFilter::blockHeightNeq(arg_0);
+    auto result = ledger::core::api::QueryFilter::blockHeightNeq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -684,7 +684,7 @@ NAN_METHOD(NJSQueryFilter::blockHeightGte) {
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
-    auto result = QueryFilter::blockHeightGte(arg_0);
+    auto result = ledger::core::api::QueryFilter::blockHeightGte(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -704,7 +704,7 @@ NAN_METHOD(NJSQueryFilter::blockHeightGt) {
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
-    auto result = QueryFilter::blockHeightGt(arg_0);
+    auto result = ledger::core::api::QueryFilter::blockHeightGt(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -724,7 +724,7 @@ NAN_METHOD(NJSQueryFilter::blockHeightLte) {
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
-    auto result = QueryFilter::blockHeightLte(arg_0);
+    auto result = ledger::core::api::QueryFilter::blockHeightLte(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -744,7 +744,7 @@ NAN_METHOD(NJSQueryFilter::blockHeightLt) {
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
-    auto result = QueryFilter::blockHeightLt(arg_0);
+    auto result = ledger::core::api::QueryFilter::blockHeightLt(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -763,7 +763,7 @@ NAN_METHOD(NJSQueryFilter::blockHeightIsNull) {
 
     //Check if parameters have correct types
 
-    auto result = QueryFilter::blockHeightIsNull();
+    auto result = ledger::core::api::QueryFilter::blockHeightIsNull();
 
     //Wrap result in node object
     auto arg_0 = NJSQueryFilter::wrap(result);
@@ -783,7 +783,7 @@ NAN_METHOD(NJSQueryFilter::operationTypeEq) {
     //Check if parameters have correct types
     auto arg_0 = (ledger::core::api::OperationType)Nan::To<int>(info[0]).FromJust();
 
-    auto result = QueryFilter::operationTypeEq(arg_0);
+    auto result = ledger::core::api::QueryFilter::operationTypeEq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -803,7 +803,7 @@ NAN_METHOD(NJSQueryFilter::operationTypeNeq) {
     //Check if parameters have correct types
     auto arg_0 = (ledger::core::api::OperationType)Nan::To<int>(info[0]).FromJust();
 
-    auto result = QueryFilter::operationTypeNeq(arg_0);
+    auto result = ledger::core::api::QueryFilter::operationTypeNeq(arg_0);
 
     //Wrap result in node object
     auto arg_1 = NJSQueryFilter::wrap(result);
@@ -822,7 +822,7 @@ NAN_METHOD(NJSQueryFilter::op_and) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSQueryFilter failed");
@@ -830,7 +830,7 @@ NAN_METHOD(NJSQueryFilter::op_and) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSQueryFilter::op_and : implementation of QueryFilter is not valid");
@@ -855,7 +855,7 @@ NAN_METHOD(NJSQueryFilter::op_or) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSQueryFilter failed");
@@ -863,7 +863,7 @@ NAN_METHOD(NJSQueryFilter::op_or) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSQueryFilter::op_or : implementation of QueryFilter is not valid");
@@ -888,7 +888,7 @@ NAN_METHOD(NJSQueryFilter::op_and_not) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSQueryFilter failed");
@@ -896,7 +896,7 @@ NAN_METHOD(NJSQueryFilter::op_and_not) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSQueryFilter::op_and_not : implementation of QueryFilter is not valid");
@@ -921,7 +921,7 @@ NAN_METHOD(NJSQueryFilter::op_or_not) {
 
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-    auto arg_0 = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(njs_arg_0);
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(njs_arg_0);
     if(!arg_0)
     {
         return Nan::ThrowError("NodeJs Object to NJSQueryFilter failed");
@@ -929,7 +929,7 @@ NAN_METHOD(NJSQueryFilter::op_or_not) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSQueryFilter::op_or_not : implementation of QueryFilter is not valid");
@@ -989,7 +989,7 @@ Local<Object> NJSQueryFilter::wrap(const std::shared_ptr<ledger::core::api::Quer
 }
 
 NAN_METHOD(NJSQueryFilter::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<QueryFilter>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }

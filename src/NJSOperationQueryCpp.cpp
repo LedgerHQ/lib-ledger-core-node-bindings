@@ -21,7 +21,7 @@ NAN_METHOD(NJSOperationQuery::addOrder) {
     auto arg_1 = Nan::To<bool>(info[1]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<OperationQuery>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperationQuery::addOrder : implementation of OperationQuery is not valid");
@@ -47,7 +47,7 @@ NAN_METHOD(NJSOperationQuery::filter) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<OperationQuery>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperationQuery::filter : implementation of OperationQuery is not valid");
@@ -74,7 +74,7 @@ NAN_METHOD(NJSOperationQuery::offset) {
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<OperationQuery>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperationQuery::offset : implementation of OperationQuery is not valid");
@@ -101,7 +101,7 @@ NAN_METHOD(NJSOperationQuery::limit) {
     auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<OperationQuery>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperationQuery::limit : implementation of OperationQuery is not valid");
@@ -127,7 +127,7 @@ NAN_METHOD(NJSOperationQuery::complete) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<OperationQuery>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperationQuery::complete : implementation of OperationQuery is not valid");
@@ -153,7 +153,7 @@ NAN_METHOD(NJSOperationQuery::partial) {
     //Check if parameters have correct types
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<OperationQuery>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperationQuery::partial : implementation of OperationQuery is not valid");
@@ -185,7 +185,7 @@ NAN_METHOD(NJSOperationQuery::execute) {
 
 
     //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<OperationQuery>::Unwrap(info.This());
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSOperationQuery::execute : implementation of OperationQuery is not valid");
@@ -224,7 +224,7 @@ Local<Object> NJSOperationQuery::wrap(const std::shared_ptr<ledger::core::api::O
 }
 
 NAN_METHOD(NJSOperationQuery::isNull) {
-    auto cpp_implementation = djinni::js::ObjectWrapper<OperationQuery>::Unwrap(info.This());
+    auto cpp_implementation = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
     auto isNull = !cpp_implementation ? true : false;
     return info.GetReturnValue().Set(Nan::New<Boolean>(isNull));
 }
