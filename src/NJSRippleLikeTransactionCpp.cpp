@@ -416,6 +416,38 @@ NAN_METHOD(NJSRippleLikeTransaction::addMemo) {
     }
     cpp_impl->addMemo(arg_0);
 }
+NAN_METHOD(NJSRippleLikeTransaction::getDestinationTag) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSRippleLikeTransaction::getDestinationTag needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSRippleLikeTransaction::getDestinationTag : implementation of RippleLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getDestinationTag();
+
+    //Wrap result in node object
+    Local<Value> arg_0;
+    if(result)
+    {
+        auto arg_0_optional = (result).value();
+        auto arg_0_tmp = Nan::New<Number>(arg_0_optional);
+        arg_0 = arg_0_tmp;
+    }
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSRippleLikeTransaction::New) {
     //Only new allowed
@@ -476,6 +508,7 @@ void NJSRippleLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getSigningPubKey", getSigningPubKey);
     Nan::SetPrototypeMethod(func_template,"getMemos", getMemos);
     Nan::SetPrototypeMethod(func_template,"addMemo", addMemo);
+    Nan::SetPrototypeMethod(func_template,"getDestinationTag", getDestinationTag);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     RippleLikeTransaction_prototype.Reset(objectTemplate);
