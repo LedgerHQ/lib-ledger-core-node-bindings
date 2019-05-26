@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSRIPPLELIKETRANSACTION_HPP
 
 
+#include "../include/../utils/optional.hpp"
 #include "../include/RippleLikeMemo.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSBigIntCpp.hpp"
@@ -81,6 +82,9 @@ private:
 
     /** Add a memo to a transaction. */
     static NAN_METHOD(addMemo);
+
+    /** An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account */
+    static NAN_METHOD(getDestinationTag);
 
     static NAN_METHOD(New);
 

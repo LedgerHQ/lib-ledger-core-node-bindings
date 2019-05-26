@@ -42,6 +42,8 @@ declare class NJSRippleLikeTransaction
     declare function getMemos(): Array<RippleLikeMemo>;
     /** Add a memo to a transaction. */
     declare function addMemo(memo: RippleLikeMemo);
+    /** An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account */
+    declare function getDestinationTag(): ?number;
 }
 /**Class representing a Ripple Operation */
 declare class NJSRippleLikeOperation
@@ -96,6 +98,8 @@ declare class NJSRippleLikeTransactionBuilder
      * @return A reference on the same builder in order to chain calls.
      */
     declare function addMemo(memo: RippleLikeMemo): NJSRippleLikeTransactionBuilder;
+    /** An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account */
+    declare function setDestinationTag(tag: number): NJSRippleLikeTransactionBuilder;
     /** Build a transaction from the given builder parameters. */
     declare function build(callback: NJSRippleLikeTransactionCallback);
     /**

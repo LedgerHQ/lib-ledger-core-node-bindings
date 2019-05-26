@@ -65,6 +65,9 @@ private:
      */
     static NAN_METHOD(addMemo);
 
+    /** An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account */
+    static NAN_METHOD(setDestinationTag);
+
     /** Build a transaction from the given builder parameters. */
     static NAN_METHOD(build);
 
