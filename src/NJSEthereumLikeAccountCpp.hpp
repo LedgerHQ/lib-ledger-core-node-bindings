@@ -48,7 +48,10 @@ private:
 
     /**
      * Get gas price from network
-     * Note: same note as for getFees method on BitcoinLikeAccount
+     * Note: it would have been better to have this method on EthereumLikeWallet
+     * but since EthereumLikeWallet is not used anywhere, it's better to keep all
+     * specific methods under the same specific class so it will be easy to segratate
+     * when the right time comes !
      */
     static NAN_METHOD(getGasPrice);
 
@@ -56,7 +59,7 @@ private:
      * Get estimated gas limit to set so the transaction will succeed
      * The passed address could be EOA or contract
      * This estimation is based on X last incoming txs (to address) that succeeded
-     * Note: same note as for getFees method on BitcoinLikeAccount
+     * Note: same note as above
      */
     static NAN_METHOD(getEstimatedGasLimit);
 
