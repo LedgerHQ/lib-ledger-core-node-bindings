@@ -54,7 +54,7 @@ declare class NJSRippleLikeOperation
      */
     declare function getTransaction(): NJSRippleLikeTransaction;
 }
-/**Class representing Bitcoin block */
+/**Class representing Ripple block */
 declare class NJSRippleLikeBlock
 {
     /**
@@ -128,6 +128,19 @@ declare class NJSRippleLikeAccount
     declare function broadcastRawTransaction(transaction: Object, callback: NJSStringCallback);
     declare function broadcastTransaction(transaction: NJSRippleLikeTransaction, callback: NJSStringCallback);
     declare function buildTransaction(): NJSRippleLikeTransactionBuilder;
+    /**
+     * Get fees from network
+     * Note: it would have been better to have this method on RippleLikeWallet
+     * but since RippleLikeWallet is not used anywhere, it's better to keep all
+     * specific methods under the same specific class so it will be easy to segratate
+     * when the right time comes !
+     */
+    declare function getFees(callback: NJSAmountCallback);
+    /**
+     * Get base reserve (dust to leave on an XRP account) from network
+     * Note: same note as above
+     */
+    declare function getBaseReserve(callback: NJSAmountCallback);
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSStringCallback
@@ -138,6 +151,16 @@ declare class NJSStringCallback
      * @params error optional of type Error, non null if main task succeeded
      */
     declare function onCallback(result: ?string, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSAmountCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?NJSAmount, error: ?Error);
 }
 declare class NJSRippleConfigurationDefaults
 {
@@ -653,16 +676,6 @@ declare class NJSAccount
      * @param date, start date of data deletion
      */
     declare function eraseDataSince(date: Date, callback: NJSErrorCodeCallback);
-}
-/** Callback triggered by main completed task, returning optional result of template type T. */
-declare class NJSAmountCallback
-{
-    /**
-     * Method triggered when main task complete.
-     * @params result optional of type T, non null if main task failed
-     * @params error optional of type Error, non null if main task succeeded
-     */
-    declare function onCallback(result: ?NJSAmount, error: ?Error);
 }
 /** Callback triggered by main completed task, returning optional result as list of template type T. */
 declare class NJSAmountListCallback
@@ -1657,7 +1670,7 @@ declare class NJSEthereumLikeOperation
      */
     declare function getTransaction(): NJSEthereumLikeTransaction;
 }
-/** Class representing Bitcoin block. */
+/** Class representing Ethereum block. */
 declare class NJSEthereumLikeBlock
 {
     /**
@@ -1745,14 +1758,17 @@ declare class NJSEthereumLikeAccount
     declare function getERC20Accounts(): Array<NJSERC20LikeAccount>;
     /**
      * Get gas price from network
-     * Note: same note as for getFees method on BitcoinLikeAccount
+     * Note: it would have been better to have this method on EthereumLikeWallet
+     * but since EthereumLikeWallet is not used anywhere, it's better to keep all
+     * specific methods under the same specific class so it will be easy to segratate
+     * when the right time comes !
      */
     declare function getGasPrice(callback: NJSBigIntCallback);
     /**
      * Get estimated gas limit to set so the transaction will succeed
      * The passed address could be EOA or contract
      * This estimation is based on X last incoming txs (to address) that succeeded
-     * Note: same note as for getFees method on BitcoinLikeAccount
+     * Note: same note as above
      */
     declare function getEstimatedGasLimit(address: string, callback: NJSBigIntCallback);
 }

@@ -102,6 +102,56 @@ NAN_METHOD(NJSRippleLikeAccount::buildTransaction) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSRippleLikeAccount::getFees) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSRippleLikeAccount::getFees needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSAmountCallback *njs_ptr_arg_0 = new NJSAmountCallback(arg_0_resolver);
+    std::shared_ptr<NJSAmountCallback> arg_0(njs_ptr_arg_0);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSRippleLikeAccount::getFees : implementation of RippleLikeAccount is not valid");
+    }
+    cpp_impl->getFees(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
+}
+NAN_METHOD(NJSRippleLikeAccount::getBaseReserve) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSRippleLikeAccount::getBaseReserve needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSAmountCallback *njs_ptr_arg_0 = new NJSAmountCallback(arg_0_resolver);
+    std::shared_ptr<NJSAmountCallback> arg_0(njs_ptr_arg_0);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSRippleLikeAccount::getBaseReserve : implementation of RippleLikeAccount is not valid");
+    }
+    cpp_impl->getBaseReserve(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
+}
 
 NAN_METHOD(NJSRippleLikeAccount::New) {
     //Only new allowed
@@ -151,6 +201,8 @@ void NJSRippleLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"broadcastRawTransaction", broadcastRawTransaction);
     Nan::SetPrototypeMethod(func_template,"broadcastTransaction", broadcastTransaction);
     Nan::SetPrototypeMethod(func_template,"buildTransaction", buildTransaction);
+    Nan::SetPrototypeMethod(func_template,"getFees", getFees);
+    Nan::SetPrototypeMethod(func_template,"getBaseReserve", getBaseReserve);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     RippleLikeAccount_prototype.Reset(objectTemplate);

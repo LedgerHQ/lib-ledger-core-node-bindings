@@ -11,6 +11,7 @@
 #include "NJSRippleLikeTransactionCallback.hpp"
 #include "NJSRippleLikeAccountCpp.hpp"
 #include "NJSStringCallback.hpp"
+#include "NJSAmountCallback.hpp"
 #include "NJSRippleConfigurationDefaultsCpp.hpp"
 #include "NJSSecp256k1Cpp.hpp"
 #include "NJSNetworksCpp.hpp"
@@ -28,7 +29,6 @@
 #include "NJSOperationListCallback.hpp"
 #include "NJSAddressCpp.hpp"
 #include "NJSAccountCpp.hpp"
-#include "NJSAmountCallback.hpp"
 #include "NJSAmountListCallback.hpp"
 #include "NJSAddressListCallback.hpp"
 #include "NJSBlockCallback.hpp"
@@ -131,6 +131,7 @@ static void initAll(Local<Object> target)
     NJSRippleLikeTransactionCallback::Initialize(target);
     NJSRippleLikeAccount::Initialize(target);
     NJSStringCallback::Initialize(target);
+    NJSAmountCallback::Initialize(target);
     NJSRippleConfigurationDefaults::Initialize(target);
     NJSSecp256k1::Initialize(target);
     NJSNetworks::Initialize(target);
@@ -148,7 +149,6 @@ static void initAll(Local<Object> target)
     NJSOperationListCallback::Initialize(target);
     NJSAddress::Initialize(target);
     NJSAccount::Initialize(target);
-    NJSAmountCallback::Initialize(target);
     NJSAmountListCallback::Initialize(target);
     NJSAddressListCallback::Initialize(target);
     NJSBlockCallback::Initialize(target);

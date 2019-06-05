@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSRIPPLELIKEACCOUNT_HPP
 
 
+#include "NJSAmountCallback.hpp"
 #include "NJSRippleLikeTransactionBuilderCpp.hpp"
 #include "NJSRippleLikeTransactionCpp.hpp"
 #include "NJSStringCallback.hpp"
@@ -36,6 +37,21 @@ private:
     static NAN_METHOD(broadcastTransaction);
 
     static NAN_METHOD(buildTransaction);
+
+    /**
+     * Get fees from network
+     * Note: it would have been better to have this method on RippleLikeWallet
+     * but since RippleLikeWallet is not used anywhere, it's better to keep all
+     * specific methods under the same specific class so it will be easy to segratate
+     * when the right time comes !
+     */
+    static NAN_METHOD(getFees);
+
+    /**
+     * Get base reserve (dust to leave on an XRP account) from network
+     * Note: same note as above
+     */
+    static NAN_METHOD(getBaseReserve);
 
     static NAN_METHOD(New);
 
