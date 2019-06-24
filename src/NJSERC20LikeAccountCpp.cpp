@@ -77,21 +77,20 @@ NAN_METHOD(NJSERC20LikeAccount::getBalance) {
 
     //Check if parameters have correct types
 
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntCallback *njs_ptr_arg_0 = new NJSBigIntCallback(arg_0_resolver);
+    std::shared_ptr<NJSBigIntCallback> arg_0(njs_ptr_arg_0);
+
+
     //Unwrap current object and retrieve its Cpp Implementation
     auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::getBalance : implementation of ERC20LikeAccount is not valid");
     }
-
-    auto result = cpp_impl->getBalance();
-
-    //Wrap result in node object
-    auto arg_0 = NJSBigInt::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
+    cpp_impl->getBalance(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
 }
 NAN_METHOD(NJSERC20LikeAccount::getBalanceHistoryFor) {
 
@@ -181,26 +180,20 @@ NAN_METHOD(NJSERC20LikeAccount::getTransferToAddressData) {
     String::Utf8Value string_arg_1(info[1]->ToString());
     auto arg_1 = std::string(*string_arg_1);
 
+    //Create promise and set it into Callback
+    auto arg_2_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBinaryCallback *njs_ptr_arg_2 = new NJSBinaryCallback(arg_2_resolver);
+    std::shared_ptr<NJSBinaryCallback> arg_2(njs_ptr_arg_2);
+
+
     //Unwrap current object and retrieve its Cpp Implementation
     auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
         return Nan::ThrowError("NJSERC20LikeAccount::getTransferToAddressData : implementation of ERC20LikeAccount is not valid");
     }
-
-    auto result = cpp_impl->getTransferToAddressData(arg_0,arg_1);
-
-    //Wrap result in node object
-    Local<Array> arg_2 = Nan::New<Array>();
-    for(size_t arg_2_id = 0; arg_2_id < result.size(); arg_2_id++)
-    {
-        auto arg_2_elem = Nan::New<Uint32>(result[arg_2_id]);
-        arg_2->Set((int)arg_2_id,arg_2_elem);
-    }
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_2);
+    cpp_impl->getTransferToAddressData(arg_0,arg_1,arg_2);
+    info.GetReturnValue().Set(arg_2_resolver->GetPromise());
 }
 NAN_METHOD(NJSERC20LikeAccount::queryOperations) {
 

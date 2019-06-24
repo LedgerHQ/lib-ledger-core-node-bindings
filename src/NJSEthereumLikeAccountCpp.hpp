@@ -63,6 +63,13 @@ private:
      */
     static NAN_METHOD(getEstimatedGasLimit);
 
+    /**
+     * Get balance of ERC20 token
+     * The passed address is an ERC20 account
+     * Note: same note as above
+     */
+    static NAN_METHOD(getERC20Balance);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

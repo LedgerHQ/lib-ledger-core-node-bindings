@@ -186,6 +186,33 @@ NAN_METHOD(NJSEthereumLikeAccount::getEstimatedGasLimit) {
     cpp_impl->getEstimatedGasLimit(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSEthereumLikeAccount::getERC20Balance) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getERC20Balance needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    String::Utf8Value string_arg_0(info[0]->ToString());
+    auto arg_0 = std::string(*string_arg_0);
+
+    //Create promise and set it into Callback
+    auto arg_1_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntCallback *njs_ptr_arg_1 = new NJSBigIntCallback(arg_1_resolver);
+    std::shared_ptr<NJSBigIntCallback> arg_1(njs_ptr_arg_1);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getERC20Balance : implementation of EthereumLikeAccount is not valid");
+    }
+    cpp_impl->getERC20Balance(arg_0,arg_1);
+    info.GetReturnValue().Set(arg_1_resolver->GetPromise());
+}
 
 NAN_METHOD(NJSEthereumLikeAccount::New) {
     //Only new allowed
@@ -238,6 +265,7 @@ void NJSEthereumLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getERC20Accounts", getERC20Accounts);
     Nan::SetPrototypeMethod(func_template,"getGasPrice", getGasPrice);
     Nan::SetPrototypeMethod(func_template,"getEstimatedGasLimit", getEstimatedGasLimit);
+    Nan::SetPrototypeMethod(func_template,"getERC20Balance", getERC20Balance);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeAccount_prototype.Reset(objectTemplate);

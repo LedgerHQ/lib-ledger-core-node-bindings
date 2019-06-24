@@ -62,6 +62,8 @@
 #include "NJSRandomNumberGenerator.hpp"
 #include "NJSEthereumPublicKeyProvider.hpp"
 #include "NJSERC20LikeAccountCpp.hpp"
+#include "NJSBigIntCallback.hpp"
+#include "NJSBinaryCallback.hpp"
 #include "NJSERC20LikeOperationCpp.hpp"
 #include "NJSGetEthreumLikeWalletCallback.hpp"
 #include "NJSEthereumLikeWalletCpp.hpp"
@@ -71,7 +73,6 @@
 #include "NJSEthereumLikeTransactionBuilderCpp.hpp"
 #include "NJSEthereumLikeTransactionCallback.hpp"
 #include "NJSEthereumLikeAccountCpp.hpp"
-#include "NJSBigIntCallback.hpp"
 #include "NJSBitcoinLikeScriptChunkCpp.hpp"
 #include "NJSBitcoinLikeScriptCpp.hpp"
 #include "NJSRippleLikeAddressCpp.hpp"
@@ -85,7 +86,6 @@
 #include "NJSPreferencesEditorCpp.hpp"
 #include "NJSBitcoinLikeWalletConfigurationCpp.hpp"
 #include "NJSBitcoinLikeInputCpp.hpp"
-#include "NJSBinaryCallback.hpp"
 #include "NJSBitcoinLikeOutputCpp.hpp"
 #include "NJSBitcoinLikeBlockCpp.hpp"
 #include "NJSBitcoinLikeTransactionCpp.hpp"
@@ -182,6 +182,8 @@ static void initAll(Local<Object> target)
     NJSRandomNumberGenerator::Initialize(target);
     NJSEthereumPublicKeyProvider::Initialize(target);
     NJSERC20LikeAccount::Initialize(target);
+    NJSBigIntCallback::Initialize(target);
+    NJSBinaryCallback::Initialize(target);
     NJSERC20LikeOperation::Initialize(target);
     NJSGetEthreumLikeWalletCallback::Initialize(target);
     NJSEthereumLikeWallet::Initialize(target);
@@ -191,7 +193,6 @@ static void initAll(Local<Object> target)
     NJSEthereumLikeTransactionBuilder::Initialize(target);
     NJSEthereumLikeTransactionCallback::Initialize(target);
     NJSEthereumLikeAccount::Initialize(target);
-    NJSBigIntCallback::Initialize(target);
     NJSBitcoinLikeScriptChunk::Initialize(target);
     NJSBitcoinLikeScript::Initialize(target);
     NJSRippleLikeAddress::Initialize(target);
@@ -205,7 +206,6 @@ static void initAll(Local<Object> target)
     NJSPreferencesEditor::Initialize(target);
     NJSBitcoinLikeWalletConfiguration::Initialize(target);
     NJSBitcoinLikeInput::Initialize(target);
-    NJSBinaryCallback::Initialize(target);
     NJSBitcoinLikeOutput::Initialize(target);
     NJSBitcoinLikeBlock::Initialize(target);
     NJSBitcoinLikeTransaction::Initialize(target);
