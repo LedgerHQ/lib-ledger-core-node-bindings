@@ -57,6 +57,13 @@ public:
      * Note: same note as above
      */
     virtual void getEstimatedGasLimit(const std::string & address, const std::shared_ptr<BigIntCallback> & callback) = 0;
+
+    /**
+     * Get balance of ERC20 token
+     * The passed address is an ERC20 account
+     * Note: same note as above
+     */
+    virtual void getERC20Balance(const std::string & erc20Address, const std::shared_ptr<BigIntCallback> & callback) = 0;
 };
 
 } } }  // namespace ledger::core::api

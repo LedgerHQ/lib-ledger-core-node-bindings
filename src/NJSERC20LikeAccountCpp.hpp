@@ -7,11 +7,12 @@
 
 #include "../include/ERC20Token.hpp"
 #include "../include/TimePeriod.hpp"
+#include "NJSBigIntCallback.hpp"
 #include "NJSBigIntCpp.hpp"
+#include "NJSBinaryCallback.hpp"
 #include "NJSERC20LikeOperationCpp.hpp"
 #include "NJSOperationQueryCpp.hpp"
 #include <chrono>
-#include <cstdint>
 #include <memory>
 #include <string>
 #include <vector>

@@ -1566,7 +1566,7 @@ declare class NJSERC20LikeAccount
     /** Get the address of this ERC20 account. */
     declare function getAddress(): string;
     /** Get the current balance of this ERC20 account. */
-    declare function getBalance(): NJSBigInt;
+    declare function getBalance(callback: NJSBigIntCallback);
     /**
      * Get the balance history of this ERC20 account from a starting date (included) to an ending
      * date (included).
@@ -1575,8 +1575,28 @@ declare class NJSERC20LikeAccount
     /** Get the list of operations performed on this ERC20 account. */
     declare function getOperations(): Array<NJSERC20LikeOperation>;
     /** Retrieve raw data concerning a transaction of a given amount to a given address. */
-    declare function getTransferToAddressData(amount: NJSBigInt, address: string): Object;
+    declare function getTransferToAddressData(amount: NJSBigInt, address: string, data: NJSBinaryCallback);
     declare function queryOperations(): NJSOperationQuery;
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSBigIntCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?NJSBigInt, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSBinaryCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Object, error: ?Error);
 }
 /** Class representing a Ethereum transaction. */
 declare class NJSERC20LikeOperation
@@ -1771,16 +1791,12 @@ declare class NJSEthereumLikeAccount
      * Note: same note as above
      */
     declare function getEstimatedGasLimit(address: string, callback: NJSBigIntCallback);
-}
-/** Callback triggered by main completed task, returning optional result of template type T. */
-declare class NJSBigIntCallback
-{
     /**
-     * Method triggered when main task complete.
-     * @params result optional of type T, non null if main task failed
-     * @params error optional of type Error, non null if main task succeeded
+     * Get balance of ERC20 token
+     * The passed address is an ERC20 account
+     * Note: same note as above
      */
-    declare function onCallback(result: ?NJSBigInt, error: ?Error);
+    declare function getERC20Balance(erc20Address: string, callback: NJSBigIntCallback);
 }
 declare class NJSBitcoinLikeScriptChunk
 {
@@ -2160,16 +2176,6 @@ declare class NJSBitcoinLikeInput
     declare function getPreviousTransaction(callback: NJSBinaryCallback);
     /** Easy way to set the P2PKH script signature. Shorthand for input.pushToScriptSig(input.getPublicKeys()[0], signature). */
     declare function setP2PKHSigScript(signature: Object);
-}
-/** Callback triggered by main completed task, returning optional result of template type T. */
-declare class NJSBinaryCallback
-{
-    /**
-     * Method triggered when main task complete.
-     * @params result optional of type T, non null if main task failed
-     * @params error optional of type Error, non null if main task succeeded
-     */
-    declare function onCallback(result: ?Object, error: ?Error);
 }
 /** Class representing Bitcoin outputs. */
 declare class NJSBitcoinLikeOutput
