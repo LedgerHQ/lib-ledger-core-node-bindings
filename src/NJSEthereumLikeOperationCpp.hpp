@@ -6,7 +6,9 @@
 
 
 #include "NJSEthereumLikeTransactionCpp.hpp"
+#include "NJSInternalTransactionCpp.hpp"
 #include <memory>
+#include <vector>
 
 #include <nan.h>
 #include <node.h>
@@ -32,6 +34,9 @@ private:
      * @return EthereumLikeTransaction object
      */
     static NAN_METHOD(getTransaction);
+
+    /** Get all actions triggered by this transaction */
+    static NAN_METHOD(getInternalTransactions);
 
     static NAN_METHOD(New);
 

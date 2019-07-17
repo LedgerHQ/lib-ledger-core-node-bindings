@@ -34,6 +34,38 @@ NAN_METHOD(NJSEthereumLikeOperation::getTransaction) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSEthereumLikeOperation::getInternalTransactions) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSEthereumLikeOperation::getInternalTransactions needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeOperation>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSEthereumLikeOperation::getInternalTransactions : implementation of EthereumLikeOperation is not valid");
+    }
+
+    auto result = cpp_impl->getInternalTransactions();
+
+    //Wrap result in node object
+    Local<Array> arg_0 = Nan::New<Array>();
+    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
+    {
+        auto arg_0_elem = NJSInternalTransaction::wrap(result[arg_0_id]);
+
+        arg_0->Set((int)arg_0_id,arg_0_elem);
+    }
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSEthereumLikeOperation::New) {
     //Only new allowed
@@ -81,6 +113,7 @@ void NJSEthereumLikeOperation::Initialize(Local<Object> target) {
 
     //SetPrototypeMethod all methods
     Nan::SetPrototypeMethod(func_template,"getTransaction", getTransaction);
+    Nan::SetPrototypeMethod(func_template,"getInternalTransactions", getInternalTransactions);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeOperation_prototype.Reset(objectTemplate);

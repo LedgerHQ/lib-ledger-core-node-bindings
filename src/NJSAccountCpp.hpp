@@ -18,6 +18,7 @@
 #include "NJSLoggerCpp.hpp"
 #include "NJSOperationQueryCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
+#include "NJSRippleLikeAccountCpp.hpp"
 #include <chrono>
 #include <cstdint>
 #include <memory>
@@ -97,16 +98,19 @@ private:
     static NAN_METHOD(getOperationPreferences);
 
     /**
-     * Turn the account into an Bitcoin one, allowing operations to be performerd on the Bitcoin
+     * Turn the account into an Bitcoin one, allowing operations to be performed on the Bitcoin
      * network.
      */
     static NAN_METHOD(asBitcoinLikeAccount);
 
     /**
-     * Turn the account into an Ethereum one, allowing operations to be performerd on the Ethereum
+     * Turn the account into an Ethereum one, allowing operations to be performrd on the Ethereum
      * network.
      */
     static NAN_METHOD(asEthereumLikeAccount);
+
+    /** Turn the account into a Ripple one, allowing operations to be performed on the Ripple network. */
+    static NAN_METHOD(asRippleLikeAccount);
 
     /**
      * Check if account is a Bitcoin one.
