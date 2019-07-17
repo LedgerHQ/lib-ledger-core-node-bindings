@@ -10,6 +10,7 @@
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/RippleLikeNetworkParameters.hpp"
+#include "../include/TezosLikeNetworkParameters.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSEthereumLikeTransactionCallback.hpp"
 #include "NJSEthereumLikeTransactionCpp.hpp"

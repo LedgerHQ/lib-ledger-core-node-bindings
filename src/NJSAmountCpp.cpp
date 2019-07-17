@@ -208,6 +208,54 @@ NAN_METHOD(NJSAmount::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked(), arg_0_8);
+    Local<Value> arg_0_9;
+    if(result.tezosLikeNetworkParameters)
+    {
+        auto arg_0_9_optional = (result.tezosLikeNetworkParameters).value();
+        auto arg_0_9_tmp = Nan::New<Object>();
+        auto arg_0_9_tmp_1 = Nan::New<String>(arg_0_9_optional.Identifier).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_9_tmp_1);
+        auto arg_0_9_tmp_2 = Nan::New<String>(arg_0_9_optional.MessagePrefix).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_9_tmp_2);
+        Local<Array> arg_0_9_tmp_3 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_3_id = 0; arg_0_9_tmp_3_id < arg_0_9_optional.XPUBVersion.size(); arg_0_9_tmp_3_id++)
+        {
+            auto arg_0_9_tmp_3_elem = Nan::New<Uint32>(arg_0_9_optional.XPUBVersion[arg_0_9_tmp_3_id]);
+            arg_0_9_tmp_3->Set((int)arg_0_9_tmp_3_id,arg_0_9_tmp_3_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_9_tmp_3);
+        Local<Array> arg_0_9_tmp_4 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_4_id = 0; arg_0_9_tmp_4_id < arg_0_9_optional.ImplicitPrefix.size(); arg_0_9_tmp_4_id++)
+        {
+            auto arg_0_9_tmp_4_elem = Nan::New<Uint32>(arg_0_9_optional.ImplicitPrefix[arg_0_9_tmp_4_id]);
+            arg_0_9_tmp_4->Set((int)arg_0_9_tmp_4_id,arg_0_9_tmp_4_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_9_tmp_4);
+        Local<Array> arg_0_9_tmp_5 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_5_id = 0; arg_0_9_tmp_5_id < arg_0_9_optional.OriginatedPrefix.size(); arg_0_9_tmp_5_id++)
+        {
+            auto arg_0_9_tmp_5_elem = Nan::New<Uint32>(arg_0_9_optional.OriginatedPrefix[arg_0_9_tmp_5_id]);
+            arg_0_9_tmp_5->Set((int)arg_0_9_tmp_5_id,arg_0_9_tmp_5_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_9_tmp_5);
+        Local<Array> arg_0_9_tmp_6 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_6_id = 0; arg_0_9_tmp_6_id < arg_0_9_optional.AdditionalTIPs.size(); arg_0_9_tmp_6_id++)
+        {
+            auto arg_0_9_tmp_6_elem = Nan::New<String>(arg_0_9_optional.AdditionalTIPs[arg_0_9_tmp_6_id]).ToLocalChecked();
+            arg_0_9_tmp_6->Set((int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_9_tmp_6);
+        auto arg_0_9_tmp_7 = Nan::New<Number>(arg_0_9_optional.TimestampDelay);
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_9_tmp_7);
+
+        arg_0_9 = arg_0_9_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked(), arg_0_9);
 
 
     //Return result
@@ -692,7 +740,81 @@ NAN_METHOD(NJSAmount::fromHex) {
         arg_0_8.emplace(opt_arg_0_8);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8);
+
+    auto field_arg_0_9 = Nan::Get(info[0]->ToObject(), Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_9 = std::experimental::optional<TezosLikeNetworkParameters>();
+    if(!field_arg_0_9->IsNull() && !field_arg_0_9->IsUndefined())
+    {
+
+        auto field_opt_arg_0_9_1 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_0_9_1(field_opt_arg_0_9_1->ToString());
+        auto opt_arg_0_9_1 = std::string(*string_opt_arg_0_9_1);
+
+        auto field_opt_arg_0_9_2 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_0_9_2(field_opt_arg_0_9_2->ToString());
+        auto opt_arg_0_9_2 = std::string(*string_opt_arg_0_9_2);
+
+        auto field_opt_arg_0_9_3 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_3;
+        Local<Array> opt_arg_0_9_3_container = Local<Array>::Cast(field_opt_arg_0_9_3);
+        for(uint32_t opt_arg_0_9_3_id = 0; opt_arg_0_9_3_id < opt_arg_0_9_3_container->Length(); opt_arg_0_9_3_id++)
+        {
+            if(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)->IsUint32())
+            {
+                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)).FromJust();
+                opt_arg_0_9_3.emplace_back(opt_arg_0_9_3_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_4 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_4;
+        Local<Array> opt_arg_0_9_4_container = Local<Array>::Cast(field_opt_arg_0_9_4);
+        for(uint32_t opt_arg_0_9_4_id = 0; opt_arg_0_9_4_id < opt_arg_0_9_4_container->Length(); opt_arg_0_9_4_id++)
+        {
+            if(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)->IsUint32())
+            {
+                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)).FromJust();
+                opt_arg_0_9_4.emplace_back(opt_arg_0_9_4_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_5 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_5;
+        Local<Array> opt_arg_0_9_5_container = Local<Array>::Cast(field_opt_arg_0_9_5);
+        for(uint32_t opt_arg_0_9_5_id = 0; opt_arg_0_9_5_id < opt_arg_0_9_5_container->Length(); opt_arg_0_9_5_id++)
+        {
+            if(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)->IsUint32())
+            {
+                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)).FromJust();
+                opt_arg_0_9_5.emplace_back(opt_arg_0_9_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_6 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("AdditionalTIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_9_6;
+        Local<Array> opt_arg_0_9_6_container = Local<Array>::Cast(field_opt_arg_0_9_6);
+        for(uint32_t opt_arg_0_9_6_id = 0; opt_arg_0_9_6_id < opt_arg_0_9_6_container->Length(); opt_arg_0_9_6_id++)
+        {
+            if(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->IsString())
+            {
+                String::Utf8Value string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->ToString());
+                auto opt_arg_0_9_6_elem = std::string(*string_opt_arg_0_9_6_elem);
+                opt_arg_0_9_6.emplace_back(opt_arg_0_9_6_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_7 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_9_7 = Nan::To<int64_t>(field_opt_arg_0_9_7).FromJust();
+        TezosLikeNetworkParameters opt_arg_0_9(opt_arg_0_9_1, opt_arg_0_9_2, opt_arg_0_9_3, opt_arg_0_9_4, opt_arg_0_9_5, opt_arg_0_9_6, opt_arg_0_9_7);
+
+        arg_0_9.emplace(opt_arg_0_9);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
 
     String::Utf8Value string_arg_1(info[1]->ToString());
     auto arg_1 = std::string(*string_arg_1);
@@ -954,7 +1076,81 @@ NAN_METHOD(NJSAmount::fromLong) {
         arg_0_8.emplace(opt_arg_0_8);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8);
+
+    auto field_arg_0_9 = Nan::Get(info[0]->ToObject(), Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_9 = std::experimental::optional<TezosLikeNetworkParameters>();
+    if(!field_arg_0_9->IsNull() && !field_arg_0_9->IsUndefined())
+    {
+
+        auto field_opt_arg_0_9_1 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_0_9_1(field_opt_arg_0_9_1->ToString());
+        auto opt_arg_0_9_1 = std::string(*string_opt_arg_0_9_1);
+
+        auto field_opt_arg_0_9_2 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_0_9_2(field_opt_arg_0_9_2->ToString());
+        auto opt_arg_0_9_2 = std::string(*string_opt_arg_0_9_2);
+
+        auto field_opt_arg_0_9_3 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_3;
+        Local<Array> opt_arg_0_9_3_container = Local<Array>::Cast(field_opt_arg_0_9_3);
+        for(uint32_t opt_arg_0_9_3_id = 0; opt_arg_0_9_3_id < opt_arg_0_9_3_container->Length(); opt_arg_0_9_3_id++)
+        {
+            if(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)->IsUint32())
+            {
+                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)).FromJust();
+                opt_arg_0_9_3.emplace_back(opt_arg_0_9_3_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_4 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_4;
+        Local<Array> opt_arg_0_9_4_container = Local<Array>::Cast(field_opt_arg_0_9_4);
+        for(uint32_t opt_arg_0_9_4_id = 0; opt_arg_0_9_4_id < opt_arg_0_9_4_container->Length(); opt_arg_0_9_4_id++)
+        {
+            if(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)->IsUint32())
+            {
+                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)).FromJust();
+                opt_arg_0_9_4.emplace_back(opt_arg_0_9_4_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_5 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_5;
+        Local<Array> opt_arg_0_9_5_container = Local<Array>::Cast(field_opt_arg_0_9_5);
+        for(uint32_t opt_arg_0_9_5_id = 0; opt_arg_0_9_5_id < opt_arg_0_9_5_container->Length(); opt_arg_0_9_5_id++)
+        {
+            if(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)->IsUint32())
+            {
+                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)).FromJust();
+                opt_arg_0_9_5.emplace_back(opt_arg_0_9_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_6 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("AdditionalTIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_9_6;
+        Local<Array> opt_arg_0_9_6_container = Local<Array>::Cast(field_opt_arg_0_9_6);
+        for(uint32_t opt_arg_0_9_6_id = 0; opt_arg_0_9_6_id < opt_arg_0_9_6_container->Length(); opt_arg_0_9_6_id++)
+        {
+            if(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->IsString())
+            {
+                String::Utf8Value string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->ToString());
+                auto opt_arg_0_9_6_elem = std::string(*string_opt_arg_0_9_6_elem);
+                opt_arg_0_9_6.emplace_back(opt_arg_0_9_6_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_7 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_9_7 = Nan::To<int64_t>(field_opt_arg_0_9_7).FromJust();
+        TezosLikeNetworkParameters opt_arg_0_9(opt_arg_0_9_1, opt_arg_0_9_2, opt_arg_0_9_3, opt_arg_0_9_4, opt_arg_0_9_5, opt_arg_0_9_6, opt_arg_0_9_7);
+
+        arg_0_9.emplace(opt_arg_0_9);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
 
     auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
 
@@ -1221,7 +1417,81 @@ NAN_METHOD(NJSAmount::New) {
         arg_0_8.emplace(opt_arg_0_8);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8);
+
+    auto field_arg_0_9 = Nan::Get(info[0]->ToObject(), Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_9 = std::experimental::optional<TezosLikeNetworkParameters>();
+    if(!field_arg_0_9->IsNull() && !field_arg_0_9->IsUndefined())
+    {
+
+        auto field_opt_arg_0_9_1 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_0_9_1(field_opt_arg_0_9_1->ToString());
+        auto opt_arg_0_9_1 = std::string(*string_opt_arg_0_9_1);
+
+        auto field_opt_arg_0_9_2 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        String::Utf8Value string_opt_arg_0_9_2(field_opt_arg_0_9_2->ToString());
+        auto opt_arg_0_9_2 = std::string(*string_opt_arg_0_9_2);
+
+        auto field_opt_arg_0_9_3 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_3;
+        Local<Array> opt_arg_0_9_3_container = Local<Array>::Cast(field_opt_arg_0_9_3);
+        for(uint32_t opt_arg_0_9_3_id = 0; opt_arg_0_9_3_id < opt_arg_0_9_3_container->Length(); opt_arg_0_9_3_id++)
+        {
+            if(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)->IsUint32())
+            {
+                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)).FromJust();
+                opt_arg_0_9_3.emplace_back(opt_arg_0_9_3_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_4 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_4;
+        Local<Array> opt_arg_0_9_4_container = Local<Array>::Cast(field_opt_arg_0_9_4);
+        for(uint32_t opt_arg_0_9_4_id = 0; opt_arg_0_9_4_id < opt_arg_0_9_4_container->Length(); opt_arg_0_9_4_id++)
+        {
+            if(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)->IsUint32())
+            {
+                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)).FromJust();
+                opt_arg_0_9_4.emplace_back(opt_arg_0_9_4_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_5 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_0_9_5;
+        Local<Array> opt_arg_0_9_5_container = Local<Array>::Cast(field_opt_arg_0_9_5);
+        for(uint32_t opt_arg_0_9_5_id = 0; opt_arg_0_9_5_id < opt_arg_0_9_5_container->Length(); opt_arg_0_9_5_id++)
+        {
+            if(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)->IsUint32())
+            {
+                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)).FromJust();
+                opt_arg_0_9_5.emplace_back(opt_arg_0_9_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_6 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("AdditionalTIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_9_6;
+        Local<Array> opt_arg_0_9_6_container = Local<Array>::Cast(field_opt_arg_0_9_6);
+        for(uint32_t opt_arg_0_9_6_id = 0; opt_arg_0_9_6_id < opt_arg_0_9_6_container->Length(); opt_arg_0_9_6_id++)
+        {
+            if(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->IsString())
+            {
+                String::Utf8Value string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->ToString());
+                auto opt_arg_0_9_6_elem = std::string(*string_opt_arg_0_9_6_elem);
+                opt_arg_0_9_6.emplace_back(opt_arg_0_9_6_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_9_7 = Nan::Get(field_arg_0_9->ToObject(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_9_7 = Nan::To<int64_t>(field_opt_arg_0_9_7).FromJust();
+        TezosLikeNetworkParameters opt_arg_0_9(opt_arg_0_9_1, opt_arg_0_9_2, opt_arg_0_9_3, opt_arg_0_9_4, opt_arg_0_9_5, opt_arg_0_9_6, opt_arg_0_9_7);
+
+        arg_0_9.emplace(opt_arg_0_9);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
 
     String::Utf8Value string_arg_1(info[1]->ToString());
     auto arg_1 = std::string(*string_arg_1);

@@ -4,14 +4,24 @@
 #include <nan.h>
 #include <node.h>
 
+#include "NJSTezosLikeTransactionCpp.hpp"
+#include "NJSTezosLikeOperationCpp.hpp"
+#include "NJSTezosLikeBlockCpp.hpp"
+#include "NJSTezosLikeTransactionBuilderCpp.hpp"
+#include "NJSTezosLikeTransactionCallback.hpp"
+#include "NJSTezosLikeAccountCpp.hpp"
+#include "NJSStringCallback.hpp"
+#include "NJSBigIntCallback.hpp"
+#include "NJSTezosLikeOriginatedAccountCpp.hpp"
+#include "NJSAmountCallback.hpp"
+#include "NJSAmountListCallback.hpp"
+#include "NJSTezosConfigurationDefaultsCpp.hpp"
 #include "NJSRippleLikeTransactionCpp.hpp"
 #include "NJSRippleLikeOperationCpp.hpp"
 #include "NJSRippleLikeBlockCpp.hpp"
 #include "NJSRippleLikeTransactionBuilderCpp.hpp"
 #include "NJSRippleLikeTransactionCallback.hpp"
 #include "NJSRippleLikeAccountCpp.hpp"
-#include "NJSStringCallback.hpp"
-#include "NJSAmountCallback.hpp"
 #include "NJSRippleConfigurationDefaultsCpp.hpp"
 #include "NJSSecp256k1Cpp.hpp"
 #include "NJSNetworksCpp.hpp"
@@ -29,7 +39,6 @@
 #include "NJSOperationListCallback.hpp"
 #include "NJSAddressCpp.hpp"
 #include "NJSAccountCpp.hpp"
-#include "NJSAmountListCallback.hpp"
 #include "NJSAddressListCallback.hpp"
 #include "NJSBlockCallback.hpp"
 #include "NJSErrorCodeCallback.hpp"
@@ -62,12 +71,12 @@
 #include "NJSRandomNumberGenerator.hpp"
 #include "NJSEthereumPublicKeyProvider.hpp"
 #include "NJSERC20LikeAccountCpp.hpp"
-#include "NJSBigIntCallback.hpp"
 #include "NJSBinaryCallback.hpp"
 #include "NJSERC20LikeOperationCpp.hpp"
 #include "NJSGetEthreumLikeWalletCallback.hpp"
 #include "NJSEthereumLikeWalletCpp.hpp"
 #include "NJSEthereumLikeTransactionCpp.hpp"
+#include "NJSInternalTransactionCpp.hpp"
 #include "NJSEthereumLikeOperationCpp.hpp"
 #include "NJSEthereumLikeBlockCpp.hpp"
 #include "NJSEthereumLikeTransactionBuilderCpp.hpp"
@@ -75,6 +84,8 @@
 #include "NJSEthereumLikeAccountCpp.hpp"
 #include "NJSBitcoinLikeScriptChunkCpp.hpp"
 #include "NJSBitcoinLikeScriptCpp.hpp"
+#include "NJSTezosLikeAddressCpp.hpp"
+#include "NJSTezosLikeExtendedPublicKeyCpp.hpp"
 #include "NJSRippleLikeAddressCpp.hpp"
 #include "NJSRippleLikeExtendedPublicKeyCpp.hpp"
 #include "NJSEthereumLikeAddressCpp.hpp"
@@ -124,14 +135,24 @@ using namespace node;
 static void initAll(Local<Object> target)
 {
     Nan::HandleScope scope;
+    NJSTezosLikeTransaction::Initialize(target);
+    NJSTezosLikeOperation::Initialize(target);
+    NJSTezosLikeBlock::Initialize(target);
+    NJSTezosLikeTransactionBuilder::Initialize(target);
+    NJSTezosLikeTransactionCallback::Initialize(target);
+    NJSTezosLikeAccount::Initialize(target);
+    NJSStringCallback::Initialize(target);
+    NJSBigIntCallback::Initialize(target);
+    NJSTezosLikeOriginatedAccount::Initialize(target);
+    NJSAmountCallback::Initialize(target);
+    NJSAmountListCallback::Initialize(target);
+    NJSTezosConfigurationDefaults::Initialize(target);
     NJSRippleLikeTransaction::Initialize(target);
     NJSRippleLikeOperation::Initialize(target);
     NJSRippleLikeBlock::Initialize(target);
     NJSRippleLikeTransactionBuilder::Initialize(target);
     NJSRippleLikeTransactionCallback::Initialize(target);
     NJSRippleLikeAccount::Initialize(target);
-    NJSStringCallback::Initialize(target);
-    NJSAmountCallback::Initialize(target);
     NJSRippleConfigurationDefaults::Initialize(target);
     NJSSecp256k1::Initialize(target);
     NJSNetworks::Initialize(target);
@@ -149,7 +170,6 @@ static void initAll(Local<Object> target)
     NJSOperationListCallback::Initialize(target);
     NJSAddress::Initialize(target);
     NJSAccount::Initialize(target);
-    NJSAmountListCallback::Initialize(target);
     NJSAddressListCallback::Initialize(target);
     NJSBlockCallback::Initialize(target);
     NJSErrorCodeCallback::Initialize(target);
@@ -182,12 +202,12 @@ static void initAll(Local<Object> target)
     NJSRandomNumberGenerator::Initialize(target);
     NJSEthereumPublicKeyProvider::Initialize(target);
     NJSERC20LikeAccount::Initialize(target);
-    NJSBigIntCallback::Initialize(target);
     NJSBinaryCallback::Initialize(target);
     NJSERC20LikeOperation::Initialize(target);
     NJSGetEthreumLikeWalletCallback::Initialize(target);
     NJSEthereumLikeWallet::Initialize(target);
     NJSEthereumLikeTransaction::Initialize(target);
+    NJSInternalTransaction::Initialize(target);
     NJSEthereumLikeOperation::Initialize(target);
     NJSEthereumLikeBlock::Initialize(target);
     NJSEthereumLikeTransactionBuilder::Initialize(target);
@@ -195,6 +215,8 @@ static void initAll(Local<Object> target)
     NJSEthereumLikeAccount::Initialize(target);
     NJSBitcoinLikeScriptChunk::Initialize(target);
     NJSBitcoinLikeScript::Initialize(target);
+    NJSTezosLikeAddress::Initialize(target);
+    NJSTezosLikeExtendedPublicKey::Initialize(target);
     NJSRippleLikeAddress::Initialize(target);
     NJSRippleLikeExtendedPublicKey::Initialize(target);
     NJSEthereumLikeAddress::Initialize(target);

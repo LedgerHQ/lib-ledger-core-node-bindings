@@ -13,6 +13,7 @@
 #include "../include/FormatRules.hpp"
 #include "../include/Locale.hpp"
 #include "../include/RippleLikeNetworkParameters.hpp"
+#include "../include/TezosLikeNetworkParameters.hpp"
 #include "NJSBigIntCpp.hpp"
 #include <cstdint>
 #include <memory>

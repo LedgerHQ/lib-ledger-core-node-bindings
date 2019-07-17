@@ -11,6 +11,7 @@
 #include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/RippleLikeMemo.hpp"
 #include "../include/RippleLikeNetworkParameters.hpp"
+#include "../include/TezosLikeNetworkParameters.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSRippleLikeTransactionCallback.hpp"
 #include "NJSRippleLikeTransactionCpp.hpp"

@@ -492,6 +492,54 @@ NAN_METHOD(NJSWallet::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked(), arg_0_8);
+    Local<Value> arg_0_9;
+    if(result.tezosLikeNetworkParameters)
+    {
+        auto arg_0_9_optional = (result.tezosLikeNetworkParameters).value();
+        auto arg_0_9_tmp = Nan::New<Object>();
+        auto arg_0_9_tmp_1 = Nan::New<String>(arg_0_9_optional.Identifier).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_9_tmp_1);
+        auto arg_0_9_tmp_2 = Nan::New<String>(arg_0_9_optional.MessagePrefix).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_9_tmp_2);
+        Local<Array> arg_0_9_tmp_3 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_3_id = 0; arg_0_9_tmp_3_id < arg_0_9_optional.XPUBVersion.size(); arg_0_9_tmp_3_id++)
+        {
+            auto arg_0_9_tmp_3_elem = Nan::New<Uint32>(arg_0_9_optional.XPUBVersion[arg_0_9_tmp_3_id]);
+            arg_0_9_tmp_3->Set((int)arg_0_9_tmp_3_id,arg_0_9_tmp_3_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_9_tmp_3);
+        Local<Array> arg_0_9_tmp_4 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_4_id = 0; arg_0_9_tmp_4_id < arg_0_9_optional.ImplicitPrefix.size(); arg_0_9_tmp_4_id++)
+        {
+            auto arg_0_9_tmp_4_elem = Nan::New<Uint32>(arg_0_9_optional.ImplicitPrefix[arg_0_9_tmp_4_id]);
+            arg_0_9_tmp_4->Set((int)arg_0_9_tmp_4_id,arg_0_9_tmp_4_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_9_tmp_4);
+        Local<Array> arg_0_9_tmp_5 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_5_id = 0; arg_0_9_tmp_5_id < arg_0_9_optional.OriginatedPrefix.size(); arg_0_9_tmp_5_id++)
+        {
+            auto arg_0_9_tmp_5_elem = Nan::New<Uint32>(arg_0_9_optional.OriginatedPrefix[arg_0_9_tmp_5_id]);
+            arg_0_9_tmp_5->Set((int)arg_0_9_tmp_5_id,arg_0_9_tmp_5_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_9_tmp_5);
+        Local<Array> arg_0_9_tmp_6 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_6_id = 0; arg_0_9_tmp_6_id < arg_0_9_optional.AdditionalTIPs.size(); arg_0_9_tmp_6_id++)
+        {
+            auto arg_0_9_tmp_6_elem = Nan::New<String>(arg_0_9_optional.AdditionalTIPs[arg_0_9_tmp_6_id]).ToLocalChecked();
+            arg_0_9_tmp_6->Set((int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_9_tmp_6);
+        auto arg_0_9_tmp_7 = Nan::New<Number>(arg_0_9_optional.TimestampDelay);
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_9_tmp_7);
+
+        arg_0_9 = arg_0_9_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked(), arg_0_9);
 
 
     //Return result
