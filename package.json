@@ -32,8 +32,9 @@
   "license": "MIT",
   "dependencies": {
     "bindings": "^1.3.0",
+    "google-protobuf": "^3.9.0",
     "nan": "^2.6.2",
-    "ubinder": "^1.0.1"
+    "ubinder": "^1.0.2"
   },
   "devDependencies": {
     "node-gyp": "^3.6.2",

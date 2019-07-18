@@ -261,6 +261,11 @@ glob@^7.0.3, glob@^7.0.5:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+google-protobuf@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.9.0.tgz#1f33e51e7993ea51e758a82650ad4347273b9bc6"
+  integrity sha512-/t/7NvL9jAmfXLdqJG7Nv2c5Z2GTdZSKi/T6kI3hpIS4yA6rXqBAMF4Yx39xbICWDgRv+R+Z79n7ZxuvoUQU4w==
+
 graceful-fs@^4.1.2:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
@@ -661,10 +666,10 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
-ubinder@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ubinder/-/ubinder-1.0.1.tgz#e852211ed9a673a82e2f0ba03d79c38137741f5f"
-  integrity sha512-wMG9rk/3wAgRNlJv3Ij+8FMYPYCWk7MOyGWiOK1kZ1/YnwOJPG0e1B5bNXpZNa1uY0RaZnryLb8L9r+wBmq+Gw==
+ubinder@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ubinder/-/ubinder-1.0.2.tgz#74474d8b6c9e90e01ecf02e96048b232f2b19720"
+  integrity sha512-KM2teZnYNWeJIQaukUDoPXJl2Wb9O+kNJhjm5IoKRpb8wpCr4/jgQOellSDgOVRK43tz9lEuXkovwnxJVsXQzg==
 
 util-deprecate@~1.0.1:
   version "1.0.2"
