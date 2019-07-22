@@ -6,5 +6,5 @@
       ['OS=="linux"', { 'wrapper_libs': '<(module_root_dir)/lib/libledger-core.so' }],
     ]
   },
-  "includes": ["node_modules/ubinder/src/node/ubinder.gypi"]
+  "includes": ["ubinder/src/node/ubinder.gypi"]
 }

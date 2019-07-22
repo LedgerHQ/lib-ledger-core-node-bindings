@@ -666,11 +666,6 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
-ubinder@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/ubinder/-/ubinder-1.0.2.tgz#74474d8b6c9e90e01ecf02e96048b232f2b19720"
-  integrity sha512-KM2teZnYNWeJIQaukUDoPXJl2Wb9O+kNJhjm5IoKRpb8wpCr4/jgQOellSDgOVRK43tz9lEuXkovwnxJVsXQzg==
-
 util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
