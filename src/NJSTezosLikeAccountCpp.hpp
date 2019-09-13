@@ -56,6 +56,9 @@ private:
      */
     static NAN_METHOD(getEstimatedGasLimit);
 
+    /** Get fees from network */
+    static NAN_METHOD(getFees);
+
     /** Get originated accounts by current account */
     static NAN_METHOD(getOriginatedAccounts);
 

@@ -156,6 +156,31 @@ NAN_METHOD(NJSTezosLikeAccount::getEstimatedGasLimit) {
     cpp_impl->getEstimatedGasLimit(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSTezosLikeAccount::getFees) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSTezosLikeAccount::getFees needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntCallback *njs_ptr_arg_0 = new NJSBigIntCallback(arg_0_resolver);
+    std::shared_ptr<NJSBigIntCallback> arg_0(njs_ptr_arg_0);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TezosLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSTezosLikeAccount::getFees : implementation of TezosLikeAccount is not valid");
+    }
+    cpp_impl->getFees(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
+}
 NAN_METHOD(NJSTezosLikeAccount::getOriginatedAccounts) {
 
     //Check if method called with right number of arguments
@@ -239,6 +264,7 @@ void NJSTezosLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"buildTransaction", buildTransaction);
     Nan::SetPrototypeMethod(func_template,"getStorage", getStorage);
     Nan::SetPrototypeMethod(func_template,"getEstimatedGasLimit", getEstimatedGasLimit);
+    Nan::SetPrototypeMethod(func_template,"getFees", getFees);
     Nan::SetPrototypeMethod(func_template,"getOriginatedAccounts", getOriginatedAccounts);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
