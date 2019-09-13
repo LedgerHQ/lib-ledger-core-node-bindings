@@ -19,6 +19,7 @@
 #include "NJSOperationQueryCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
 #include "NJSRippleLikeAccountCpp.hpp"
+#include "NJSTezosLikeAccountCpp.hpp"
 #include <chrono>
 #include <cstdint>
 #include <memory>
@@ -111,6 +112,9 @@ private:
 
     /** Turn the account into a Ripple one, allowing operations to be performed on the Ripple network. */
     static NAN_METHOD(asRippleLikeAccount);
+
+    /** Turn the account into a Tezos one, allowing operations to be performed on the Tezos network. */
+    static NAN_METHOD(asTezosLikeAccount);
 
     /**
      * Check if account is a Bitcoin one.

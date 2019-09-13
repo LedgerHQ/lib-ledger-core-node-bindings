@@ -67,6 +67,8 @@ private:
 
     static NAN_METHOD(getDerivationPath);
 
+    static NAN_METHOD(getBlockHeight);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

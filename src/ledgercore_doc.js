@@ -140,6 +140,8 @@ declare class NJSTezosLikeAccount
      * Note: same note as for getFees method on BitcoinLikeAccount
      */
     declare function getEstimatedGasLimit(address: string, callback: NJSBigIntCallback);
+    /** Get fees from network */
+    declare function getFees(callback: NJSBigIntCallback);
     /** Get originated accounts by current account */
     declare function getOriginatedAccounts(): Array<NJSTezosLikeOriginatedAccount>;
 }
@@ -834,6 +836,8 @@ declare class NJSAccount
     declare function asEthereumLikeAccount(): NJSEthereumLikeAccount;
     /** Turn the account into a Ripple one, allowing operations to be performed on the Ripple network. */
     declare function asRippleLikeAccount(): NJSRippleLikeAccount;
+    /** Turn the account into a Tezos one, allowing operations to be performed on the Tezos network. */
+    declare function asTezosLikeAccount(): NJSTezosLikeAccount;
     /**
      * Check if account is a Bitcoin one.
      * @return bool
@@ -2451,6 +2455,7 @@ declare class NJSBitcoinLikeOutput
      */
     declare function getAddress(): ?string;
     declare function getDerivationPath(): ?NJSDerivationPath;
+    declare function getBlockHeight(): ?number;
 }
 /** Class representing Bitcoin block */
 declare class NJSBitcoinLikeBlock

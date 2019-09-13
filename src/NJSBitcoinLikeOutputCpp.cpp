@@ -200,6 +200,38 @@ NAN_METHOD(NJSBitcoinLikeOutput::getDerivationPath) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSBitcoinLikeOutput::getBlockHeight) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeOutput::getBlockHeight needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeOutput::getBlockHeight : implementation of BitcoinLikeOutput is not valid");
+    }
+
+    auto result = cpp_impl->getBlockHeight();
+
+    //Wrap result in node object
+    Local<Value> arg_0;
+    if(result)
+    {
+        auto arg_0_optional = (result).value();
+        auto arg_0_tmp = Nan::New<Number>(arg_0_optional);
+        arg_0 = arg_0_tmp;
+    }
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSBitcoinLikeOutput::New) {
     //Only new allowed
@@ -253,6 +285,7 @@ void NJSBitcoinLikeOutput::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"parseScript", parseScript);
     Nan::SetPrototypeMethod(func_template,"getAddress", getAddress);
     Nan::SetPrototypeMethod(func_template,"getDerivationPath", getDerivationPath);
+    Nan::SetPrototypeMethod(func_template,"getBlockHeight", getBlockHeight);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeOutput_prototype.Reset(objectTemplate);
