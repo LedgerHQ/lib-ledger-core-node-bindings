@@ -388,6 +388,130 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getEstimatedSize) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSBitcoinLikeTransaction::setSignatures) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeTransaction::setSignatures needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    vector<BitcoinLikeSignature> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    {
+        if(arg_0_container->Get(arg_0_id)->IsObject())
+        {
+
+            auto field_arg_0_elem_1 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(), Nan::New<String>("r").ToLocalChecked()).ToLocalChecked();
+            vector<uint8_t> arg_0_elem_1;
+            Local<Array> arg_0_elem_1_container = Local<Array>::Cast(field_arg_0_elem_1);
+            for(uint32_t arg_0_elem_1_id = 0; arg_0_elem_1_id < arg_0_elem_1_container->Length(); arg_0_elem_1_id++)
+            {
+                if(arg_0_elem_1_container->Get(arg_0_elem_1_id)->IsUint32())
+                {
+                    auto arg_0_elem_1_elem = Nan::To<uint32_t>(arg_0_elem_1_container->Get(arg_0_elem_1_id)).FromJust();
+                    arg_0_elem_1.emplace_back(arg_0_elem_1_elem);
+                }
+            }
+
+
+            auto field_arg_0_elem_2 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(), Nan::New<String>("s").ToLocalChecked()).ToLocalChecked();
+            vector<uint8_t> arg_0_elem_2;
+            Local<Array> arg_0_elem_2_container = Local<Array>::Cast(field_arg_0_elem_2);
+            for(uint32_t arg_0_elem_2_id = 0; arg_0_elem_2_id < arg_0_elem_2_container->Length(); arg_0_elem_2_id++)
+            {
+                if(arg_0_elem_2_container->Get(arg_0_elem_2_id)->IsUint32())
+                {
+                    auto arg_0_elem_2_elem = Nan::To<uint32_t>(arg_0_elem_2_container->Get(arg_0_elem_2_id)).FromJust();
+                    arg_0_elem_2.emplace_back(arg_0_elem_2_elem);
+                }
+            }
+
+
+            auto field_arg_0_elem_3 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(), Nan::New<String>("v").ToLocalChecked()).ToLocalChecked();
+            vector<uint8_t> arg_0_elem_3;
+            Local<Array> arg_0_elem_3_container = Local<Array>::Cast(field_arg_0_elem_3);
+            for(uint32_t arg_0_elem_3_id = 0; arg_0_elem_3_id < arg_0_elem_3_container->Length(); arg_0_elem_3_id++)
+            {
+                if(arg_0_elem_3_container->Get(arg_0_elem_3_id)->IsUint32())
+                {
+                    auto arg_0_elem_3_elem = Nan::To<uint32_t>(arg_0_elem_3_container->Get(arg_0_elem_3_id)).FromJust();
+                    arg_0_elem_3.emplace_back(arg_0_elem_3_elem);
+                }
+            }
+
+            BitcoinLikeSignature arg_0_elem(arg_0_elem_1, arg_0_elem_2, arg_0_elem_3);
+
+            arg_0.emplace_back(arg_0_elem);
+        }
+    }
+
+    auto arg_1 = Nan::To<bool>(info[1]).FromJust();
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeTransaction::setSignatures : implementation of BitcoinLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->setSignatures(arg_0,arg_1);
+
+    //Wrap result in node object
+    auto arg_2 = Nan::New<Integer>((int)result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_2);
+}
+NAN_METHOD(NJSBitcoinLikeTransaction::setDERSignatures) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeTransaction::setDERSignatures needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    vector<std::vector<uint8_t>> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    {
+        if(arg_0_container->Get(arg_0_id)->IsObject())
+        {
+            vector<uint8_t> arg_0_elem;
+            Local<Array> arg_0_elem_container = Local<Array>::Cast(arg_0_container->Get(arg_0_id));
+            for(uint32_t arg_0_elem_id = 0; arg_0_elem_id < arg_0_elem_container->Length(); arg_0_elem_id++)
+            {
+                if(arg_0_elem_container->Get(arg_0_elem_id)->IsUint32())
+                {
+                    auto arg_0_elem_elem = Nan::To<uint32_t>(arg_0_elem_container->Get(arg_0_elem_id)).FromJust();
+                    arg_0_elem.emplace_back(arg_0_elem_elem);
+                }
+            }
+
+            arg_0.emplace_back(arg_0_elem);
+        }
+    }
+
+    auto arg_1 = Nan::To<bool>(info[1]).FromJust();
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeTransaction::setDERSignatures : implementation of BitcoinLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->setDERSignatures(arg_0,arg_1);
+
+    //Wrap result in node object
+    auto arg_2 = Nan::New<Integer>((int)result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_2);
+}
 
 NAN_METHOD(NJSBitcoinLikeTransaction::New) {
     //Only new allowed
@@ -447,6 +571,8 @@ void NJSBitcoinLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"serializeOutputs", serializeOutputs);
     Nan::SetPrototypeMethod(func_template,"getWitness", getWitness);
     Nan::SetPrototypeMethod(func_template,"getEstimatedSize", getEstimatedSize);
+    Nan::SetPrototypeMethod(func_template,"setSignatures", setSignatures);
+    Nan::SetPrototypeMethod(func_template,"setDERSignatures", setDERSignatures);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeTransaction_prototype.Reset(objectTemplate);
