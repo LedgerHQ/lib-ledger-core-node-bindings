@@ -19,8 +19,7 @@ declare class NJSTezosLikeTransaction
     /** Serialize the transaction to its raw format. */
     declare function serialize(): Object;
     /** Set signature of transaction, when a signature is set serialize method gives back serialized Tx */
-    declare function setSignature(rSignature: Object, sSignature: Object);
-    declare function setDERSignature(signature: Object);
+    declare function setSignature(signature: Object);
     /**
      * Get the time when the transaction was issued or the time of the block including
      * this transaction
@@ -214,6 +213,9 @@ declare class NJSAmountListCallback
      */
     declare function onCallback(result: ?Array<NJSAmount>, error: ?Error);
 }
+declare class NJSTezosConfiguration
+{
+}
 declare class NJSTezosConfigurationDefaults
 {
 }
@@ -357,6 +359,9 @@ declare class NJSRippleLikeAccount
      * Note: same note as above
      */
     declare function getBaseReserve(callback: NJSAmountCallback);
+}
+declare class NJSRippleConfiguration
+{
 }
 declare class NJSRippleConfigurationDefaults
 {
@@ -2511,6 +2516,17 @@ declare class NJSBitcoinLikeTransaction
      * size.
      */
     declare function getEstimatedSize(): EstimatedSize;
+    /**
+     * Sign all inputs for given transaction. 
+     * Build DER encoded signature from RSV data.
+     * @return SIGNING_SUCCEED if succeed case else refers to BitcoinLikeSignatureState enumeration
+     */
+    declare function setSignatures(signatures: Array<BitcoinLikeSignature>, override: boolean): BitcoinLikeSignatureState;
+    /**
+     * Sign all inputs for given transaction. 
+     * @return SIGNING_SUCCEED if succeed case else refers to BitcoinLikeSignatureState enumeration
+     */
+    declare function setDERSignatures(signatures: Array<Object>, override: boolean): BitcoinLikeSignatureState;
 }
 /** Class representing a Bitcoin Operation. */
 declare class NJSBitcoinLikeOperation

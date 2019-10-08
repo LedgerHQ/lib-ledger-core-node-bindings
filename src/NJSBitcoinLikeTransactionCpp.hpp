@@ -6,6 +6,8 @@
 
 
 #include "../include/../utils/optional.hpp"
+#include "../include/BitcoinLikeSignature.hpp"
+#include "../include/BitcoinLikeSignatureState.hpp"
 #include "../include/EstimatedSize.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSBitcoinLikeBlockCpp.hpp"
@@ -80,6 +82,19 @@ private:
      * size.
      */
     static NAN_METHOD(getEstimatedSize);
+
+    /**
+     * Sign all inputs for given transaction. 
+     * Build DER encoded signature from RSV data.
+     * @return SIGNING_SUCCEED if succeed case else refers to BitcoinLikeSignatureState enumeration
+     */
+    static NAN_METHOD(setSignatures);
+
+    /**
+     * Sign all inputs for given transaction. 
+     * @return SIGNING_SUCCEED if succeed case else refers to BitcoinLikeSignatureState enumeration
+     */
+    static NAN_METHOD(setDERSignatures);
 
     static NAN_METHOD(New);
 

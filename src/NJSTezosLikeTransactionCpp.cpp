@@ -198,9 +198,9 @@ NAN_METHOD(NJSTezosLikeTransaction::serialize) {
 NAN_METHOD(NJSTezosLikeTransaction::setSignature) {
 
     //Check if method called with right number of arguments
-    if(info.Length() != 2)
+    if(info.Length() != 1)
     {
-        return Nan::ThrowError("NJSTezosLikeTransaction::setSignature needs 2 arguments");
+        return Nan::ThrowError("NJSTezosLikeTransaction::setSignature needs 1 arguments");
     }
 
     //Check if parameters have correct types
@@ -212,17 +212,6 @@ NAN_METHOD(NJSTezosLikeTransaction::setSignature) {
         {
             auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
             arg_0.emplace_back(arg_0_elem);
-        }
-    }
-
-    vector<uint8_t> arg_1;
-    Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
-    for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
-    {
-        if(arg_1_container->Get(arg_1_id)->IsUint32())
-        {
-            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(arg_1_id)).FromJust();
-            arg_1.emplace_back(arg_1_elem);
         }
     }
 
@@ -233,36 +222,7 @@ NAN_METHOD(NJSTezosLikeTransaction::setSignature) {
     {
         return Nan::ThrowError("NJSTezosLikeTransaction::setSignature : implementation of TezosLikeTransaction is not valid");
     }
-    cpp_impl->setSignature(arg_0,arg_1);
-}
-NAN_METHOD(NJSTezosLikeTransaction::setDERSignature) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 1)
-    {
-        return Nan::ThrowError("NJSTezosLikeTransaction::setDERSignature needs 1 arguments");
-    }
-
-    //Check if parameters have correct types
-    vector<uint8_t> arg_0;
-    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
-    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
-    {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
-        {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
-            arg_0.emplace_back(arg_0_elem);
-        }
-    }
-
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TezosLikeTransaction>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSTezosLikeTransaction::setDERSignature : implementation of TezosLikeTransaction is not valid");
-    }
-    cpp_impl->setDERSignature(arg_0);
+    cpp_impl->setSignature(arg_0);
 }
 NAN_METHOD(NJSTezosLikeTransaction::getDate) {
 
@@ -485,7 +445,6 @@ void NJSTezosLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getValue", getValue);
     Nan::SetPrototypeMethod(func_template,"serialize", serialize);
     Nan::SetPrototypeMethod(func_template,"setSignature", setSignature);
-    Nan::SetPrototypeMethod(func_template,"setDERSignature", setDERSignature);
     Nan::SetPrototypeMethod(func_template,"getDate", getDate);
     Nan::SetPrototypeMethod(func_template,"getSigningPubKey", getSigningPubKey);
     Nan::SetPrototypeMethod(func_template,"getCounter", getCounter);

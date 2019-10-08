@@ -59,8 +59,6 @@ private:
     /** Set signature of transaction, when a signature is set serialize method gives back serialized Tx */
     static NAN_METHOD(setSignature);
 
-    static NAN_METHOD(setDERSignature);
-
     /**
      * Get the time when the transaction was issued or the time of the block including
      * this transaction

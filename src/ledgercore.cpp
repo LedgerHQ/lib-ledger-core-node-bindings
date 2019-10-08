@@ -15,6 +15,7 @@
 #include "NJSTezosLikeOriginatedAccountCpp.hpp"
 #include "NJSAmountCallback.hpp"
 #include "NJSAmountListCallback.hpp"
+#include "NJSTezosConfigurationCpp.hpp"
 #include "NJSTezosConfigurationDefaultsCpp.hpp"
 #include "NJSRippleLikeTransactionCpp.hpp"
 #include "NJSRippleLikeOperationCpp.hpp"
@@ -22,6 +23,7 @@
 #include "NJSRippleLikeTransactionBuilderCpp.hpp"
 #include "NJSRippleLikeTransactionCallback.hpp"
 #include "NJSRippleLikeAccountCpp.hpp"
+#include "NJSRippleConfigurationCpp.hpp"
 #include "NJSRippleConfigurationDefaultsCpp.hpp"
 #include "NJSSecp256k1Cpp.hpp"
 #include "NJSNetworksCpp.hpp"
@@ -146,6 +148,7 @@ static void initAll(Local<Object> target)
     NJSTezosLikeOriginatedAccount::Initialize(target);
     NJSAmountCallback::Initialize(target);
     NJSAmountListCallback::Initialize(target);
+    NJSTezosConfiguration::Initialize(target);
     NJSTezosConfigurationDefaults::Initialize(target);
     NJSRippleLikeTransaction::Initialize(target);
     NJSRippleLikeOperation::Initialize(target);
@@ -153,6 +156,7 @@ static void initAll(Local<Object> target)
     NJSRippleLikeTransactionBuilder::Initialize(target);
     NJSRippleLikeTransactionCallback::Initialize(target);
     NJSRippleLikeAccount::Initialize(target);
+    NJSRippleConfiguration::Initialize(target);
     NJSRippleConfigurationDefaults::Initialize(target);
     NJSSecp256k1::Initialize(target);
     NJSNetworks::Initialize(target);
