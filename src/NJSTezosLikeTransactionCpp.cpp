@@ -353,7 +353,7 @@ NAN_METHOD(NJSTezosLikeTransaction::getStorageLimit) {
     auto result = cpp_impl->getStorageLimit();
 
     //Wrap result in node object
-    auto arg_0 = NJSAmount::wrap(result);
+    auto arg_0 = NJSBigInt::wrap(result);
 
 
     //Return result

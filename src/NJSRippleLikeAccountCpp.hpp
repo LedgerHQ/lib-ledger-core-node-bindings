@@ -6,11 +6,13 @@
 
 
 #include "NJSAmountCallback.hpp"
+#include "NJSBoolCallback.hpp"
 #include "NJSRippleLikeTransactionBuilderCpp.hpp"
 #include "NJSRippleLikeTransactionCpp.hpp"
 #include "NJSStringCallback.hpp"
 #include <cstdint>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include <nan.h>
@@ -52,6 +54,15 @@ private:
      * Note: same note as above
      */
     static NAN_METHOD(getBaseReserve);
+
+    /**
+     * Check whether an account has been activated or not
+     * Here activation, means that the XRP account received a first transaction with a minimum amount
+     * greater or equal to XRP base reserve
+     * @param: address to check
+     * @return: true if valid address and has been activated, false otherwise
+     */
+    static NAN_METHOD(isAddressActivated);
 
     static NAN_METHOD(New);
 
