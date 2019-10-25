@@ -29,7 +29,7 @@ declare class NJSTezosLikeTransaction
     declare function getSigningPubKey(): Object;
     declare function getCounter(): NJSBigInt;
     declare function getGasLimit(): NJSAmount;
-    declare function getStorageLimit(): NJSAmount;
+    declare function getStorageLimit(): NJSBigInt;
     /** Get hash of block in which tx is included */
     declare function getBlockHash(): ?string;
 }
@@ -359,6 +359,24 @@ declare class NJSRippleLikeAccount
      * Note: same note as above
      */
     declare function getBaseReserve(callback: NJSAmountCallback);
+    /**
+     * Check whether an account has been activated or not
+     * Here activation, means that the XRP account received a first transaction with a minimum amount
+     * greater or equal to XRP base reserve
+     * @param: address to check
+     * @return: true if valid address and has been activated, false otherwise
+     */
+    declare function isAddressActivated(address: string, isActivated: NJSBoolCallback);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSBoolCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?boolean, error: ?Error);
 }
 declare class NJSRippleConfiguration
 {

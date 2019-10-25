@@ -23,7 +23,7 @@ public:
 
     static std::string const TEZOS_DEFAULT_API_VERSION;
 
-    static std::string const TEZOS_OBSERVER_NODE_ENDPOINT_S2;
+    static std::string const TZSTATS_API_ENDPOINT;
 
     static std::string const TEZOS_OBSERVER_NODE_ENDPOINT_S3;
 
@@ -41,6 +41,8 @@ public:
     static std::string const TEZOS_DEFAULT_GAS_LIMIT;
 
     static std::string const TEZOS_DEFAULT_STORAGE_LIMIT;
+
+    static std::string const TEZOS_PROTOCOL_UPDATE_BABYLON;
 };
 
 } } }  // namespace ledger::core::api

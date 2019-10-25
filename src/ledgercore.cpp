@@ -23,6 +23,7 @@
 #include "NJSRippleLikeTransactionBuilderCpp.hpp"
 #include "NJSRippleLikeTransactionCallback.hpp"
 #include "NJSRippleLikeAccountCpp.hpp"
+#include "NJSBoolCallback.hpp"
 #include "NJSRippleConfigurationCpp.hpp"
 #include "NJSRippleConfigurationDefaultsCpp.hpp"
 #include "NJSSecp256k1Cpp.hpp"
@@ -156,6 +157,7 @@ static void initAll(Local<Object> target)
     NJSRippleLikeTransactionBuilder::Initialize(target);
     NJSRippleLikeTransactionCallback::Initialize(target);
     NJSRippleLikeAccount::Initialize(target);
+    NJSBoolCallback::Initialize(target);
     NJSRippleConfiguration::Initialize(target);
     NJSRippleConfigurationDefaults::Initialize(target);
     NJSSecp256k1::Initialize(target);
