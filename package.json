@@ -1,7 +1,7 @@
 {
   "name": "@ledgerhq/ledger-core",
   "version": "3.4.0",
-  "libcoreVersion": "3.1.0-rc-83269e",
+  "libcoreVersion": "3.1.0-rc-350822",
   "description": "Ledger Core Library cross-platform C++ bindings for NodeJs",
   "main": "js/index.js",
   "repository": {
