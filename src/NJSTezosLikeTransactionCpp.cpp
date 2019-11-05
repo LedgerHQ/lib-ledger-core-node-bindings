@@ -391,6 +391,31 @@ NAN_METHOD(NJSTezosLikeTransaction::getBlockHash) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSTezosLikeTransaction::getStatus) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSTezosLikeTransaction::getStatus needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TezosLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSTezosLikeTransaction::getStatus : implementation of TezosLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getStatus();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Int32>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSTezosLikeTransaction::New) {
     //Only new allowed
@@ -451,6 +476,7 @@ void NJSTezosLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getGasLimit", getGasLimit);
     Nan::SetPrototypeMethod(func_template,"getStorageLimit", getStorageLimit);
     Nan::SetPrototypeMethod(func_template,"getBlockHash", getBlockHash);
+    Nan::SetPrototypeMethod(func_template,"getStatus", getStatus);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     TezosLikeTransaction_prototype.Reset(objectTemplate);
