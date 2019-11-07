@@ -77,6 +77,9 @@ private:
     /** Get hash of block in which tx is included */
     static NAN_METHOD(getBlockHash);
 
+    /** Get status of transaction: equals to 1 if succeeded, 0 otherwise */
+    static NAN_METHOD(getStatus);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

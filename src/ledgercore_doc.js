@@ -32,6 +32,8 @@ declare class NJSTezosLikeTransaction
     declare function getStorageLimit(): NJSBigInt;
     /** Get hash of block in which tx is included */
     declare function getBlockHash(): ?string;
+    /** Get status of transaction: equals to 1 if succeeded, 0 otherwise */
+    declare function getStatus(): number;
 }
 /**Class representing a Tezos Operation */
 declare class NJSTezosLikeOperation
