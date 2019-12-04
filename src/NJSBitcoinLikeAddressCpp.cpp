@@ -318,7 +318,7 @@ Local<Object> NJSBitcoinLikeAddress::wrap(const std::shared_ptr<ledger::core::ap
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAddress>::Wrap(object, obj);
     }
     else
@@ -358,5 +358,5 @@ void NJSBitcoinLikeAddress::Initialize(Local<Object> target) {
     BitcoinLikeAddress_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeAddress").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSBitcoinLikeAddress").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

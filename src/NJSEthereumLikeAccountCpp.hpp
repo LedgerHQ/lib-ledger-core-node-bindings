@@ -6,6 +6,7 @@
 
 
 #include "NJSBigIntCallback.hpp"
+#include "NJSBigIntListCallback.hpp"
 #include "NJSERC20LikeAccountCpp.hpp"
 #include "NJSEthereumLikeTransactionBuilderCpp.hpp"
 #include "NJSEthereumLikeTransactionCpp.hpp"
@@ -69,6 +70,13 @@ private:
      * Note: same note as above
      */
     static NAN_METHOD(getERC20Balance);
+
+    /**
+     * Get balance of ERC20 tokens
+     * The passed addresses are ERC20 accounts
+     * Note: same note as above
+     */
+    static NAN_METHOD(getERC20Balances);
 
     static NAN_METHOD(New);
 

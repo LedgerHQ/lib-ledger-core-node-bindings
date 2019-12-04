@@ -76,7 +76,7 @@ Local<Object> NJSAddressListCallback::wrap(const std::shared_ptr<ledger::core::a
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::AddressListCallback>::Wrap(object, obj);
     }
     else
@@ -99,5 +99,5 @@ void NJSAddressListCallback::Initialize(Local<Object> target) {
     AddressListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSAddressListCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSAddressListCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

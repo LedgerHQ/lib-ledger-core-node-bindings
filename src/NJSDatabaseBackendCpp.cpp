@@ -158,7 +158,7 @@ Local<Object> NJSDatabaseBackend::wrap(const std::shared_ptr<ledger::core::api::
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::DatabaseBackend>::Wrap(object, obj);
     }
     else
@@ -194,5 +194,5 @@ void NJSDatabaseBackend::Initialize(Local<Object> target) {
     DatabaseBackend_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseBackend").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSDatabaseBackend").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

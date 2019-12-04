@@ -404,7 +404,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::setSignatures) {
         if(arg_0_container->Get(arg_0_id)->IsObject())
         {
 
-            auto field_arg_0_elem_1 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(), Nan::New<String>("r").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_elem_1 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("r").ToLocalChecked()).ToLocalChecked();
             vector<uint8_t> arg_0_elem_1;
             Local<Array> arg_0_elem_1_container = Local<Array>::Cast(field_arg_0_elem_1);
             for(uint32_t arg_0_elem_1_id = 0; arg_0_elem_1_id < arg_0_elem_1_container->Length(); arg_0_elem_1_id++)
@@ -417,7 +417,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::setSignatures) {
             }
 
 
-            auto field_arg_0_elem_2 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(), Nan::New<String>("s").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_elem_2 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("s").ToLocalChecked()).ToLocalChecked();
             vector<uint8_t> arg_0_elem_2;
             Local<Array> arg_0_elem_2_container = Local<Array>::Cast(field_arg_0_elem_2);
             for(uint32_t arg_0_elem_2_id = 0; arg_0_elem_2_id < arg_0_elem_2_container->Length(); arg_0_elem_2_id++)
@@ -430,7 +430,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::setSignatures) {
             }
 
 
-            auto field_arg_0_elem_3 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(), Nan::New<String>("v").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_elem_3 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("v").ToLocalChecked()).ToLocalChecked();
             vector<uint8_t> arg_0_elem_3;
             Local<Array> arg_0_elem_3_container = Local<Array>::Cast(field_arg_0_elem_3);
             for(uint32_t arg_0_elem_3_id = 0; arg_0_elem_3_id < arg_0_elem_3_container->Length(); arg_0_elem_3_id++)
@@ -532,7 +532,7 @@ Local<Object> NJSBitcoinLikeTransaction::wrap(const std::shared_ptr<ledger::core
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Wrap(object, obj);
     }
     else
@@ -578,5 +578,5 @@ void NJSBitcoinLikeTransaction::Initialize(Local<Object> target) {
     BitcoinLikeTransaction_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeTransaction").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSBitcoinLikeTransaction").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

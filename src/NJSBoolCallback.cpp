@@ -69,7 +69,7 @@ Local<Object> NJSBoolCallback::wrap(const std::shared_ptr<ledger::core::api::Boo
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::BoolCallback>::Wrap(object, obj);
     }
     else
@@ -92,5 +92,5 @@ void NJSBoolCallback::Initialize(Local<Object> target) {
     BoolCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBoolCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSBoolCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

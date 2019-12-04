@@ -13,14 +13,14 @@ std::shared_ptr<ExecutionContext> NJSThreadDispatcher::getSerialExecutionContext
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<String>(name).ToLocalChecked();
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSThreadDispatcher::getSerialExecutionContext fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getSerialExecutionContext").ToLocalChecked()).ToLocalChecked();
-    auto result_getSerialExecutionContext = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getSerialExecutionContext = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getSerialExecutionContext.IsEmpty())
     {
         Nan::ThrowError("NJSThreadDispatcher::getSerialExecutionContext call failed");
@@ -37,14 +37,14 @@ std::shared_ptr<ExecutionContext> NJSThreadDispatcher::getThreadPoolExecutionCon
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<String>(name).ToLocalChecked();
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSThreadDispatcher::getThreadPoolExecutionContext fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getThreadPoolExecutionContext").ToLocalChecked()).ToLocalChecked();
-    auto result_getThreadPoolExecutionContext = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getThreadPoolExecutionContext = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getThreadPoolExecutionContext.IsEmpty())
     {
         Nan::ThrowError("NJSThreadDispatcher::getThreadPoolExecutionContext call failed");
@@ -60,14 +60,14 @@ std::shared_ptr<ExecutionContext> NJSThreadDispatcher::getMainExecutionContext()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSThreadDispatcher::getMainExecutionContext fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getMainExecutionContext").ToLocalChecked()).ToLocalChecked();
-    auto result_getMainExecutionContext = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getMainExecutionContext = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getMainExecutionContext.IsEmpty())
     {
         Nan::ThrowError("NJSThreadDispatcher::getMainExecutionContext call failed");
@@ -83,14 +83,14 @@ std::shared_ptr<Lock> NJSThreadDispatcher::newLock()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSThreadDispatcher::newLock fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("newLock").ToLocalChecked()).ToLocalChecked();
-    auto result_newLock = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_newLock = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_newLock.IsEmpty())
     {
         Nan::ThrowError("NJSThreadDispatcher::newLock call failed");
@@ -113,7 +113,7 @@ NAN_METHOD(NJSThreadDispatcher::New) {
     {
         return Nan::ThrowError("NJSThreadDispatcher::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSThreadDispatcher>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSThreadDispatcher>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSThreadDispatcher>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -128,7 +128,7 @@ Local<Object> NJSThreadDispatcher::wrap(const std::shared_ptr<ledger::core::api:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::ThreadDispatcher>::Wrap(object, obj);
     }
     else
@@ -151,5 +151,5 @@ void NJSThreadDispatcher::Initialize(Local<Object> target) {
     ThreadDispatcher_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSThreadDispatcher").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSThreadDispatcher").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

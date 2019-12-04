@@ -64,7 +64,7 @@ Local<Object> NJSBitcoinLikeTransactionCallback::wrap(const std::shared_ptr<ledg
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransactionCallback>::Wrap(object, obj);
     }
     else
@@ -87,5 +87,5 @@ void NJSBitcoinLikeTransactionCallback::Initialize(Local<Object> target) {
     BitcoinLikeTransactionCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeTransactionCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSBitcoinLikeTransactionCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

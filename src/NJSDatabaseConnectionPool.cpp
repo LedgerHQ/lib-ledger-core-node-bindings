@@ -12,14 +12,14 @@ std::shared_ptr<DatabaseConnection> NJSDatabaseConnectionPool::getConnection()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseConnectionPool::getConnection fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getConnection").ToLocalChecked()).ToLocalChecked();
-    auto result_getConnection = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getConnection = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getConnection.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseConnectionPool::getConnection call failed");
@@ -42,7 +42,7 @@ NAN_METHOD(NJSDatabaseConnectionPool::New) {
     {
         return Nan::ThrowError("NJSDatabaseConnectionPool::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSDatabaseConnectionPool>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSDatabaseConnectionPool>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSDatabaseConnectionPool>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -57,7 +57,7 @@ Local<Object> NJSDatabaseConnectionPool::wrap(const std::shared_ptr<ledger::core
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::DatabaseConnectionPool>::Wrap(object, obj);
     }
     else
@@ -80,5 +80,5 @@ void NJSDatabaseConnectionPool::Initialize(Local<Object> target) {
     DatabaseConnectionPool_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseConnectionPool").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSDatabaseConnectionPool").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

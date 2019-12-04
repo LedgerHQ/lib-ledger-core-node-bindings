@@ -143,11 +143,11 @@ NAN_METHOD(NJSHttpRequest::complete) {
     if(!info[1]->IsNull() && !info[1]->IsUndefined())
     {
 
-        auto field_opt_arg_1_1 = Nan::Get(info[1]->ToObject(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
+        auto field_opt_arg_1_1 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
         auto opt_arg_1_1 = (ledger::core::api::ErrorCode)Nan::To<int>(field_opt_arg_1_1).FromJust();
 
-        auto field_opt_arg_1_2 = Nan::Get(info[1]->ToObject(), Nan::New<String>("message").ToLocalChecked()).ToLocalChecked();
-        String::Utf8Value string_opt_arg_1_2(field_opt_arg_1_2->ToString());
+        auto field_opt_arg_1_2 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("message").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_2(field_opt_arg_1_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
         auto opt_arg_1_2 = std::string(*string_opt_arg_1_2);
         Error opt_arg_1(opt_arg_1_1, opt_arg_1_2);
 
@@ -183,7 +183,7 @@ Local<Object> NJSHttpRequest::wrap(const std::shared_ptr<ledger::core::api::Http
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::HttpRequest>::Wrap(object, obj);
     }
     else
@@ -219,5 +219,5 @@ void NJSHttpRequest::Initialize(Local<Object> target) {
     HttpRequest_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSHttpRequest").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSHttpRequest").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

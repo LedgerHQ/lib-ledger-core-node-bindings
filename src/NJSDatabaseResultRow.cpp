@@ -13,14 +13,14 @@ bool NJSDatabaseResultRow::isNullAtPos(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::isNullAtPos fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("isNullAtPos").ToLocalChecked()).ToLocalChecked();
-    auto result_isNullAtPos = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_isNullAtPos = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_isNullAtPos.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::isNullAtPos call failed");
@@ -35,20 +35,20 @@ std::string NJSDatabaseResultRow::getColumnName(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getColumnName fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getColumnName").ToLocalChecked()).ToLocalChecked();
-    auto result_getColumnName = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getColumnName = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getColumnName.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getColumnName call failed");
     }
     auto checkedResult_getColumnName = result_getColumnName.ToLocalChecked();
-    String::Utf8Value string_fResult_getColumnName(checkedResult_getColumnName->ToString());
+    Nan::Utf8String string_fResult_getColumnName(checkedResult_getColumnName->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto fResult_getColumnName = std::string(*string_fResult_getColumnName);
     return fResult_getColumnName;
 }
@@ -58,14 +58,14 @@ int16_t NJSDatabaseResultRow::getShortByPos(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getShortByPos fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getShortByPos").ToLocalChecked()).ToLocalChecked();
-    auto result_getShortByPos = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getShortByPos = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getShortByPos.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getShortByPos call failed");
@@ -80,14 +80,14 @@ int32_t NJSDatabaseResultRow::getIntByPos(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getIntByPos fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getIntByPos").ToLocalChecked()).ToLocalChecked();
-    auto result_getIntByPos = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getIntByPos = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getIntByPos.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getIntByPos call failed");
@@ -102,14 +102,14 @@ float NJSDatabaseResultRow::getFloatByPos(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getFloatByPos fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getFloatByPos").ToLocalChecked()).ToLocalChecked();
-    auto result_getFloatByPos = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getFloatByPos = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getFloatByPos.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getFloatByPos call failed");
@@ -124,14 +124,14 @@ double NJSDatabaseResultRow::getDoubleByPos(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getDoubleByPos fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getDoubleByPos").ToLocalChecked()).ToLocalChecked();
-    auto result_getDoubleByPos = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getDoubleByPos = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getDoubleByPos.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getDoubleByPos call failed");
@@ -146,14 +146,14 @@ int64_t NJSDatabaseResultRow::getLongByPos(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getLongByPos fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getLongByPos").ToLocalChecked()).ToLocalChecked();
-    auto result_getLongByPos = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getLongByPos = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getLongByPos.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getLongByPos call failed");
@@ -168,20 +168,20 @@ std::string NJSDatabaseResultRow::getStringByPos(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getStringByPos fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getStringByPos").ToLocalChecked()).ToLocalChecked();
-    auto result_getStringByPos = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getStringByPos = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getStringByPos.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getStringByPos call failed");
     }
     auto checkedResult_getStringByPos = result_getStringByPos.ToLocalChecked();
-    String::Utf8Value string_fResult_getStringByPos(checkedResult_getStringByPos->ToString());
+    Nan::Utf8String string_fResult_getStringByPos(checkedResult_getStringByPos->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto fResult_getStringByPos = std::string(*string_fResult_getStringByPos);
     return fResult_getStringByPos;
 }
@@ -191,14 +191,14 @@ std::shared_ptr<DatabaseBlob> NJSDatabaseResultRow::getBlobByPos(int32_t pos)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(pos);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getBlobByPos fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getBlobByPos").ToLocalChecked()).ToLocalChecked();
-    auto result_getBlobByPos = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getBlobByPos = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getBlobByPos.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultRow::getBlobByPos call failed");
@@ -221,7 +221,7 @@ NAN_METHOD(NJSDatabaseResultRow::New) {
     {
         return Nan::ThrowError("NJSDatabaseResultRow::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSDatabaseResultRow>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSDatabaseResultRow>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSDatabaseResultRow>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -236,7 +236,7 @@ Local<Object> NJSDatabaseResultRow::wrap(const std::shared_ptr<ledger::core::api
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::DatabaseResultRow>::Wrap(object, obj);
     }
     else
@@ -259,5 +259,5 @@ void NJSDatabaseResultRow::Initialize(Local<Object> target) {
     DatabaseResultRow_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseResultRow").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSDatabaseResultRow").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

@@ -216,9 +216,9 @@ NAN_METHOD(NJSBigInt::toDecimalString) {
 
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
-    String::Utf8Value string_arg_2(info[2]->ToString());
+    Nan::Utf8String string_arg_2(info[2]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_2 = std::string(*string_arg_2);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -328,10 +328,10 @@ NAN_METHOD(NJSBigInt::fromDecimalString) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
-    String::Utf8Value string_arg_2(info[2]->ToString());
+    Nan::Utf8String string_arg_2(info[2]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_2 = std::string(*string_arg_2);
 
     auto result = ledger::core::api::BigInt::fromDecimalString(arg_0,arg_1,arg_2);
@@ -352,7 +352,7 @@ NAN_METHOD(NJSBigInt::fromIntegerString) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
@@ -400,10 +400,10 @@ NAN_METHOD(NJSBigInt::New) {
     }
 
     //Unwrap objects to get C++ classes
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
-    String::Utf8Value string_arg_2(info[2]->ToString());
+    Nan::Utf8String string_arg_2(info[2]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_2 = std::string(*string_arg_2);
 
     //Call factory
@@ -422,7 +422,7 @@ Local<Object> NJSBigInt::wrap(const std::shared_ptr<ledger::core::api::BigInt> &
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::BigInt>::Wrap(object, obj);
     }
     else
@@ -466,5 +466,5 @@ void NJSBigInt::Initialize(Local<Object> target) {
     BigInt_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBigInt").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSBigInt").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

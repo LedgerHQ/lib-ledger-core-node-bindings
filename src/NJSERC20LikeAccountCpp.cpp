@@ -177,7 +177,7 @@ NAN_METHOD(NJSERC20LikeAccount::getTransferToAddressData) {
         return Nan::ThrowError("NodeJs Object to NJSBigInt failed");
     }
 
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
 
     //Create promise and set it into Callback
@@ -241,7 +241,7 @@ Local<Object> NJSERC20LikeAccount::wrap(const std::shared_ptr<ledger::core::api:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Wrap(object, obj);
     }
     else
@@ -279,5 +279,5 @@ void NJSERC20LikeAccount::Initialize(Local<Object> target) {
     ERC20LikeAccount_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSERC20LikeAccount").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSERC20LikeAccount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

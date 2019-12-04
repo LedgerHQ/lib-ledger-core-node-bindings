@@ -85,6 +85,7 @@
 #include "NJSEthereumLikeTransactionBuilderCpp.hpp"
 #include "NJSEthereumLikeTransactionCallback.hpp"
 #include "NJSEthereumLikeAccountCpp.hpp"
+#include "NJSBigIntListCallback.hpp"
 #include "NJSBitcoinLikeScriptChunkCpp.hpp"
 #include "NJSBitcoinLikeScriptCpp.hpp"
 #include "NJSTezosLikeAddressCpp.hpp"
@@ -108,7 +109,6 @@
 #include "NJSBitcoinLikeTransactionCallback.hpp"
 #include "NJSBitcoinLikeAccountCpp.hpp"
 #include "NJSBitcoinLikeOutputListCallback.hpp"
-#include "NJSBigIntListCallback.hpp"
 #include "NJSBitcoinLikeWalletCpp.hpp"
 #include "NJSWalletPoolCpp.hpp"
 #include "NJSWalletListCallback.hpp"
@@ -219,6 +219,7 @@ static void initAll(Local<Object> target)
     NJSEthereumLikeTransactionBuilder::Initialize(target);
     NJSEthereumLikeTransactionCallback::Initialize(target);
     NJSEthereumLikeAccount::Initialize(target);
+    NJSBigIntListCallback::Initialize(target);
     NJSBitcoinLikeScriptChunk::Initialize(target);
     NJSBitcoinLikeScript::Initialize(target);
     NJSTezosLikeAddress::Initialize(target);
@@ -242,7 +243,6 @@ static void initAll(Local<Object> target)
     NJSBitcoinLikeTransactionCallback::Initialize(target);
     NJSBitcoinLikeAccount::Initialize(target);
     NJSBitcoinLikeOutputListCallback::Initialize(target);
-    NJSBigIntListCallback::Initialize(target);
     NJSBitcoinLikeWallet::Initialize(target);
     NJSWalletPool::Initialize(target);
     NJSWalletListCallback::Initialize(target);

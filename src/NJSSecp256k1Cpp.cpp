@@ -274,7 +274,7 @@ Local<Object> NJSSecp256k1::wrap(const std::shared_ptr<ledger::core::api::Secp25
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::Secp256k1>::Wrap(object, obj);
     }
     else
@@ -311,5 +311,5 @@ void NJSSecp256k1::Initialize(Local<Object> target) {
     Secp256k1_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSSecp256k1").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSSecp256k1").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

@@ -809,7 +809,7 @@ Local<Object> NJSOperation::wrap(const std::shared_ptr<ledger::core::api::Operat
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::Operation>::Wrap(object, obj);
     }
     else
@@ -862,5 +862,5 @@ void NJSOperation::Initialize(Local<Object> target) {
     Operation_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSOperation").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSOperation").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

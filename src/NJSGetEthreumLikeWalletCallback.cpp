@@ -15,14 +15,14 @@ void NJSGetEthreumLikeWalletCallback::onSuccess(const std::shared_ptr<::ledger::
     auto arg_0 = NJSEthereumLikeWallet::wrap(wallet);
 
     auto arg_1 = Nan::New<Boolean>(isCreated);
-    Handle<Value> args[2] = {arg_0,arg_1};
+    Local<Value> args[2] = {arg_0,arg_1};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSGetEthreumLikeWalletCallback::onSuccess fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("onSuccess").ToLocalChecked()).ToLocalChecked();
-    auto result_onSuccess = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,2,args);
+    auto result_onSuccess = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,2,args);
     if(result_onSuccess.IsEmpty())
     {
         Nan::ThrowError("NJSGetEthreumLikeWalletCallback::onSuccess call failed");
@@ -39,14 +39,14 @@ void NJSGetEthreumLikeWalletCallback::onError(const ::ledger::core::api::Error &
     auto arg_0_2 = Nan::New<String>(error.message).ToLocalChecked();
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("message").ToLocalChecked(), arg_0_2);
 
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSGetEthreumLikeWalletCallback::onError fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("onError").ToLocalChecked()).ToLocalChecked();
-    auto result_onError = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_onError = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_onError.IsEmpty())
     {
         Nan::ThrowError("NJSGetEthreumLikeWalletCallback::onError call failed");
@@ -76,7 +76,7 @@ Local<Object> NJSGetEthreumLikeWalletCallback::wrap(const std::shared_ptr<ledger
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::GetEthreumLikeWalletCallback>::Wrap(object, obj);
     }
     else
@@ -99,5 +99,5 @@ void NJSGetEthreumLikeWalletCallback::Initialize(Local<Object> target) {
     GetEthreumLikeWalletCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSGetEthreumLikeWalletCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSGetEthreumLikeWalletCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

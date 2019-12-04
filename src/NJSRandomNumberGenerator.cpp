@@ -13,14 +13,14 @@ std::vector<uint8_t> NJSRandomNumberGenerator::getRandomBytes(int32_t size)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Int32>(size);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomBytes fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getRandomBytes").ToLocalChecked()).ToLocalChecked();
-    auto result_getRandomBytes = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_getRandomBytes = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_getRandomBytes.IsEmpty())
     {
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomBytes call failed");
@@ -44,14 +44,14 @@ int32_t NJSRandomNumberGenerator::getRandomInt()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomInt fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getRandomInt").ToLocalChecked()).ToLocalChecked();
-    auto result_getRandomInt = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getRandomInt = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getRandomInt.IsEmpty())
     {
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomInt call failed");
@@ -65,14 +65,14 @@ int64_t NJSRandomNumberGenerator::getRandomLong()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomLong fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getRandomLong").ToLocalChecked()).ToLocalChecked();
-    auto result_getRandomLong = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getRandomLong = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getRandomLong.IsEmpty())
     {
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomLong call failed");
@@ -86,14 +86,14 @@ int8_t NJSRandomNumberGenerator::getRandomByte()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomByte fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getRandomByte").ToLocalChecked()).ToLocalChecked();
-    auto result_getRandomByte = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getRandomByte = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getRandomByte.IsEmpty())
     {
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomByte call failed");
@@ -114,7 +114,7 @@ NAN_METHOD(NJSRandomNumberGenerator::New) {
     {
         return Nan::ThrowError("NJSRandomNumberGenerator::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSRandomNumberGenerator>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSRandomNumberGenerator>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSRandomNumberGenerator>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -129,7 +129,7 @@ Local<Object> NJSRandomNumberGenerator::wrap(const std::shared_ptr<ledger::core:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::RandomNumberGenerator>::Wrap(object, obj);
     }
     else
@@ -152,5 +152,5 @@ void NJSRandomNumberGenerator::Initialize(Local<Object> target) {
     RandomNumberGenerator_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRandomNumberGenerator").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSRandomNumberGenerator").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

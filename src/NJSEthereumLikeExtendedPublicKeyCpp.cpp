@@ -17,7 +17,7 @@ NAN_METHOD(NJSEthereumLikeExtendedPublicKey::derive) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -45,7 +45,7 @@ NAN_METHOD(NJSEthereumLikeExtendedPublicKey::derivePublicKey) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -78,7 +78,7 @@ NAN_METHOD(NJSEthereumLikeExtendedPublicKey::deriveHash160) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -172,7 +172,7 @@ Local<Object> NJSEthereumLikeExtendedPublicKey::wrap(const std::shared_ptr<ledge
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeExtendedPublicKey>::Wrap(object, obj);
     }
     else
@@ -208,5 +208,5 @@ void NJSEthereumLikeExtendedPublicKey::Initialize(Local<Object> target) {
     EthereumLikeExtendedPublicKey_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSEthereumLikeExtendedPublicKey").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSEthereumLikeExtendedPublicKey").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

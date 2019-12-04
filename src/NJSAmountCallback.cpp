@@ -64,7 +64,7 @@ Local<Object> NJSAmountCallback::wrap(const std::shared_ptr<ledger::core::api::A
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::AmountCallback>::Wrap(object, obj);
     }
     else
@@ -87,5 +87,5 @@ void NJSAmountCallback::Initialize(Local<Object> target) {
     AmountCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSAmountCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSAmountCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

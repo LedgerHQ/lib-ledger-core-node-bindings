@@ -12,14 +12,14 @@ std::shared_ptr<DatabaseResultRow> NJSDatabaseResultSet::getRow()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultSet::getRow fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getRow").ToLocalChecked()).ToLocalChecked();
-    auto result_getRow = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getRow = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getRow.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultSet::getRow call failed");
@@ -35,14 +35,14 @@ int32_t NJSDatabaseResultSet::getUpdateCount()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultSet::getUpdateCount fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getUpdateCount").ToLocalChecked()).ToLocalChecked();
-    auto result_getUpdateCount = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getUpdateCount = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getUpdateCount.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultSet::getUpdateCount call failed");
@@ -56,14 +56,14 @@ bool NJSDatabaseResultSet::hasNext()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultSet::hasNext fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("hasNext").ToLocalChecked()).ToLocalChecked();
-    auto result_hasNext = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_hasNext = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_hasNext.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultSet::hasNext call failed");
@@ -77,14 +77,14 @@ int32_t NJSDatabaseResultSet::available()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultSet::available fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("available").ToLocalChecked()).ToLocalChecked();
-    auto result_available = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_available = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_available.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultSet::available call failed");
@@ -98,14 +98,14 @@ void NJSDatabaseResultSet::next()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultSet::next fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("next").ToLocalChecked()).ToLocalChecked();
-    auto result_next = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_next = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_next.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultSet::next call failed");
@@ -116,14 +116,14 @@ void NJSDatabaseResultSet::close()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultSet::close fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("close").ToLocalChecked()).ToLocalChecked();
-    auto result_close = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_close = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_close.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultSet::close call failed");
@@ -134,14 +134,14 @@ std::shared_ptr<DatabaseError> NJSDatabaseResultSet::getError()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseResultSet::getError fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getError").ToLocalChecked()).ToLocalChecked();
-    auto result_getError = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getError = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getError.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseResultSet::getError call failed");
@@ -164,7 +164,7 @@ NAN_METHOD(NJSDatabaseResultSet::New) {
     {
         return Nan::ThrowError("NJSDatabaseResultSet::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSDatabaseResultSet>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSDatabaseResultSet>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSDatabaseResultSet>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -179,7 +179,7 @@ Local<Object> NJSDatabaseResultSet::wrap(const std::shared_ptr<ledger::core::api
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::DatabaseResultSet>::Wrap(object, obj);
     }
     else
@@ -202,5 +202,5 @@ void NJSDatabaseResultSet::Initialize(Local<Object> target) {
     DatabaseResultSet_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseResultSet").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSDatabaseResultSet").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

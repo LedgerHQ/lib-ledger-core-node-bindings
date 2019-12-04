@@ -12,14 +12,14 @@ void NJSLock::lock()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLock::lock fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("lock").ToLocalChecked()).ToLocalChecked();
-    auto result_lock = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_lock = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_lock.IsEmpty())
     {
         Nan::ThrowError("NJSLock::lock call failed");
@@ -30,14 +30,14 @@ bool NJSLock::tryLock()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLock::tryLock fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("tryLock").ToLocalChecked()).ToLocalChecked();
-    auto result_tryLock = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_tryLock = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_tryLock.IsEmpty())
     {
         Nan::ThrowError("NJSLock::tryLock call failed");
@@ -51,14 +51,14 @@ void NJSLock::unlock()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLock::unlock fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("unlock").ToLocalChecked()).ToLocalChecked();
-    auto result_unlock = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_unlock = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_unlock.IsEmpty())
     {
         Nan::ThrowError("NJSLock::unlock call failed");
@@ -76,7 +76,7 @@ NAN_METHOD(NJSLock::New) {
     {
         return Nan::ThrowError("NJSLock::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSLock>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSLock>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSLock>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -91,7 +91,7 @@ Local<Object> NJSLock::wrap(const std::shared_ptr<ledger::core::api::Lock> &obje
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::Lock>::Wrap(object, obj);
     }
     else
@@ -114,5 +114,5 @@ void NJSLock::Initialize(Local<Object> target) {
     Lock_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSLock").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSLock").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

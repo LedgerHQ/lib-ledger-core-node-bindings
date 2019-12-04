@@ -782,38 +782,38 @@ NAN_METHOD(NJSWallet::newAccountWithInfo) {
 
     //Check if parameters have correct types
 
-    auto field_arg_0_1 = Nan::Get(info[0]->ToObject(), Nan::New<String>("index").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_1 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("index").ToLocalChecked()).ToLocalChecked();
     auto arg_0_1 = Nan::To<int32_t>(field_arg_0_1).FromJust();
 
-    auto field_arg_0_2 = Nan::Get(info[0]->ToObject(), Nan::New<String>("owners").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_2 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("owners").ToLocalChecked()).ToLocalChecked();
     vector<std::string> arg_0_2;
     Local<Array> arg_0_2_container = Local<Array>::Cast(field_arg_0_2);
     for(uint32_t arg_0_2_id = 0; arg_0_2_id < arg_0_2_container->Length(); arg_0_2_id++)
     {
         if(arg_0_2_container->Get(arg_0_2_id)->IsString())
         {
-            String::Utf8Value string_arg_0_2_elem(arg_0_2_container->Get(arg_0_2_id)->ToString());
+            Nan::Utf8String string_arg_0_2_elem(arg_0_2_container->Get(arg_0_2_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_2_elem = std::string(*string_arg_0_2_elem);
             arg_0_2.emplace_back(arg_0_2_elem);
         }
     }
 
 
-    auto field_arg_0_3 = Nan::Get(info[0]->ToObject(), Nan::New<String>("derivations").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_3 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("derivations").ToLocalChecked()).ToLocalChecked();
     vector<std::string> arg_0_3;
     Local<Array> arg_0_3_container = Local<Array>::Cast(field_arg_0_3);
     for(uint32_t arg_0_3_id = 0; arg_0_3_id < arg_0_3_container->Length(); arg_0_3_id++)
     {
         if(arg_0_3_container->Get(arg_0_3_id)->IsString())
         {
-            String::Utf8Value string_arg_0_3_elem(arg_0_3_container->Get(arg_0_3_id)->ToString());
+            Nan::Utf8String string_arg_0_3_elem(arg_0_3_container->Get(arg_0_3_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_3_elem = std::string(*string_arg_0_3_elem);
             arg_0_3.emplace_back(arg_0_3_elem);
         }
     }
 
 
-    auto field_arg_0_4 = Nan::Get(info[0]->ToObject(), Nan::New<String>("publicKeys").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_4 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("publicKeys").ToLocalChecked()).ToLocalChecked();
     vector<std::vector<uint8_t>> arg_0_4;
     Local<Array> arg_0_4_container = Local<Array>::Cast(field_arg_0_4);
     for(uint32_t arg_0_4_id = 0; arg_0_4_id < arg_0_4_container->Length(); arg_0_4_id++)
@@ -836,7 +836,7 @@ NAN_METHOD(NJSWallet::newAccountWithInfo) {
     }
 
 
-    auto field_arg_0_5 = Nan::Get(info[0]->ToObject(), Nan::New<String>("chainCodes").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_5 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("chainCodes").ToLocalChecked()).ToLocalChecked();
     vector<std::vector<uint8_t>> arg_0_5;
     Local<Array> arg_0_5_container = Local<Array>::Cast(field_arg_0_5);
     for(uint32_t arg_0_5_id = 0; arg_0_5_id < arg_0_5_container->Length(); arg_0_5_id++)
@@ -886,45 +886,45 @@ NAN_METHOD(NJSWallet::newAccountWithExtendedKeyInfo) {
 
     //Check if parameters have correct types
 
-    auto field_arg_0_1 = Nan::Get(info[0]->ToObject(), Nan::New<String>("index").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_1 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("index").ToLocalChecked()).ToLocalChecked();
     auto arg_0_1 = Nan::To<int32_t>(field_arg_0_1).FromJust();
 
-    auto field_arg_0_2 = Nan::Get(info[0]->ToObject(), Nan::New<String>("owners").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_2 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("owners").ToLocalChecked()).ToLocalChecked();
     vector<std::string> arg_0_2;
     Local<Array> arg_0_2_container = Local<Array>::Cast(field_arg_0_2);
     for(uint32_t arg_0_2_id = 0; arg_0_2_id < arg_0_2_container->Length(); arg_0_2_id++)
     {
         if(arg_0_2_container->Get(arg_0_2_id)->IsString())
         {
-            String::Utf8Value string_arg_0_2_elem(arg_0_2_container->Get(arg_0_2_id)->ToString());
+            Nan::Utf8String string_arg_0_2_elem(arg_0_2_container->Get(arg_0_2_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_2_elem = std::string(*string_arg_0_2_elem);
             arg_0_2.emplace_back(arg_0_2_elem);
         }
     }
 
 
-    auto field_arg_0_3 = Nan::Get(info[0]->ToObject(), Nan::New<String>("derivations").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_3 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("derivations").ToLocalChecked()).ToLocalChecked();
     vector<std::string> arg_0_3;
     Local<Array> arg_0_3_container = Local<Array>::Cast(field_arg_0_3);
     for(uint32_t arg_0_3_id = 0; arg_0_3_id < arg_0_3_container->Length(); arg_0_3_id++)
     {
         if(arg_0_3_container->Get(arg_0_3_id)->IsString())
         {
-            String::Utf8Value string_arg_0_3_elem(arg_0_3_container->Get(arg_0_3_id)->ToString());
+            Nan::Utf8String string_arg_0_3_elem(arg_0_3_container->Get(arg_0_3_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_3_elem = std::string(*string_arg_0_3_elem);
             arg_0_3.emplace_back(arg_0_3_elem);
         }
     }
 
 
-    auto field_arg_0_4 = Nan::Get(info[0]->ToObject(), Nan::New<String>("extendedKeys").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_4 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("extendedKeys").ToLocalChecked()).ToLocalChecked();
     vector<std::string> arg_0_4;
     Local<Array> arg_0_4_container = Local<Array>::Cast(field_arg_0_4);
     for(uint32_t arg_0_4_id = 0; arg_0_4_id < arg_0_4_container->Length(); arg_0_4_id++)
     {
         if(arg_0_4_container->Get(arg_0_4_id)->IsString())
         {
-            String::Utf8Value string_arg_0_4_elem(arg_0_4_container->Get(arg_0_4_id)->ToString());
+            Nan::Utf8String string_arg_0_4_elem(arg_0_4_container->Get(arg_0_4_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_4_elem = std::string(*string_arg_0_4_elem);
             arg_0_4.emplace_back(arg_0_4_elem);
         }
@@ -1021,7 +1021,7 @@ Local<Object> NJSWallet::wrap(const std::shared_ptr<ledger::core::api::Wallet> &
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Wrap(object, obj);
     }
     else
@@ -1078,5 +1078,5 @@ void NJSWallet::Initialize(Local<Object> target) {
     Wallet_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSWallet").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSWallet").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

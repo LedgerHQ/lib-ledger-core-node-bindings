@@ -17,9 +17,9 @@ NAN_METHOD(NJSLogger::d) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -39,9 +39,9 @@ NAN_METHOD(NJSLogger::i) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -61,9 +61,9 @@ NAN_METHOD(NJSLogger::e) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -83,9 +83,9 @@ NAN_METHOD(NJSLogger::w) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -105,9 +105,9 @@ NAN_METHOD(NJSLogger::c) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -138,7 +138,7 @@ Local<Object> NJSLogger::wrap(const std::shared_ptr<ledger::core::api::Logger> &
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::Logger>::Wrap(object, obj);
     }
     else
@@ -174,5 +174,5 @@ void NJSLogger::Initialize(Local<Object> target) {
     Logger_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSLogger").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSLogger").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

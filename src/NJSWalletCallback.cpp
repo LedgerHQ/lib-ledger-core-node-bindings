@@ -64,7 +64,7 @@ Local<Object> NJSWalletCallback::wrap(const std::shared_ptr<ledger::core::api::W
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::WalletCallback>::Wrap(object, obj);
     }
     else
@@ -87,5 +87,5 @@ void NJSWalletCallback::Initialize(Local<Object> target) {
     WalletCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSWalletCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSWalletCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

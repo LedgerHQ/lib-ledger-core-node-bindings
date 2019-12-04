@@ -15,14 +15,14 @@ void NJSWebSocketClient::connect(const std::string & url, const std::shared_ptr<
     auto arg_0 = Nan::New<String>(url).ToLocalChecked();
     auto arg_1 = NJSWebSocketConnection::wrap(connection);
 
-    Handle<Value> args[2] = {arg_0,arg_1};
+    Local<Value> args[2] = {arg_0,arg_1};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSWebSocketClient::connect fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("connect").ToLocalChecked()).ToLocalChecked();
-    auto result_connect = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,2,args);
+    auto result_connect = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,2,args);
     if(result_connect.IsEmpty())
     {
         Nan::ThrowError("NJSWebSocketClient::connect call failed");
@@ -36,14 +36,14 @@ void NJSWebSocketClient::send(const std::shared_ptr<::ledger::core::api::WebSock
     auto arg_0 = NJSWebSocketConnection::wrap(connection);
 
     auto arg_1 = Nan::New<String>(data).ToLocalChecked();
-    Handle<Value> args[2] = {arg_0,arg_1};
+    Local<Value> args[2] = {arg_0,arg_1};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSWebSocketClient::send fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("send").ToLocalChecked()).ToLocalChecked();
-    auto result_send = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,2,args);
+    auto result_send = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,2,args);
     if(result_send.IsEmpty())
     {
         Nan::ThrowError("NJSWebSocketClient::send call failed");
@@ -56,14 +56,14 @@ void NJSWebSocketClient::disconnect(const std::shared_ptr<::ledger::core::api::W
     //Wrap parameters
     auto arg_0 = NJSWebSocketConnection::wrap(connection);
 
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSWebSocketClient::disconnect fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("disconnect").ToLocalChecked()).ToLocalChecked();
-    auto result_disconnect = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_disconnect = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_disconnect.IsEmpty())
     {
         Nan::ThrowError("NJSWebSocketClient::disconnect call failed");
@@ -81,7 +81,7 @@ NAN_METHOD(NJSWebSocketClient::New) {
     {
         return Nan::ThrowError("NJSWebSocketClient::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSWebSocketClient>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSWebSocketClient>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSWebSocketClient>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -96,7 +96,7 @@ Local<Object> NJSWebSocketClient::wrap(const std::shared_ptr<ledger::core::api::
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::WebSocketClient>::Wrap(object, obj);
     }
     else
@@ -119,5 +119,5 @@ void NJSWebSocketClient::Initialize(Local<Object> target) {
     WebSocketClient_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSWebSocketClient").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSWebSocketClient").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }
