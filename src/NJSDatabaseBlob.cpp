@@ -14,14 +14,14 @@ std::vector<uint8_t> NJSDatabaseBlob::read(int64_t offset, int64_t length)
     //Wrap parameters
     auto arg_0 = Nan::New<Number>(offset);
     auto arg_1 = Nan::New<Number>(length);
-    Handle<Value> args[2] = {arg_0,arg_1};
+    Local<Value> args[2] = {arg_0,arg_1};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseBlob::read fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("read").ToLocalChecked()).ToLocalChecked();
-    auto result_read = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,2,args);
+    auto result_read = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,2,args);
     if(result_read.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseBlob::read call failed");
@@ -53,14 +53,14 @@ int64_t NJSDatabaseBlob::write(int64_t offset, const std::vector<uint8_t> & data
         arg_1->Set((int)arg_1_id,arg_1_elem);
     }
 
-    Handle<Value> args[2] = {arg_0,arg_1};
+    Local<Value> args[2] = {arg_0,arg_1};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseBlob::write fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("write").ToLocalChecked()).ToLocalChecked();
-    auto result_write = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,2,args);
+    auto result_write = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,2,args);
     if(result_write.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseBlob::write call failed");
@@ -81,14 +81,14 @@ int64_t NJSDatabaseBlob::append(const std::vector<uint8_t> & data)
         arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseBlob::append fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("append").ToLocalChecked()).ToLocalChecked();
-    auto result_append = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_append = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_append.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseBlob::append call failed");
@@ -103,14 +103,14 @@ int64_t NJSDatabaseBlob::trim(int64_t newLen)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Number>(newLen);
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseBlob::trim fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("trim").ToLocalChecked()).ToLocalChecked();
-    auto result_trim = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_trim = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_trim.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseBlob::trim call failed");
@@ -124,14 +124,14 @@ int64_t NJSDatabaseBlob::size()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseBlob::size fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("size").ToLocalChecked()).ToLocalChecked();
-    auto result_size = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_size = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_size.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseBlob::size call failed");
@@ -152,7 +152,7 @@ NAN_METHOD(NJSDatabaseBlob::New) {
     {
         return Nan::ThrowError("NJSDatabaseBlob::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSDatabaseBlob>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSDatabaseBlob>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSDatabaseBlob>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -167,7 +167,7 @@ Local<Object> NJSDatabaseBlob::wrap(const std::shared_ptr<ledger::core::api::Dat
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::DatabaseBlob>::Wrap(object, obj);
     }
     else
@@ -190,5 +190,5 @@ void NJSDatabaseBlob::Initialize(Local<Object> target) {
     DatabaseBlob_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseBlob").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSDatabaseBlob").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

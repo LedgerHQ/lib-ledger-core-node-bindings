@@ -14,14 +14,14 @@ void NJSHttpClient::execute(const std::shared_ptr<::ledger::core::api::HttpReque
     //Wrap parameters
     auto arg_0 = NJSHttpRequest::wrap(request);
 
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSHttpClient::execute fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("execute").ToLocalChecked()).ToLocalChecked();
-    auto result_execute = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_execute = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_execute.IsEmpty())
     {
         Nan::ThrowError("NJSHttpClient::execute call failed");
@@ -39,7 +39,7 @@ NAN_METHOD(NJSHttpClient::New) {
     {
         return Nan::ThrowError("NJSHttpClient::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSHttpClient>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSHttpClient>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSHttpClient>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -54,7 +54,7 @@ Local<Object> NJSHttpClient::wrap(const std::shared_ptr<ledger::core::api::HttpC
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::HttpClient>::Wrap(object, obj);
     }
     else
@@ -77,5 +77,5 @@ void NJSHttpClient::Initialize(Local<Object> target) {
     HttpClient_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSHttpClient").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSHttpClient").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

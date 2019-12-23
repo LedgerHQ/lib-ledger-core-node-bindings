@@ -76,7 +76,7 @@ Local<Object> NJSOperationListCallback::wrap(const std::shared_ptr<ledger::core:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::OperationListCallback>::Wrap(object, obj);
     }
     else
@@ -99,5 +99,5 @@ void NJSOperationListCallback::Initialize(Local<Object> target) {
     OperationListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSOperationListCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSOperationListCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

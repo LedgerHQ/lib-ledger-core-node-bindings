@@ -64,7 +64,7 @@ Local<Object> NJSAccountCallback::wrap(const std::shared_ptr<ledger::core::api::
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::AccountCallback>::Wrap(object, obj);
     }
     else
@@ -87,5 +87,5 @@ void NJSAccountCallback::Initialize(Local<Object> target) {
     AccountCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSAccountCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSAccountCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

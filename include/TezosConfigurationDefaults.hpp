@@ -37,11 +37,15 @@ public:
 
     static std::string const TEZOS_XPUB_CURVE_SECP256K1;
 
+    static std::string const TEZOS_XPUB_CURVE_P256;
+
     /**
      * Taken from some existing XTZ wallets
      * http://tezos.gitlab.io/protocols/005_babylon.html#gas-cost-changes
      */
     static std::string const TEZOS_DEFAULT_FEES;
+
+    static std::string const TEZOS_DEFAULT_MAX_FEES;
 
     static std::string const TEZOS_DEFAULT_GAS_LIMIT;
 

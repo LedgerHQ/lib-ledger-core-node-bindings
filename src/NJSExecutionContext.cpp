@@ -14,14 +14,14 @@ void NJSExecutionContext::execute(const std::shared_ptr<::ledger::core::api::Run
     //Wrap parameters
     auto arg_0 = NJSRunnable::wrap(runnable);
 
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSExecutionContext::execute fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("execute").ToLocalChecked()).ToLocalChecked();
-    auto result_execute = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_execute = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_execute.IsEmpty())
     {
         Nan::ThrowError("NJSExecutionContext::execute call failed");
@@ -35,14 +35,14 @@ void NJSExecutionContext::delay(const std::shared_ptr<::ledger::core::api::Runna
     auto arg_0 = NJSRunnable::wrap(runnable);
 
     auto arg_1 = Nan::New<Number>(millis);
-    Handle<Value> args[2] = {arg_0,arg_1};
+    Local<Value> args[2] = {arg_0,arg_1};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSExecutionContext::delay fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("delay").ToLocalChecked()).ToLocalChecked();
-    auto result_delay = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,2,args);
+    auto result_delay = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,2,args);
     if(result_delay.IsEmpty())
     {
         Nan::ThrowError("NJSExecutionContext::delay call failed");
@@ -60,7 +60,7 @@ NAN_METHOD(NJSExecutionContext::New) {
     {
         return Nan::ThrowError("NJSExecutionContext::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSExecutionContext>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSExecutionContext>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSExecutionContext>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -75,7 +75,7 @@ Local<Object> NJSExecutionContext::wrap(const std::shared_ptr<ledger::core::api:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::ExecutionContext>::Wrap(object, obj);
     }
     else
@@ -98,5 +98,5 @@ void NJSExecutionContext::Initialize(Local<Object> target) {
     ExecutionContext_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSExecutionContext").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSExecutionContext").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

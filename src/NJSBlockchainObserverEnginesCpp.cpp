@@ -28,7 +28,7 @@ Local<Object> NJSBlockchainObserverEngines::wrap(const std::shared_ptr<ledger::c
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::BlockchainObserverEngines>::Wrap(object, obj);
     }
     else
@@ -59,5 +59,5 @@ void NJSBlockchainObserverEngines::Initialize(Local<Object> target) {
     BlockchainObserverEngines_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBlockchainObserverEngines").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSBlockchainObserverEngines").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

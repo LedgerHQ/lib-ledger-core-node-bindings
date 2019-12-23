@@ -13,14 +13,14 @@ void NJSLogPrinter::printError(const std::string & message)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<String>(message).ToLocalChecked();
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLogPrinter::printError fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("printError").ToLocalChecked()).ToLocalChecked();
-    auto result_printError = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_printError = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_printError.IsEmpty())
     {
         Nan::ThrowError("NJSLogPrinter::printError call failed");
@@ -32,14 +32,14 @@ void NJSLogPrinter::printInfo(const std::string & message)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<String>(message).ToLocalChecked();
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLogPrinter::printInfo fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("printInfo").ToLocalChecked()).ToLocalChecked();
-    auto result_printInfo = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_printInfo = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_printInfo.IsEmpty())
     {
         Nan::ThrowError("NJSLogPrinter::printInfo call failed");
@@ -51,14 +51,14 @@ void NJSLogPrinter::printDebug(const std::string & message)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<String>(message).ToLocalChecked();
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLogPrinter::printDebug fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("printDebug").ToLocalChecked()).ToLocalChecked();
-    auto result_printDebug = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_printDebug = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_printDebug.IsEmpty())
     {
         Nan::ThrowError("NJSLogPrinter::printDebug call failed");
@@ -70,14 +70,14 @@ void NJSLogPrinter::printWarning(const std::string & message)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<String>(message).ToLocalChecked();
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLogPrinter::printWarning fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("printWarning").ToLocalChecked()).ToLocalChecked();
-    auto result_printWarning = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_printWarning = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_printWarning.IsEmpty())
     {
         Nan::ThrowError("NJSLogPrinter::printWarning call failed");
@@ -89,14 +89,14 @@ void NJSLogPrinter::printApdu(const std::string & message)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<String>(message).ToLocalChecked();
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLogPrinter::printApdu fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("printApdu").ToLocalChecked()).ToLocalChecked();
-    auto result_printApdu = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_printApdu = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_printApdu.IsEmpty())
     {
         Nan::ThrowError("NJSLogPrinter::printApdu call failed");
@@ -108,14 +108,14 @@ void NJSLogPrinter::printCriticalError(const std::string & message)
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<String>(message).ToLocalChecked();
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLogPrinter::printCriticalError fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("printCriticalError").ToLocalChecked()).ToLocalChecked();
-    auto result_printCriticalError = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_printCriticalError = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_printCriticalError.IsEmpty())
     {
         Nan::ThrowError("NJSLogPrinter::printCriticalError call failed");
@@ -126,14 +126,14 @@ std::shared_ptr<ExecutionContext> NJSLogPrinter::getContext()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSLogPrinter::getContext fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getContext").ToLocalChecked()).ToLocalChecked();
-    auto result_getContext = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getContext = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getContext.IsEmpty())
     {
         Nan::ThrowError("NJSLogPrinter::getContext call failed");
@@ -156,7 +156,7 @@ NAN_METHOD(NJSLogPrinter::New) {
     {
         return Nan::ThrowError("NJSLogPrinter::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSLogPrinter>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSLogPrinter>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSLogPrinter>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -171,7 +171,7 @@ Local<Object> NJSLogPrinter::wrap(const std::shared_ptr<ledger::core::api::LogPr
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::LogPrinter>::Wrap(object, obj);
     }
     else
@@ -194,5 +194,5 @@ void NJSLogPrinter::Initialize(Local<Object> target) {
     LogPrinter_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSLogPrinter").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSLogPrinter").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

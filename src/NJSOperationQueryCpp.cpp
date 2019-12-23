@@ -213,7 +213,7 @@ Local<Object> NJSOperationQuery::wrap(const std::shared_ptr<ledger::core::api::O
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Wrap(object, obj);
     }
     else
@@ -251,5 +251,5 @@ void NJSOperationQuery::Initialize(Local<Object> target) {
     OperationQuery_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSOperationQuery").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSOperationQuery").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

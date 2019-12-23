@@ -69,7 +69,7 @@ Local<Object> NJSStringCallback::wrap(const std::shared_ptr<ledger::core::api::S
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::StringCallback>::Wrap(object, obj);
     }
     else
@@ -92,5 +92,5 @@ void NJSStringCallback::Initialize(Local<Object> target) {
     StringCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSStringCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSStringCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

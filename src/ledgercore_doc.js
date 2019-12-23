@@ -2032,6 +2032,22 @@ declare class NJSEthereumLikeAccount
      * Note: same note as above
      */
     declare function getERC20Balance(erc20Address: string, callback: NJSBigIntCallback);
+    /**
+     * Get balance of ERC20 tokens
+     * The passed addresses are ERC20 accounts
+     * Note: same note as above
+     */
+    declare function getERC20Balances(erc20Addresses: Array<string>, callback: NJSBigIntListCallback);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSBigIntListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<NJSBigInt>, error: ?Error);
 }
 declare class NJSBitcoinLikeScriptChunk
 {
@@ -2687,16 +2703,6 @@ declare class NJSBitcoinLikeOutputListCallback
      * @params error optional of type Error, non null if main task succeeded
      */
     declare function onCallback(result: ?Array<NJSBitcoinLikeOutput>, error: ?Error);
-}
-/** Callback triggered by main completed task, returning optional result as list of template type T. */
-declare class NJSBigIntListCallback
-{
-    /**
-     * Method triggered when main task complete.
-     * @params result optional of type list<T>, non null if main task failed
-     * @params error optional of type Error, non null if main task succeeded
-     */
-    declare function onCallback(result: ?Array<NJSBigInt>, error: ?Error);
 }
 /** A bitcoin-like wallet. */
 declare class NJSBitcoinLikeWallet

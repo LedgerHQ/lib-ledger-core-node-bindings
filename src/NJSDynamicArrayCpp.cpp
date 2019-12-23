@@ -96,7 +96,7 @@ NAN_METHOD(NJSDynamicArray::pushString) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -787,7 +787,7 @@ Local<Object> NJSDynamicArray::wrap(const std::shared_ptr<ledger::core::api::Dyn
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::DynamicArray>::Wrap(object, obj);
     }
     else
@@ -843,5 +843,5 @@ void NJSDynamicArray::Initialize(Local<Object> target) {
     DynamicArray_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDynamicArray").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSDynamicArray").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

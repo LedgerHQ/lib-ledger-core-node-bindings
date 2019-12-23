@@ -86,7 +86,7 @@ Local<Object> NJSEthereumLikeOperation::wrap(const std::shared_ptr<ledger::core:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeOperation>::Wrap(object, obj);
     }
     else
@@ -119,5 +119,5 @@ void NJSEthereumLikeOperation::Initialize(Local<Object> target) {
     EthereumLikeOperation_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSEthereumLikeOperation").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSEthereumLikeOperation").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

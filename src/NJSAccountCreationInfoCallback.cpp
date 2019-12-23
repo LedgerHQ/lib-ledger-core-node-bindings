@@ -116,7 +116,7 @@ Local<Object> NJSAccountCreationInfoCallback::wrap(const std::shared_ptr<ledger:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::AccountCreationInfoCallback>::Wrap(object, obj);
     }
     else
@@ -139,5 +139,5 @@ void NJSAccountCreationInfoCallback::Initialize(Local<Object> target) {
     AccountCreationInfoCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSAccountCreationInfoCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSAccountCreationInfoCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

@@ -12,14 +12,14 @@ DatabaseValueType NJSDatabaseColumn::getType()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseColumn::getType fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getType").ToLocalChecked()).ToLocalChecked();
-    auto result_getType = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getType = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getType.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseColumn::getType call failed");
@@ -33,20 +33,20 @@ std::string NJSDatabaseColumn::getName()
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Handle<Value> args[1];
+    Local<Value> args[1];
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSDatabaseColumn::getName fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getName").ToLocalChecked()).ToLocalChecked();
-    auto result_getName = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,0,args);
+    auto result_getName = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
     if(result_getName.IsEmpty())
     {
         Nan::ThrowError("NJSDatabaseColumn::getName call failed");
     }
     auto checkedResult_getName = result_getName.ToLocalChecked();
-    String::Utf8Value string_fResult_getName(checkedResult_getName->ToString());
+    Nan::Utf8String string_fResult_getName(checkedResult_getName->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto fResult_getName = std::string(*string_fResult_getName);
     return fResult_getName;
 }
@@ -62,7 +62,7 @@ NAN_METHOD(NJSDatabaseColumn::New) {
     {
         return Nan::ThrowError("NJSDatabaseColumn::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSDatabaseColumn>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSDatabaseColumn>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSDatabaseColumn>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -77,7 +77,7 @@ Local<Object> NJSDatabaseColumn::wrap(const std::shared_ptr<ledger::core::api::D
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::DatabaseColumn>::Wrap(object, obj);
     }
     else
@@ -100,5 +100,5 @@ void NJSDatabaseColumn::Initialize(Local<Object> target) {
     DatabaseColumn_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseColumn").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSDatabaseColumn").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

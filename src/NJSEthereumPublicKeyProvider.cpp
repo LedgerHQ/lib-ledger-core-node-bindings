@@ -19,7 +19,7 @@ NAN_METHOD(NJSEthereumPublicKeyProvider::New) {
     {
         return Nan::ThrowError("NJSEthereumPublicKeyProvider::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSEthereumPublicKeyProvider>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSEthereumPublicKeyProvider>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSEthereumPublicKeyProvider>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -34,7 +34,7 @@ Local<Object> NJSEthereumPublicKeyProvider::wrap(const std::shared_ptr<ledger::c
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::EthereumPublicKeyProvider>::Wrap(object, obj);
     }
     else
@@ -57,5 +57,5 @@ void NJSEthereumPublicKeyProvider::Initialize(Local<Object> target) {
     EthereumPublicKeyProvider_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSEthereumPublicKeyProvider").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSEthereumPublicKeyProvider").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

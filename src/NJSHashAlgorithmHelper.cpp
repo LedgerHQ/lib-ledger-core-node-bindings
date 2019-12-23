@@ -19,14 +19,14 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::ripemd160(const std::vector<uint8_t
         arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSHashAlgorithmHelper::ripemd160 fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("ripemd160").ToLocalChecked()).ToLocalChecked();
-    auto result_ripemd160 = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_ripemd160 = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_ripemd160.IsEmpty())
     {
         Nan::ThrowError("NJSHashAlgorithmHelper::ripemd160 call failed");
@@ -57,14 +57,14 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::sha256(const std::vector<uint8_t> &
         arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSHashAlgorithmHelper::sha256 fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("sha256").ToLocalChecked()).ToLocalChecked();
-    auto result_sha256 = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_sha256 = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_sha256.IsEmpty())
     {
         Nan::ThrowError("NJSHashAlgorithmHelper::sha256 call failed");
@@ -95,14 +95,14 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::keccak256(const std::vector<uint8_t
         arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
-    Handle<Value> args[1] = {arg_0};
+    Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
     if(!local_njs_impl->IsObject())
     {
         Nan::ThrowError("NJSHashAlgorithmHelper::keccak256 fail to retrieve node implementation");
     }
     auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("keccak256").ToLocalChecked()).ToLocalChecked();
-    auto result_keccak256 = Nan::CallAsFunction(calling_funtion->ToObject(),local_njs_impl,1,args);
+    auto result_keccak256 = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,1,args);
     if(result_keccak256.IsEmpty())
     {
         Nan::ThrowError("NJSHashAlgorithmHelper::keccak256 call failed");
@@ -133,7 +133,7 @@ NAN_METHOD(NJSHashAlgorithmHelper::New) {
     {
         return Nan::ThrowError("NJSHashAlgorithmHelper::New requires an implementation from node");
     }
-    auto node_instance = std::make_shared<NJSHashAlgorithmHelper>(info[0]->ToObject());
+    auto node_instance = std::make_shared<NJSHashAlgorithmHelper>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
     djinni::js::ObjectWrapper<NJSHashAlgorithmHelper>::Wrap(node_instance, info.This());
     info.GetReturnValue().Set(info.This());
 }
@@ -148,7 +148,7 @@ Local<Object> NJSHashAlgorithmHelper::wrap(const std::shared_ptr<ledger::core::a
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::HashAlgorithmHelper>::Wrap(object, obj);
     }
     else
@@ -171,5 +171,5 @@ void NJSHashAlgorithmHelper::Initialize(Local<Object> target) {
     HashAlgorithmHelper_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSHashAlgorithmHelper").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSHashAlgorithmHelper").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

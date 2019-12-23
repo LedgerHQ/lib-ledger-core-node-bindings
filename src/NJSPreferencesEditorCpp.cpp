@@ -17,9 +17,9 @@ NAN_METHOD(NJSPreferencesEditor::putString) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -47,7 +47,7 @@ NAN_METHOD(NJSPreferencesEditor::putInt) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
@@ -76,7 +76,7 @@ NAN_METHOD(NJSPreferencesEditor::putLong) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
 
@@ -105,7 +105,7 @@ NAN_METHOD(NJSPreferencesEditor::putBoolean) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
     auto arg_1 = Nan::To<bool>(info[1]).FromJust();
 
@@ -134,7 +134,7 @@ NAN_METHOD(NJSPreferencesEditor::putStringArray) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
     vector<std::string> arg_1;
     Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
@@ -142,7 +142,7 @@ NAN_METHOD(NJSPreferencesEditor::putStringArray) {
     {
         if(arg_1_container->Get(arg_1_id)->IsString())
         {
-            String::Utf8Value string_arg_1_elem(arg_1_container->Get(arg_1_id)->ToString());
+            Nan::Utf8String string_arg_1_elem(arg_1_container->Get(arg_1_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_elem = std::string(*string_arg_1_elem);
             arg_1.emplace_back(arg_1_elem);
         }
@@ -174,7 +174,7 @@ NAN_METHOD(NJSPreferencesEditor::putData) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
     vector<uint8_t> arg_1;
     Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
@@ -213,7 +213,7 @@ NAN_METHOD(NJSPreferencesEditor::remove) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -288,7 +288,7 @@ Local<Object> NJSPreferencesEditor::wrap(const std::shared_ptr<ledger::core::api
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::PreferencesEditor>::Wrap(object, obj);
     }
     else
@@ -328,5 +328,5 @@ void NJSPreferencesEditor::Initialize(Local<Object> target) {
     PreferencesEditor_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSPreferencesEditor").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSPreferencesEditor").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

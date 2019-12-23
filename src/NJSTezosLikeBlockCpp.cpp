@@ -104,7 +104,7 @@ Local<Object> NJSTezosLikeBlock::wrap(const std::shared_ptr<ledger::core::api::T
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::TezosLikeBlock>::Wrap(object, obj);
     }
     else
@@ -138,5 +138,5 @@ void NJSTezosLikeBlock::Initialize(Local<Object> target) {
     TezosLikeBlock_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTezosLikeBlock").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSTezosLikeBlock").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

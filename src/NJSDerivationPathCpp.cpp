@@ -202,7 +202,7 @@ NAN_METHOD(NJSDerivationPath::parse) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     auto result = ledger::core::api::DerivationPath::parse(arg_0);
@@ -229,7 +229,7 @@ NAN_METHOD(NJSDerivationPath::New) {
     }
 
     //Unwrap objects to get C++ classes
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Call factory
@@ -248,7 +248,7 @@ Local<Object> NJSDerivationPath::wrap(const std::shared_ptr<ledger::core::api::D
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::DerivationPath>::Wrap(object, obj);
     }
     else
@@ -287,5 +287,5 @@ void NJSDerivationPath::Initialize(Local<Object> target) {
     DerivationPath_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDerivationPath").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSDerivationPath").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

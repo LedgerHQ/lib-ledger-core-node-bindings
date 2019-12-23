@@ -23,7 +23,11 @@ std::string const TezosConfigurationDefaults::TEZOS_XPUB_CURVE_ED25519 = {"ED255
 
 std::string const TezosConfigurationDefaults::TEZOS_XPUB_CURVE_SECP256K1 = {"SECP256K1"};
 
-std::string const TezosConfigurationDefaults::TEZOS_DEFAULT_FEES = {"2500"};
+std::string const TezosConfigurationDefaults::TEZOS_XPUB_CURVE_P256 = {"P256"};
+
+std::string const TezosConfigurationDefaults::TEZOS_DEFAULT_FEES = {"5000"};
+
+std::string const TezosConfigurationDefaults::TEZOS_DEFAULT_MAX_FEES = {"30000"};
 
 std::string const TezosConfigurationDefaults::TEZOS_DEFAULT_GAS_LIMIT = {"18000"};
 

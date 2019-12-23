@@ -17,7 +17,7 @@ NAN_METHOD(NJSTezosLikeExtendedPublicKey::derive) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -45,7 +45,7 @@ NAN_METHOD(NJSTezosLikeExtendedPublicKey::derivePublicKey) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -78,7 +78,7 @@ NAN_METHOD(NJSTezosLikeExtendedPublicKey::deriveHash160) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -172,7 +172,7 @@ Local<Object> NJSTezosLikeExtendedPublicKey::wrap(const std::shared_ptr<ledger::
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::TezosLikeExtendedPublicKey>::Wrap(object, obj);
     }
     else
@@ -208,5 +208,5 @@ void NJSTezosLikeExtendedPublicKey::Initialize(Local<Object> target) {
     TezosLikeExtendedPublicKey_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTezosLikeExtendedPublicKey").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSTezosLikeExtendedPublicKey").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

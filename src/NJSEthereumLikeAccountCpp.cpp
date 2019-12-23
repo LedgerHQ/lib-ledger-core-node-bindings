@@ -168,7 +168,7 @@ NAN_METHOD(NJSEthereumLikeAccount::getEstimatedGasLimit) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Create promise and set it into Callback
@@ -195,7 +195,7 @@ NAN_METHOD(NJSEthereumLikeAccount::getERC20Balance) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Create promise and set it into Callback
@@ -211,6 +211,43 @@ NAN_METHOD(NJSEthereumLikeAccount::getERC20Balance) {
         return Nan::ThrowError("NJSEthereumLikeAccount::getERC20Balance : implementation of EthereumLikeAccount is not valid");
     }
     cpp_impl->getERC20Balance(arg_0,arg_1);
+    info.GetReturnValue().Set(arg_1_resolver->GetPromise());
+}
+NAN_METHOD(NJSEthereumLikeAccount::getERC20Balances) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getERC20Balances needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    vector<std::string> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    {
+        if(arg_0_container->Get(arg_0_id)->IsString())
+        {
+            Nan::Utf8String string_arg_0_elem(arg_0_container->Get(arg_0_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+            auto arg_0_elem = std::string(*string_arg_0_elem);
+            arg_0.emplace_back(arg_0_elem);
+        }
+    }
+
+
+    //Create promise and set it into Callback
+    auto arg_1_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntListCallback *njs_ptr_arg_1 = new NJSBigIntListCallback(arg_1_resolver);
+    std::shared_ptr<NJSBigIntListCallback> arg_1(njs_ptr_arg_1);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getERC20Balances : implementation of EthereumLikeAccount is not valid");
+    }
+    cpp_impl->getERC20Balances(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
 
@@ -233,7 +270,7 @@ Local<Object> NJSEthereumLikeAccount::wrap(const std::shared_ptr<ledger::core::a
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Wrap(object, obj);
     }
     else
@@ -266,10 +303,11 @@ void NJSEthereumLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getGasPrice", getGasPrice);
     Nan::SetPrototypeMethod(func_template,"getEstimatedGasLimit", getEstimatedGasLimit);
     Nan::SetPrototypeMethod(func_template,"getERC20Balance", getERC20Balance);
+    Nan::SetPrototypeMethod(func_template,"getERC20Balances", getERC20Balances);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeAccount_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSEthereumLikeAccount").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSEthereumLikeAccount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

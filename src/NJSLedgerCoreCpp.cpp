@@ -64,7 +64,7 @@ Local<Object> NJSLedgerCore::wrap(const std::shared_ptr<ledger::core::api::Ledge
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::LedgerCore>::Wrap(object, obj);
     }
     else
@@ -97,5 +97,5 @@ void NJSLedgerCore::Initialize(Local<Object> target) {
     LedgerCore_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSLedgerCore").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSLedgerCore").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

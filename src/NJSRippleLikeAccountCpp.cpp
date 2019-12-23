@@ -161,7 +161,7 @@ NAN_METHOD(NJSRippleLikeAccount::isAddressActivated) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Create promise and set it into Callback
@@ -199,7 +199,7 @@ Local<Object> NJSRippleLikeAccount::wrap(const std::shared_ptr<ledger::core::api
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::RippleLikeAccount>::Wrap(object, obj);
     }
     else
@@ -236,5 +236,5 @@ void NJSRippleLikeAccount::Initialize(Local<Object> target) {
     RippleLikeAccount_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleLikeAccount").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSRippleLikeAccount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

@@ -69,7 +69,7 @@ Local<Object> NJSI32Callback::wrap(const std::shared_ptr<ledger::core::api::I32C
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::I32Callback>::Wrap(object, obj);
     }
     else
@@ -92,5 +92,5 @@ void NJSI32Callback::Initialize(Local<Object> target) {
     I32Callback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSI32Callback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSI32Callback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

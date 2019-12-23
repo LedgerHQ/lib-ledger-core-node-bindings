@@ -394,16 +394,16 @@ NAN_METHOD(NJSRippleLikeTransaction::addMemo) {
 
     //Check if parameters have correct types
 
-    auto field_arg_0_1 = Nan::Get(info[0]->ToObject(), Nan::New<String>("data").ToLocalChecked()).ToLocalChecked();
-    String::Utf8Value string_arg_0_1(field_arg_0_1->ToString());
+    auto field_arg_0_1 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("data").ToLocalChecked()).ToLocalChecked();
+    Nan::Utf8String string_arg_0_1(field_arg_0_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0_1 = std::string(*string_arg_0_1);
 
-    auto field_arg_0_2 = Nan::Get(info[0]->ToObject(), Nan::New<String>("fmt").ToLocalChecked()).ToLocalChecked();
-    String::Utf8Value string_arg_0_2(field_arg_0_2->ToString());
+    auto field_arg_0_2 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("fmt").ToLocalChecked()).ToLocalChecked();
+    Nan::Utf8String string_arg_0_2(field_arg_0_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0_2 = std::string(*string_arg_0_2);
 
-    auto field_arg_0_3 = Nan::Get(info[0]->ToObject(), Nan::New<String>("ty").ToLocalChecked()).ToLocalChecked();
-    String::Utf8Value string_arg_0_3(field_arg_0_3->ToString());
+    auto field_arg_0_3 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ty").ToLocalChecked()).ToLocalChecked();
+    Nan::Utf8String string_arg_0_3(field_arg_0_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0_3 = std::string(*string_arg_0_3);
     RippleLikeMemo arg_0(arg_0_1, arg_0_2, arg_0_3);
 
@@ -468,7 +468,7 @@ Local<Object> NJSRippleLikeTransaction::wrap(const std::shared_ptr<ledger::core:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::RippleLikeTransaction>::Wrap(object, obj);
     }
     else
@@ -514,5 +514,5 @@ void NJSRippleLikeTransaction::Initialize(Local<Object> target) {
     RippleLikeTransaction_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleLikeTransaction").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSRippleLikeTransaction").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

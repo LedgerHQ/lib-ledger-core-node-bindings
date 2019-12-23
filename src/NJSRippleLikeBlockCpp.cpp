@@ -104,7 +104,7 @@ Local<Object> NJSRippleLikeBlock::wrap(const std::shared_ptr<ledger::core::api::
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::RippleLikeBlock>::Wrap(object, obj);
     }
     else
@@ -138,5 +138,5 @@ void NJSRippleLikeBlock::Initialize(Local<Object> target) {
     RippleLikeBlock_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleLikeBlock").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSRippleLikeBlock").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

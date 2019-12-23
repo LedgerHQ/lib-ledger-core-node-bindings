@@ -436,7 +436,7 @@ Local<Object> NJSTezosLikeTransaction::wrap(const std::shared_ptr<ledger::core::
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::TezosLikeTransaction>::Wrap(object, obj);
     }
     else
@@ -482,5 +482,5 @@ void NJSTezosLikeTransaction::Initialize(Local<Object> target) {
     TezosLikeTransaction_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTezosLikeTransaction").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSTezosLikeTransaction").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

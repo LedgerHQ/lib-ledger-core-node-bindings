@@ -28,7 +28,7 @@ Local<Object> NJSRippleConfiguration::wrap(const std::shared_ptr<ledger::core::a
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::RippleConfiguration>::Wrap(object, obj);
     }
     else
@@ -59,5 +59,5 @@ void NJSRippleConfiguration::Initialize(Local<Object> target) {
     RippleConfiguration_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleConfiguration").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSRippleConfiguration").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

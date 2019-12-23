@@ -28,7 +28,7 @@ Local<Object> NJSConfigurationDefaults::wrap(const std::shared_ptr<ledger::core:
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::ConfigurationDefaults>::Wrap(object, obj);
     }
     else
@@ -59,5 +59,5 @@ void NJSConfigurationDefaults::Initialize(Local<Object> target) {
     ConfigurationDefaults_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSConfigurationDefaults").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSConfigurationDefaults").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

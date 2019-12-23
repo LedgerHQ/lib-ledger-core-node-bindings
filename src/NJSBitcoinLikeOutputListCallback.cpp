@@ -76,7 +76,7 @@ Local<Object> NJSBitcoinLikeOutputListCallback::wrap(const std::shared_ptr<ledge
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutputListCallback>::Wrap(object, obj);
     }
     else
@@ -99,5 +99,5 @@ void NJSBitcoinLikeOutputListCallback::Initialize(Local<Object> target) {
     BitcoinLikeOutputListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeOutputListCallback").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSBitcoinLikeOutputListCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

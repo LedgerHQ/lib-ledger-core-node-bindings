@@ -93,9 +93,9 @@ NAN_METHOD(NJSAccount::getBalanceHistory) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    String::Utf8Value string_arg_1(info[1]->ToString());
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
     auto arg_2 = (ledger::core::api::TimePeriod)Nan::To<int>(info[2]).FromJust();
 
@@ -226,7 +226,7 @@ NAN_METHOD(NJSAccount::getOperationPreferences) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -658,7 +658,7 @@ Local<Object> NJSAccount::wrap(const std::shared_ptr<ledger::core::api::Account>
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::Account>::Wrap(object, obj);
     }
     else
@@ -714,5 +714,5 @@ void NJSAccount::Initialize(Local<Object> target) {
     Account_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSAccount").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSAccount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

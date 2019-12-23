@@ -17,7 +17,7 @@ NAN_METHOD(NJSQueryFilter::accountEq) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     auto result = ledger::core::api::QueryFilter::accountEq(arg_0);
@@ -38,7 +38,7 @@ NAN_METHOD(NJSQueryFilter::accountNeq) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     auto result = ledger::core::api::QueryFilter::accountNeq(arg_0);
@@ -185,7 +185,7 @@ NAN_METHOD(NJSQueryFilter::containsRecipient) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     auto result = ledger::core::api::QueryFilter::containsRecipient(arg_0);
@@ -206,7 +206,7 @@ NAN_METHOD(NJSQueryFilter::containsSender) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     auto result = ledger::core::api::QueryFilter::containsSender(arg_0);
@@ -227,7 +227,7 @@ NAN_METHOD(NJSQueryFilter::currencyEq) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     auto result = ledger::core::api::QueryFilter::currencyEq(arg_0);
@@ -248,7 +248,7 @@ NAN_METHOD(NJSQueryFilter::operationUidEq) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     auto result = ledger::core::api::QueryFilter::operationUidEq(arg_0);
@@ -269,7 +269,7 @@ NAN_METHOD(NJSQueryFilter::operationUidNeq) {
     }
 
     //Check if parameters have correct types
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     auto result = ledger::core::api::QueryFilter::operationUidNeq(arg_0);
@@ -959,7 +959,7 @@ NAN_METHOD(NJSQueryFilter::New) {
     }
 
     //Unwrap objects to get C++ classes
-    String::Utf8Value string_arg_0(info[0]->ToString());
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
 
     //Call factory
@@ -978,7 +978,7 @@ Local<Object> NJSQueryFilter::wrap(const std::shared_ptr<ledger::core::api::Quer
     Local<Object> obj;
     if(!local_prototype.IsEmpty())
     {
-        obj = local_prototype->NewInstance();
+        obj = local_prototype->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
         djinni::js::ObjectWrapper<ledger::core::api::QueryFilter>::Wrap(object, obj);
     }
     else
@@ -1049,5 +1049,5 @@ void NJSQueryFilter::Initialize(Local<Object> target) {
     QueryFilter_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSQueryFilter").ToLocalChecked(), func_template->GetFunction());
+    target->Set(Nan::New<String>("NJSQueryFilter").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }
