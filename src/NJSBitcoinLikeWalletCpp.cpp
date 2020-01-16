@@ -59,5 +59,5 @@ void NJSBitcoinLikeWallet::Initialize(Local<Object> target) {
     BitcoinLikeWallet_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeWallet").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBitcoinLikeWallet").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

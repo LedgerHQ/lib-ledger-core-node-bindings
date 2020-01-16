@@ -136,9 +136,9 @@ NAN_METHOD(NJSPreferences::getStringArray) {
     Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
     for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
     {
-        if(arg_1_container->Get(arg_1_id)->IsString())
+        if(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->IsString())
         {
-            Nan::Utf8String string_arg_1_elem(arg_1_container->Get(arg_1_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+            Nan::Utf8String string_arg_1_elem(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_elem = std::string(*string_arg_1_elem);
             arg_1.emplace_back(arg_1_elem);
         }
@@ -159,7 +159,7 @@ NAN_METHOD(NJSPreferences::getStringArray) {
     for(size_t arg_2_id = 0; arg_2_id < result.size(); arg_2_id++)
     {
         auto arg_2_elem = Nan::New<String>(result[arg_2_id]).ToLocalChecked();
-        arg_2->Set((int)arg_2_id,arg_2_elem);
+        Nan::Set(arg_2, (int)arg_2_id,arg_2_elem);
     }
 
 
@@ -181,9 +181,9 @@ NAN_METHOD(NJSPreferences::getData) {
     Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
     for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
     {
-        if(arg_1_container->Get(arg_1_id)->IsUint32())
+        if(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(arg_1_id)).FromJust();
+            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()).FromJust();
             arg_1.emplace_back(arg_1_elem);
         }
     }
@@ -203,7 +203,7 @@ NAN_METHOD(NJSPreferences::getData) {
     for(size_t arg_2_id = 0; arg_2_id < result.size(); arg_2_id++)
     {
         auto arg_2_elem = Nan::New<Uint32>(result[arg_2_id]);
-        arg_2->Set((int)arg_2_id,arg_2_elem);
+        Nan::Set(arg_2, (int)arg_2_id,arg_2_elem);
     }
 
 
@@ -322,5 +322,5 @@ void NJSPreferences::Initialize(Local<Object> target) {
     Preferences_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSPreferences").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSPreferences").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

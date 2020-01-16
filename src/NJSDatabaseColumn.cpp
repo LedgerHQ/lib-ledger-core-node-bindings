@@ -100,5 +100,5 @@ void NJSDatabaseColumn::Initialize(Local<Object> target) {
     DatabaseColumn_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseColumn").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSDatabaseColumn").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

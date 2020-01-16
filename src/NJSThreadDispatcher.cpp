@@ -151,5 +151,5 @@ void NJSThreadDispatcher::Initialize(Local<Object> target) {
     ThreadDispatcher_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSThreadDispatcher").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSThreadDispatcher").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

@@ -77,5 +77,5 @@ void NJSHttpClient::Initialize(Local<Object> target) {
     HttpClient_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSHttpClient").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSHttpClient").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

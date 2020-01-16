@@ -102,5 +102,5 @@ void NJSDatabaseEngine::Initialize(Local<Object> target) {
     DatabaseEngine_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseEngine").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSDatabaseEngine").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

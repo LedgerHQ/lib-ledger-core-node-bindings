@@ -31,9 +31,9 @@ std::vector<uint8_t> NJSDatabaseBlob::read(int64_t offset, int64_t length)
     Local<Array> fResult_read_container = Local<Array>::Cast(checkedResult_read);
     for(uint32_t fResult_read_id = 0; fResult_read_id < fResult_read_container->Length(); fResult_read_id++)
     {
-        if(fResult_read_container->Get(fResult_read_id)->IsUint32())
+        if(fResult_read_container->Get(Nan::GetCurrentContext(), fResult_read_id).ToLocalChecked()->IsUint32())
         {
-            auto fResult_read_elem = Nan::To<uint32_t>(fResult_read_container->Get(fResult_read_id)).FromJust();
+            auto fResult_read_elem = Nan::To<uint32_t>(fResult_read_container->Get(Nan::GetCurrentContext(), fResult_read_id).ToLocalChecked()).FromJust();
             fResult_read.emplace_back(fResult_read_elem);
         }
     }
@@ -50,7 +50,7 @@ int64_t NJSDatabaseBlob::write(int64_t offset, const std::vector<uint8_t> & data
     for(size_t arg_1_id = 0; arg_1_id < data.size(); arg_1_id++)
     {
         auto arg_1_elem = Nan::New<Uint32>(data[arg_1_id]);
-        arg_1->Set((int)arg_1_id,arg_1_elem);
+        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
     }
 
     Local<Value> args[2] = {arg_0,arg_1};
@@ -78,7 +78,7 @@ int64_t NJSDatabaseBlob::append(const std::vector<uint8_t> & data)
     for(size_t arg_0_id = 0; arg_0_id < data.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(data[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
     Local<Value> args[1] = {arg_0};
@@ -190,5 +190,5 @@ void NJSDatabaseBlob::Initialize(Local<Object> target) {
     DatabaseBlob_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseBlob").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSDatabaseBlob").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

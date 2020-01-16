@@ -21,7 +21,7 @@ void NJSOperationListCallback::onCallback(const std::experimental::optional<std:
         {
             auto arg_0_tmp_elem = NJSOperation::wrap(arg_0_optional[arg_0_tmp_id]);
 
-            arg_0_tmp->Set((int)arg_0_tmp_id,arg_0_tmp_elem);
+            Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
         }
 
         arg_0 = arg_0_tmp;
@@ -99,5 +99,5 @@ void NJSOperationListCallback::Initialize(Local<Object> target) {
     OperationListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSOperationListCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSOperationListCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

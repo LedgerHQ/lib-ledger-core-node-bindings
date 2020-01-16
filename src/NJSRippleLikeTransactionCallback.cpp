@@ -87,5 +87,5 @@ void NJSRippleLikeTransactionCallback::Initialize(Local<Object> target) {
     RippleLikeTransactionCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleLikeTransactionCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSRippleLikeTransactionCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

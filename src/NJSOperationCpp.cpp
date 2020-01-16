@@ -133,7 +133,7 @@ NAN_METHOD(NJSOperation::getSenders) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<String>(result[arg_0_id]).ToLocalChecked();
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -164,7 +164,7 @@ NAN_METHOD(NJSOperation::getRecipients) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<String>(result[arg_0_id]).ToLocalChecked();
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -604,7 +604,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         auto arg_0_5_elem_4 = Nan::New<Int32>(result.units[arg_0_5_id].numberOfDecimal);
         Nan::DefineOwnProperty(arg_0_5_elem, Nan::New<String>("numberOfDecimal").ToLocalChecked(), arg_0_5_elem_4);
 
-        arg_0_5->Set((int)arg_0_5_id,arg_0_5_elem);
+        Nan::Set(arg_0_5, (int)arg_0_5_id,arg_0_5_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("units").ToLocalChecked(), arg_0_5);
@@ -619,7 +619,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_6_tmp_2_id = 0; arg_0_6_tmp_2_id < arg_0_6_optional.P2PKHVersion.size(); arg_0_6_tmp_2_id++)
         {
             auto arg_0_6_tmp_2_elem = Nan::New<Uint32>(arg_0_6_optional.P2PKHVersion[arg_0_6_tmp_2_id]);
-            arg_0_6_tmp_2->Set((int)arg_0_6_tmp_2_id,arg_0_6_tmp_2_elem);
+            Nan::Set(arg_0_6_tmp_2, (int)arg_0_6_tmp_2_id,arg_0_6_tmp_2_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("P2PKHVersion").ToLocalChecked(), arg_0_6_tmp_2);
@@ -627,7 +627,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_6_tmp_3_id = 0; arg_0_6_tmp_3_id < arg_0_6_optional.P2SHVersion.size(); arg_0_6_tmp_3_id++)
         {
             auto arg_0_6_tmp_3_elem = Nan::New<Uint32>(arg_0_6_optional.P2SHVersion[arg_0_6_tmp_3_id]);
-            arg_0_6_tmp_3->Set((int)arg_0_6_tmp_3_id,arg_0_6_tmp_3_elem);
+            Nan::Set(arg_0_6_tmp_3, (int)arg_0_6_tmp_3_id,arg_0_6_tmp_3_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("P2SHVersion").ToLocalChecked(), arg_0_6_tmp_3);
@@ -635,7 +635,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_6_tmp_4_id = 0; arg_0_6_tmp_4_id < arg_0_6_optional.XPUBVersion.size(); arg_0_6_tmp_4_id++)
         {
             auto arg_0_6_tmp_4_elem = Nan::New<Uint32>(arg_0_6_optional.XPUBVersion[arg_0_6_tmp_4_id]);
-            arg_0_6_tmp_4->Set((int)arg_0_6_tmp_4_id,arg_0_6_tmp_4_elem);
+            Nan::Set(arg_0_6_tmp_4, (int)arg_0_6_tmp_4_id,arg_0_6_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_6_tmp_4);
@@ -653,7 +653,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_6_tmp_10_id = 0; arg_0_6_tmp_10_id < arg_0_6_optional.SigHash.size(); arg_0_6_tmp_10_id++)
         {
             auto arg_0_6_tmp_10_elem = Nan::New<Uint32>(arg_0_6_optional.SigHash[arg_0_6_tmp_10_id]);
-            arg_0_6_tmp_10->Set((int)arg_0_6_tmp_10_id,arg_0_6_tmp_10_elem);
+            Nan::Set(arg_0_6_tmp_10, (int)arg_0_6_tmp_10_id,arg_0_6_tmp_10_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_6_tmp_10);
@@ -661,7 +661,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_6_tmp_11_id = 0; arg_0_6_tmp_11_id < arg_0_6_optional.AdditionalBIPs.size(); arg_0_6_tmp_11_id++)
         {
             auto arg_0_6_tmp_11_elem = Nan::New<String>(arg_0_6_optional.AdditionalBIPs[arg_0_6_tmp_11_id]).ToLocalChecked();
-            arg_0_6_tmp_11->Set((int)arg_0_6_tmp_11_id,arg_0_6_tmp_11_elem);
+            Nan::Set(arg_0_6_tmp_11, (int)arg_0_6_tmp_11_id,arg_0_6_tmp_11_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_6_tmp_11);
@@ -685,7 +685,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_7_tmp_4_id = 0; arg_0_7_tmp_4_id < arg_0_7_optional.XPUBVersion.size(); arg_0_7_tmp_4_id++)
         {
             auto arg_0_7_tmp_4_elem = Nan::New<Uint32>(arg_0_7_optional.XPUBVersion[arg_0_7_tmp_4_id]);
-            arg_0_7_tmp_4->Set((int)arg_0_7_tmp_4_id,arg_0_7_tmp_4_elem);
+            Nan::Set(arg_0_7_tmp_4, (int)arg_0_7_tmp_4_id,arg_0_7_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_7_tmp_4);
@@ -693,7 +693,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_7_tmp_5_id = 0; arg_0_7_tmp_5_id < arg_0_7_optional.AdditionalEIPs.size(); arg_0_7_tmp_5_id++)
         {
             auto arg_0_7_tmp_5_elem = Nan::New<String>(arg_0_7_optional.AdditionalEIPs[arg_0_7_tmp_5_id]).ToLocalChecked();
-            arg_0_7_tmp_5->Set((int)arg_0_7_tmp_5_id,arg_0_7_tmp_5_elem);
+            Nan::Set(arg_0_7_tmp_5, (int)arg_0_7_tmp_5_id,arg_0_7_tmp_5_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AdditionalEIPs").ToLocalChecked(), arg_0_7_tmp_5);
@@ -717,7 +717,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_8_tmp_3_id = 0; arg_0_8_tmp_3_id < arg_0_8_optional.XPUBVersion.size(); arg_0_8_tmp_3_id++)
         {
             auto arg_0_8_tmp_3_elem = Nan::New<Uint32>(arg_0_8_optional.XPUBVersion[arg_0_8_tmp_3_id]);
-            arg_0_8_tmp_3->Set((int)arg_0_8_tmp_3_id,arg_0_8_tmp_3_elem);
+            Nan::Set(arg_0_8_tmp_3, (int)arg_0_8_tmp_3_id,arg_0_8_tmp_3_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_8_tmp_3);
@@ -725,7 +725,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_8_tmp_4_id = 0; arg_0_8_tmp_4_id < arg_0_8_optional.AdditionalRIPs.size(); arg_0_8_tmp_4_id++)
         {
             auto arg_0_8_tmp_4_elem = Nan::New<String>(arg_0_8_optional.AdditionalRIPs[arg_0_8_tmp_4_id]).ToLocalChecked();
-            arg_0_8_tmp_4->Set((int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
+            Nan::Set(arg_0_8_tmp_4, (int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_8_tmp_4);
@@ -749,7 +749,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_9_tmp_3_id = 0; arg_0_9_tmp_3_id < arg_0_9_optional.XPUBVersion.size(); arg_0_9_tmp_3_id++)
         {
             auto arg_0_9_tmp_3_elem = Nan::New<Uint32>(arg_0_9_optional.XPUBVersion[arg_0_9_tmp_3_id]);
-            arg_0_9_tmp_3->Set((int)arg_0_9_tmp_3_id,arg_0_9_tmp_3_elem);
+            Nan::Set(arg_0_9_tmp_3, (int)arg_0_9_tmp_3_id,arg_0_9_tmp_3_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_9_tmp_3);
@@ -757,7 +757,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_9_tmp_4_id = 0; arg_0_9_tmp_4_id < arg_0_9_optional.ImplicitPrefix.size(); arg_0_9_tmp_4_id++)
         {
             auto arg_0_9_tmp_4_elem = Nan::New<Uint32>(arg_0_9_optional.ImplicitPrefix[arg_0_9_tmp_4_id]);
-            arg_0_9_tmp_4->Set((int)arg_0_9_tmp_4_id,arg_0_9_tmp_4_elem);
+            Nan::Set(arg_0_9_tmp_4, (int)arg_0_9_tmp_4_id,arg_0_9_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_9_tmp_4);
@@ -765,7 +765,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_9_tmp_5_id = 0; arg_0_9_tmp_5_id < arg_0_9_optional.OriginatedPrefix.size(); arg_0_9_tmp_5_id++)
         {
             auto arg_0_9_tmp_5_elem = Nan::New<Uint32>(arg_0_9_optional.OriginatedPrefix[arg_0_9_tmp_5_id]);
-            arg_0_9_tmp_5->Set((int)arg_0_9_tmp_5_id,arg_0_9_tmp_5_elem);
+            Nan::Set(arg_0_9_tmp_5, (int)arg_0_9_tmp_5_id,arg_0_9_tmp_5_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_9_tmp_5);
@@ -773,7 +773,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         for(size_t arg_0_9_tmp_6_id = 0; arg_0_9_tmp_6_id < arg_0_9_optional.AdditionalTIPs.size(); arg_0_9_tmp_6_id++)
         {
             auto arg_0_9_tmp_6_elem = Nan::New<String>(arg_0_9_optional.AdditionalTIPs[arg_0_9_tmp_6_id]).ToLocalChecked();
-            arg_0_9_tmp_6->Set((int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
+            Nan::Set(arg_0_9_tmp_6, (int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_9_tmp_6);
@@ -862,5 +862,5 @@ void NJSOperation::Initialize(Local<Object> target) {
     Operation_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSOperation").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSOperation").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

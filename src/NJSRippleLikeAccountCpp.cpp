@@ -21,9 +21,9 @@ NAN_METHOD(NJSRippleLikeAccount::broadcastRawTransaction) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
             arg_0.emplace_back(arg_0_elem);
         }
     }
@@ -236,5 +236,5 @@ void NJSRippleLikeAccount::Initialize(Local<Object> target) {
     RippleLikeAccount_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleLikeAccount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSRippleLikeAccount").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

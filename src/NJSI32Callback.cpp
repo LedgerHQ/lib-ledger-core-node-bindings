@@ -92,5 +92,5 @@ void NJSI32Callback::Initialize(Local<Object> target) {
     I32Callback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSI32Callback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSI32Callback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

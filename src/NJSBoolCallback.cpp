@@ -92,5 +92,5 @@ void NJSBoolCallback::Initialize(Local<Object> target) {
     BoolCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBoolCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBoolCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

@@ -23,7 +23,7 @@ void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optiona
         for(size_t arg_0_tmp_2_id = 0; arg_0_tmp_2_id < arg_0_optional.owners.size(); arg_0_tmp_2_id++)
         {
             auto arg_0_tmp_2_elem = Nan::New<String>(arg_0_optional.owners[arg_0_tmp_2_id]).ToLocalChecked();
-            arg_0_tmp_2->Set((int)arg_0_tmp_2_id,arg_0_tmp_2_elem);
+            Nan::Set(arg_0_tmp_2, (int)arg_0_tmp_2_id,arg_0_tmp_2_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("owners").ToLocalChecked(), arg_0_tmp_2);
@@ -31,7 +31,7 @@ void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optiona
         for(size_t arg_0_tmp_3_id = 0; arg_0_tmp_3_id < arg_0_optional.derivations.size(); arg_0_tmp_3_id++)
         {
             auto arg_0_tmp_3_elem = Nan::New<String>(arg_0_optional.derivations[arg_0_tmp_3_id]).ToLocalChecked();
-            arg_0_tmp_3->Set((int)arg_0_tmp_3_id,arg_0_tmp_3_elem);
+            Nan::Set(arg_0_tmp_3, (int)arg_0_tmp_3_id,arg_0_tmp_3_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("derivations").ToLocalChecked(), arg_0_tmp_3);
@@ -42,10 +42,10 @@ void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optiona
             for(size_t arg_0_tmp_4_elem_id = 0; arg_0_tmp_4_elem_id < arg_0_optional.publicKeys[arg_0_tmp_4_id].size(); arg_0_tmp_4_elem_id++)
             {
                 auto arg_0_tmp_4_elem_elem = Nan::New<Uint32>(arg_0_optional.publicKeys[arg_0_tmp_4_id][arg_0_tmp_4_elem_id]);
-                arg_0_tmp_4_elem->Set((int)arg_0_tmp_4_elem_id,arg_0_tmp_4_elem_elem);
+                Nan::Set(arg_0_tmp_4_elem, (int)arg_0_tmp_4_elem_id,arg_0_tmp_4_elem_elem);
             }
 
-            arg_0_tmp_4->Set((int)arg_0_tmp_4_id,arg_0_tmp_4_elem);
+            Nan::Set(arg_0_tmp_4, (int)arg_0_tmp_4_id,arg_0_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("publicKeys").ToLocalChecked(), arg_0_tmp_4);
@@ -56,10 +56,10 @@ void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optiona
             for(size_t arg_0_tmp_5_elem_id = 0; arg_0_tmp_5_elem_id < arg_0_optional.chainCodes[arg_0_tmp_5_id].size(); arg_0_tmp_5_elem_id++)
             {
                 auto arg_0_tmp_5_elem_elem = Nan::New<Uint32>(arg_0_optional.chainCodes[arg_0_tmp_5_id][arg_0_tmp_5_elem_id]);
-                arg_0_tmp_5_elem->Set((int)arg_0_tmp_5_elem_id,arg_0_tmp_5_elem_elem);
+                Nan::Set(arg_0_tmp_5_elem, (int)arg_0_tmp_5_elem_id,arg_0_tmp_5_elem_elem);
             }
 
-            arg_0_tmp_5->Set((int)arg_0_tmp_5_id,arg_0_tmp_5_elem);
+            Nan::Set(arg_0_tmp_5, (int)arg_0_tmp_5_id,arg_0_tmp_5_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("chainCodes").ToLocalChecked(), arg_0_tmp_5);
@@ -139,5 +139,5 @@ void NJSAccountCreationInfoCallback::Initialize(Local<Object> target) {
     AccountCreationInfoCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSAccountCreationInfoCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSAccountCreationInfoCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

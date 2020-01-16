@@ -76,7 +76,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         auto arg_0_5_elem_4 = Nan::New<Int32>(result.units[arg_0_5_id].numberOfDecimal);
         Nan::DefineOwnProperty(arg_0_5_elem, Nan::New<String>("numberOfDecimal").ToLocalChecked(), arg_0_5_elem_4);
 
-        arg_0_5->Set((int)arg_0_5_id,arg_0_5_elem);
+        Nan::Set(arg_0_5, (int)arg_0_5_id,arg_0_5_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("units").ToLocalChecked(), arg_0_5);
@@ -91,7 +91,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_6_tmp_2_id = 0; arg_0_6_tmp_2_id < arg_0_6_optional.P2PKHVersion.size(); arg_0_6_tmp_2_id++)
         {
             auto arg_0_6_tmp_2_elem = Nan::New<Uint32>(arg_0_6_optional.P2PKHVersion[arg_0_6_tmp_2_id]);
-            arg_0_6_tmp_2->Set((int)arg_0_6_tmp_2_id,arg_0_6_tmp_2_elem);
+            Nan::Set(arg_0_6_tmp_2, (int)arg_0_6_tmp_2_id,arg_0_6_tmp_2_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("P2PKHVersion").ToLocalChecked(), arg_0_6_tmp_2);
@@ -99,7 +99,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_6_tmp_3_id = 0; arg_0_6_tmp_3_id < arg_0_6_optional.P2SHVersion.size(); arg_0_6_tmp_3_id++)
         {
             auto arg_0_6_tmp_3_elem = Nan::New<Uint32>(arg_0_6_optional.P2SHVersion[arg_0_6_tmp_3_id]);
-            arg_0_6_tmp_3->Set((int)arg_0_6_tmp_3_id,arg_0_6_tmp_3_elem);
+            Nan::Set(arg_0_6_tmp_3, (int)arg_0_6_tmp_3_id,arg_0_6_tmp_3_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("P2SHVersion").ToLocalChecked(), arg_0_6_tmp_3);
@@ -107,7 +107,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_6_tmp_4_id = 0; arg_0_6_tmp_4_id < arg_0_6_optional.XPUBVersion.size(); arg_0_6_tmp_4_id++)
         {
             auto arg_0_6_tmp_4_elem = Nan::New<Uint32>(arg_0_6_optional.XPUBVersion[arg_0_6_tmp_4_id]);
-            arg_0_6_tmp_4->Set((int)arg_0_6_tmp_4_id,arg_0_6_tmp_4_elem);
+            Nan::Set(arg_0_6_tmp_4, (int)arg_0_6_tmp_4_id,arg_0_6_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_6_tmp_4);
@@ -125,7 +125,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_6_tmp_10_id = 0; arg_0_6_tmp_10_id < arg_0_6_optional.SigHash.size(); arg_0_6_tmp_10_id++)
         {
             auto arg_0_6_tmp_10_elem = Nan::New<Uint32>(arg_0_6_optional.SigHash[arg_0_6_tmp_10_id]);
-            arg_0_6_tmp_10->Set((int)arg_0_6_tmp_10_id,arg_0_6_tmp_10_elem);
+            Nan::Set(arg_0_6_tmp_10, (int)arg_0_6_tmp_10_id,arg_0_6_tmp_10_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_6_tmp_10);
@@ -133,7 +133,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_6_tmp_11_id = 0; arg_0_6_tmp_11_id < arg_0_6_optional.AdditionalBIPs.size(); arg_0_6_tmp_11_id++)
         {
             auto arg_0_6_tmp_11_elem = Nan::New<String>(arg_0_6_optional.AdditionalBIPs[arg_0_6_tmp_11_id]).ToLocalChecked();
-            arg_0_6_tmp_11->Set((int)arg_0_6_tmp_11_id,arg_0_6_tmp_11_elem);
+            Nan::Set(arg_0_6_tmp_11, (int)arg_0_6_tmp_11_id,arg_0_6_tmp_11_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_6_tmp_11);
@@ -157,7 +157,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_7_tmp_4_id = 0; arg_0_7_tmp_4_id < arg_0_7_optional.XPUBVersion.size(); arg_0_7_tmp_4_id++)
         {
             auto arg_0_7_tmp_4_elem = Nan::New<Uint32>(arg_0_7_optional.XPUBVersion[arg_0_7_tmp_4_id]);
-            arg_0_7_tmp_4->Set((int)arg_0_7_tmp_4_id,arg_0_7_tmp_4_elem);
+            Nan::Set(arg_0_7_tmp_4, (int)arg_0_7_tmp_4_id,arg_0_7_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_7_tmp_4);
@@ -165,7 +165,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_7_tmp_5_id = 0; arg_0_7_tmp_5_id < arg_0_7_optional.AdditionalEIPs.size(); arg_0_7_tmp_5_id++)
         {
             auto arg_0_7_tmp_5_elem = Nan::New<String>(arg_0_7_optional.AdditionalEIPs[arg_0_7_tmp_5_id]).ToLocalChecked();
-            arg_0_7_tmp_5->Set((int)arg_0_7_tmp_5_id,arg_0_7_tmp_5_elem);
+            Nan::Set(arg_0_7_tmp_5, (int)arg_0_7_tmp_5_id,arg_0_7_tmp_5_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AdditionalEIPs").ToLocalChecked(), arg_0_7_tmp_5);
@@ -189,7 +189,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_8_tmp_3_id = 0; arg_0_8_tmp_3_id < arg_0_8_optional.XPUBVersion.size(); arg_0_8_tmp_3_id++)
         {
             auto arg_0_8_tmp_3_elem = Nan::New<Uint32>(arg_0_8_optional.XPUBVersion[arg_0_8_tmp_3_id]);
-            arg_0_8_tmp_3->Set((int)arg_0_8_tmp_3_id,arg_0_8_tmp_3_elem);
+            Nan::Set(arg_0_8_tmp_3, (int)arg_0_8_tmp_3_id,arg_0_8_tmp_3_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_8_tmp_3);
@@ -197,7 +197,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_8_tmp_4_id = 0; arg_0_8_tmp_4_id < arg_0_8_optional.AdditionalRIPs.size(); arg_0_8_tmp_4_id++)
         {
             auto arg_0_8_tmp_4_elem = Nan::New<String>(arg_0_8_optional.AdditionalRIPs[arg_0_8_tmp_4_id]).ToLocalChecked();
-            arg_0_8_tmp_4->Set((int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
+            Nan::Set(arg_0_8_tmp_4, (int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_8_tmp_4);
@@ -221,7 +221,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_9_tmp_3_id = 0; arg_0_9_tmp_3_id < arg_0_9_optional.XPUBVersion.size(); arg_0_9_tmp_3_id++)
         {
             auto arg_0_9_tmp_3_elem = Nan::New<Uint32>(arg_0_9_optional.XPUBVersion[arg_0_9_tmp_3_id]);
-            arg_0_9_tmp_3->Set((int)arg_0_9_tmp_3_id,arg_0_9_tmp_3_elem);
+            Nan::Set(arg_0_9_tmp_3, (int)arg_0_9_tmp_3_id,arg_0_9_tmp_3_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_9_tmp_3);
@@ -229,7 +229,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_9_tmp_4_id = 0; arg_0_9_tmp_4_id < arg_0_9_optional.ImplicitPrefix.size(); arg_0_9_tmp_4_id++)
         {
             auto arg_0_9_tmp_4_elem = Nan::New<Uint32>(arg_0_9_optional.ImplicitPrefix[arg_0_9_tmp_4_id]);
-            arg_0_9_tmp_4->Set((int)arg_0_9_tmp_4_id,arg_0_9_tmp_4_elem);
+            Nan::Set(arg_0_9_tmp_4, (int)arg_0_9_tmp_4_id,arg_0_9_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_9_tmp_4);
@@ -237,7 +237,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_9_tmp_5_id = 0; arg_0_9_tmp_5_id < arg_0_9_optional.OriginatedPrefix.size(); arg_0_9_tmp_5_id++)
         {
             auto arg_0_9_tmp_5_elem = Nan::New<Uint32>(arg_0_9_optional.OriginatedPrefix[arg_0_9_tmp_5_id]);
-            arg_0_9_tmp_5->Set((int)arg_0_9_tmp_5_id,arg_0_9_tmp_5_elem);
+            Nan::Set(arg_0_9_tmp_5, (int)arg_0_9_tmp_5_id,arg_0_9_tmp_5_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_9_tmp_5);
@@ -245,7 +245,7 @@ NAN_METHOD(NJSAmount::getCurrency) {
         for(size_t arg_0_9_tmp_6_id = 0; arg_0_9_tmp_6_id < arg_0_9_optional.AdditionalTIPs.size(); arg_0_9_tmp_6_id++)
         {
             auto arg_0_9_tmp_6_elem = Nan::New<String>(arg_0_9_optional.AdditionalTIPs[arg_0_9_tmp_6_id]).ToLocalChecked();
-            arg_0_9_tmp_6->Set((int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
+            Nan::Set(arg_0_9_tmp_6, (int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_9_tmp_6);
@@ -521,22 +521,22 @@ NAN_METHOD(NJSAmount::fromHex) {
     Local<Array> arg_0_5_container = Local<Array>::Cast(field_arg_0_5);
     for(uint32_t arg_0_5_id = 0; arg_0_5_id < arg_0_5_container->Length(); arg_0_5_id++)
     {
-        if(arg_0_5_container->Get(arg_0_5_id)->IsObject())
+        if(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->IsObject())
         {
 
-            auto field_arg_0_5_elem_1 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_1 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_1(field_arg_0_5_elem_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_1 = std::string(*string_arg_0_5_elem_1);
 
-            auto field_arg_0_5_elem_2 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_2 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_2(field_arg_0_5_elem_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_2 = std::string(*string_arg_0_5_elem_2);
 
-            auto field_arg_0_5_elem_3 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_3 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_3(field_arg_0_5_elem_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_3 = std::string(*string_arg_0_5_elem_3);
 
-            auto field_arg_0_5_elem_4 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_4 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
             auto arg_0_5_elem_4 = Nan::To<int32_t>(field_arg_0_5_elem_4).FromJust();
             CurrencyUnit arg_0_5_elem(arg_0_5_elem_1, arg_0_5_elem_2, arg_0_5_elem_3, arg_0_5_elem_4);
 
@@ -559,9 +559,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_6_2_container = Local<Array>::Cast(field_opt_arg_0_6_2);
         for(uint32_t opt_arg_0_6_2_id = 0; opt_arg_0_6_2_id < opt_arg_0_6_2_container->Length(); opt_arg_0_6_2_id++)
         {
-            if(opt_arg_0_6_2_container->Get(opt_arg_0_6_2_id)->IsUint32())
+            if(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_2_elem = Nan::To<uint32_t>(opt_arg_0_6_2_container->Get(opt_arg_0_6_2_id)).FromJust();
+                auto opt_arg_0_6_2_elem = Nan::To<uint32_t>(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_2.emplace_back(opt_arg_0_6_2_elem);
             }
         }
@@ -572,9 +572,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_6_3_container = Local<Array>::Cast(field_opt_arg_0_6_3);
         for(uint32_t opt_arg_0_6_3_id = 0; opt_arg_0_6_3_id < opt_arg_0_6_3_container->Length(); opt_arg_0_6_3_id++)
         {
-            if(opt_arg_0_6_3_container->Get(opt_arg_0_6_3_id)->IsUint32())
+            if(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_3_elem = Nan::To<uint32_t>(opt_arg_0_6_3_container->Get(opt_arg_0_6_3_id)).FromJust();
+                auto opt_arg_0_6_3_elem = Nan::To<uint32_t>(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_3.emplace_back(opt_arg_0_6_3_elem);
             }
         }
@@ -585,9 +585,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_6_4_container = Local<Array>::Cast(field_opt_arg_0_6_4);
         for(uint32_t opt_arg_0_6_4_id = 0; opt_arg_0_6_4_id < opt_arg_0_6_4_container->Length(); opt_arg_0_6_4_id++)
         {
-            if(opt_arg_0_6_4_container->Get(opt_arg_0_6_4_id)->IsUint32())
+            if(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_4_elem = Nan::To<uint32_t>(opt_arg_0_6_4_container->Get(opt_arg_0_6_4_id)).FromJust();
+                auto opt_arg_0_6_4_elem = Nan::To<uint32_t>(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_4.emplace_back(opt_arg_0_6_4_elem);
             }
         }
@@ -614,9 +614,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_6_10_container = Local<Array>::Cast(field_opt_arg_0_6_10);
         for(uint32_t opt_arg_0_6_10_id = 0; opt_arg_0_6_10_id < opt_arg_0_6_10_container->Length(); opt_arg_0_6_10_id++)
         {
-            if(opt_arg_0_6_10_container->Get(opt_arg_0_6_10_id)->IsUint32())
+            if(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_10_elem = Nan::To<uint32_t>(opt_arg_0_6_10_container->Get(opt_arg_0_6_10_id)).FromJust();
+                auto opt_arg_0_6_10_elem = Nan::To<uint32_t>(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_10.emplace_back(opt_arg_0_6_10_elem);
             }
         }
@@ -627,9 +627,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_6_11_container = Local<Array>::Cast(field_opt_arg_0_6_11);
         for(uint32_t opt_arg_0_6_11_id = 0; opt_arg_0_6_11_id < opt_arg_0_6_11_container->Length(); opt_arg_0_6_11_id++)
         {
-            if(opt_arg_0_6_11_container->Get(opt_arg_0_6_11_id)->IsString())
+            if(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_6_11_elem(opt_arg_0_6_11_container->Get(opt_arg_0_6_11_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_6_11_elem(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_6_11_elem = std::string(*string_opt_arg_0_6_11_elem);
                 opt_arg_0_6_11.emplace_back(opt_arg_0_6_11_elem);
             }
@@ -663,9 +663,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_7_4_container = Local<Array>::Cast(field_opt_arg_0_7_4);
         for(uint32_t opt_arg_0_7_4_id = 0; opt_arg_0_7_4_id < opt_arg_0_7_4_container->Length(); opt_arg_0_7_4_id++)
         {
-            if(opt_arg_0_7_4_container->Get(opt_arg_0_7_4_id)->IsUint32())
+            if(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_7_4_elem = Nan::To<uint32_t>(opt_arg_0_7_4_container->Get(opt_arg_0_7_4_id)).FromJust();
+                auto opt_arg_0_7_4_elem = Nan::To<uint32_t>(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_7_4.emplace_back(opt_arg_0_7_4_elem);
             }
         }
@@ -676,9 +676,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_7_5_container = Local<Array>::Cast(field_opt_arg_0_7_5);
         for(uint32_t opt_arg_0_7_5_id = 0; opt_arg_0_7_5_id < opt_arg_0_7_5_container->Length(); opt_arg_0_7_5_id++)
         {
-            if(opt_arg_0_7_5_container->Get(opt_arg_0_7_5_id)->IsString())
+            if(opt_arg_0_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_5_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_7_5_elem(opt_arg_0_7_5_container->Get(opt_arg_0_7_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_7_5_elem(opt_arg_0_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_7_5_elem = std::string(*string_opt_arg_0_7_5_elem);
                 opt_arg_0_7_5.emplace_back(opt_arg_0_7_5_elem);
             }
@@ -711,9 +711,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_8_3_container = Local<Array>::Cast(field_opt_arg_0_8_3);
         for(uint32_t opt_arg_0_8_3_id = 0; opt_arg_0_8_3_id < opt_arg_0_8_3_container->Length(); opt_arg_0_8_3_id++)
         {
-            if(opt_arg_0_8_3_container->Get(opt_arg_0_8_3_id)->IsUint32())
+            if(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_8_3_elem = Nan::To<uint32_t>(opt_arg_0_8_3_container->Get(opt_arg_0_8_3_id)).FromJust();
+                auto opt_arg_0_8_3_elem = Nan::To<uint32_t>(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_8_3.emplace_back(opt_arg_0_8_3_elem);
             }
         }
@@ -724,9 +724,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_8_4_container = Local<Array>::Cast(field_opt_arg_0_8_4);
         for(uint32_t opt_arg_0_8_4_id = 0; opt_arg_0_8_4_id < opt_arg_0_8_4_container->Length(); opt_arg_0_8_4_id++)
         {
-            if(opt_arg_0_8_4_container->Get(opt_arg_0_8_4_id)->IsString())
+            if(opt_arg_0_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_4_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_8_4_elem(opt_arg_0_8_4_container->Get(opt_arg_0_8_4_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_8_4_elem(opt_arg_0_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_4_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_8_4_elem = std::string(*string_opt_arg_0_8_4_elem);
                 opt_arg_0_8_4.emplace_back(opt_arg_0_8_4_elem);
             }
@@ -759,9 +759,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_9_3_container = Local<Array>::Cast(field_opt_arg_0_9_3);
         for(uint32_t opt_arg_0_9_3_id = 0; opt_arg_0_9_3_id < opt_arg_0_9_3_container->Length(); opt_arg_0_9_3_id++)
         {
-            if(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)->IsUint32())
+            if(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)).FromJust();
+                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_3.emplace_back(opt_arg_0_9_3_elem);
             }
         }
@@ -772,9 +772,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_9_4_container = Local<Array>::Cast(field_opt_arg_0_9_4);
         for(uint32_t opt_arg_0_9_4_id = 0; opt_arg_0_9_4_id < opt_arg_0_9_4_container->Length(); opt_arg_0_9_4_id++)
         {
-            if(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)->IsUint32())
+            if(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)).FromJust();
+                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_4.emplace_back(opt_arg_0_9_4_elem);
             }
         }
@@ -785,9 +785,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_9_5_container = Local<Array>::Cast(field_opt_arg_0_9_5);
         for(uint32_t opt_arg_0_9_5_id = 0; opt_arg_0_9_5_id < opt_arg_0_9_5_container->Length(); opt_arg_0_9_5_id++)
         {
-            if(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)->IsUint32())
+            if(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)).FromJust();
+                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_5.emplace_back(opt_arg_0_9_5_elem);
             }
         }
@@ -798,9 +798,9 @@ NAN_METHOD(NJSAmount::fromHex) {
         Local<Array> opt_arg_0_9_6_container = Local<Array>::Cast(field_opt_arg_0_9_6);
         for(uint32_t opt_arg_0_9_6_id = 0; opt_arg_0_9_6_id < opt_arg_0_9_6_container->Length(); opt_arg_0_9_6_id++)
         {
-            if(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->IsString())
+            if(opt_arg_0_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_6_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_6_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_9_6_elem = std::string(*string_opt_arg_0_9_6_elem);
                 opt_arg_0_9_6.emplace_back(opt_arg_0_9_6_elem);
             }
@@ -857,22 +857,22 @@ NAN_METHOD(NJSAmount::fromLong) {
     Local<Array> arg_0_5_container = Local<Array>::Cast(field_arg_0_5);
     for(uint32_t arg_0_5_id = 0; arg_0_5_id < arg_0_5_container->Length(); arg_0_5_id++)
     {
-        if(arg_0_5_container->Get(arg_0_5_id)->IsObject())
+        if(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->IsObject())
         {
 
-            auto field_arg_0_5_elem_1 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_1 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_1(field_arg_0_5_elem_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_1 = std::string(*string_arg_0_5_elem_1);
 
-            auto field_arg_0_5_elem_2 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_2 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_2(field_arg_0_5_elem_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_2 = std::string(*string_arg_0_5_elem_2);
 
-            auto field_arg_0_5_elem_3 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_3 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_3(field_arg_0_5_elem_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_3 = std::string(*string_arg_0_5_elem_3);
 
-            auto field_arg_0_5_elem_4 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_4 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
             auto arg_0_5_elem_4 = Nan::To<int32_t>(field_arg_0_5_elem_4).FromJust();
             CurrencyUnit arg_0_5_elem(arg_0_5_elem_1, arg_0_5_elem_2, arg_0_5_elem_3, arg_0_5_elem_4);
 
@@ -895,9 +895,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_6_2_container = Local<Array>::Cast(field_opt_arg_0_6_2);
         for(uint32_t opt_arg_0_6_2_id = 0; opt_arg_0_6_2_id < opt_arg_0_6_2_container->Length(); opt_arg_0_6_2_id++)
         {
-            if(opt_arg_0_6_2_container->Get(opt_arg_0_6_2_id)->IsUint32())
+            if(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_2_elem = Nan::To<uint32_t>(opt_arg_0_6_2_container->Get(opt_arg_0_6_2_id)).FromJust();
+                auto opt_arg_0_6_2_elem = Nan::To<uint32_t>(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_2.emplace_back(opt_arg_0_6_2_elem);
             }
         }
@@ -908,9 +908,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_6_3_container = Local<Array>::Cast(field_opt_arg_0_6_3);
         for(uint32_t opt_arg_0_6_3_id = 0; opt_arg_0_6_3_id < opt_arg_0_6_3_container->Length(); opt_arg_0_6_3_id++)
         {
-            if(opt_arg_0_6_3_container->Get(opt_arg_0_6_3_id)->IsUint32())
+            if(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_3_elem = Nan::To<uint32_t>(opt_arg_0_6_3_container->Get(opt_arg_0_6_3_id)).FromJust();
+                auto opt_arg_0_6_3_elem = Nan::To<uint32_t>(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_3.emplace_back(opt_arg_0_6_3_elem);
             }
         }
@@ -921,9 +921,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_6_4_container = Local<Array>::Cast(field_opt_arg_0_6_4);
         for(uint32_t opt_arg_0_6_4_id = 0; opt_arg_0_6_4_id < opt_arg_0_6_4_container->Length(); opt_arg_0_6_4_id++)
         {
-            if(opt_arg_0_6_4_container->Get(opt_arg_0_6_4_id)->IsUint32())
+            if(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_4_elem = Nan::To<uint32_t>(opt_arg_0_6_4_container->Get(opt_arg_0_6_4_id)).FromJust();
+                auto opt_arg_0_6_4_elem = Nan::To<uint32_t>(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_4.emplace_back(opt_arg_0_6_4_elem);
             }
         }
@@ -950,9 +950,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_6_10_container = Local<Array>::Cast(field_opt_arg_0_6_10);
         for(uint32_t opt_arg_0_6_10_id = 0; opt_arg_0_6_10_id < opt_arg_0_6_10_container->Length(); opt_arg_0_6_10_id++)
         {
-            if(opt_arg_0_6_10_container->Get(opt_arg_0_6_10_id)->IsUint32())
+            if(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_10_elem = Nan::To<uint32_t>(opt_arg_0_6_10_container->Get(opt_arg_0_6_10_id)).FromJust();
+                auto opt_arg_0_6_10_elem = Nan::To<uint32_t>(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_10.emplace_back(opt_arg_0_6_10_elem);
             }
         }
@@ -963,9 +963,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_6_11_container = Local<Array>::Cast(field_opt_arg_0_6_11);
         for(uint32_t opt_arg_0_6_11_id = 0; opt_arg_0_6_11_id < opt_arg_0_6_11_container->Length(); opt_arg_0_6_11_id++)
         {
-            if(opt_arg_0_6_11_container->Get(opt_arg_0_6_11_id)->IsString())
+            if(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_6_11_elem(opt_arg_0_6_11_container->Get(opt_arg_0_6_11_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_6_11_elem(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_6_11_elem = std::string(*string_opt_arg_0_6_11_elem);
                 opt_arg_0_6_11.emplace_back(opt_arg_0_6_11_elem);
             }
@@ -999,9 +999,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_7_4_container = Local<Array>::Cast(field_opt_arg_0_7_4);
         for(uint32_t opt_arg_0_7_4_id = 0; opt_arg_0_7_4_id < opt_arg_0_7_4_container->Length(); opt_arg_0_7_4_id++)
         {
-            if(opt_arg_0_7_4_container->Get(opt_arg_0_7_4_id)->IsUint32())
+            if(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_7_4_elem = Nan::To<uint32_t>(opt_arg_0_7_4_container->Get(opt_arg_0_7_4_id)).FromJust();
+                auto opt_arg_0_7_4_elem = Nan::To<uint32_t>(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_7_4.emplace_back(opt_arg_0_7_4_elem);
             }
         }
@@ -1012,9 +1012,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_7_5_container = Local<Array>::Cast(field_opt_arg_0_7_5);
         for(uint32_t opt_arg_0_7_5_id = 0; opt_arg_0_7_5_id < opt_arg_0_7_5_container->Length(); opt_arg_0_7_5_id++)
         {
-            if(opt_arg_0_7_5_container->Get(opt_arg_0_7_5_id)->IsString())
+            if(opt_arg_0_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_5_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_7_5_elem(opt_arg_0_7_5_container->Get(opt_arg_0_7_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_7_5_elem(opt_arg_0_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_7_5_elem = std::string(*string_opt_arg_0_7_5_elem);
                 opt_arg_0_7_5.emplace_back(opt_arg_0_7_5_elem);
             }
@@ -1047,9 +1047,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_8_3_container = Local<Array>::Cast(field_opt_arg_0_8_3);
         for(uint32_t opt_arg_0_8_3_id = 0; opt_arg_0_8_3_id < opt_arg_0_8_3_container->Length(); opt_arg_0_8_3_id++)
         {
-            if(opt_arg_0_8_3_container->Get(opt_arg_0_8_3_id)->IsUint32())
+            if(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_8_3_elem = Nan::To<uint32_t>(opt_arg_0_8_3_container->Get(opt_arg_0_8_3_id)).FromJust();
+                auto opt_arg_0_8_3_elem = Nan::To<uint32_t>(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_8_3.emplace_back(opt_arg_0_8_3_elem);
             }
         }
@@ -1060,9 +1060,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_8_4_container = Local<Array>::Cast(field_opt_arg_0_8_4);
         for(uint32_t opt_arg_0_8_4_id = 0; opt_arg_0_8_4_id < opt_arg_0_8_4_container->Length(); opt_arg_0_8_4_id++)
         {
-            if(opt_arg_0_8_4_container->Get(opt_arg_0_8_4_id)->IsString())
+            if(opt_arg_0_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_4_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_8_4_elem(opt_arg_0_8_4_container->Get(opt_arg_0_8_4_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_8_4_elem(opt_arg_0_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_4_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_8_4_elem = std::string(*string_opt_arg_0_8_4_elem);
                 opt_arg_0_8_4.emplace_back(opt_arg_0_8_4_elem);
             }
@@ -1095,9 +1095,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_9_3_container = Local<Array>::Cast(field_opt_arg_0_9_3);
         for(uint32_t opt_arg_0_9_3_id = 0; opt_arg_0_9_3_id < opt_arg_0_9_3_container->Length(); opt_arg_0_9_3_id++)
         {
-            if(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)->IsUint32())
+            if(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)).FromJust();
+                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_3.emplace_back(opt_arg_0_9_3_elem);
             }
         }
@@ -1108,9 +1108,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_9_4_container = Local<Array>::Cast(field_opt_arg_0_9_4);
         for(uint32_t opt_arg_0_9_4_id = 0; opt_arg_0_9_4_id < opt_arg_0_9_4_container->Length(); opt_arg_0_9_4_id++)
         {
-            if(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)->IsUint32())
+            if(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)).FromJust();
+                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_4.emplace_back(opt_arg_0_9_4_elem);
             }
         }
@@ -1121,9 +1121,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_9_5_container = Local<Array>::Cast(field_opt_arg_0_9_5);
         for(uint32_t opt_arg_0_9_5_id = 0; opt_arg_0_9_5_id < opt_arg_0_9_5_container->Length(); opt_arg_0_9_5_id++)
         {
-            if(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)->IsUint32())
+            if(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)).FromJust();
+                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_5.emplace_back(opt_arg_0_9_5_elem);
             }
         }
@@ -1134,9 +1134,9 @@ NAN_METHOD(NJSAmount::fromLong) {
         Local<Array> opt_arg_0_9_6_container = Local<Array>::Cast(field_opt_arg_0_9_6);
         for(uint32_t opt_arg_0_9_6_id = 0; opt_arg_0_9_6_id < opt_arg_0_9_6_container->Length(); opt_arg_0_9_6_id++)
         {
-            if(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->IsString())
+            if(opt_arg_0_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_6_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_6_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_9_6_elem = std::string(*string_opt_arg_0_9_6_elem);
                 opt_arg_0_9_6.emplace_back(opt_arg_0_9_6_elem);
             }
@@ -1198,22 +1198,22 @@ NAN_METHOD(NJSAmount::New) {
     Local<Array> arg_0_5_container = Local<Array>::Cast(field_arg_0_5);
     for(uint32_t arg_0_5_id = 0; arg_0_5_id < arg_0_5_container->Length(); arg_0_5_id++)
     {
-        if(arg_0_5_container->Get(arg_0_5_id)->IsObject())
+        if(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->IsObject())
         {
 
-            auto field_arg_0_5_elem_1 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_1 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_1(field_arg_0_5_elem_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_1 = std::string(*string_arg_0_5_elem_1);
 
-            auto field_arg_0_5_elem_2 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_2 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_2(field_arg_0_5_elem_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_2 = std::string(*string_arg_0_5_elem_2);
 
-            auto field_arg_0_5_elem_3 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_3 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_0_5_elem_3(field_arg_0_5_elem_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_5_elem_3 = std::string(*string_arg_0_5_elem_3);
 
-            auto field_arg_0_5_elem_4 = Nan::Get(arg_0_5_container->Get(arg_0_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_5_elem_4 = Nan::Get(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
             auto arg_0_5_elem_4 = Nan::To<int32_t>(field_arg_0_5_elem_4).FromJust();
             CurrencyUnit arg_0_5_elem(arg_0_5_elem_1, arg_0_5_elem_2, arg_0_5_elem_3, arg_0_5_elem_4);
 
@@ -1236,9 +1236,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_6_2_container = Local<Array>::Cast(field_opt_arg_0_6_2);
         for(uint32_t opt_arg_0_6_2_id = 0; opt_arg_0_6_2_id < opt_arg_0_6_2_container->Length(); opt_arg_0_6_2_id++)
         {
-            if(opt_arg_0_6_2_container->Get(opt_arg_0_6_2_id)->IsUint32())
+            if(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_2_elem = Nan::To<uint32_t>(opt_arg_0_6_2_container->Get(opt_arg_0_6_2_id)).FromJust();
+                auto opt_arg_0_6_2_elem = Nan::To<uint32_t>(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_2.emplace_back(opt_arg_0_6_2_elem);
             }
         }
@@ -1249,9 +1249,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_6_3_container = Local<Array>::Cast(field_opt_arg_0_6_3);
         for(uint32_t opt_arg_0_6_3_id = 0; opt_arg_0_6_3_id < opt_arg_0_6_3_container->Length(); opt_arg_0_6_3_id++)
         {
-            if(opt_arg_0_6_3_container->Get(opt_arg_0_6_3_id)->IsUint32())
+            if(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_3_elem = Nan::To<uint32_t>(opt_arg_0_6_3_container->Get(opt_arg_0_6_3_id)).FromJust();
+                auto opt_arg_0_6_3_elem = Nan::To<uint32_t>(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_3.emplace_back(opt_arg_0_6_3_elem);
             }
         }
@@ -1262,9 +1262,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_6_4_container = Local<Array>::Cast(field_opt_arg_0_6_4);
         for(uint32_t opt_arg_0_6_4_id = 0; opt_arg_0_6_4_id < opt_arg_0_6_4_container->Length(); opt_arg_0_6_4_id++)
         {
-            if(opt_arg_0_6_4_container->Get(opt_arg_0_6_4_id)->IsUint32())
+            if(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_4_elem = Nan::To<uint32_t>(opt_arg_0_6_4_container->Get(opt_arg_0_6_4_id)).FromJust();
+                auto opt_arg_0_6_4_elem = Nan::To<uint32_t>(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_4.emplace_back(opt_arg_0_6_4_elem);
             }
         }
@@ -1291,9 +1291,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_6_10_container = Local<Array>::Cast(field_opt_arg_0_6_10);
         for(uint32_t opt_arg_0_6_10_id = 0; opt_arg_0_6_10_id < opt_arg_0_6_10_container->Length(); opt_arg_0_6_10_id++)
         {
-            if(opt_arg_0_6_10_container->Get(opt_arg_0_6_10_id)->IsUint32())
+            if(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_6_10_elem = Nan::To<uint32_t>(opt_arg_0_6_10_container->Get(opt_arg_0_6_10_id)).FromJust();
+                auto opt_arg_0_6_10_elem = Nan::To<uint32_t>(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()).FromJust();
                 opt_arg_0_6_10.emplace_back(opt_arg_0_6_10_elem);
             }
         }
@@ -1304,9 +1304,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_6_11_container = Local<Array>::Cast(field_opt_arg_0_6_11);
         for(uint32_t opt_arg_0_6_11_id = 0; opt_arg_0_6_11_id < opt_arg_0_6_11_container->Length(); opt_arg_0_6_11_id++)
         {
-            if(opt_arg_0_6_11_container->Get(opt_arg_0_6_11_id)->IsString())
+            if(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_6_11_elem(opt_arg_0_6_11_container->Get(opt_arg_0_6_11_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_6_11_elem(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_6_11_elem = std::string(*string_opt_arg_0_6_11_elem);
                 opt_arg_0_6_11.emplace_back(opt_arg_0_6_11_elem);
             }
@@ -1340,9 +1340,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_7_4_container = Local<Array>::Cast(field_opt_arg_0_7_4);
         for(uint32_t opt_arg_0_7_4_id = 0; opt_arg_0_7_4_id < opt_arg_0_7_4_container->Length(); opt_arg_0_7_4_id++)
         {
-            if(opt_arg_0_7_4_container->Get(opt_arg_0_7_4_id)->IsUint32())
+            if(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_7_4_elem = Nan::To<uint32_t>(opt_arg_0_7_4_container->Get(opt_arg_0_7_4_id)).FromJust();
+                auto opt_arg_0_7_4_elem = Nan::To<uint32_t>(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_7_4.emplace_back(opt_arg_0_7_4_elem);
             }
         }
@@ -1353,9 +1353,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_7_5_container = Local<Array>::Cast(field_opt_arg_0_7_5);
         for(uint32_t opt_arg_0_7_5_id = 0; opt_arg_0_7_5_id < opt_arg_0_7_5_container->Length(); opt_arg_0_7_5_id++)
         {
-            if(opt_arg_0_7_5_container->Get(opt_arg_0_7_5_id)->IsString())
+            if(opt_arg_0_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_5_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_7_5_elem(opt_arg_0_7_5_container->Get(opt_arg_0_7_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_7_5_elem(opt_arg_0_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_7_5_elem = std::string(*string_opt_arg_0_7_5_elem);
                 opt_arg_0_7_5.emplace_back(opt_arg_0_7_5_elem);
             }
@@ -1388,9 +1388,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_8_3_container = Local<Array>::Cast(field_opt_arg_0_8_3);
         for(uint32_t opt_arg_0_8_3_id = 0; opt_arg_0_8_3_id < opt_arg_0_8_3_container->Length(); opt_arg_0_8_3_id++)
         {
-            if(opt_arg_0_8_3_container->Get(opt_arg_0_8_3_id)->IsUint32())
+            if(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_8_3_elem = Nan::To<uint32_t>(opt_arg_0_8_3_container->Get(opt_arg_0_8_3_id)).FromJust();
+                auto opt_arg_0_8_3_elem = Nan::To<uint32_t>(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_8_3.emplace_back(opt_arg_0_8_3_elem);
             }
         }
@@ -1401,9 +1401,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_8_4_container = Local<Array>::Cast(field_opt_arg_0_8_4);
         for(uint32_t opt_arg_0_8_4_id = 0; opt_arg_0_8_4_id < opt_arg_0_8_4_container->Length(); opt_arg_0_8_4_id++)
         {
-            if(opt_arg_0_8_4_container->Get(opt_arg_0_8_4_id)->IsString())
+            if(opt_arg_0_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_4_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_8_4_elem(opt_arg_0_8_4_container->Get(opt_arg_0_8_4_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_8_4_elem(opt_arg_0_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_4_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_8_4_elem = std::string(*string_opt_arg_0_8_4_elem);
                 opt_arg_0_8_4.emplace_back(opt_arg_0_8_4_elem);
             }
@@ -1436,9 +1436,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_9_3_container = Local<Array>::Cast(field_opt_arg_0_9_3);
         for(uint32_t opt_arg_0_9_3_id = 0; opt_arg_0_9_3_id < opt_arg_0_9_3_container->Length(); opt_arg_0_9_3_id++)
         {
-            if(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)->IsUint32())
+            if(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(opt_arg_0_9_3_id)).FromJust();
+                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_3.emplace_back(opt_arg_0_9_3_elem);
             }
         }
@@ -1449,9 +1449,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_9_4_container = Local<Array>::Cast(field_opt_arg_0_9_4);
         for(uint32_t opt_arg_0_9_4_id = 0; opt_arg_0_9_4_id < opt_arg_0_9_4_container->Length(); opt_arg_0_9_4_id++)
         {
-            if(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)->IsUint32())
+            if(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(opt_arg_0_9_4_id)).FromJust();
+                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_4.emplace_back(opt_arg_0_9_4_elem);
             }
         }
@@ -1462,9 +1462,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_9_5_container = Local<Array>::Cast(field_opt_arg_0_9_5);
         for(uint32_t opt_arg_0_9_5_id = 0; opt_arg_0_9_5_id < opt_arg_0_9_5_container->Length(); opt_arg_0_9_5_id++)
         {
-            if(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)->IsUint32())
+            if(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(opt_arg_0_9_5_id)).FromJust();
+                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()).FromJust();
                 opt_arg_0_9_5.emplace_back(opt_arg_0_9_5_elem);
             }
         }
@@ -1475,9 +1475,9 @@ NAN_METHOD(NJSAmount::New) {
         Local<Array> opt_arg_0_9_6_container = Local<Array>::Cast(field_opt_arg_0_9_6);
         for(uint32_t opt_arg_0_9_6_id = 0; opt_arg_0_9_6_id < opt_arg_0_9_6_container->Length(); opt_arg_0_9_6_id++)
         {
-            if(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->IsString())
+            if(opt_arg_0_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_6_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(opt_arg_0_9_6_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_0_9_6_elem(opt_arg_0_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_6_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_0_9_6_elem = std::string(*string_opt_arg_0_9_6_elem);
                 opt_arg_0_9_6.emplace_back(opt_arg_0_9_6_elem);
             }
@@ -1554,5 +1554,5 @@ void NJSAmount::Initialize(Local<Object> target) {
     Amount_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSAmount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSAmount").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

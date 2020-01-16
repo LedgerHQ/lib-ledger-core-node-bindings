@@ -119,5 +119,5 @@ void NJSWebSocketClient::Initialize(Local<Object> target) {
     WebSocketClient_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSWebSocketClient").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSWebSocketClient").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

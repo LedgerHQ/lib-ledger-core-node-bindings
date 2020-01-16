@@ -172,7 +172,7 @@ NAN_METHOD(NJSBigInt::divideAndRemainder) {
     {
         auto arg_1_elem = NJSBigInt::wrap(result[arg_1_id]);
 
-        arg_1->Set((int)arg_1_id,arg_1_elem);
+        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
     }
 
 
@@ -466,5 +466,5 @@ void NJSBigInt::Initialize(Local<Object> target) {
     BigInt_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBigInt").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBigInt").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

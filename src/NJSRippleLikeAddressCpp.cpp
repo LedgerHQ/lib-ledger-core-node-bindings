@@ -32,7 +32,7 @@ NAN_METHOD(NJSRippleLikeAddress::getVersion) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -63,7 +63,7 @@ NAN_METHOD(NJSRippleLikeAddress::getHash160) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -99,7 +99,7 @@ NAN_METHOD(NJSRippleLikeAddress::getNetworkParameters) {
     for(size_t arg_0_3_id = 0; arg_0_3_id < result.XPUBVersion.size(); arg_0_3_id++)
     {
         auto arg_0_3_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_3_id]);
-        arg_0_3->Set((int)arg_0_3_id,arg_0_3_elem);
+        Nan::Set(arg_0_3, (int)arg_0_3_id,arg_0_3_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_3);
@@ -107,7 +107,7 @@ NAN_METHOD(NJSRippleLikeAddress::getNetworkParameters) {
     for(size_t arg_0_4_id = 0; arg_0_4_id < result.AdditionalRIPs.size(); arg_0_4_id++)
     {
         auto arg_0_4_elem = Nan::New<String>(result.AdditionalRIPs[arg_0_4_id]).ToLocalChecked();
-        arg_0_4->Set((int)arg_0_4_id,arg_0_4_elem);
+        Nan::Set(arg_0_4, (int)arg_0_4_id,arg_0_4_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_4);
@@ -198,5 +198,5 @@ void NJSRippleLikeAddress::Initialize(Local<Object> target) {
     RippleLikeAddress_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleLikeAddress").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSRippleLikeAddress").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

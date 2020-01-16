@@ -138,5 +138,5 @@ void NJSTezosLikeBlock::Initialize(Local<Object> target) {
     TezosLikeBlock_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTezosLikeBlock").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSTezosLikeBlock").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

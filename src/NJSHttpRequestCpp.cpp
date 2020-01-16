@@ -89,7 +89,7 @@ NAN_METHOD(NJSHttpRequest::getBody) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -219,5 +219,5 @@ void NJSHttpRequest::Initialize(Local<Object> target) {
     HttpRequest_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSHttpRequest").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSHttpRequest").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

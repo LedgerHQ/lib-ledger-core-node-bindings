@@ -62,7 +62,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::derivePublicKey) {
     for(size_t arg_1_id = 0; arg_1_id < result.size(); arg_1_id++)
     {
         auto arg_1_elem = Nan::New<Uint32>(result[arg_1_id]);
-        arg_1->Set((int)arg_1_id,arg_1_elem);
+        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
     }
 
 
@@ -95,7 +95,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::deriveHash160) {
     for(size_t arg_1_id = 0; arg_1_id < result.size(); arg_1_id++)
     {
         auto arg_1_elem = Nan::New<Uint32>(result[arg_1_id]);
-        arg_1->Set((int)arg_1_id,arg_1_elem);
+        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
     }
 
 
@@ -208,5 +208,5 @@ void NJSBitcoinLikeExtendedPublicKey::Initialize(Local<Object> target) {
     BitcoinLikeExtendedPublicKey_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeExtendedPublicKey").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBitcoinLikeExtendedPublicKey").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

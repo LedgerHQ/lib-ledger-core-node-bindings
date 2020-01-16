@@ -423,5 +423,5 @@ void NJSWalletPoolBuilder::Initialize(Local<Object> target) {
     WalletPoolBuilder_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSWalletPoolBuilder").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSWalletPoolBuilder").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

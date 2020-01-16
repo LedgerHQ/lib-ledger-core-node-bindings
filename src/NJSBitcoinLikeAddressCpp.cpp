@@ -32,7 +32,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getVersion) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -63,7 +63,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getHash160) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -97,7 +97,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getNetworkParameters) {
     for(size_t arg_0_2_id = 0; arg_0_2_id < result.P2PKHVersion.size(); arg_0_2_id++)
     {
         auto arg_0_2_elem = Nan::New<Uint32>(result.P2PKHVersion[arg_0_2_id]);
-        arg_0_2->Set((int)arg_0_2_id,arg_0_2_elem);
+        Nan::Set(arg_0_2, (int)arg_0_2_id,arg_0_2_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("P2PKHVersion").ToLocalChecked(), arg_0_2);
@@ -105,7 +105,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getNetworkParameters) {
     for(size_t arg_0_3_id = 0; arg_0_3_id < result.P2SHVersion.size(); arg_0_3_id++)
     {
         auto arg_0_3_elem = Nan::New<Uint32>(result.P2SHVersion[arg_0_3_id]);
-        arg_0_3->Set((int)arg_0_3_id,arg_0_3_elem);
+        Nan::Set(arg_0_3, (int)arg_0_3_id,arg_0_3_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("P2SHVersion").ToLocalChecked(), arg_0_3);
@@ -113,7 +113,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getNetworkParameters) {
     for(size_t arg_0_4_id = 0; arg_0_4_id < result.XPUBVersion.size(); arg_0_4_id++)
     {
         auto arg_0_4_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_4_id]);
-        arg_0_4->Set((int)arg_0_4_id,arg_0_4_elem);
+        Nan::Set(arg_0_4, (int)arg_0_4_id,arg_0_4_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_4);
@@ -131,7 +131,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getNetworkParameters) {
     for(size_t arg_0_10_id = 0; arg_0_10_id < result.SigHash.size(); arg_0_10_id++)
     {
         auto arg_0_10_elem = Nan::New<Uint32>(result.SigHash[arg_0_10_id]);
-        arg_0_10->Set((int)arg_0_10_id,arg_0_10_elem);
+        Nan::Set(arg_0_10, (int)arg_0_10_id,arg_0_10_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_10);
@@ -139,7 +139,7 @@ NAN_METHOD(NJSBitcoinLikeAddress::getNetworkParameters) {
     for(size_t arg_0_11_id = 0; arg_0_11_id < result.AdditionalBIPs.size(); arg_0_11_id++)
     {
         auto arg_0_11_elem = Nan::New<String>(result.AdditionalBIPs[arg_0_11_id]).ToLocalChecked();
-        arg_0_11->Set((int)arg_0_11_id,arg_0_11_elem);
+        Nan::Set(arg_0_11, (int)arg_0_11_id,arg_0_11_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_11);
@@ -358,5 +358,5 @@ void NJSBitcoinLikeAddress::Initialize(Local<Object> target) {
     BitcoinLikeAddress_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeAddress").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBitcoinLikeAddress").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

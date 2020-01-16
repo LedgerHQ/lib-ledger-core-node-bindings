@@ -59,5 +59,5 @@ void NJSKeychainEngines::Initialize(Local<Object> target) {
     KeychainEngines_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSKeychainEngines").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSKeychainEngines").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

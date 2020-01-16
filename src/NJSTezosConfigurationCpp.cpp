@@ -59,5 +59,5 @@ void NJSTezosConfiguration::Initialize(Local<Object> target) {
     TezosConfiguration_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTezosConfiguration").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSTezosConfiguration").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

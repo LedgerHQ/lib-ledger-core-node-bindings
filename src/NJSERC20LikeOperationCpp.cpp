@@ -237,7 +237,7 @@ NAN_METHOD(NJSERC20LikeOperation::getData) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -416,5 +416,5 @@ void NJSERC20LikeOperation::Initialize(Local<Object> target) {
     ERC20LikeOperation_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSERC20LikeOperation").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSERC20LikeOperation").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

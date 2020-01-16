@@ -32,7 +32,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getVersion) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -63,7 +63,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getKeccakHash) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -101,7 +101,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getNetworkParameters) {
     for(size_t arg_0_4_id = 0; arg_0_4_id < result.XPUBVersion.size(); arg_0_4_id++)
     {
         auto arg_0_4_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_4_id]);
-        arg_0_4->Set((int)arg_0_4_id,arg_0_4_elem);
+        Nan::Set(arg_0_4, (int)arg_0_4_id,arg_0_4_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_4);
@@ -109,7 +109,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getNetworkParameters) {
     for(size_t arg_0_5_id = 0; arg_0_5_id < result.AdditionalEIPs.size(); arg_0_5_id++)
     {
         auto arg_0_5_elem = Nan::New<String>(result.AdditionalEIPs[arg_0_5_id]).ToLocalChecked();
-        arg_0_5->Set((int)arg_0_5_id,arg_0_5_elem);
+        Nan::Set(arg_0_5, (int)arg_0_5_id,arg_0_5_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalEIPs").ToLocalChecked(), arg_0_5);
@@ -200,5 +200,5 @@ void NJSEthereumLikeAddress::Initialize(Local<Object> target) {
     EthereumLikeAddress_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSEthereumLikeAddress").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSEthereumLikeAddress").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

@@ -16,7 +16,7 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::ripemd160(const std::vector<uint8_t
     for(size_t arg_0_id = 0; arg_0_id < data.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(data[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
     Local<Value> args[1] = {arg_0};
@@ -36,9 +36,9 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::ripemd160(const std::vector<uint8_t
     Local<Array> fResult_ripemd160_container = Local<Array>::Cast(checkedResult_ripemd160);
     for(uint32_t fResult_ripemd160_id = 0; fResult_ripemd160_id < fResult_ripemd160_container->Length(); fResult_ripemd160_id++)
     {
-        if(fResult_ripemd160_container->Get(fResult_ripemd160_id)->IsUint32())
+        if(fResult_ripemd160_container->Get(Nan::GetCurrentContext(), fResult_ripemd160_id).ToLocalChecked()->IsUint32())
         {
-            auto fResult_ripemd160_elem = Nan::To<uint32_t>(fResult_ripemd160_container->Get(fResult_ripemd160_id)).FromJust();
+            auto fResult_ripemd160_elem = Nan::To<uint32_t>(fResult_ripemd160_container->Get(Nan::GetCurrentContext(), fResult_ripemd160_id).ToLocalChecked()).FromJust();
             fResult_ripemd160.emplace_back(fResult_ripemd160_elem);
         }
     }
@@ -54,7 +54,7 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::sha256(const std::vector<uint8_t> &
     for(size_t arg_0_id = 0; arg_0_id < data.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(data[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
     Local<Value> args[1] = {arg_0};
@@ -74,9 +74,9 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::sha256(const std::vector<uint8_t> &
     Local<Array> fResult_sha256_container = Local<Array>::Cast(checkedResult_sha256);
     for(uint32_t fResult_sha256_id = 0; fResult_sha256_id < fResult_sha256_container->Length(); fResult_sha256_id++)
     {
-        if(fResult_sha256_container->Get(fResult_sha256_id)->IsUint32())
+        if(fResult_sha256_container->Get(Nan::GetCurrentContext(), fResult_sha256_id).ToLocalChecked()->IsUint32())
         {
-            auto fResult_sha256_elem = Nan::To<uint32_t>(fResult_sha256_container->Get(fResult_sha256_id)).FromJust();
+            auto fResult_sha256_elem = Nan::To<uint32_t>(fResult_sha256_container->Get(Nan::GetCurrentContext(), fResult_sha256_id).ToLocalChecked()).FromJust();
             fResult_sha256.emplace_back(fResult_sha256_elem);
         }
     }
@@ -92,7 +92,7 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::keccak256(const std::vector<uint8_t
     for(size_t arg_0_id = 0; arg_0_id < data.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(data[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
     Local<Value> args[1] = {arg_0};
@@ -112,9 +112,9 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::keccak256(const std::vector<uint8_t
     Local<Array> fResult_keccak256_container = Local<Array>::Cast(checkedResult_keccak256);
     for(uint32_t fResult_keccak256_id = 0; fResult_keccak256_id < fResult_keccak256_container->Length(); fResult_keccak256_id++)
     {
-        if(fResult_keccak256_container->Get(fResult_keccak256_id)->IsUint32())
+        if(fResult_keccak256_container->Get(Nan::GetCurrentContext(), fResult_keccak256_id).ToLocalChecked()->IsUint32())
         {
-            auto fResult_keccak256_elem = Nan::To<uint32_t>(fResult_keccak256_container->Get(fResult_keccak256_id)).FromJust();
+            auto fResult_keccak256_elem = Nan::To<uint32_t>(fResult_keccak256_container->Get(Nan::GetCurrentContext(), fResult_keccak256_id).ToLocalChecked()).FromJust();
             fResult_keccak256.emplace_back(fResult_keccak256_elem);
         }
     }
@@ -171,5 +171,5 @@ void NJSHashAlgorithmHelper::Initialize(Local<Object> target) {
     HashAlgorithmHelper_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSHashAlgorithmHelper").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSHashAlgorithmHelper").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }
