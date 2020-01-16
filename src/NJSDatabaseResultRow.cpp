@@ -259,5 +259,5 @@ void NJSDatabaseResultRow::Initialize(Local<Object> target) {
     DatabaseResultRow_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseResultRow").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSDatabaseResultRow").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

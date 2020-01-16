@@ -174,5 +174,5 @@ void NJSLogger::Initialize(Local<Object> target) {
     Logger_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSLogger").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSLogger").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

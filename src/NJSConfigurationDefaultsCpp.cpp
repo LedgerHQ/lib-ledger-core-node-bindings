@@ -59,5 +59,5 @@ void NJSConfigurationDefaults::Initialize(Local<Object> target) {
     ConfigurationDefaults_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSConfigurationDefaults").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSConfigurationDefaults").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

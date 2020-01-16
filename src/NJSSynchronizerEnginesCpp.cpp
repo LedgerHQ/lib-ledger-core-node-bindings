@@ -59,5 +59,5 @@ void NJSSynchronizerEngines::Initialize(Local<Object> target) {
     SynchronizerEngines_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSSynchronizerEngines").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSSynchronizerEngines").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

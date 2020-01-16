@@ -212,5 +212,5 @@ void NJSEvent::Initialize(Local<Object> target) {
     Event_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSEvent").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSEvent").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

@@ -114,5 +114,5 @@ void NJSLock::Initialize(Local<Object> target) {
     Lock_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSLock").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSLock").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

@@ -80,5 +80,5 @@ void NJSDatabaseConnectionPool::Initialize(Local<Object> target) {
     DatabaseConnectionPool_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseConnectionPool").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSDatabaseConnectionPool").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

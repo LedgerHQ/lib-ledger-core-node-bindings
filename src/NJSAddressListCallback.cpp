@@ -21,7 +21,7 @@ void NJSAddressListCallback::onCallback(const std::experimental::optional<std::v
         {
             auto arg_0_tmp_elem = NJSAddress::wrap(arg_0_optional[arg_0_tmp_id]);
 
-            arg_0_tmp->Set((int)arg_0_tmp_id,arg_0_tmp_elem);
+            Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
         }
 
         arg_0 = arg_0_tmp;
@@ -99,5 +99,5 @@ void NJSAddressListCallback::Initialize(Local<Object> target) {
     AddressListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSAddressListCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSAddressListCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

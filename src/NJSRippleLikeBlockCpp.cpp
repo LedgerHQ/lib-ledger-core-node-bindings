@@ -138,5 +138,5 @@ void NJSRippleLikeBlock::Initialize(Local<Object> target) {
     RippleLikeBlock_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleLikeBlock").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSRippleLikeBlock").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

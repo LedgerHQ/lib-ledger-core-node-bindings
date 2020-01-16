@@ -138,5 +138,5 @@ void NJSBitcoinLikeBlock::Initialize(Local<Object> target) {
     BitcoinLikeBlock_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeBlock").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBitcoinLikeBlock").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

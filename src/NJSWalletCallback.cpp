@@ -87,5 +87,5 @@ void NJSWalletCallback::Initialize(Local<Object> target) {
     WalletCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSWalletCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSWalletCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

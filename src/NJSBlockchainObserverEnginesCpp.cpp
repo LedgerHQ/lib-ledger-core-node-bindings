@@ -59,5 +59,5 @@ void NJSBlockchainObserverEngines::Initialize(Local<Object> target) {
     BlockchainObserverEngines_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBlockchainObserverEngines").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBlockchainObserverEngines").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

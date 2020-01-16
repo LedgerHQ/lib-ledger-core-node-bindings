@@ -82,7 +82,7 @@ NAN_METHOD(NJSTrustIndicator::getConflictingOperationUids) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<String>(result[arg_0_id]).ToLocalChecked();
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -169,5 +169,5 @@ void NJSTrustIndicator::Initialize(Local<Object> target) {
     TrustIndicator_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTrustIndicator").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSTrustIndicator").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

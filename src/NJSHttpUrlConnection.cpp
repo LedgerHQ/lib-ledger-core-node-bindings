@@ -73,7 +73,7 @@ std::unordered_map<std::string, std::string> NJSHttpUrlConnection::getHeaders()
     auto fResult_getHeaders_prop_names = fResult_getHeaders_container->GetPropertyNames(Nan::GetCurrentContext()).ToLocalChecked();
     for(uint32_t fResult_getHeaders_id = 0; fResult_getHeaders_id < fResult_getHeaders_prop_names->Length(); fResult_getHeaders_id++)
     {
-        auto key = fResult_getHeaders_prop_names->Get(fResult_getHeaders_id);
+        auto key = fResult_getHeaders_prop_names->Get(Nan::GetCurrentContext(), fResult_getHeaders_id).ToLocalChecked();
         auto fResult_getHeaders_key_ctx = fResult_getHeaders_container->Get(Nan::GetCurrentContext(), key).ToLocalChecked();
         if(key->IsString() && fResult_getHeaders_key_ctx->IsString())
         {
@@ -131,9 +131,9 @@ HttpReadBodyResult NJSHttpUrlConnection::readBody()
         Local<Array> opt_fResult_readBody_2_container = Local<Array>::Cast(field_fResult_readBody_2);
         for(uint32_t opt_fResult_readBody_2_id = 0; opt_fResult_readBody_2_id < opt_fResult_readBody_2_container->Length(); opt_fResult_readBody_2_id++)
         {
-            if(opt_fResult_readBody_2_container->Get(opt_fResult_readBody_2_id)->IsUint32())
+            if(opt_fResult_readBody_2_container->Get(Nan::GetCurrentContext(), opt_fResult_readBody_2_id).ToLocalChecked()->IsUint32())
             {
-                auto opt_fResult_readBody_2_elem = Nan::To<uint32_t>(opt_fResult_readBody_2_container->Get(opt_fResult_readBody_2_id)).FromJust();
+                auto opt_fResult_readBody_2_elem = Nan::To<uint32_t>(opt_fResult_readBody_2_container->Get(Nan::GetCurrentContext(), opt_fResult_readBody_2_id).ToLocalChecked()).FromJust();
                 opt_fResult_readBody_2.emplace_back(opt_fResult_readBody_2_elem);
             }
         }
@@ -195,5 +195,5 @@ void NJSHttpUrlConnection::Initialize(Local<Object> target) {
     HttpUrlConnection_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSHttpUrlConnection").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSHttpUrlConnection").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

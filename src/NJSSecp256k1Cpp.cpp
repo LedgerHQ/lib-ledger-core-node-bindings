@@ -40,9 +40,9 @@ NAN_METHOD(NJSSecp256k1::computePubKey) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
             arg_0.emplace_back(arg_0_elem);
         }
     }
@@ -63,7 +63,7 @@ NAN_METHOD(NJSSecp256k1::computePubKey) {
     for(size_t arg_2_id = 0; arg_2_id < result.size(); arg_2_id++)
     {
         auto arg_2_elem = Nan::New<Uint32>(result[arg_2_id]);
-        arg_2->Set((int)arg_2_id,arg_2_elem);
+        Nan::Set(arg_2, (int)arg_2_id,arg_2_elem);
     }
 
 
@@ -83,9 +83,9 @@ NAN_METHOD(NJSSecp256k1::computeUncompressedPubKey) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
             arg_0.emplace_back(arg_0_elem);
         }
     }
@@ -105,7 +105,7 @@ NAN_METHOD(NJSSecp256k1::computeUncompressedPubKey) {
     for(size_t arg_1_id = 0; arg_1_id < result.size(); arg_1_id++)
     {
         auto arg_1_elem = Nan::New<Uint32>(result[arg_1_id]);
-        arg_1->Set((int)arg_1_id,arg_1_elem);
+        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
     }
 
 
@@ -125,9 +125,9 @@ NAN_METHOD(NJSSecp256k1::sign) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
             arg_0.emplace_back(arg_0_elem);
         }
     }
@@ -136,9 +136,9 @@ NAN_METHOD(NJSSecp256k1::sign) {
     Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
     for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
     {
-        if(arg_1_container->Get(arg_1_id)->IsUint32())
+        if(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(arg_1_id)).FromJust();
+            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()).FromJust();
             arg_1.emplace_back(arg_1_elem);
         }
     }
@@ -158,7 +158,7 @@ NAN_METHOD(NJSSecp256k1::sign) {
     for(size_t arg_2_id = 0; arg_2_id < result.size(); arg_2_id++)
     {
         auto arg_2_elem = Nan::New<Uint32>(result[arg_2_id]);
-        arg_2->Set((int)arg_2_id,arg_2_elem);
+        Nan::Set(arg_2, (int)arg_2_id,arg_2_elem);
     }
 
 
@@ -178,9 +178,9 @@ NAN_METHOD(NJSSecp256k1::verify) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
             arg_0.emplace_back(arg_0_elem);
         }
     }
@@ -189,9 +189,9 @@ NAN_METHOD(NJSSecp256k1::verify) {
     Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
     for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
     {
-        if(arg_1_container->Get(arg_1_id)->IsUint32())
+        if(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(arg_1_id)).FromJust();
+            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()).FromJust();
             arg_1.emplace_back(arg_1_elem);
         }
     }
@@ -200,9 +200,9 @@ NAN_METHOD(NJSSecp256k1::verify) {
     Local<Array> arg_2_container = Local<Array>::Cast(info[2]);
     for(uint32_t arg_2_id = 0; arg_2_id < arg_2_container->Length(); arg_2_id++)
     {
-        if(arg_2_container->Get(arg_2_id)->IsUint32())
+        if(arg_2_container->Get(Nan::GetCurrentContext(), arg_2_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_2_elem = Nan::To<uint32_t>(arg_2_container->Get(arg_2_id)).FromJust();
+            auto arg_2_elem = Nan::To<uint32_t>(arg_2_container->Get(Nan::GetCurrentContext(), arg_2_id).ToLocalChecked()).FromJust();
             arg_2.emplace_back(arg_2_elem);
         }
     }
@@ -311,5 +311,5 @@ void NJSSecp256k1::Initialize(Local<Object> target) {
     Secp256k1_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSSecp256k1").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSSecp256k1").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

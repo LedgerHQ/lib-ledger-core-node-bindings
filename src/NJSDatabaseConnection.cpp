@@ -177,5 +177,5 @@ void NJSDatabaseConnection::Initialize(Local<Object> target) {
     DatabaseConnection_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseConnection").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSDatabaseConnection").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

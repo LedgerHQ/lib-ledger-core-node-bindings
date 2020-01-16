@@ -62,7 +62,7 @@ NAN_METHOD(NJSTezosLikeExtendedPublicKey::derivePublicKey) {
     for(size_t arg_1_id = 0; arg_1_id < result.size(); arg_1_id++)
     {
         auto arg_1_elem = Nan::New<Uint32>(result[arg_1_id]);
-        arg_1->Set((int)arg_1_id,arg_1_elem);
+        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
     }
 
 
@@ -95,7 +95,7 @@ NAN_METHOD(NJSTezosLikeExtendedPublicKey::deriveHash160) {
     for(size_t arg_1_id = 0; arg_1_id < result.size(); arg_1_id++)
     {
         auto arg_1_elem = Nan::New<Uint32>(result[arg_1_id]);
-        arg_1->Set((int)arg_1_id,arg_1_elem);
+        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
     }
 
 
@@ -208,5 +208,5 @@ void NJSTezosLikeExtendedPublicKey::Initialize(Local<Object> target) {
     TezosLikeExtendedPublicKey_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTezosLikeExtendedPublicKey").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSTezosLikeExtendedPublicKey").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

@@ -21,9 +21,9 @@ NAN_METHOD(NJSEthereumLikeAccount::broadcastRawTransaction) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
             arg_0.emplace_back(arg_0_elem);
         }
     }
@@ -127,7 +127,7 @@ NAN_METHOD(NJSEthereumLikeAccount::getERC20Accounts) {
     {
         auto arg_0_elem = NJSERC20LikeAccount::wrap(result[arg_0_id]);
 
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -226,9 +226,9 @@ NAN_METHOD(NJSEthereumLikeAccount::getERC20Balances) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsString())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsString())
         {
-            Nan::Utf8String string_arg_0_elem(arg_0_container->Get(arg_0_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+            Nan::Utf8String string_arg_0_elem(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_0_elem = std::string(*string_arg_0_elem);
             arg_0.emplace_back(arg_0_elem);
         }
@@ -309,5 +309,5 @@ void NJSEthereumLikeAccount::Initialize(Local<Object> target) {
     EthereumLikeAccount_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSEthereumLikeAccount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSEthereumLikeAccount").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

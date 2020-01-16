@@ -251,5 +251,5 @@ void NJSOperationQuery::Initialize(Local<Object> target) {
     OperationQuery_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSOperationQuery").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSOperationQuery").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

@@ -58,7 +58,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getInputs) {
     {
         auto arg_0_elem = NJSBitcoinLikeInput::wrap(result[arg_0_id]);
 
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -90,7 +90,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getOutputs) {
     {
         auto arg_0_elem = NJSBitcoinLikeOutput::wrap(result[arg_0_id]);
 
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -282,7 +282,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::serialize) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -313,7 +313,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::serializeOutputs) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -348,7 +348,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getWitness) {
         for(size_t arg_0_tmp_id = 0; arg_0_tmp_id < arg_0_optional.size(); arg_0_tmp_id++)
         {
             auto arg_0_tmp_elem = Nan::New<Uint32>(arg_0_optional[arg_0_tmp_id]);
-            arg_0_tmp->Set((int)arg_0_tmp_id,arg_0_tmp_elem);
+            Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
         }
 
         arg_0 = arg_0_tmp;
@@ -401,43 +401,43 @@ NAN_METHOD(NJSBitcoinLikeTransaction::setSignatures) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsObject())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsObject())
         {
 
-            auto field_arg_0_elem_1 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("r").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_elem_1 = Nan::Get(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("r").ToLocalChecked()).ToLocalChecked();
             vector<uint8_t> arg_0_elem_1;
             Local<Array> arg_0_elem_1_container = Local<Array>::Cast(field_arg_0_elem_1);
             for(uint32_t arg_0_elem_1_id = 0; arg_0_elem_1_id < arg_0_elem_1_container->Length(); arg_0_elem_1_id++)
             {
-                if(arg_0_elem_1_container->Get(arg_0_elem_1_id)->IsUint32())
+                if(arg_0_elem_1_container->Get(Nan::GetCurrentContext(), arg_0_elem_1_id).ToLocalChecked()->IsUint32())
                 {
-                    auto arg_0_elem_1_elem = Nan::To<uint32_t>(arg_0_elem_1_container->Get(arg_0_elem_1_id)).FromJust();
+                    auto arg_0_elem_1_elem = Nan::To<uint32_t>(arg_0_elem_1_container->Get(Nan::GetCurrentContext(), arg_0_elem_1_id).ToLocalChecked()).FromJust();
                     arg_0_elem_1.emplace_back(arg_0_elem_1_elem);
                 }
             }
 
 
-            auto field_arg_0_elem_2 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("s").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_elem_2 = Nan::Get(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("s").ToLocalChecked()).ToLocalChecked();
             vector<uint8_t> arg_0_elem_2;
             Local<Array> arg_0_elem_2_container = Local<Array>::Cast(field_arg_0_elem_2);
             for(uint32_t arg_0_elem_2_id = 0; arg_0_elem_2_id < arg_0_elem_2_container->Length(); arg_0_elem_2_id++)
             {
-                if(arg_0_elem_2_container->Get(arg_0_elem_2_id)->IsUint32())
+                if(arg_0_elem_2_container->Get(Nan::GetCurrentContext(), arg_0_elem_2_id).ToLocalChecked()->IsUint32())
                 {
-                    auto arg_0_elem_2_elem = Nan::To<uint32_t>(arg_0_elem_2_container->Get(arg_0_elem_2_id)).FromJust();
+                    auto arg_0_elem_2_elem = Nan::To<uint32_t>(arg_0_elem_2_container->Get(Nan::GetCurrentContext(), arg_0_elem_2_id).ToLocalChecked()).FromJust();
                     arg_0_elem_2.emplace_back(arg_0_elem_2_elem);
                 }
             }
 
 
-            auto field_arg_0_elem_3 = Nan::Get(arg_0_container->Get(arg_0_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("v").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_0_elem_3 = Nan::Get(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("v").ToLocalChecked()).ToLocalChecked();
             vector<uint8_t> arg_0_elem_3;
             Local<Array> arg_0_elem_3_container = Local<Array>::Cast(field_arg_0_elem_3);
             for(uint32_t arg_0_elem_3_id = 0; arg_0_elem_3_id < arg_0_elem_3_container->Length(); arg_0_elem_3_id++)
             {
-                if(arg_0_elem_3_container->Get(arg_0_elem_3_id)->IsUint32())
+                if(arg_0_elem_3_container->Get(Nan::GetCurrentContext(), arg_0_elem_3_id).ToLocalChecked()->IsUint32())
                 {
-                    auto arg_0_elem_3_elem = Nan::To<uint32_t>(arg_0_elem_3_container->Get(arg_0_elem_3_id)).FromJust();
+                    auto arg_0_elem_3_elem = Nan::To<uint32_t>(arg_0_elem_3_container->Get(Nan::GetCurrentContext(), arg_0_elem_3_id).ToLocalChecked()).FromJust();
                     arg_0_elem_3.emplace_back(arg_0_elem_3_elem);
                 }
             }
@@ -478,15 +478,15 @@ NAN_METHOD(NJSBitcoinLikeTransaction::setDERSignatures) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsObject())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsObject())
         {
             vector<uint8_t> arg_0_elem;
-            Local<Array> arg_0_elem_container = Local<Array>::Cast(arg_0_container->Get(arg_0_id));
+            Local<Array> arg_0_elem_container = Local<Array>::Cast(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked());
             for(uint32_t arg_0_elem_id = 0; arg_0_elem_id < arg_0_elem_container->Length(); arg_0_elem_id++)
             {
-                if(arg_0_elem_container->Get(arg_0_elem_id)->IsUint32())
+                if(arg_0_elem_container->Get(Nan::GetCurrentContext(), arg_0_elem_id).ToLocalChecked()->IsUint32())
                 {
-                    auto arg_0_elem_elem = Nan::To<uint32_t>(arg_0_elem_container->Get(arg_0_elem_id)).FromJust();
+                    auto arg_0_elem_elem = Nan::To<uint32_t>(arg_0_elem_container->Get(Nan::GetCurrentContext(), arg_0_elem_id).ToLocalChecked()).FromJust();
                     arg_0_elem.emplace_back(arg_0_elem_elem);
                 }
             }
@@ -578,5 +578,5 @@ void NJSBitcoinLikeTransaction::Initialize(Local<Object> target) {
     BitcoinLikeTransaction_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeTransaction").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBitcoinLikeTransaction").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

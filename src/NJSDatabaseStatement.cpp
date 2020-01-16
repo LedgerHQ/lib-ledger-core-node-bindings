@@ -321,5 +321,5 @@ void NJSDatabaseStatement::Initialize(Local<Object> target) {
     DatabaseStatement_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSDatabaseStatement").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSDatabaseStatement").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

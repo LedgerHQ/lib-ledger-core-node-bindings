@@ -87,5 +87,5 @@ void NJSBitcoinLikeTransactionCallback::Initialize(Local<Object> target) {
     BitcoinLikeTransactionCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBitcoinLikeTransactionCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBitcoinLikeTransactionCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

@@ -87,5 +87,5 @@ void NJSTezosLikeTransactionCallback::Initialize(Local<Object> target) {
     TezosLikeTransactionCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTezosLikeTransactionCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSTezosLikeTransactionCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

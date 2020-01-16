@@ -161,7 +161,7 @@ NAN_METHOD(NJSRippleLikeTransaction::serialize) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -181,9 +181,9 @@ NAN_METHOD(NJSRippleLikeTransaction::setSignature) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
             arg_0.emplace_back(arg_0_elem);
         }
     }
@@ -192,9 +192,9 @@ NAN_METHOD(NJSRippleLikeTransaction::setSignature) {
     Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
     for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
     {
-        if(arg_1_container->Get(arg_1_id)->IsUint32())
+        if(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(arg_1_id)).FromJust();
+            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()).FromJust();
             arg_1.emplace_back(arg_1_elem);
         }
     }
@@ -221,9 +221,9 @@ NAN_METHOD(NJSRippleLikeTransaction::setDERSignature) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
         {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
             arg_0.emplace_back(arg_0_elem);
         }
     }
@@ -339,7 +339,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getSigningPubKey) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -377,7 +377,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getMemos) {
         auto arg_0_elem_3 = Nan::New<String>(result[arg_0_id].ty).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_elem, Nan::New<String>("ty").ToLocalChecked(), arg_0_elem_3);
 
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -514,5 +514,5 @@ void NJSRippleLikeTransaction::Initialize(Local<Object> target) {
     RippleLikeTransaction_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRippleLikeTransaction").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSRippleLikeTransaction").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

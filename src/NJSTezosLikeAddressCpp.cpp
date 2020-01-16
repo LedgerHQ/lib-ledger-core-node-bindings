@@ -32,7 +32,7 @@ NAN_METHOD(NJSTezosLikeAddress::getVersion) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -63,7 +63,7 @@ NAN_METHOD(NJSTezosLikeAddress::getHash160) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        arg_0->Set((int)arg_0_id,arg_0_elem);
+        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
 
 
@@ -99,7 +99,7 @@ NAN_METHOD(NJSTezosLikeAddress::getNetworkParameters) {
     for(size_t arg_0_3_id = 0; arg_0_3_id < result.XPUBVersion.size(); arg_0_3_id++)
     {
         auto arg_0_3_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_3_id]);
-        arg_0_3->Set((int)arg_0_3_id,arg_0_3_elem);
+        Nan::Set(arg_0_3, (int)arg_0_3_id,arg_0_3_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_3);
@@ -107,7 +107,7 @@ NAN_METHOD(NJSTezosLikeAddress::getNetworkParameters) {
     for(size_t arg_0_4_id = 0; arg_0_4_id < result.ImplicitPrefix.size(); arg_0_4_id++)
     {
         auto arg_0_4_elem = Nan::New<Uint32>(result.ImplicitPrefix[arg_0_4_id]);
-        arg_0_4->Set((int)arg_0_4_id,arg_0_4_elem);
+        Nan::Set(arg_0_4, (int)arg_0_4_id,arg_0_4_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_4);
@@ -115,7 +115,7 @@ NAN_METHOD(NJSTezosLikeAddress::getNetworkParameters) {
     for(size_t arg_0_5_id = 0; arg_0_5_id < result.OriginatedPrefix.size(); arg_0_5_id++)
     {
         auto arg_0_5_elem = Nan::New<Uint32>(result.OriginatedPrefix[arg_0_5_id]);
-        arg_0_5->Set((int)arg_0_5_id,arg_0_5_elem);
+        Nan::Set(arg_0_5, (int)arg_0_5_id,arg_0_5_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_5);
@@ -123,7 +123,7 @@ NAN_METHOD(NJSTezosLikeAddress::getNetworkParameters) {
     for(size_t arg_0_6_id = 0; arg_0_6_id < result.AdditionalTIPs.size(); arg_0_6_id++)
     {
         auto arg_0_6_elem = Nan::New<String>(result.AdditionalTIPs[arg_0_6_id]).ToLocalChecked();
-        arg_0_6->Set((int)arg_0_6_id,arg_0_6_elem);
+        Nan::Set(arg_0_6, (int)arg_0_6_id,arg_0_6_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_6);
@@ -214,5 +214,5 @@ void NJSTezosLikeAddress::Initialize(Local<Object> target) {
     TezosLikeAddress_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSTezosLikeAddress").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSTezosLikeAddress").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

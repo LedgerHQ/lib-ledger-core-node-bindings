@@ -30,9 +30,9 @@ std::vector<uint8_t> NJSRandomNumberGenerator::getRandomBytes(int32_t size)
     Local<Array> fResult_getRandomBytes_container = Local<Array>::Cast(checkedResult_getRandomBytes);
     for(uint32_t fResult_getRandomBytes_id = 0; fResult_getRandomBytes_id < fResult_getRandomBytes_container->Length(); fResult_getRandomBytes_id++)
     {
-        if(fResult_getRandomBytes_container->Get(fResult_getRandomBytes_id)->IsUint32())
+        if(fResult_getRandomBytes_container->Get(Nan::GetCurrentContext(), fResult_getRandomBytes_id).ToLocalChecked()->IsUint32())
         {
-            auto fResult_getRandomBytes_elem = Nan::To<uint32_t>(fResult_getRandomBytes_container->Get(fResult_getRandomBytes_id)).FromJust();
+            auto fResult_getRandomBytes_elem = Nan::To<uint32_t>(fResult_getRandomBytes_container->Get(Nan::GetCurrentContext(), fResult_getRandomBytes_id).ToLocalChecked()).FromJust();
             fResult_getRandomBytes.emplace_back(fResult_getRandomBytes_elem);
         }
     }
@@ -152,5 +152,5 @@ void NJSRandomNumberGenerator::Initialize(Local<Object> target) {
     RandomNumberGenerator_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSRandomNumberGenerator").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSRandomNumberGenerator").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }

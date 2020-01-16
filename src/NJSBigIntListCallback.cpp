@@ -21,7 +21,7 @@ void NJSBigIntListCallback::onCallback(const std::experimental::optional<std::ve
         {
             auto arg_0_tmp_elem = NJSBigInt::wrap(arg_0_optional[arg_0_tmp_id]);
 
-            arg_0_tmp->Set((int)arg_0_tmp_id,arg_0_tmp_elem);
+            Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
         }
 
         arg_0 = arg_0_tmp;
@@ -99,5 +99,5 @@ void NJSBigIntListCallback::Initialize(Local<Object> target) {
     BigIntListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    target->Set(Nan::New<String>("NJSBigIntListCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    Nan::Set(target, Nan::New<String>("NJSBigIntListCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
 }
