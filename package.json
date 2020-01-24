@@ -6,7 +6,7 @@
   "main": "js/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LedgerHQ/lib-ledger-core-node-bindings"
+    "url": "https://github.com/LedgerHQ/lib-ledger-core-node-bindings.git"
   },
   "gypfile": true,
   "scripts": {
@@ -19,7 +19,14 @@
     "clean": "rimraf build",
     "gypconfigx": "node-gyp configure -- -f xcode",
     "lint": "eslint js",
-    "prettier": "prettier --write \"js/**/*.js\""
+    "prettier": "prettier --write \"js/**/*.js\"",
+    "install": "node-pre-gyp install --fallback-to-build"
+  },
+  "binary": {
+    "module_name": "ledger-core-node",
+    "module_path": "./build/Release/",
+    "host": "https://github.com/LedgerHQ/lib-ledger-core-node-bindings/releases/download/",
+    "remote_path": "{version}"
   },
   "authors": [
     {
@@ -34,14 +41,16 @@
   "license": "MIT",
   "dependencies": {
     "bindings": "1.3.0",
-    "nan": "^2.6.2"
+    "nan": "^2.6.2",
+    "node-gyp": "^6.1.0",
+    "node-pre-gyp": "^0.14.0",
+    "node-pre-gyp-github": "^1.4.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
     "eslint": "^4.18.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
-    "node-gyp": "^3.6.2",
     "prettier": "^1.12.1",
     "rimraf": "^2.5.3"
   }
