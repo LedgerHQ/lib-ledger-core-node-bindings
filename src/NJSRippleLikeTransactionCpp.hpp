@@ -86,6 +86,9 @@ private:
     /** An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account */
     static NAN_METHOD(getDestinationTag);
 
+    /** Status of the transaction. */
+    static NAN_METHOD(getStatus);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

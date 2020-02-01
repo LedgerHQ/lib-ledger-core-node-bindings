@@ -25,9 +25,12 @@ if (!conf) {
   console.error(`Platform ${process.platform} is not supported`)
   process.exit(1)
 }
-const endpointURL = `https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core/${libcoreVersion}/${
-  conf.dir
-}`
+
+const dir = process.platform === "linux" &&
+Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 10  ?
+`${conf.dir}-arch_ssl_1_1` : conf.dir
+
+const endpointURL = `https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core/${libcoreVersion}/${dir}`
 
 if (!fs.existsSync('lib')) {
   fs.mkdirSync('lib')

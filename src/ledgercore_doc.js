@@ -264,6 +264,8 @@ declare class NJSRippleLikeTransaction
     declare function addMemo(memo: RippleLikeMemo);
     /** An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account */
     declare function getDestinationTag(): ?number;
+    /** Status of the transaction. */
+    declare function getStatus(): number;
 }
 /**Class representing a Ripple Operation */
 declare class NJSRippleLikeOperation
@@ -1752,6 +1754,11 @@ declare class NJSDatabaseBackend
      * @return DatabaseBackend object
      */
     static declare function getSqlite3Backend(): NJSDatabaseBackend;
+    /**
+     * Create an instance of PostgreSQL database.
+     * @return DatabaseBackend object
+     */
+    static declare function getPostgreSQLBackend(connectionPoolSize: number): NJSDatabaseBackend;
     /** Create a database backend instance from the given DatabaseEngine implementation. */
     static declare function createBackendFromEngine(engine: NJSDatabaseEngine): NJSDatabaseBackend;
 }
