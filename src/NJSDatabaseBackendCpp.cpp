@@ -104,6 +104,26 @@ NAN_METHOD(NJSDatabaseBackend::getSqlite3Backend) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSDatabaseBackend::getPostgreSQLBackend) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSDatabaseBackend::getPostgreSQLBackend needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
+
+    auto result = ledger::core::api::DatabaseBackend::getPostgreSQLBackend(arg_0);
+
+    //Wrap result in node object
+    auto arg_1 = NJSDatabaseBackend::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_1);
+}
 NAN_METHOD(NJSDatabaseBackend::createBackendFromEngine) {
 
     //Check if method called with right number of arguments
@@ -188,6 +208,7 @@ void NJSDatabaseBackend::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"enableQueryLogging", enableQueryLogging);
     Nan::SetPrototypeMethod(func_template,"isLoggingEnabled", isLoggingEnabled);
     Nan::SetPrototypeMethod(func_template,"getSqlite3Backend", getSqlite3Backend);
+    Nan::SetPrototypeMethod(func_template,"getPostgreSQLBackend", getPostgreSQLBackend);
     Nan::SetPrototypeMethod(func_template,"createBackendFromEngine", createBackendFromEngine);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype

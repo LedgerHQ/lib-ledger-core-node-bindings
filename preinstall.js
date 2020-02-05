@@ -25,9 +25,14 @@ if (!conf) {
   console.error(`Platform ${process.platform} is not supported`)
   process.exit(1)
 }
-const endpointURL = `https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core/${libcoreVersion}/${
-  conf.dir
-}`
+
+const dir =
+  process.platform === 'linux' && Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 10
+    ? `${conf.dir}-arch_ssl_1_1`
+    : conf.dir
+
+
+const endpointURL = `https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core/${libcoreVersion}/${dir}`
 
 if (!fs.existsSync('lib')) {
   fs.mkdirSync('lib')
@@ -36,11 +41,16 @@ if (!fs.existsSync('lib')) {
 conf.files.reduce(
   (p, file) =>
     p.then(() =>
-      get(file).then(() => {
-        if (conf.chmod) {
-          fs.chmodSync(`lib/${file}`, conf.chmod)
-        }
-      }),
+      get(file)
+        .then(() => {
+          if (conf.chmod) {
+            fs.chmodSync(`lib/${file}`, conf.chmod)
+          }
+        })
+        .catch(err => {
+          console.error(`Error: ${err.message}, statusCode: ${err.code}`)
+          process.exit(1)
+        }),
     ),
   Promise.resolve(),
 )
@@ -66,7 +76,11 @@ function get(file) {
 
       https
         .get(url, res => {
-          res.pipe(f)
+          if (res.statusCode === 404) {
+            reject({ code: res.statusCode, message: res.statusMessage })
+          } else {
+            res.pipe(f)
+          }
         })
         .on('error', err => {
           fs.unlink(dest)
