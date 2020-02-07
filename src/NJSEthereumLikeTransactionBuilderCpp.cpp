@@ -3,6 +3,7 @@
 
 #include "NJSEthereumLikeTransactionBuilderCpp.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -146,16 +147,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::setInputData) {
     }
 
     //Check if parameters have correct types
-    vector<uint8_t> arg_0;
-    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
-    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    if(!info[0]->IsString())
     {
-        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
-        {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
-            arg_0.emplace_back(arg_0_elem);
-        }
+        Nan::ThrowError("info[0] should be a hexadecimal string.");
     }
+    Nan::Utf8String string_arg_0(info[0]);
+    auto arg_0 = djinni::js::hex::toByteArray(std::string(*string_arg_0, string_arg_0.length()));
 
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -306,42 +303,30 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawUnsignedTransaction) {
         auto opt_arg_0_6_1 = std::string(*string_opt_arg_0_6_1);
 
         auto field_opt_arg_0_6_2 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2PKHVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_6_2;
-        Local<Array> opt_arg_0_6_2_container = Local<Array>::Cast(field_opt_arg_0_6_2);
-        for(uint32_t opt_arg_0_6_2_id = 0; opt_arg_0_6_2_id < opt_arg_0_6_2_container->Length(); opt_arg_0_6_2_id++)
+        if(!field_opt_arg_0_6_2->IsString())
         {
-            if(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_6_2_elem = Nan::To<uint32_t>(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()).FromJust();
-                opt_arg_0_6_2.emplace_back(opt_arg_0_6_2_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_6_2 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_6_2(field_opt_arg_0_6_2);
+        auto opt_arg_0_6_2 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_2, string_opt_arg_0_6_2.length()));
 
 
         auto field_opt_arg_0_6_3 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2SHVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_6_3;
-        Local<Array> opt_arg_0_6_3_container = Local<Array>::Cast(field_opt_arg_0_6_3);
-        for(uint32_t opt_arg_0_6_3_id = 0; opt_arg_0_6_3_id < opt_arg_0_6_3_container->Length(); opt_arg_0_6_3_id++)
+        if(!field_opt_arg_0_6_3->IsString())
         {
-            if(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_6_3_elem = Nan::To<uint32_t>(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()).FromJust();
-                opt_arg_0_6_3.emplace_back(opt_arg_0_6_3_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_6_3 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_6_3(field_opt_arg_0_6_3);
+        auto opt_arg_0_6_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_3, string_opt_arg_0_6_3.length()));
 
 
         auto field_opt_arg_0_6_4 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_6_4;
-        Local<Array> opt_arg_0_6_4_container = Local<Array>::Cast(field_opt_arg_0_6_4);
-        for(uint32_t opt_arg_0_6_4_id = 0; opt_arg_0_6_4_id < opt_arg_0_6_4_container->Length(); opt_arg_0_6_4_id++)
+        if(!field_opt_arg_0_6_4->IsString())
         {
-            if(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_6_4_elem = Nan::To<uint32_t>(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()).FromJust();
-                opt_arg_0_6_4.emplace_back(opt_arg_0_6_4_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_6_4 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_6_4(field_opt_arg_0_6_4);
+        auto opt_arg_0_6_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_4, string_opt_arg_0_6_4.length()));
 
 
         auto field_opt_arg_0_6_5 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("FeePolicy").ToLocalChecked()).ToLocalChecked();
@@ -361,16 +346,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawUnsignedTransaction) {
         auto opt_arg_0_6_9 = Nan::To<int64_t>(field_opt_arg_0_6_9).FromJust();
 
         auto field_opt_arg_0_6_10 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_6_10;
-        Local<Array> opt_arg_0_6_10_container = Local<Array>::Cast(field_opt_arg_0_6_10);
-        for(uint32_t opt_arg_0_6_10_id = 0; opt_arg_0_6_10_id < opt_arg_0_6_10_container->Length(); opt_arg_0_6_10_id++)
+        if(!field_opt_arg_0_6_10->IsString())
         {
-            if(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_6_10_elem = Nan::To<uint32_t>(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()).FromJust();
-                opt_arg_0_6_10.emplace_back(opt_arg_0_6_10_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_6_10 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_6_10(field_opt_arg_0_6_10);
+        auto opt_arg_0_6_10 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_10, string_opt_arg_0_6_10.length()));
 
 
         auto field_opt_arg_0_6_11 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalBIPs").ToLocalChecked()).ToLocalChecked();
@@ -410,16 +391,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawUnsignedTransaction) {
         auto opt_arg_0_7_3 = std::string(*string_opt_arg_0_7_3);
 
         auto field_opt_arg_0_7_4 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_7_4;
-        Local<Array> opt_arg_0_7_4_container = Local<Array>::Cast(field_opt_arg_0_7_4);
-        for(uint32_t opt_arg_0_7_4_id = 0; opt_arg_0_7_4_id < opt_arg_0_7_4_container->Length(); opt_arg_0_7_4_id++)
+        if(!field_opt_arg_0_7_4->IsString())
         {
-            if(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_7_4_elem = Nan::To<uint32_t>(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()).FromJust();
-                opt_arg_0_7_4.emplace_back(opt_arg_0_7_4_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_7_4 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_7_4(field_opt_arg_0_7_4);
+        auto opt_arg_0_7_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_7_4, string_opt_arg_0_7_4.length()));
 
 
         auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalEIPs").ToLocalChecked()).ToLocalChecked();
@@ -458,16 +435,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawUnsignedTransaction) {
         auto opt_arg_0_8_2 = std::string(*string_opt_arg_0_8_2);
 
         auto field_opt_arg_0_8_3 = Nan::Get(field_arg_0_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_8_3;
-        Local<Array> opt_arg_0_8_3_container = Local<Array>::Cast(field_opt_arg_0_8_3);
-        for(uint32_t opt_arg_0_8_3_id = 0; opt_arg_0_8_3_id < opt_arg_0_8_3_container->Length(); opt_arg_0_8_3_id++)
+        if(!field_opt_arg_0_8_3->IsString())
         {
-            if(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_8_3_elem = Nan::To<uint32_t>(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()).FromJust();
-                opt_arg_0_8_3.emplace_back(opt_arg_0_8_3_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_8_3 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_8_3(field_opt_arg_0_8_3);
+        auto opt_arg_0_8_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_8_3, string_opt_arg_0_8_3.length()));
 
 
         auto field_opt_arg_0_8_4 = Nan::Get(field_arg_0_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalRIPs").ToLocalChecked()).ToLocalChecked();
@@ -506,42 +479,30 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawUnsignedTransaction) {
         auto opt_arg_0_9_2 = std::string(*string_opt_arg_0_9_2);
 
         auto field_opt_arg_0_9_3 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_9_3;
-        Local<Array> opt_arg_0_9_3_container = Local<Array>::Cast(field_opt_arg_0_9_3);
-        for(uint32_t opt_arg_0_9_3_id = 0; opt_arg_0_9_3_id < opt_arg_0_9_3_container->Length(); opt_arg_0_9_3_id++)
+        if(!field_opt_arg_0_9_3->IsString())
         {
-            if(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()).FromJust();
-                opt_arg_0_9_3.emplace_back(opt_arg_0_9_3_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_9_3 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_9_3(field_opt_arg_0_9_3);
+        auto opt_arg_0_9_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_3, string_opt_arg_0_9_3.length()));
 
 
         auto field_opt_arg_0_9_4 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_9_4;
-        Local<Array> opt_arg_0_9_4_container = Local<Array>::Cast(field_opt_arg_0_9_4);
-        for(uint32_t opt_arg_0_9_4_id = 0; opt_arg_0_9_4_id < opt_arg_0_9_4_container->Length(); opt_arg_0_9_4_id++)
+        if(!field_opt_arg_0_9_4->IsString())
         {
-            if(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()).FromJust();
-                opt_arg_0_9_4.emplace_back(opt_arg_0_9_4_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_9_4 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_9_4(field_opt_arg_0_9_4);
+        auto opt_arg_0_9_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_4, string_opt_arg_0_9_4.length()));
 
 
         auto field_opt_arg_0_9_5 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_9_5;
-        Local<Array> opt_arg_0_9_5_container = Local<Array>::Cast(field_opt_arg_0_9_5);
-        for(uint32_t opt_arg_0_9_5_id = 0; opt_arg_0_9_5_id < opt_arg_0_9_5_container->Length(); opt_arg_0_9_5_id++)
+        if(!field_opt_arg_0_9_5->IsString())
         {
-            if(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()).FromJust();
-                opt_arg_0_9_5.emplace_back(opt_arg_0_9_5_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_9_5 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_9_5(field_opt_arg_0_9_5);
+        auto opt_arg_0_9_5 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_5, string_opt_arg_0_9_5.length()));
 
 
         auto field_opt_arg_0_9_6 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalTIPs").ToLocalChecked()).ToLocalChecked();
@@ -567,16 +528,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawUnsignedTransaction) {
 
     Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
 
-    vector<uint8_t> arg_1;
-    Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
-    for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
+    if(!info[1]->IsString())
     {
-        if(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->IsUint32())
-        {
-            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()).FromJust();
-            arg_1.emplace_back(arg_1_elem);
-        }
+        Nan::ThrowError("info[1] should be a hexadecimal string.");
     }
+    Nan::Utf8String string_arg_1(info[1]);
+    auto arg_1 = djinni::js::hex::toByteArray(std::string(*string_arg_1, string_arg_1.length()));
 
 
     auto result = ledger::core::api::EthereumLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1);
@@ -651,42 +608,30 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawSignedTransaction) {
         auto opt_arg_0_6_1 = std::string(*string_opt_arg_0_6_1);
 
         auto field_opt_arg_0_6_2 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2PKHVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_6_2;
-        Local<Array> opt_arg_0_6_2_container = Local<Array>::Cast(field_opt_arg_0_6_2);
-        for(uint32_t opt_arg_0_6_2_id = 0; opt_arg_0_6_2_id < opt_arg_0_6_2_container->Length(); opt_arg_0_6_2_id++)
+        if(!field_opt_arg_0_6_2->IsString())
         {
-            if(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_6_2_elem = Nan::To<uint32_t>(opt_arg_0_6_2_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_2_id).ToLocalChecked()).FromJust();
-                opt_arg_0_6_2.emplace_back(opt_arg_0_6_2_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_6_2 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_6_2(field_opt_arg_0_6_2);
+        auto opt_arg_0_6_2 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_2, string_opt_arg_0_6_2.length()));
 
 
         auto field_opt_arg_0_6_3 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2SHVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_6_3;
-        Local<Array> opt_arg_0_6_3_container = Local<Array>::Cast(field_opt_arg_0_6_3);
-        for(uint32_t opt_arg_0_6_3_id = 0; opt_arg_0_6_3_id < opt_arg_0_6_3_container->Length(); opt_arg_0_6_3_id++)
+        if(!field_opt_arg_0_6_3->IsString())
         {
-            if(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_6_3_elem = Nan::To<uint32_t>(opt_arg_0_6_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_3_id).ToLocalChecked()).FromJust();
-                opt_arg_0_6_3.emplace_back(opt_arg_0_6_3_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_6_3 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_6_3(field_opt_arg_0_6_3);
+        auto opt_arg_0_6_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_3, string_opt_arg_0_6_3.length()));
 
 
         auto field_opt_arg_0_6_4 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_6_4;
-        Local<Array> opt_arg_0_6_4_container = Local<Array>::Cast(field_opt_arg_0_6_4);
-        for(uint32_t opt_arg_0_6_4_id = 0; opt_arg_0_6_4_id < opt_arg_0_6_4_container->Length(); opt_arg_0_6_4_id++)
+        if(!field_opt_arg_0_6_4->IsString())
         {
-            if(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_6_4_elem = Nan::To<uint32_t>(opt_arg_0_6_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_4_id).ToLocalChecked()).FromJust();
-                opt_arg_0_6_4.emplace_back(opt_arg_0_6_4_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_6_4 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_6_4(field_opt_arg_0_6_4);
+        auto opt_arg_0_6_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_4, string_opt_arg_0_6_4.length()));
 
 
         auto field_opt_arg_0_6_5 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("FeePolicy").ToLocalChecked()).ToLocalChecked();
@@ -706,16 +651,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawSignedTransaction) {
         auto opt_arg_0_6_9 = Nan::To<int64_t>(field_opt_arg_0_6_9).FromJust();
 
         auto field_opt_arg_0_6_10 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_6_10;
-        Local<Array> opt_arg_0_6_10_container = Local<Array>::Cast(field_opt_arg_0_6_10);
-        for(uint32_t opt_arg_0_6_10_id = 0; opt_arg_0_6_10_id < opt_arg_0_6_10_container->Length(); opt_arg_0_6_10_id++)
+        if(!field_opt_arg_0_6_10->IsString())
         {
-            if(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_6_10_elem = Nan::To<uint32_t>(opt_arg_0_6_10_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_10_id).ToLocalChecked()).FromJust();
-                opt_arg_0_6_10.emplace_back(opt_arg_0_6_10_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_6_10 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_6_10(field_opt_arg_0_6_10);
+        auto opt_arg_0_6_10 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_10, string_opt_arg_0_6_10.length()));
 
 
         auto field_opt_arg_0_6_11 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalBIPs").ToLocalChecked()).ToLocalChecked();
@@ -755,16 +696,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawSignedTransaction) {
         auto opt_arg_0_7_3 = std::string(*string_opt_arg_0_7_3);
 
         auto field_opt_arg_0_7_4 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_7_4;
-        Local<Array> opt_arg_0_7_4_container = Local<Array>::Cast(field_opt_arg_0_7_4);
-        for(uint32_t opt_arg_0_7_4_id = 0; opt_arg_0_7_4_id < opt_arg_0_7_4_container->Length(); opt_arg_0_7_4_id++)
+        if(!field_opt_arg_0_7_4->IsString())
         {
-            if(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_7_4_elem = Nan::To<uint32_t>(opt_arg_0_7_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_4_id).ToLocalChecked()).FromJust();
-                opt_arg_0_7_4.emplace_back(opt_arg_0_7_4_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_7_4 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_7_4(field_opt_arg_0_7_4);
+        auto opt_arg_0_7_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_7_4, string_opt_arg_0_7_4.length()));
 
 
         auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalEIPs").ToLocalChecked()).ToLocalChecked();
@@ -803,16 +740,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawSignedTransaction) {
         auto opt_arg_0_8_2 = std::string(*string_opt_arg_0_8_2);
 
         auto field_opt_arg_0_8_3 = Nan::Get(field_arg_0_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_8_3;
-        Local<Array> opt_arg_0_8_3_container = Local<Array>::Cast(field_opt_arg_0_8_3);
-        for(uint32_t opt_arg_0_8_3_id = 0; opt_arg_0_8_3_id < opt_arg_0_8_3_container->Length(); opt_arg_0_8_3_id++)
+        if(!field_opt_arg_0_8_3->IsString())
         {
-            if(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_8_3_elem = Nan::To<uint32_t>(opt_arg_0_8_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_8_3_id).ToLocalChecked()).FromJust();
-                opt_arg_0_8_3.emplace_back(opt_arg_0_8_3_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_8_3 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_8_3(field_opt_arg_0_8_3);
+        auto opt_arg_0_8_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_8_3, string_opt_arg_0_8_3.length()));
 
 
         auto field_opt_arg_0_8_4 = Nan::Get(field_arg_0_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalRIPs").ToLocalChecked()).ToLocalChecked();
@@ -851,42 +784,30 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawSignedTransaction) {
         auto opt_arg_0_9_2 = std::string(*string_opt_arg_0_9_2);
 
         auto field_opt_arg_0_9_3 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_9_3;
-        Local<Array> opt_arg_0_9_3_container = Local<Array>::Cast(field_opt_arg_0_9_3);
-        for(uint32_t opt_arg_0_9_3_id = 0; opt_arg_0_9_3_id < opt_arg_0_9_3_container->Length(); opt_arg_0_9_3_id++)
+        if(!field_opt_arg_0_9_3->IsString())
         {
-            if(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_9_3_elem = Nan::To<uint32_t>(opt_arg_0_9_3_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_3_id).ToLocalChecked()).FromJust();
-                opt_arg_0_9_3.emplace_back(opt_arg_0_9_3_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_9_3 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_9_3(field_opt_arg_0_9_3);
+        auto opt_arg_0_9_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_3, string_opt_arg_0_9_3.length()));
 
 
         auto field_opt_arg_0_9_4 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_9_4;
-        Local<Array> opt_arg_0_9_4_container = Local<Array>::Cast(field_opt_arg_0_9_4);
-        for(uint32_t opt_arg_0_9_4_id = 0; opt_arg_0_9_4_id < opt_arg_0_9_4_container->Length(); opt_arg_0_9_4_id++)
+        if(!field_opt_arg_0_9_4->IsString())
         {
-            if(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_9_4_elem = Nan::To<uint32_t>(opt_arg_0_9_4_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_4_id).ToLocalChecked()).FromJust();
-                opt_arg_0_9_4.emplace_back(opt_arg_0_9_4_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_9_4 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_9_4(field_opt_arg_0_9_4);
+        auto opt_arg_0_9_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_4, string_opt_arg_0_9_4.length()));
 
 
         auto field_opt_arg_0_9_5 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
-        vector<uint8_t> opt_arg_0_9_5;
-        Local<Array> opt_arg_0_9_5_container = Local<Array>::Cast(field_opt_arg_0_9_5);
-        for(uint32_t opt_arg_0_9_5_id = 0; opt_arg_0_9_5_id < opt_arg_0_9_5_container->Length(); opt_arg_0_9_5_id++)
+        if(!field_opt_arg_0_9_5->IsString())
         {
-            if(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()->IsUint32())
-            {
-                auto opt_arg_0_9_5_elem = Nan::To<uint32_t>(opt_arg_0_9_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_9_5_id).ToLocalChecked()).FromJust();
-                opt_arg_0_9_5.emplace_back(opt_arg_0_9_5_elem);
-            }
+            Nan::ThrowError("field_opt_arg_0_9_5 should be a hexadecimal string.");
         }
+        Nan::Utf8String string_opt_arg_0_9_5(field_opt_arg_0_9_5);
+        auto opt_arg_0_9_5 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_5, string_opt_arg_0_9_5.length()));
 
 
         auto field_opt_arg_0_9_6 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalTIPs").ToLocalChecked()).ToLocalChecked();
@@ -912,16 +833,12 @@ NAN_METHOD(NJSEthereumLikeTransactionBuilder::parseRawSignedTransaction) {
 
     Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
 
-    vector<uint8_t> arg_1;
-    Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
-    for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
+    if(!info[1]->IsString())
     {
-        if(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->IsUint32())
-        {
-            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()).FromJust();
-            arg_1.emplace_back(arg_1_elem);
-        }
+        Nan::ThrowError("info[1] should be a hexadecimal string.");
     }
+    Nan::Utf8String string_arg_1(info[1]);
+    auto arg_1 = djinni::js::hex::toByteArray(std::string(*string_arg_1, string_arg_1.length()));
 
 
     auto result = ledger::core::api::EthereumLikeTransactionBuilder::parseRawSignedTransaction(arg_0,arg_1);

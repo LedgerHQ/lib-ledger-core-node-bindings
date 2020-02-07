@@ -3,6 +3,7 @@
 
 #include "NJSTezosLikeExtendedPublicKeyCpp.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -58,12 +59,7 @@ NAN_METHOD(NJSTezosLikeExtendedPublicKey::derivePublicKey) {
     auto result = cpp_impl->derivePublicKey(arg_0);
 
     //Wrap result in node object
-    Local<Array> arg_1 = Nan::New<Array>();
-    for(size_t arg_1_id = 0; arg_1_id < result.size(); arg_1_id++)
-    {
-        auto arg_1_elem = Nan::New<Uint32>(result[arg_1_id]);
-        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
-    }
+    auto arg_1 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -91,12 +87,7 @@ NAN_METHOD(NJSTezosLikeExtendedPublicKey::deriveHash160) {
     auto result = cpp_impl->deriveHash160(arg_0);
 
     //Wrap result in node object
-    Local<Array> arg_1 = Nan::New<Array>();
-    for(size_t arg_1_id = 0; arg_1_id < result.size(); arg_1_id++)
-    {
-        auto arg_1_elem = Nan::New<Uint32>(result[arg_1_id]);
-        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
-    }
+    auto arg_1 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result

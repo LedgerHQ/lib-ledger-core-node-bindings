@@ -3,6 +3,7 @@
 
 #include "NJSBitcoinLikeInputCpp.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -63,12 +64,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getPublicKeys) {
     Local<Array> arg_0 = Nan::New<Array>();
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
-        Local<Array> arg_0_elem = Nan::New<Array>();
-        for(size_t arg_0_elem_id = 0; arg_0_elem_id < result[arg_0_id].size(); arg_0_elem_id++)
-        {
-            auto arg_0_elem_elem = Nan::New<Uint32>(result[arg_0_id][arg_0_elem_id]);
-            Nan::Set(arg_0_elem, (int)arg_0_elem_id,arg_0_elem_elem);
-        }
+        auto arg_0_elem = Nan::New<String>(djinni::js::hex::toString(result[arg_0_id])).ToLocalChecked();
 
         Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
@@ -303,12 +299,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getScriptSig) {
     auto result = cpp_impl->getScriptSig();
 
     //Wrap result in node object
-    Local<Array> arg_0 = Nan::New<Array>();
-    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
-    {
-        auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
-    }
+    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -349,16 +340,12 @@ NAN_METHOD(NJSBitcoinLikeInput::setScriptSig) {
     }
 
     //Check if parameters have correct types
-    vector<uint8_t> arg_0;
-    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
-    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    if(!info[0]->IsString())
     {
-        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
-        {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
-            arg_0.emplace_back(arg_0_elem);
-        }
+        Nan::ThrowError("info[0] should be a hexadecimal string.");
     }
+    Nan::Utf8String string_arg_0(info[0]);
+    auto arg_0 = djinni::js::hex::toByteArray(std::string(*string_arg_0, string_arg_0.length()));
 
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -378,16 +365,12 @@ NAN_METHOD(NJSBitcoinLikeInput::pushToScriptSig) {
     }
 
     //Check if parameters have correct types
-    vector<uint8_t> arg_0;
-    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
-    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    if(!info[0]->IsString())
     {
-        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
-        {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
-            arg_0.emplace_back(arg_0_elem);
-        }
+        Nan::ThrowError("info[0] should be a hexadecimal string.");
     }
+    Nan::Utf8String string_arg_0(info[0]);
+    auto arg_0 = djinni::js::hex::toByteArray(std::string(*string_arg_0, string_arg_0.length()));
 
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -476,16 +459,12 @@ NAN_METHOD(NJSBitcoinLikeInput::setP2PKHSigScript) {
     }
 
     //Check if parameters have correct types
-    vector<uint8_t> arg_0;
-    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
-    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    if(!info[0]->IsString())
     {
-        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
-        {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
-            arg_0.emplace_back(arg_0_elem);
-        }
+        Nan::ThrowError("info[0] should be a hexadecimal string.");
     }
+    Nan::Utf8String string_arg_0(info[0]);
+    auto arg_0 = djinni::js::hex::toByteArray(std::string(*string_arg_0, string_arg_0.length()));
 
 
     //Unwrap current object and retrieve its Cpp Implementation
