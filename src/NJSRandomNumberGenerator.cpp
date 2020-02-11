@@ -31,8 +31,17 @@ std::vector<uint8_t> NJSRandomNumberGenerator::getRandomBytes(int32_t size)
     {
         Nan::ThrowError("checkedResult_getRandomBytes should be a hexadecimal string.");
     }
-    Nan::Utf8String string_fResult_getRandomBytes(checkedResult_getRandomBytes);
-    auto fResult_getRandomBytes = djinni::js::hex::toByteArray(std::string(*string_fResult_getRandomBytes, string_fResult_getRandomBytes.length()));
+    std::vector<uint8_t> fResult_getRandomBytes;
+    Nan::Utf8String str_fResult_getRandomBytes(checkedResult_getRandomBytes);
+    std::string string_fResult_getRandomBytes(*str_fResult_getRandomBytes, str_fResult_getRandomBytes.length());
+    if (string_fResult_getRandomBytes.rfind("0x", 0) == 0)
+    {
+        fResult_getRandomBytes = djinni::js::hex::toByteArray(string_fResult_getRandomBytes.substr(2));
+    }
+    else
+    {
+        fResult_getRandomBytes = std::vector<uint8_t>(string_fResult_getRandomBytes.cbegin(), string_fResult_getRandomBytes.cend());
+    }
 
     return fResult_getRandomBytes;
 }

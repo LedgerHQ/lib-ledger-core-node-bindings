@@ -32,8 +32,17 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::ripemd160(const std::vector<uint8_t
     {
         Nan::ThrowError("checkedResult_ripemd160 should be a hexadecimal string.");
     }
-    Nan::Utf8String string_fResult_ripemd160(checkedResult_ripemd160);
-    auto fResult_ripemd160 = djinni::js::hex::toByteArray(std::string(*string_fResult_ripemd160, string_fResult_ripemd160.length()));
+    std::vector<uint8_t> fResult_ripemd160;
+    Nan::Utf8String str_fResult_ripemd160(checkedResult_ripemd160);
+    std::string string_fResult_ripemd160(*str_fResult_ripemd160, str_fResult_ripemd160.length());
+    if (string_fResult_ripemd160.rfind("0x", 0) == 0)
+    {
+        fResult_ripemd160 = djinni::js::hex::toByteArray(string_fResult_ripemd160.substr(2));
+    }
+    else
+    {
+        fResult_ripemd160 = std::vector<uint8_t>(string_fResult_ripemd160.cbegin(), string_fResult_ripemd160.cend());
+    }
 
     return fResult_ripemd160;
 }
@@ -61,8 +70,17 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::sha256(const std::vector<uint8_t> &
     {
         Nan::ThrowError("checkedResult_sha256 should be a hexadecimal string.");
     }
-    Nan::Utf8String string_fResult_sha256(checkedResult_sha256);
-    auto fResult_sha256 = djinni::js::hex::toByteArray(std::string(*string_fResult_sha256, string_fResult_sha256.length()));
+    std::vector<uint8_t> fResult_sha256;
+    Nan::Utf8String str_fResult_sha256(checkedResult_sha256);
+    std::string string_fResult_sha256(*str_fResult_sha256, str_fResult_sha256.length());
+    if (string_fResult_sha256.rfind("0x", 0) == 0)
+    {
+        fResult_sha256 = djinni::js::hex::toByteArray(string_fResult_sha256.substr(2));
+    }
+    else
+    {
+        fResult_sha256 = std::vector<uint8_t>(string_fResult_sha256.cbegin(), string_fResult_sha256.cend());
+    }
 
     return fResult_sha256;
 }
@@ -90,8 +108,17 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::keccak256(const std::vector<uint8_t
     {
         Nan::ThrowError("checkedResult_keccak256 should be a hexadecimal string.");
     }
-    Nan::Utf8String string_fResult_keccak256(checkedResult_keccak256);
-    auto fResult_keccak256 = djinni::js::hex::toByteArray(std::string(*string_fResult_keccak256, string_fResult_keccak256.length()));
+    std::vector<uint8_t> fResult_keccak256;
+    Nan::Utf8String str_fResult_keccak256(checkedResult_keccak256);
+    std::string string_fResult_keccak256(*str_fResult_keccak256, str_fResult_keccak256.length());
+    if (string_fResult_keccak256.rfind("0x", 0) == 0)
+    {
+        fResult_keccak256 = djinni::js::hex::toByteArray(string_fResult_keccak256.substr(2));
+    }
+    else
+    {
+        fResult_keccak256 = std::vector<uint8_t>(string_fResult_keccak256.cbegin(), string_fResult_keccak256.cend());
+    }
 
     return fResult_keccak256;
 }

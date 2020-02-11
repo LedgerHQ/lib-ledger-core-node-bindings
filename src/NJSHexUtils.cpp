@@ -63,11 +63,11 @@ char hex::byteToDigit(uint8_t byte, bool uppercase)
     {
         return '0' + byte;
     }
-    if (byte < 0xA)
+    else if (uppercase)
     {
         return (char)('A' + (byte - 0xA));
     }
-    if (byte < 0xA)
+    else
     {
         return (char)('a' + (byte - 0xA));
     }

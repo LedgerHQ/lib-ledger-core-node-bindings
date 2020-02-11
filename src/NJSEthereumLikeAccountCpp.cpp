@@ -22,8 +22,17 @@ NAN_METHOD(NJSEthereumLikeAccount::broadcastRawTransaction) {
     {
         Nan::ThrowError("info[0] should be a hexadecimal string.");
     }
-    Nan::Utf8String string_arg_0(info[0]);
-    auto arg_0 = djinni::js::hex::toByteArray(std::string(*string_arg_0, string_arg_0.length()));
+    std::vector<uint8_t> arg_0;
+    Nan::Utf8String str_arg_0(info[0]);
+    std::string string_arg_0(*str_arg_0, str_arg_0.length());
+    if (string_arg_0.rfind("0x", 0) == 0)
+    {
+        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
+    }
+    else
+    {
+        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+    }
 
 
     //Create promise and set it into Callback

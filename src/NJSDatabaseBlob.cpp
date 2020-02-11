@@ -32,8 +32,17 @@ std::vector<uint8_t> NJSDatabaseBlob::read(int64_t offset, int64_t length)
     {
         Nan::ThrowError("checkedResult_read should be a hexadecimal string.");
     }
-    Nan::Utf8String string_fResult_read(checkedResult_read);
-    auto fResult_read = djinni::js::hex::toByteArray(std::string(*string_fResult_read, string_fResult_read.length()));
+    std::vector<uint8_t> fResult_read;
+    Nan::Utf8String str_fResult_read(checkedResult_read);
+    std::string string_fResult_read(*str_fResult_read, str_fResult_read.length());
+    if (string_fResult_read.rfind("0x", 0) == 0)
+    {
+        fResult_read = djinni::js::hex::toByteArray(string_fResult_read.substr(2));
+    }
+    else
+    {
+        fResult_read = std::vector<uint8_t>(string_fResult_read.cbegin(), string_fResult_read.cend());
+    }
 
     return fResult_read;
 }

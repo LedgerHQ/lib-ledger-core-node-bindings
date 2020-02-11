@@ -132,8 +132,17 @@ HttpReadBodyResult NJSHttpUrlConnection::readBody()
         {
             Nan::ThrowError("field_fResult_readBody_2 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_fResult_readBody_2(field_fResult_readBody_2);
-        auto opt_fResult_readBody_2 = djinni::js::hex::toByteArray(std::string(*string_opt_fResult_readBody_2, string_opt_fResult_readBody_2.length()));
+        std::vector<uint8_t> opt_fResult_readBody_2;
+        Nan::Utf8String str_opt_fResult_readBody_2(field_fResult_readBody_2);
+        std::string string_opt_fResult_readBody_2(*str_opt_fResult_readBody_2, str_opt_fResult_readBody_2.length());
+        if (string_opt_fResult_readBody_2.rfind("0x", 0) == 0)
+        {
+            opt_fResult_readBody_2 = djinni::js::hex::toByteArray(string_opt_fResult_readBody_2.substr(2));
+        }
+        else
+        {
+            opt_fResult_readBody_2 = std::vector<uint8_t>(string_opt_fResult_readBody_2.cbegin(), string_opt_fResult_readBody_2.cend());
+        }
 
         fResult_readBody_2.emplace(opt_fResult_readBody_2);
     }

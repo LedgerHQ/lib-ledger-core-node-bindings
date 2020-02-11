@@ -774,14 +774,23 @@ NAN_METHOD(NJSWallet::newAccountWithInfo) {
     Local<Array> arg_0_4_container = Local<Array>::Cast(field_arg_0_4);
     for(uint32_t arg_0_4_id = 0; arg_0_4_id < arg_0_4_container->Length(); arg_0_4_id++)
     {
-        if(arg_0_4_container->Get(Nan::GetCurrentContext(), arg_0_4_id).ToLocalChecked()->IsObject())
+        if(arg_0_4_container->Get(Nan::GetCurrentContext(), arg_0_4_id).ToLocalChecked()->IsString())
         {
             if(!arg_0_4_container->Get(Nan::GetCurrentContext(), arg_0_4_id).ToLocalChecked()->IsString())
             {
                 Nan::ThrowError("arg_0_4_container->Get(Nan::GetCurrentContext(), arg_0_4_id).ToLocalChecked() should be a hexadecimal string.");
             }
-            Nan::Utf8String string_arg_0_4_elem(arg_0_4_container->Get(Nan::GetCurrentContext(), arg_0_4_id).ToLocalChecked());
-            auto arg_0_4_elem = djinni::js::hex::toByteArray(std::string(*string_arg_0_4_elem, string_arg_0_4_elem.length()));
+            std::vector<uint8_t> arg_0_4_elem;
+            Nan::Utf8String str_arg_0_4_elem(arg_0_4_container->Get(Nan::GetCurrentContext(), arg_0_4_id).ToLocalChecked());
+            std::string string_arg_0_4_elem(*str_arg_0_4_elem, str_arg_0_4_elem.length());
+            if (string_arg_0_4_elem.rfind("0x", 0) == 0)
+            {
+                arg_0_4_elem = djinni::js::hex::toByteArray(string_arg_0_4_elem.substr(2));
+            }
+            else
+            {
+                arg_0_4_elem = std::vector<uint8_t>(string_arg_0_4_elem.cbegin(), string_arg_0_4_elem.cend());
+            }
 
             arg_0_4.emplace_back(arg_0_4_elem);
         }
@@ -793,14 +802,23 @@ NAN_METHOD(NJSWallet::newAccountWithInfo) {
     Local<Array> arg_0_5_container = Local<Array>::Cast(field_arg_0_5);
     for(uint32_t arg_0_5_id = 0; arg_0_5_id < arg_0_5_container->Length(); arg_0_5_id++)
     {
-        if(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->IsObject())
+        if(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->IsString())
         {
             if(!arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked()->IsString())
             {
                 Nan::ThrowError("arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked() should be a hexadecimal string.");
             }
-            Nan::Utf8String string_arg_0_5_elem(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked());
-            auto arg_0_5_elem = djinni::js::hex::toByteArray(std::string(*string_arg_0_5_elem, string_arg_0_5_elem.length()));
+            std::vector<uint8_t> arg_0_5_elem;
+            Nan::Utf8String str_arg_0_5_elem(arg_0_5_container->Get(Nan::GetCurrentContext(), arg_0_5_id).ToLocalChecked());
+            std::string string_arg_0_5_elem(*str_arg_0_5_elem, str_arg_0_5_elem.length());
+            if (string_arg_0_5_elem.rfind("0x", 0) == 0)
+            {
+                arg_0_5_elem = djinni::js::hex::toByteArray(string_arg_0_5_elem.substr(2));
+            }
+            else
+            {
+                arg_0_5_elem = std::vector<uint8_t>(string_arg_0_5_elem.cbegin(), string_arg_0_5_elem.cend());
+            }
 
             arg_0_5.emplace_back(arg_0_5_elem);
         }

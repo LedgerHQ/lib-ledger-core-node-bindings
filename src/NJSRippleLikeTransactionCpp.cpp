@@ -177,15 +177,33 @@ NAN_METHOD(NJSRippleLikeTransaction::setSignature) {
     {
         Nan::ThrowError("info[0] should be a hexadecimal string.");
     }
-    Nan::Utf8String string_arg_0(info[0]);
-    auto arg_0 = djinni::js::hex::toByteArray(std::string(*string_arg_0, string_arg_0.length()));
+    std::vector<uint8_t> arg_0;
+    Nan::Utf8String str_arg_0(info[0]);
+    std::string string_arg_0(*str_arg_0, str_arg_0.length());
+    if (string_arg_0.rfind("0x", 0) == 0)
+    {
+        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
+    }
+    else
+    {
+        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+    }
 
     if(!info[1]->IsString())
     {
         Nan::ThrowError("info[1] should be a hexadecimal string.");
     }
-    Nan::Utf8String string_arg_1(info[1]);
-    auto arg_1 = djinni::js::hex::toByteArray(std::string(*string_arg_1, string_arg_1.length()));
+    std::vector<uint8_t> arg_1;
+    Nan::Utf8String str_arg_1(info[1]);
+    std::string string_arg_1(*str_arg_1, str_arg_1.length());
+    if (string_arg_1.rfind("0x", 0) == 0)
+    {
+        arg_1 = djinni::js::hex::toByteArray(string_arg_1.substr(2));
+    }
+    else
+    {
+        arg_1 = std::vector<uint8_t>(string_arg_1.cbegin(), string_arg_1.cend());
+    }
 
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -209,8 +227,17 @@ NAN_METHOD(NJSRippleLikeTransaction::setDERSignature) {
     {
         Nan::ThrowError("info[0] should be a hexadecimal string.");
     }
-    Nan::Utf8String string_arg_0(info[0]);
-    auto arg_0 = djinni::js::hex::toByteArray(std::string(*string_arg_0, string_arg_0.length()));
+    std::vector<uint8_t> arg_0;
+    Nan::Utf8String str_arg_0(info[0]);
+    std::string string_arg_0(*str_arg_0, str_arg_0.length());
+    if (string_arg_0.rfind("0x", 0) == 0)
+    {
+        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
+    }
+    else
+    {
+        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+    }
 
 
     //Unwrap current object and retrieve its Cpp Implementation

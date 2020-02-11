@@ -181,8 +181,17 @@ NAN_METHOD(NJSPreferencesEditor::putData) {
     {
         Nan::ThrowError("info[1] should be a hexadecimal string.");
     }
-    Nan::Utf8String string_arg_1(info[1]);
-    auto arg_1 = djinni::js::hex::toByteArray(std::string(*string_arg_1, string_arg_1.length()));
+    std::vector<uint8_t> arg_1;
+    Nan::Utf8String str_arg_1(info[1]);
+    std::string string_arg_1(*str_arg_1, str_arg_1.length());
+    if (string_arg_1.rfind("0x", 0) == 0)
+    {
+        arg_1 = djinni::js::hex::toByteArray(string_arg_1.substr(2));
+    }
+    else
+    {
+        arg_1 = std::vector<uint8_t>(string_arg_1.cbegin(), string_arg_1.cend());
+    }
 
 
     //Unwrap current object and retrieve its Cpp Implementation

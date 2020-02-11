@@ -308,8 +308,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_6_2 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_6_2(field_opt_arg_0_6_2);
-        auto opt_arg_0_6_2 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_2, string_opt_arg_0_6_2.length()));
+        std::vector<uint8_t> opt_arg_0_6_2;
+        Nan::Utf8String str_opt_arg_0_6_2(field_opt_arg_0_6_2);
+        std::string string_opt_arg_0_6_2(*str_opt_arg_0_6_2, str_opt_arg_0_6_2.length());
+        if (string_opt_arg_0_6_2.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_6_2 = djinni::js::hex::toByteArray(string_opt_arg_0_6_2.substr(2));
+        }
+        else
+        {
+            opt_arg_0_6_2 = std::vector<uint8_t>(string_opt_arg_0_6_2.cbegin(), string_opt_arg_0_6_2.cend());
+        }
 
 
         auto field_opt_arg_0_6_3 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2SHVersion").ToLocalChecked()).ToLocalChecked();
@@ -317,8 +326,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_6_3 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_6_3(field_opt_arg_0_6_3);
-        auto opt_arg_0_6_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_3, string_opt_arg_0_6_3.length()));
+        std::vector<uint8_t> opt_arg_0_6_3;
+        Nan::Utf8String str_opt_arg_0_6_3(field_opt_arg_0_6_3);
+        std::string string_opt_arg_0_6_3(*str_opt_arg_0_6_3, str_opt_arg_0_6_3.length());
+        if (string_opt_arg_0_6_3.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_6_3 = djinni::js::hex::toByteArray(string_opt_arg_0_6_3.substr(2));
+        }
+        else
+        {
+            opt_arg_0_6_3 = std::vector<uint8_t>(string_opt_arg_0_6_3.cbegin(), string_opt_arg_0_6_3.cend());
+        }
 
 
         auto field_opt_arg_0_6_4 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
@@ -326,8 +344,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_6_4 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_6_4(field_opt_arg_0_6_4);
-        auto opt_arg_0_6_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_4, string_opt_arg_0_6_4.length()));
+        std::vector<uint8_t> opt_arg_0_6_4;
+        Nan::Utf8String str_opt_arg_0_6_4(field_opt_arg_0_6_4);
+        std::string string_opt_arg_0_6_4(*str_opt_arg_0_6_4, str_opt_arg_0_6_4.length());
+        if (string_opt_arg_0_6_4.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_6_4 = djinni::js::hex::toByteArray(string_opt_arg_0_6_4.substr(2));
+        }
+        else
+        {
+            opt_arg_0_6_4 = std::vector<uint8_t>(string_opt_arg_0_6_4.cbegin(), string_opt_arg_0_6_4.cend());
+        }
 
 
         auto field_opt_arg_0_6_5 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("FeePolicy").ToLocalChecked()).ToLocalChecked();
@@ -351,8 +378,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_6_10 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_6_10(field_opt_arg_0_6_10);
-        auto opt_arg_0_6_10 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_10, string_opt_arg_0_6_10.length()));
+        std::vector<uint8_t> opt_arg_0_6_10;
+        Nan::Utf8String str_opt_arg_0_6_10(field_opt_arg_0_6_10);
+        std::string string_opt_arg_0_6_10(*str_opt_arg_0_6_10, str_opt_arg_0_6_10.length());
+        if (string_opt_arg_0_6_10.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_6_10 = djinni::js::hex::toByteArray(string_opt_arg_0_6_10.substr(2));
+        }
+        else
+        {
+            opt_arg_0_6_10 = std::vector<uint8_t>(string_opt_arg_0_6_10.cbegin(), string_opt_arg_0_6_10.cend());
+        }
 
 
         auto field_opt_arg_0_6_11 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalBIPs").ToLocalChecked()).ToLocalChecked();
@@ -396,8 +432,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_7_4 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_7_4(field_opt_arg_0_7_4);
-        auto opt_arg_0_7_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_7_4, string_opt_arg_0_7_4.length()));
+        std::vector<uint8_t> opt_arg_0_7_4;
+        Nan::Utf8String str_opt_arg_0_7_4(field_opt_arg_0_7_4);
+        std::string string_opt_arg_0_7_4(*str_opt_arg_0_7_4, str_opt_arg_0_7_4.length());
+        if (string_opt_arg_0_7_4.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_7_4 = djinni::js::hex::toByteArray(string_opt_arg_0_7_4.substr(2));
+        }
+        else
+        {
+            opt_arg_0_7_4 = std::vector<uint8_t>(string_opt_arg_0_7_4.cbegin(), string_opt_arg_0_7_4.cend());
+        }
 
 
         auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalEIPs").ToLocalChecked()).ToLocalChecked();
@@ -440,8 +485,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_8_3 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_8_3(field_opt_arg_0_8_3);
-        auto opt_arg_0_8_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_8_3, string_opt_arg_0_8_3.length()));
+        std::vector<uint8_t> opt_arg_0_8_3;
+        Nan::Utf8String str_opt_arg_0_8_3(field_opt_arg_0_8_3);
+        std::string string_opt_arg_0_8_3(*str_opt_arg_0_8_3, str_opt_arg_0_8_3.length());
+        if (string_opt_arg_0_8_3.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_8_3 = djinni::js::hex::toByteArray(string_opt_arg_0_8_3.substr(2));
+        }
+        else
+        {
+            opt_arg_0_8_3 = std::vector<uint8_t>(string_opt_arg_0_8_3.cbegin(), string_opt_arg_0_8_3.cend());
+        }
 
 
         auto field_opt_arg_0_8_4 = Nan::Get(field_arg_0_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalRIPs").ToLocalChecked()).ToLocalChecked();
@@ -484,8 +538,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_9_3 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_9_3(field_opt_arg_0_9_3);
-        auto opt_arg_0_9_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_3, string_opt_arg_0_9_3.length()));
+        std::vector<uint8_t> opt_arg_0_9_3;
+        Nan::Utf8String str_opt_arg_0_9_3(field_opt_arg_0_9_3);
+        std::string string_opt_arg_0_9_3(*str_opt_arg_0_9_3, str_opt_arg_0_9_3.length());
+        if (string_opt_arg_0_9_3.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_9_3 = djinni::js::hex::toByteArray(string_opt_arg_0_9_3.substr(2));
+        }
+        else
+        {
+            opt_arg_0_9_3 = std::vector<uint8_t>(string_opt_arg_0_9_3.cbegin(), string_opt_arg_0_9_3.cend());
+        }
 
 
         auto field_opt_arg_0_9_4 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
@@ -493,8 +556,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_9_4 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_9_4(field_opt_arg_0_9_4);
-        auto opt_arg_0_9_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_4, string_opt_arg_0_9_4.length()));
+        std::vector<uint8_t> opt_arg_0_9_4;
+        Nan::Utf8String str_opt_arg_0_9_4(field_opt_arg_0_9_4);
+        std::string string_opt_arg_0_9_4(*str_opt_arg_0_9_4, str_opt_arg_0_9_4.length());
+        if (string_opt_arg_0_9_4.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_9_4 = djinni::js::hex::toByteArray(string_opt_arg_0_9_4.substr(2));
+        }
+        else
+        {
+            opt_arg_0_9_4 = std::vector<uint8_t>(string_opt_arg_0_9_4.cbegin(), string_opt_arg_0_9_4.cend());
+        }
 
 
         auto field_opt_arg_0_9_5 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
@@ -502,8 +574,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_9_5 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_9_5(field_opt_arg_0_9_5);
-        auto opt_arg_0_9_5 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_5, string_opt_arg_0_9_5.length()));
+        std::vector<uint8_t> opt_arg_0_9_5;
+        Nan::Utf8String str_opt_arg_0_9_5(field_opt_arg_0_9_5);
+        std::string string_opt_arg_0_9_5(*str_opt_arg_0_9_5, str_opt_arg_0_9_5.length());
+        if (string_opt_arg_0_9_5.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_9_5 = djinni::js::hex::toByteArray(string_opt_arg_0_9_5.substr(2));
+        }
+        else
+        {
+            opt_arg_0_9_5 = std::vector<uint8_t>(string_opt_arg_0_9_5.cbegin(), string_opt_arg_0_9_5.cend());
+        }
 
 
         auto field_opt_arg_0_9_6 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalTIPs").ToLocalChecked()).ToLocalChecked();
@@ -533,8 +614,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawUnsignedTransaction) {
     {
         Nan::ThrowError("info[1] should be a hexadecimal string.");
     }
-    Nan::Utf8String string_arg_1(info[1]);
-    auto arg_1 = djinni::js::hex::toByteArray(std::string(*string_arg_1, string_arg_1.length()));
+    std::vector<uint8_t> arg_1;
+    Nan::Utf8String str_arg_1(info[1]);
+    std::string string_arg_1(*str_arg_1, str_arg_1.length());
+    if (string_arg_1.rfind("0x", 0) == 0)
+    {
+        arg_1 = djinni::js::hex::toByteArray(string_arg_1.substr(2));
+    }
+    else
+    {
+        arg_1 = std::vector<uint8_t>(string_arg_1.cbegin(), string_arg_1.cend());
+    }
 
 
     auto result = ledger::core::api::RippleLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1);
@@ -613,8 +703,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_6_2 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_6_2(field_opt_arg_0_6_2);
-        auto opt_arg_0_6_2 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_2, string_opt_arg_0_6_2.length()));
+        std::vector<uint8_t> opt_arg_0_6_2;
+        Nan::Utf8String str_opt_arg_0_6_2(field_opt_arg_0_6_2);
+        std::string string_opt_arg_0_6_2(*str_opt_arg_0_6_2, str_opt_arg_0_6_2.length());
+        if (string_opt_arg_0_6_2.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_6_2 = djinni::js::hex::toByteArray(string_opt_arg_0_6_2.substr(2));
+        }
+        else
+        {
+            opt_arg_0_6_2 = std::vector<uint8_t>(string_opt_arg_0_6_2.cbegin(), string_opt_arg_0_6_2.cend());
+        }
 
 
         auto field_opt_arg_0_6_3 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2SHVersion").ToLocalChecked()).ToLocalChecked();
@@ -622,8 +721,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_6_3 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_6_3(field_opt_arg_0_6_3);
-        auto opt_arg_0_6_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_3, string_opt_arg_0_6_3.length()));
+        std::vector<uint8_t> opt_arg_0_6_3;
+        Nan::Utf8String str_opt_arg_0_6_3(field_opt_arg_0_6_3);
+        std::string string_opt_arg_0_6_3(*str_opt_arg_0_6_3, str_opt_arg_0_6_3.length());
+        if (string_opt_arg_0_6_3.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_6_3 = djinni::js::hex::toByteArray(string_opt_arg_0_6_3.substr(2));
+        }
+        else
+        {
+            opt_arg_0_6_3 = std::vector<uint8_t>(string_opt_arg_0_6_3.cbegin(), string_opt_arg_0_6_3.cend());
+        }
 
 
         auto field_opt_arg_0_6_4 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
@@ -631,8 +739,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_6_4 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_6_4(field_opt_arg_0_6_4);
-        auto opt_arg_0_6_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_4, string_opt_arg_0_6_4.length()));
+        std::vector<uint8_t> opt_arg_0_6_4;
+        Nan::Utf8String str_opt_arg_0_6_4(field_opt_arg_0_6_4);
+        std::string string_opt_arg_0_6_4(*str_opt_arg_0_6_4, str_opt_arg_0_6_4.length());
+        if (string_opt_arg_0_6_4.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_6_4 = djinni::js::hex::toByteArray(string_opt_arg_0_6_4.substr(2));
+        }
+        else
+        {
+            opt_arg_0_6_4 = std::vector<uint8_t>(string_opt_arg_0_6_4.cbegin(), string_opt_arg_0_6_4.cend());
+        }
 
 
         auto field_opt_arg_0_6_5 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("FeePolicy").ToLocalChecked()).ToLocalChecked();
@@ -656,8 +773,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_6_10 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_6_10(field_opt_arg_0_6_10);
-        auto opt_arg_0_6_10 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_6_10, string_opt_arg_0_6_10.length()));
+        std::vector<uint8_t> opt_arg_0_6_10;
+        Nan::Utf8String str_opt_arg_0_6_10(field_opt_arg_0_6_10);
+        std::string string_opt_arg_0_6_10(*str_opt_arg_0_6_10, str_opt_arg_0_6_10.length());
+        if (string_opt_arg_0_6_10.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_6_10 = djinni::js::hex::toByteArray(string_opt_arg_0_6_10.substr(2));
+        }
+        else
+        {
+            opt_arg_0_6_10 = std::vector<uint8_t>(string_opt_arg_0_6_10.cbegin(), string_opt_arg_0_6_10.cend());
+        }
 
 
         auto field_opt_arg_0_6_11 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalBIPs").ToLocalChecked()).ToLocalChecked();
@@ -701,8 +827,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_7_4 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_7_4(field_opt_arg_0_7_4);
-        auto opt_arg_0_7_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_7_4, string_opt_arg_0_7_4.length()));
+        std::vector<uint8_t> opt_arg_0_7_4;
+        Nan::Utf8String str_opt_arg_0_7_4(field_opt_arg_0_7_4);
+        std::string string_opt_arg_0_7_4(*str_opt_arg_0_7_4, str_opt_arg_0_7_4.length());
+        if (string_opt_arg_0_7_4.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_7_4 = djinni::js::hex::toByteArray(string_opt_arg_0_7_4.substr(2));
+        }
+        else
+        {
+            opt_arg_0_7_4 = std::vector<uint8_t>(string_opt_arg_0_7_4.cbegin(), string_opt_arg_0_7_4.cend());
+        }
 
 
         auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalEIPs").ToLocalChecked()).ToLocalChecked();
@@ -745,8 +880,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_8_3 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_8_3(field_opt_arg_0_8_3);
-        auto opt_arg_0_8_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_8_3, string_opt_arg_0_8_3.length()));
+        std::vector<uint8_t> opt_arg_0_8_3;
+        Nan::Utf8String str_opt_arg_0_8_3(field_opt_arg_0_8_3);
+        std::string string_opt_arg_0_8_3(*str_opt_arg_0_8_3, str_opt_arg_0_8_3.length());
+        if (string_opt_arg_0_8_3.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_8_3 = djinni::js::hex::toByteArray(string_opt_arg_0_8_3.substr(2));
+        }
+        else
+        {
+            opt_arg_0_8_3 = std::vector<uint8_t>(string_opt_arg_0_8_3.cbegin(), string_opt_arg_0_8_3.cend());
+        }
 
 
         auto field_opt_arg_0_8_4 = Nan::Get(field_arg_0_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalRIPs").ToLocalChecked()).ToLocalChecked();
@@ -789,8 +933,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_9_3 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_9_3(field_opt_arg_0_9_3);
-        auto opt_arg_0_9_3 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_3, string_opt_arg_0_9_3.length()));
+        std::vector<uint8_t> opt_arg_0_9_3;
+        Nan::Utf8String str_opt_arg_0_9_3(field_opt_arg_0_9_3);
+        std::string string_opt_arg_0_9_3(*str_opt_arg_0_9_3, str_opt_arg_0_9_3.length());
+        if (string_opt_arg_0_9_3.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_9_3 = djinni::js::hex::toByteArray(string_opt_arg_0_9_3.substr(2));
+        }
+        else
+        {
+            opt_arg_0_9_3 = std::vector<uint8_t>(string_opt_arg_0_9_3.cbegin(), string_opt_arg_0_9_3.cend());
+        }
 
 
         auto field_opt_arg_0_9_4 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
@@ -798,8 +951,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_9_4 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_9_4(field_opt_arg_0_9_4);
-        auto opt_arg_0_9_4 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_4, string_opt_arg_0_9_4.length()));
+        std::vector<uint8_t> opt_arg_0_9_4;
+        Nan::Utf8String str_opt_arg_0_9_4(field_opt_arg_0_9_4);
+        std::string string_opt_arg_0_9_4(*str_opt_arg_0_9_4, str_opt_arg_0_9_4.length());
+        if (string_opt_arg_0_9_4.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_9_4 = djinni::js::hex::toByteArray(string_opt_arg_0_9_4.substr(2));
+        }
+        else
+        {
+            opt_arg_0_9_4 = std::vector<uint8_t>(string_opt_arg_0_9_4.cbegin(), string_opt_arg_0_9_4.cend());
+        }
 
 
         auto field_opt_arg_0_9_5 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
@@ -807,8 +969,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
         {
             Nan::ThrowError("field_opt_arg_0_9_5 should be a hexadecimal string.");
         }
-        Nan::Utf8String string_opt_arg_0_9_5(field_opt_arg_0_9_5);
-        auto opt_arg_0_9_5 = djinni::js::hex::toByteArray(std::string(*string_opt_arg_0_9_5, string_opt_arg_0_9_5.length()));
+        std::vector<uint8_t> opt_arg_0_9_5;
+        Nan::Utf8String str_opt_arg_0_9_5(field_opt_arg_0_9_5);
+        std::string string_opt_arg_0_9_5(*str_opt_arg_0_9_5, str_opt_arg_0_9_5.length());
+        if (string_opt_arg_0_9_5.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_9_5 = djinni::js::hex::toByteArray(string_opt_arg_0_9_5.substr(2));
+        }
+        else
+        {
+            opt_arg_0_9_5 = std::vector<uint8_t>(string_opt_arg_0_9_5.cbegin(), string_opt_arg_0_9_5.cend());
+        }
 
 
         auto field_opt_arg_0_9_6 = Nan::Get(field_arg_0_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalTIPs").ToLocalChecked()).ToLocalChecked();
@@ -838,8 +1009,17 @@ NAN_METHOD(NJSRippleLikeTransactionBuilder::parseRawSignedTransaction) {
     {
         Nan::ThrowError("info[1] should be a hexadecimal string.");
     }
-    Nan::Utf8String string_arg_1(info[1]);
-    auto arg_1 = djinni::js::hex::toByteArray(std::string(*string_arg_1, string_arg_1.length()));
+    std::vector<uint8_t> arg_1;
+    Nan::Utf8String str_arg_1(info[1]);
+    std::string string_arg_1(*str_arg_1, str_arg_1.length());
+    if (string_arg_1.rfind("0x", 0) == 0)
+    {
+        arg_1 = djinni::js::hex::toByteArray(string_arg_1.substr(2));
+    }
+    else
+    {
+        arg_1 = std::vector<uint8_t>(string_arg_1.cbegin(), string_arg_1.cend());
+    }
 
 
     auto result = ledger::core::api::RippleLikeTransactionBuilder::parseRawSignedTransaction(arg_0,arg_1);
