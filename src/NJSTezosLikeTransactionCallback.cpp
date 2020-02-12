@@ -3,6 +3,7 @@
 
 #include "NJSTezosLikeTransactionCallback.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;

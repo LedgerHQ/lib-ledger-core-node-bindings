@@ -3,6 +3,7 @@
 
 #include "NJSRandomNumberGenerator.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -26,15 +27,20 @@ std::vector<uint8_t> NJSRandomNumberGenerator::getRandomBytes(int32_t size)
         Nan::ThrowError("NJSRandomNumberGenerator::getRandomBytes call failed");
     }
     auto checkedResult_getRandomBytes = result_getRandomBytes.ToLocalChecked();
-    vector<uint8_t> fResult_getRandomBytes;
-    Local<Array> fResult_getRandomBytes_container = Local<Array>::Cast(checkedResult_getRandomBytes);
-    for(uint32_t fResult_getRandomBytes_id = 0; fResult_getRandomBytes_id < fResult_getRandomBytes_container->Length(); fResult_getRandomBytes_id++)
+    if(!checkedResult_getRandomBytes->IsString())
     {
-        if(fResult_getRandomBytes_container->Get(Nan::GetCurrentContext(), fResult_getRandomBytes_id).ToLocalChecked()->IsUint32())
-        {
-            auto fResult_getRandomBytes_elem = Nan::To<uint32_t>(fResult_getRandomBytes_container->Get(Nan::GetCurrentContext(), fResult_getRandomBytes_id).ToLocalChecked()).FromJust();
-            fResult_getRandomBytes.emplace_back(fResult_getRandomBytes_elem);
-        }
+        Nan::ThrowError("checkedResult_getRandomBytes should be a hexadecimal string.");
+    }
+    std::vector<uint8_t> fResult_getRandomBytes;
+    Nan::Utf8String str_fResult_getRandomBytes(checkedResult_getRandomBytes);
+    std::string string_fResult_getRandomBytes(*str_fResult_getRandomBytes, str_fResult_getRandomBytes.length());
+    if (string_fResult_getRandomBytes.rfind("0x", 0) == 0)
+    {
+        fResult_getRandomBytes = djinni::js::hex::toByteArray(string_fResult_getRandomBytes.substr(2));
+    }
+    else
+    {
+        fResult_getRandomBytes = std::vector<uint8_t>(string_fResult_getRandomBytes.cbegin(), string_fResult_getRandomBytes.cend());
     }
 
     return fResult_getRandomBytes;

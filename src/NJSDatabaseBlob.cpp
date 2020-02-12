@@ -3,6 +3,7 @@
 
 #include "NJSDatabaseBlob.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -27,15 +28,20 @@ std::vector<uint8_t> NJSDatabaseBlob::read(int64_t offset, int64_t length)
         Nan::ThrowError("NJSDatabaseBlob::read call failed");
     }
     auto checkedResult_read = result_read.ToLocalChecked();
-    vector<uint8_t> fResult_read;
-    Local<Array> fResult_read_container = Local<Array>::Cast(checkedResult_read);
-    for(uint32_t fResult_read_id = 0; fResult_read_id < fResult_read_container->Length(); fResult_read_id++)
+    if(!checkedResult_read->IsString())
     {
-        if(fResult_read_container->Get(Nan::GetCurrentContext(), fResult_read_id).ToLocalChecked()->IsUint32())
-        {
-            auto fResult_read_elem = Nan::To<uint32_t>(fResult_read_container->Get(Nan::GetCurrentContext(), fResult_read_id).ToLocalChecked()).FromJust();
-            fResult_read.emplace_back(fResult_read_elem);
-        }
+        Nan::ThrowError("checkedResult_read should be a hexadecimal string.");
+    }
+    std::vector<uint8_t> fResult_read;
+    Nan::Utf8String str_fResult_read(checkedResult_read);
+    std::string string_fResult_read(*str_fResult_read, str_fResult_read.length());
+    if (string_fResult_read.rfind("0x", 0) == 0)
+    {
+        fResult_read = djinni::js::hex::toByteArray(string_fResult_read.substr(2));
+    }
+    else
+    {
+        fResult_read = std::vector<uint8_t>(string_fResult_read.cbegin(), string_fResult_read.cend());
     }
 
     return fResult_read;
@@ -46,12 +52,7 @@ int64_t NJSDatabaseBlob::write(int64_t offset, const std::vector<uint8_t> & data
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Number>(offset);
-    Local<Array> arg_1 = Nan::New<Array>();
-    for(size_t arg_1_id = 0; arg_1_id < data.size(); arg_1_id++)
-    {
-        auto arg_1_elem = Nan::New<Uint32>(data[arg_1_id]);
-        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
-    }
+    auto arg_1 = Nan::New<String>(djinni::js::hex::toString(data)).ToLocalChecked();
 
     Local<Value> args[2] = {arg_0,arg_1};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
@@ -74,12 +75,7 @@ int64_t NJSDatabaseBlob::append(const std::vector<uint8_t> & data)
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    Local<Array> arg_0 = Nan::New<Array>();
-    for(size_t arg_0_id = 0; arg_0_id < data.size(); arg_0_id++)
-    {
-        auto arg_0_elem = Nan::New<Uint32>(data[arg_0_id]);
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
-    }
+    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(data)).ToLocalChecked();
 
     Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);

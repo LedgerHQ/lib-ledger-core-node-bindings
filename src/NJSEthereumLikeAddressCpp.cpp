@@ -3,6 +3,7 @@
 
 #include "NJSEthereumLikeAddressCpp.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -28,12 +29,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getVersion) {
     auto result = cpp_impl->getVersion();
 
     //Wrap result in node object
-    Local<Array> arg_0 = Nan::New<Array>();
-    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
-    {
-        auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
-    }
+    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -59,12 +55,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getKeccakHash) {
     auto result = cpp_impl->getKeccakHash();
 
     //Wrap result in node object
-    Local<Array> arg_0 = Nan::New<Array>();
-    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
-    {
-        auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
-    }
+    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -97,12 +88,7 @@ NAN_METHOD(NJSEthereumLikeAddress::getNetworkParameters) {
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_2);
     auto arg_0_3 = Nan::New<String>(result.ChainID).ToLocalChecked();
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("ChainID").ToLocalChecked(), arg_0_3);
-    Local<Array> arg_0_4 = Nan::New<Array>();
-    for(size_t arg_0_4_id = 0; arg_0_4_id < result.XPUBVersion.size(); arg_0_4_id++)
-    {
-        auto arg_0_4_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_4_id]);
-        Nan::Set(arg_0_4, (int)arg_0_4_id,arg_0_4_elem);
-    }
+    auto arg_0_4 = Nan::New<String>(djinni::js::hex::toString(result.XPUBVersion)).ToLocalChecked();
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_4);
     Local<Array> arg_0_5 = Nan::New<Array>();

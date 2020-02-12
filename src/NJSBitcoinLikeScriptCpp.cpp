@@ -3,6 +3,7 @@
 
 #include "NJSBitcoinLikeScriptCpp.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -68,15 +69,20 @@ NAN_METHOD(NJSBitcoinLikeScript::parse) {
     }
 
     //Check if parameters have correct types
-    vector<uint8_t> arg_0;
-    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
-    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    if(!info[0]->IsString())
     {
-        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
-        {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
-            arg_0.emplace_back(arg_0_elem);
-        }
+        Nan::ThrowError("info[0] should be a hexadecimal string.");
+    }
+    std::vector<uint8_t> arg_0;
+    Nan::Utf8String str_arg_0(info[0]);
+    std::string string_arg_0(*str_arg_0, str_arg_0.length());
+    if (string_arg_0.rfind("0x", 0) == 0)
+    {
+        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
+    }
+    else
+    {
+        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
     }
 
 
@@ -104,15 +110,20 @@ NAN_METHOD(NJSBitcoinLikeScript::New) {
     }
 
     //Unwrap objects to get C++ classes
-    vector<uint8_t> arg_0;
-    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
-    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    if(!info[0]->IsString())
     {
-        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsUint32())
-        {
-            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()).FromJust();
-            arg_0.emplace_back(arg_0_elem);
-        }
+        Nan::ThrowError("info[0] should be a hexadecimal string.");
+    }
+    std::vector<uint8_t> arg_0;
+    Nan::Utf8String str_arg_0(info[0]);
+    std::string string_arg_0(*str_arg_0, str_arg_0.length());
+    if (string_arg_0.rfind("0x", 0) == 0)
+    {
+        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
+    }
+    else
+    {
+        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
     }
 
 

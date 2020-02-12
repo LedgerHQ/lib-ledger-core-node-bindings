@@ -3,6 +3,7 @@
 
 #include "NJSAccountCreationInfoCallback.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -38,12 +39,7 @@ void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optiona
         Local<Array> arg_0_tmp_4 = Nan::New<Array>();
         for(size_t arg_0_tmp_4_id = 0; arg_0_tmp_4_id < arg_0_optional.publicKeys.size(); arg_0_tmp_4_id++)
         {
-            Local<Array> arg_0_tmp_4_elem = Nan::New<Array>();
-            for(size_t arg_0_tmp_4_elem_id = 0; arg_0_tmp_4_elem_id < arg_0_optional.publicKeys[arg_0_tmp_4_id].size(); arg_0_tmp_4_elem_id++)
-            {
-                auto arg_0_tmp_4_elem_elem = Nan::New<Uint32>(arg_0_optional.publicKeys[arg_0_tmp_4_id][arg_0_tmp_4_elem_id]);
-                Nan::Set(arg_0_tmp_4_elem, (int)arg_0_tmp_4_elem_id,arg_0_tmp_4_elem_elem);
-            }
+            auto arg_0_tmp_4_elem = Nan::New<String>(djinni::js::hex::toString(arg_0_optional.publicKeys[arg_0_tmp_4_id])).ToLocalChecked();
 
             Nan::Set(arg_0_tmp_4, (int)arg_0_tmp_4_id,arg_0_tmp_4_elem);
         }
@@ -52,12 +48,7 @@ void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optiona
         Local<Array> arg_0_tmp_5 = Nan::New<Array>();
         for(size_t arg_0_tmp_5_id = 0; arg_0_tmp_5_id < arg_0_optional.chainCodes.size(); arg_0_tmp_5_id++)
         {
-            Local<Array> arg_0_tmp_5_elem = Nan::New<Array>();
-            for(size_t arg_0_tmp_5_elem_id = 0; arg_0_tmp_5_elem_id < arg_0_optional.chainCodes[arg_0_tmp_5_id].size(); arg_0_tmp_5_elem_id++)
-            {
-                auto arg_0_tmp_5_elem_elem = Nan::New<Uint32>(arg_0_optional.chainCodes[arg_0_tmp_5_id][arg_0_tmp_5_elem_id]);
-                Nan::Set(arg_0_tmp_5_elem, (int)arg_0_tmp_5_elem_id,arg_0_tmp_5_elem_elem);
-            }
+            auto arg_0_tmp_5_elem = Nan::New<String>(djinni::js::hex::toString(arg_0_optional.chainCodes[arg_0_tmp_5_id])).ToLocalChecked();
 
             Nan::Set(arg_0_tmp_5, (int)arg_0_tmp_5_id,arg_0_tmp_5_elem);
         }

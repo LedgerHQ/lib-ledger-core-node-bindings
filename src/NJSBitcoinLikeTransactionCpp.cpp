@@ -3,6 +3,7 @@
 
 #include "NJSBitcoinLikeTransactionCpp.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -278,12 +279,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::serialize) {
     auto result = cpp_impl->serialize();
 
     //Wrap result in node object
-    Local<Array> arg_0 = Nan::New<Array>();
-    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
-    {
-        auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
-    }
+    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -309,12 +305,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::serializeOutputs) {
     auto result = cpp_impl->serializeOutputs();
 
     //Wrap result in node object
-    Local<Array> arg_0 = Nan::New<Array>();
-    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
-    {
-        auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
-    }
+    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -344,12 +335,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getWitness) {
     if(result)
     {
         auto arg_0_optional = (result).value();
-        Local<Array> arg_0_tmp = Nan::New<Array>();
-        for(size_t arg_0_tmp_id = 0; arg_0_tmp_id < arg_0_optional.size(); arg_0_tmp_id++)
-        {
-            auto arg_0_tmp_elem = Nan::New<Uint32>(arg_0_optional[arg_0_tmp_id]);
-            Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
-        }
+        auto arg_0_tmp = Nan::New<String>(djinni::js::hex::toString(arg_0_optional)).ToLocalChecked();
 
         arg_0 = arg_0_tmp;
     }
@@ -405,41 +391,56 @@ NAN_METHOD(NJSBitcoinLikeTransaction::setSignatures) {
         {
 
             auto field_arg_0_elem_1 = Nan::Get(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("r").ToLocalChecked()).ToLocalChecked();
-            vector<uint8_t> arg_0_elem_1;
-            Local<Array> arg_0_elem_1_container = Local<Array>::Cast(field_arg_0_elem_1);
-            for(uint32_t arg_0_elem_1_id = 0; arg_0_elem_1_id < arg_0_elem_1_container->Length(); arg_0_elem_1_id++)
+            if(!field_arg_0_elem_1->IsString())
             {
-                if(arg_0_elem_1_container->Get(Nan::GetCurrentContext(), arg_0_elem_1_id).ToLocalChecked()->IsUint32())
-                {
-                    auto arg_0_elem_1_elem = Nan::To<uint32_t>(arg_0_elem_1_container->Get(Nan::GetCurrentContext(), arg_0_elem_1_id).ToLocalChecked()).FromJust();
-                    arg_0_elem_1.emplace_back(arg_0_elem_1_elem);
-                }
+                Nan::ThrowError("field_arg_0_elem_1 should be a hexadecimal string.");
+            }
+            std::vector<uint8_t> arg_0_elem_1;
+            Nan::Utf8String str_arg_0_elem_1(field_arg_0_elem_1);
+            std::string string_arg_0_elem_1(*str_arg_0_elem_1, str_arg_0_elem_1.length());
+            if (string_arg_0_elem_1.rfind("0x", 0) == 0)
+            {
+                arg_0_elem_1 = djinni::js::hex::toByteArray(string_arg_0_elem_1.substr(2));
+            }
+            else
+            {
+                arg_0_elem_1 = std::vector<uint8_t>(string_arg_0_elem_1.cbegin(), string_arg_0_elem_1.cend());
             }
 
 
             auto field_arg_0_elem_2 = Nan::Get(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("s").ToLocalChecked()).ToLocalChecked();
-            vector<uint8_t> arg_0_elem_2;
-            Local<Array> arg_0_elem_2_container = Local<Array>::Cast(field_arg_0_elem_2);
-            for(uint32_t arg_0_elem_2_id = 0; arg_0_elem_2_id < arg_0_elem_2_container->Length(); arg_0_elem_2_id++)
+            if(!field_arg_0_elem_2->IsString())
             {
-                if(arg_0_elem_2_container->Get(Nan::GetCurrentContext(), arg_0_elem_2_id).ToLocalChecked()->IsUint32())
-                {
-                    auto arg_0_elem_2_elem = Nan::To<uint32_t>(arg_0_elem_2_container->Get(Nan::GetCurrentContext(), arg_0_elem_2_id).ToLocalChecked()).FromJust();
-                    arg_0_elem_2.emplace_back(arg_0_elem_2_elem);
-                }
+                Nan::ThrowError("field_arg_0_elem_2 should be a hexadecimal string.");
+            }
+            std::vector<uint8_t> arg_0_elem_2;
+            Nan::Utf8String str_arg_0_elem_2(field_arg_0_elem_2);
+            std::string string_arg_0_elem_2(*str_arg_0_elem_2, str_arg_0_elem_2.length());
+            if (string_arg_0_elem_2.rfind("0x", 0) == 0)
+            {
+                arg_0_elem_2 = djinni::js::hex::toByteArray(string_arg_0_elem_2.substr(2));
+            }
+            else
+            {
+                arg_0_elem_2 = std::vector<uint8_t>(string_arg_0_elem_2.cbegin(), string_arg_0_elem_2.cend());
             }
 
 
             auto field_arg_0_elem_3 = Nan::Get(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("v").ToLocalChecked()).ToLocalChecked();
-            vector<uint8_t> arg_0_elem_3;
-            Local<Array> arg_0_elem_3_container = Local<Array>::Cast(field_arg_0_elem_3);
-            for(uint32_t arg_0_elem_3_id = 0; arg_0_elem_3_id < arg_0_elem_3_container->Length(); arg_0_elem_3_id++)
+            if(!field_arg_0_elem_3->IsString())
             {
-                if(arg_0_elem_3_container->Get(Nan::GetCurrentContext(), arg_0_elem_3_id).ToLocalChecked()->IsUint32())
-                {
-                    auto arg_0_elem_3_elem = Nan::To<uint32_t>(arg_0_elem_3_container->Get(Nan::GetCurrentContext(), arg_0_elem_3_id).ToLocalChecked()).FromJust();
-                    arg_0_elem_3.emplace_back(arg_0_elem_3_elem);
-                }
+                Nan::ThrowError("field_arg_0_elem_3 should be a hexadecimal string.");
+            }
+            std::vector<uint8_t> arg_0_elem_3;
+            Nan::Utf8String str_arg_0_elem_3(field_arg_0_elem_3);
+            std::string string_arg_0_elem_3(*str_arg_0_elem_3, str_arg_0_elem_3.length());
+            if (string_arg_0_elem_3.rfind("0x", 0) == 0)
+            {
+                arg_0_elem_3 = djinni::js::hex::toByteArray(string_arg_0_elem_3.substr(2));
+            }
+            else
+            {
+                arg_0_elem_3 = std::vector<uint8_t>(string_arg_0_elem_3.cbegin(), string_arg_0_elem_3.cend());
             }
 
             BitcoinLikeSignature arg_0_elem(arg_0_elem_1, arg_0_elem_2, arg_0_elem_3);
@@ -478,17 +479,22 @@ NAN_METHOD(NJSBitcoinLikeTransaction::setDERSignatures) {
     Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
     for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsObject())
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsString())
         {
-            vector<uint8_t> arg_0_elem;
-            Local<Array> arg_0_elem_container = Local<Array>::Cast(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked());
-            for(uint32_t arg_0_elem_id = 0; arg_0_elem_id < arg_0_elem_container->Length(); arg_0_elem_id++)
+            if(!arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsString())
             {
-                if(arg_0_elem_container->Get(Nan::GetCurrentContext(), arg_0_elem_id).ToLocalChecked()->IsUint32())
-                {
-                    auto arg_0_elem_elem = Nan::To<uint32_t>(arg_0_elem_container->Get(Nan::GetCurrentContext(), arg_0_elem_id).ToLocalChecked()).FromJust();
-                    arg_0_elem.emplace_back(arg_0_elem_elem);
-                }
+                Nan::ThrowError("arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked() should be a hexadecimal string.");
+            }
+            std::vector<uint8_t> arg_0_elem;
+            Nan::Utf8String str_arg_0_elem(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked());
+            std::string string_arg_0_elem(*str_arg_0_elem, str_arg_0_elem.length());
+            if (string_arg_0_elem.rfind("0x", 0) == 0)
+            {
+                arg_0_elem = djinni::js::hex::toByteArray(string_arg_0_elem.substr(2));
+            }
+            else
+            {
+                arg_0_elem = std::vector<uint8_t>(string_arg_0_elem.cbegin(), string_arg_0_elem.cend());
             }
 
             arg_0.emplace_back(arg_0_elem);

@@ -3,6 +3,7 @@
 
 #include "NJSBitcoinLikeScriptChunkCpp.hpp"
 #include "NJSObjectWrapper.hpp"
+#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -119,12 +120,7 @@ NAN_METHOD(NJSBitcoinLikeScriptChunk::getPushedData) {
     if(result)
     {
         auto arg_0_optional = (result).value();
-        Local<Array> arg_0_tmp = Nan::New<Array>();
-        for(size_t arg_0_tmp_id = 0; arg_0_tmp_id < arg_0_optional.size(); arg_0_tmp_id++)
-        {
-            auto arg_0_tmp_elem = Nan::New<Uint32>(arg_0_optional[arg_0_tmp_id]);
-            Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
-        }
+        auto arg_0_tmp = Nan::New<String>(djinni::js::hex::toString(arg_0_optional)).ToLocalChecked();
 
         arg_0 = arg_0_tmp;
     }
