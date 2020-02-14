@@ -157,7 +157,7 @@ NAN_METHOD(NJSInternalTransaction::getData) {
     auto result = cpp_impl->getData();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result

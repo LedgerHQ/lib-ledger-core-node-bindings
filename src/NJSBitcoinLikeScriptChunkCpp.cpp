@@ -120,7 +120,7 @@ NAN_METHOD(NJSBitcoinLikeScriptChunk::getPushedData) {
     if(result)
     {
         auto arg_0_optional = (result).value();
-        auto arg_0_tmp = Nan::New<String>(djinni::js::hex::toString(arg_0_optional)).ToLocalChecked();
+        auto arg_0_tmp = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_optional)).ToLocalChecked();
 
         arg_0 = arg_0_tmp;
     }

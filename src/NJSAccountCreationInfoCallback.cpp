@@ -39,7 +39,7 @@ void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optiona
         Local<Array> arg_0_tmp_4 = Nan::New<Array>();
         for(size_t arg_0_tmp_4_id = 0; arg_0_tmp_4_id < arg_0_optional.publicKeys.size(); arg_0_tmp_4_id++)
         {
-            auto arg_0_tmp_4_elem = Nan::New<String>(djinni::js::hex::toString(arg_0_optional.publicKeys[arg_0_tmp_4_id])).ToLocalChecked();
+            auto arg_0_tmp_4_elem = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_optional.publicKeys[arg_0_tmp_4_id])).ToLocalChecked();
 
             Nan::Set(arg_0_tmp_4, (int)arg_0_tmp_4_id,arg_0_tmp_4_elem);
         }
@@ -48,7 +48,7 @@ void NJSAccountCreationInfoCallback::onCallback(const std::experimental::optiona
         Local<Array> arg_0_tmp_5 = Nan::New<Array>();
         for(size_t arg_0_tmp_5_id = 0; arg_0_tmp_5_id < arg_0_optional.chainCodes.size(); arg_0_tmp_5_id++)
         {
-            auto arg_0_tmp_5_elem = Nan::New<String>(djinni::js::hex::toString(arg_0_optional.chainCodes[arg_0_tmp_5_id])).ToLocalChecked();
+            auto arg_0_tmp_5_elem = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_optional.chainCodes[arg_0_tmp_5_id])).ToLocalChecked();
 
             Nan::Set(arg_0_tmp_5, (int)arg_0_tmp_5_id,arg_0_tmp_5_elem);
         }

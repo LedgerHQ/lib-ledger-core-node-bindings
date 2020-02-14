@@ -64,7 +64,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getPublicKeys) {
     Local<Array> arg_0 = Nan::New<Array>();
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
-        auto arg_0_elem = Nan::New<String>(djinni::js::hex::toString(result[arg_0_id])).ToLocalChecked();
+        auto arg_0_elem = Nan::New<String>("0x" + djinni::js::hex::toString(result[arg_0_id])).ToLocalChecked();
 
         Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
     }
@@ -299,7 +299,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getScriptSig) {
     auto result = cpp_impl->getScriptSig();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result

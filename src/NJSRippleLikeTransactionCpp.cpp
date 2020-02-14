@@ -158,7 +158,7 @@ NAN_METHOD(NJSRippleLikeTransaction::serialize) {
     auto result = cpp_impl->serialize();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -346,7 +346,7 @@ NAN_METHOD(NJSRippleLikeTransaction::getSigningPubKey) {
     auto result = cpp_impl->getSigningPubKey();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result

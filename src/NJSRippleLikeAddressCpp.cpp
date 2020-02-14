@@ -29,7 +29,7 @@ NAN_METHOD(NJSRippleLikeAddress::getVersion) {
     auto result = cpp_impl->getVersion();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -55,7 +55,7 @@ NAN_METHOD(NJSRippleLikeAddress::getHash160) {
     auto result = cpp_impl->getHash160();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -86,7 +86,7 @@ NAN_METHOD(NJSRippleLikeAddress::getNetworkParameters) {
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_1);
     auto arg_0_2 = Nan::New<String>(result.MessagePrefix).ToLocalChecked();
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_2);
-    auto arg_0_3 = Nan::New<String>(djinni::js::hex::toString(result.XPUBVersion)).ToLocalChecked();
+    auto arg_0_3 = Nan::New<String>("0x" + djinni::js::hex::toString(result.XPUBVersion)).ToLocalChecked();
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_3);
     Local<Array> arg_0_4 = Nan::New<Array>();

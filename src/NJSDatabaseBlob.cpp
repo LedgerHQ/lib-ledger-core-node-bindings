@@ -52,7 +52,7 @@ int64_t NJSDatabaseBlob::write(int64_t offset, const std::vector<uint8_t> & data
     Nan::HandleScope scope;
     //Wrap parameters
     auto arg_0 = Nan::New<Number>(offset);
-    auto arg_1 = Nan::New<String>(djinni::js::hex::toString(data)).ToLocalChecked();
+    auto arg_1 = Nan::New<String>("0x" + djinni::js::hex::toString(data)).ToLocalChecked();
 
     Local<Value> args[2] = {arg_0,arg_1};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
@@ -75,7 +75,7 @@ int64_t NJSDatabaseBlob::append(const std::vector<uint8_t> & data)
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(data)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(data)).ToLocalChecked();
 
     Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);

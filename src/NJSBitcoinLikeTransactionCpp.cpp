@@ -279,7 +279,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::serialize) {
     auto result = cpp_impl->serialize();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -305,7 +305,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::serializeOutputs) {
     auto result = cpp_impl->serializeOutputs();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -335,7 +335,7 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getWitness) {
     if(result)
     {
         auto arg_0_optional = (result).value();
-        auto arg_0_tmp = Nan::New<String>(djinni::js::hex::toString(arg_0_optional)).ToLocalChecked();
+        auto arg_0_tmp = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_optional)).ToLocalChecked();
 
         arg_0 = arg_0_tmp;
     }
