@@ -14,7 +14,7 @@ yarn add @ledgerhq/ledger-core
 
 ## Prerequisite
 
-It currently only works with **Node 8**.
+It currently only works with **Node 12**.
 
 ### On Linux
 
