@@ -431,7 +431,7 @@ NAN_METHOD(NJSDynamicObject::getData) {
     if(result)
     {
         auto arg_1_optional = (result).value();
-        auto arg_1_tmp = Nan::New<String>(djinni::js::hex::toString(arg_1_optional)).ToLocalChecked();
+        auto arg_1_tmp = Nan::New<String>("0x" + djinni::js::hex::toString(arg_1_optional)).ToLocalChecked();
 
         arg_1 = arg_1_tmp;
     }
@@ -696,7 +696,7 @@ NAN_METHOD(NJSDynamicObject::serialize) {
     auto result = cpp_impl->serialize();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result

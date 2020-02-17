@@ -13,7 +13,7 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::ripemd160(const std::vector<uint8_t
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(data)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(data)).ToLocalChecked();
 
     Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
@@ -51,7 +51,7 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::sha256(const std::vector<uint8_t> &
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(data)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(data)).ToLocalChecked();
 
     Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
@@ -89,7 +89,7 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::keccak256(const std::vector<uint8_t
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    auto arg_0 = Nan::New<String>(djinni::js::hex::toString(data)).ToLocalChecked();
+    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(data)).ToLocalChecked();
 
     Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);

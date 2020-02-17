@@ -205,7 +205,7 @@ NAN_METHOD(NJSPreferences::getData) {
     auto result = cpp_impl->getData(arg_0,arg_1);
 
     //Wrap result in node object
-    auto arg_2 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_2 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result

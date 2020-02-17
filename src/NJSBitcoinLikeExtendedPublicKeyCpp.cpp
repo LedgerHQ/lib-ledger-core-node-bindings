@@ -59,7 +59,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::derivePublicKey) {
     auto result = cpp_impl->derivePublicKey(arg_0);
 
     //Wrap result in node object
-    auto arg_1 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_1 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -87,7 +87,7 @@ NAN_METHOD(NJSBitcoinLikeExtendedPublicKey::deriveHash160) {
     auto result = cpp_impl->deriveHash160(arg_0);
 
     //Wrap result in node object
-    auto arg_1 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_1 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result

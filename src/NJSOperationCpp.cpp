@@ -616,13 +616,13 @@ NAN_METHOD(NJSOperation::getCurrency) {
         auto arg_0_6_tmp = Nan::New<Object>();
         auto arg_0_6_tmp_1 = Nan::New<String>(arg_0_6_optional.Identifier).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_6_tmp_1);
-        auto arg_0_6_tmp_2 = Nan::New<String>(djinni::js::hex::toString(arg_0_6_optional.P2PKHVersion)).ToLocalChecked();
+        auto arg_0_6_tmp_2 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_6_optional.P2PKHVersion)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("P2PKHVersion").ToLocalChecked(), arg_0_6_tmp_2);
-        auto arg_0_6_tmp_3 = Nan::New<String>(djinni::js::hex::toString(arg_0_6_optional.P2SHVersion)).ToLocalChecked();
+        auto arg_0_6_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_6_optional.P2SHVersion)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("P2SHVersion").ToLocalChecked(), arg_0_6_tmp_3);
-        auto arg_0_6_tmp_4 = Nan::New<String>(djinni::js::hex::toString(arg_0_6_optional.XPUBVersion)).ToLocalChecked();
+        auto arg_0_6_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_6_optional.XPUBVersion)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_6_tmp_4);
         auto arg_0_6_tmp_5 = Nan::New<Integer>((int)arg_0_6_optional.FeePolicy);
@@ -635,7 +635,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked(), arg_0_6_tmp_8);
         auto arg_0_6_tmp_9 = Nan::New<Number>(arg_0_6_optional.TimestampDelay);
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_6_tmp_9);
-        auto arg_0_6_tmp_10 = Nan::New<String>(djinni::js::hex::toString(arg_0_6_optional.SigHash)).ToLocalChecked();
+        auto arg_0_6_tmp_10 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_6_optional.SigHash)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_6_tmp_10);
         Local<Array> arg_0_6_tmp_11 = Nan::New<Array>();
@@ -662,7 +662,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_7_tmp_2);
         auto arg_0_7_tmp_3 = Nan::New<String>(arg_0_7_optional.ChainID).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("ChainID").ToLocalChecked(), arg_0_7_tmp_3);
-        auto arg_0_7_tmp_4 = Nan::New<String>(djinni::js::hex::toString(arg_0_7_optional.XPUBVersion)).ToLocalChecked();
+        auto arg_0_7_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.XPUBVersion)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_7_tmp_4);
         Local<Array> arg_0_7_tmp_5 = Nan::New<Array>();
@@ -689,7 +689,7 @@ NAN_METHOD(NJSOperation::getCurrency) {
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_8_tmp_1);
         auto arg_0_8_tmp_2 = Nan::New<String>(arg_0_8_optional.MessagePrefix).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_8_tmp_2);
-        auto arg_0_8_tmp_3 = Nan::New<String>(djinni::js::hex::toString(arg_0_8_optional.XPUBVersion)).ToLocalChecked();
+        auto arg_0_8_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_8_optional.XPUBVersion)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_8_tmp_3);
         Local<Array> arg_0_8_tmp_4 = Nan::New<Array>();
@@ -716,13 +716,13 @@ NAN_METHOD(NJSOperation::getCurrency) {
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_9_tmp_1);
         auto arg_0_9_tmp_2 = Nan::New<String>(arg_0_9_optional.MessagePrefix).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_9_tmp_2);
-        auto arg_0_9_tmp_3 = Nan::New<String>(djinni::js::hex::toString(arg_0_9_optional.XPUBVersion)).ToLocalChecked();
+        auto arg_0_9_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.XPUBVersion)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_9_tmp_3);
-        auto arg_0_9_tmp_4 = Nan::New<String>(djinni::js::hex::toString(arg_0_9_optional.ImplicitPrefix)).ToLocalChecked();
+        auto arg_0_9_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.ImplicitPrefix)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_9_tmp_4);
-        auto arg_0_9_tmp_5 = Nan::New<String>(djinni::js::hex::toString(arg_0_9_optional.OriginatedPrefix)).ToLocalChecked();
+        auto arg_0_9_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.OriginatedPrefix)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_9_tmp_5);
         Local<Array> arg_0_9_tmp_6 = Nan::New<Array>();

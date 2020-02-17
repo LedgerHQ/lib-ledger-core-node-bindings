@@ -65,7 +65,7 @@ NAN_METHOD(NJSSecp256k1::computePubKey) {
     auto result = cpp_impl->computePubKey(arg_0,arg_1);
 
     //Wrap result in node object
-    auto arg_2 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_2 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -107,7 +107,7 @@ NAN_METHOD(NJSSecp256k1::computeUncompressedPubKey) {
     auto result = cpp_impl->computeUncompressedPubKey(arg_0);
 
     //Wrap result in node object
-    auto arg_1 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_1 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
@@ -165,7 +165,7 @@ NAN_METHOD(NJSSecp256k1::sign) {
     auto result = cpp_impl->sign(arg_0,arg_1);
 
     //Wrap result in node object
-    auto arg_2 = Nan::New<String>(djinni::js::hex::toString(result)).ToLocalChecked();
+    auto arg_2 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
 
 
     //Return result
