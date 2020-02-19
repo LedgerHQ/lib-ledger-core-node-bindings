@@ -3,7 +3,6 @@
 
 #include "NJSEthereumPublicKeyProvider.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -58,5 +57,5 @@ void NJSEthereumPublicKeyProvider::Initialize(Local<Object> target) {
     EthereumPublicKeyProvider_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSEthereumPublicKeyProvider").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSEthereumPublicKeyProvider").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

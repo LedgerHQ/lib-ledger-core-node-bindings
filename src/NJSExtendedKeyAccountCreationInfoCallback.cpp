@@ -3,7 +3,6 @@
 
 #include "NJSExtendedKeyAccountCreationInfoCallback.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -24,7 +23,7 @@ void NJSExtendedKeyAccountCreationInfoCallback::onCallback(const std::experiment
         for(size_t arg_0_tmp_2_id = 0; arg_0_tmp_2_id < arg_0_optional.owners.size(); arg_0_tmp_2_id++)
         {
             auto arg_0_tmp_2_elem = Nan::New<String>(arg_0_optional.owners[arg_0_tmp_2_id]).ToLocalChecked();
-            Nan::Set(arg_0_tmp_2, (int)arg_0_tmp_2_id,arg_0_tmp_2_elem);
+            arg_0_tmp_2->Set((int)arg_0_tmp_2_id,arg_0_tmp_2_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("owners").ToLocalChecked(), arg_0_tmp_2);
@@ -32,7 +31,7 @@ void NJSExtendedKeyAccountCreationInfoCallback::onCallback(const std::experiment
         for(size_t arg_0_tmp_3_id = 0; arg_0_tmp_3_id < arg_0_optional.derivations.size(); arg_0_tmp_3_id++)
         {
             auto arg_0_tmp_3_elem = Nan::New<String>(arg_0_optional.derivations[arg_0_tmp_3_id]).ToLocalChecked();
-            Nan::Set(arg_0_tmp_3, (int)arg_0_tmp_3_id,arg_0_tmp_3_elem);
+            arg_0_tmp_3->Set((int)arg_0_tmp_3_id,arg_0_tmp_3_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("derivations").ToLocalChecked(), arg_0_tmp_3);
@@ -40,7 +39,7 @@ void NJSExtendedKeyAccountCreationInfoCallback::onCallback(const std::experiment
         for(size_t arg_0_tmp_4_id = 0; arg_0_tmp_4_id < arg_0_optional.extendedKeys.size(); arg_0_tmp_4_id++)
         {
             auto arg_0_tmp_4_elem = Nan::New<String>(arg_0_optional.extendedKeys[arg_0_tmp_4_id]).ToLocalChecked();
-            Nan::Set(arg_0_tmp_4, (int)arg_0_tmp_4_id,arg_0_tmp_4_elem);
+            arg_0_tmp_4->Set((int)arg_0_tmp_4_id,arg_0_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("extendedKeys").ToLocalChecked(), arg_0_tmp_4);
@@ -120,5 +119,5 @@ void NJSExtendedKeyAccountCreationInfoCallback::Initialize(Local<Object> target)
     ExtendedKeyAccountCreationInfoCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSExtendedKeyAccountCreationInfoCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSExtendedKeyAccountCreationInfoCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

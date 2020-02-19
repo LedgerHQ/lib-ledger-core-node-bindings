@@ -3,7 +3,6 @@
 
 #include "NJSAmountCallback.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -88,5 +87,5 @@ void NJSAmountCallback::Initialize(Local<Object> target) {
     AmountCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSAmountCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSAmountCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

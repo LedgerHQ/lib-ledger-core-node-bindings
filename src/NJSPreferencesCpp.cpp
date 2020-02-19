@@ -3,7 +3,6 @@
 
 #include "NJSPreferencesCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -137,9 +136,9 @@ NAN_METHOD(NJSPreferences::getStringArray) {
     Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
     for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
     {
-        if(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->IsString())
+        if(arg_1_container->Get(arg_1_id)->IsString())
         {
-            Nan::Utf8String string_arg_1_elem(arg_1_container->Get(Nan::GetCurrentContext(), arg_1_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+            Nan::Utf8String string_arg_1_elem(arg_1_container->Get(arg_1_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_elem = std::string(*string_arg_1_elem);
             arg_1.emplace_back(arg_1_elem);
         }
@@ -160,7 +159,7 @@ NAN_METHOD(NJSPreferences::getStringArray) {
     for(size_t arg_2_id = 0; arg_2_id < result.size(); arg_2_id++)
     {
         auto arg_2_elem = Nan::New<String>(result[arg_2_id]).ToLocalChecked();
-        Nan::Set(arg_2, (int)arg_2_id,arg_2_elem);
+        arg_2->Set((int)arg_2_id,arg_2_elem);
     }
 
 
@@ -178,20 +177,15 @@ NAN_METHOD(NJSPreferences::getData) {
     //Check if parameters have correct types
     Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    if(!info[1]->IsString())
+    vector<uint8_t> arg_1;
+    Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
+    for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
     {
-        Nan::ThrowError("info[1] should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> arg_1;
-    Nan::Utf8String str_arg_1(info[1]);
-    std::string string_arg_1(*str_arg_1, str_arg_1.length());
-    if (string_arg_1.rfind("0x", 0) == 0)
-    {
-        arg_1 = djinni::js::hex::toByteArray(string_arg_1.substr(2));
-    }
-    else
-    {
-        arg_1 = std::vector<uint8_t>(string_arg_1.cbegin(), string_arg_1.cend());
+        if(arg_1_container->Get(arg_1_id)->IsUint32())
+        {
+            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(arg_1_id)).FromJust();
+            arg_1.emplace_back(arg_1_elem);
+        }
     }
 
 
@@ -205,7 +199,12 @@ NAN_METHOD(NJSPreferences::getData) {
     auto result = cpp_impl->getData(arg_0,arg_1);
 
     //Wrap result in node object
-    auto arg_2 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
+    Local<Array> arg_2 = Nan::New<Array>();
+    for(size_t arg_2_id = 0; arg_2_id < result.size(); arg_2_id++)
+    {
+        auto arg_2_elem = Nan::New<Uint32>(result[arg_2_id]);
+        arg_2->Set((int)arg_2_id,arg_2_elem);
+    }
 
 
     //Return result
@@ -323,5 +322,5 @@ void NJSPreferences::Initialize(Local<Object> target) {
     Preferences_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSPreferences").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSPreferences").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

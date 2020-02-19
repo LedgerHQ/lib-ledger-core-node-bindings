@@ -3,7 +3,6 @@
 
 #include "NJSDynamicArrayCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -152,20 +151,15 @@ NAN_METHOD(NJSDynamicArray::pushData) {
     }
 
     //Check if parameters have correct types
-    if(!info[0]->IsString())
+    vector<uint8_t> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        Nan::ThrowError("info[0] should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> arg_0;
-    Nan::Utf8String str_arg_0(info[0]);
-    std::string string_arg_0(*str_arg_0, str_arg_0.length());
-    if (string_arg_0.rfind("0x", 0) == 0)
-    {
-        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
-    }
-    else
-    {
-        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        {
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            arg_0.emplace_back(arg_0_elem);
+        }
     }
 
 
@@ -435,7 +429,12 @@ NAN_METHOD(NJSDynamicArray::getData) {
     if(result)
     {
         auto arg_1_optional = (result).value();
-        auto arg_1_tmp = Nan::New<String>("0x" + djinni::js::hex::toString(arg_1_optional)).ToLocalChecked();
+        Local<Array> arg_1_tmp = Nan::New<Array>();
+        for(size_t arg_1_tmp_id = 0; arg_1_tmp_id < arg_1_optional.size(); arg_1_tmp_id++)
+        {
+            auto arg_1_tmp_elem = Nan::New<Uint32>(arg_1_optional[arg_1_tmp_id]);
+            arg_1_tmp->Set((int)arg_1_tmp_id,arg_1_tmp_elem);
+        }
 
         arg_1 = arg_1_tmp;
     }
@@ -670,7 +669,12 @@ NAN_METHOD(NJSDynamicArray::serialize) {
     auto result = cpp_impl->serialize();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
+    Local<Array> arg_0 = Nan::New<Array>();
+    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
+    {
+        auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
+    }
 
 
     //Return result
@@ -729,20 +733,15 @@ NAN_METHOD(NJSDynamicArray::load) {
     }
 
     //Check if parameters have correct types
-    if(!info[0]->IsString())
+    vector<uint8_t> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        Nan::ThrowError("info[0] should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> arg_0;
-    Nan::Utf8String str_arg_0(info[0]);
-    std::string string_arg_0(*str_arg_0, str_arg_0.length());
-    if (string_arg_0.rfind("0x", 0) == 0)
-    {
-        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
-    }
-    else
-    {
-        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        {
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            arg_0.emplace_back(arg_0_elem);
+        }
     }
 
 
@@ -844,5 +843,5 @@ void NJSDynamicArray::Initialize(Local<Object> target) {
     DynamicArray_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSDynamicArray").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSDynamicArray").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

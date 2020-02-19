@@ -17,16 +17,16 @@ declare class NJSTezosLikeTransaction
     /** Get amount of XTZ to send */
     declare function getValue(): ?NJSAmount;
     /** Serialize the transaction to its raw format. */
-    declare function serialize(): String;
+    declare function serialize(): Object;
     /** Set signature of transaction, when a signature is set serialize method gives back serialized Tx */
-    declare function setSignature(signature: String);
+    declare function setSignature(signature: Object);
     /**
      * Get the time when the transaction was issued or the time of the block including
      * this transaction
      */
     declare function getDate(): Date;
     /** Get Signing public Key */
-    declare function getSigningPubKey(): String;
+    declare function getSigningPubKey(): Object;
     declare function getCounter(): NJSBigInt;
     declare function getGasLimit(): NJSAmount;
     declare function getStorageLimit(): NJSBigInt;
@@ -108,8 +108,8 @@ declare class NJSTezosLikeTransactionBuilder
     declare function clone(): NJSTezosLikeTransactionBuilder;
     /** Reset the current instance to its initial state */
     declare function reset();
-    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: String): NJSTezosLikeTransaction;
-    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: String): NJSTezosLikeTransaction;
+    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: Object): NJSTezosLikeTransaction;
+    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: Object): NJSTezosLikeTransaction;
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSTezosLikeTransactionCallback
@@ -124,7 +124,7 @@ declare class NJSTezosLikeTransactionCallback
 /**Class representing a Tezos account */
 declare class NJSTezosLikeAccount
 {
-    declare function broadcastRawTransaction(transaction: String, callback: NJSStringCallback);
+    declare function broadcastRawTransaction(transaction: Object, callback: NJSStringCallback);
     declare function broadcastTransaction(transaction: NJSTezosLikeTransaction, callback: NJSStringCallback);
     declare function buildTransaction(): NJSTezosLikeTransactionBuilder;
     /**
@@ -239,10 +239,10 @@ declare class NJSRippleLikeTransaction
     /** Get amount of XRP to send */
     declare function getValue(): NJSAmount;
     /** Serialize the transaction to its raw format. */
-    declare function serialize(): String;
+    declare function serialize(): Object;
     /** Set signature of transaction, when a signature is set serialize method gives back serialized Tx */
-    declare function setSignature(rSignature: String, sSignature: String);
-    declare function setDERSignature(signature: String);
+    declare function setSignature(rSignature: Object, sSignature: Object);
+    declare function setDERSignature(signature: Object);
     /**
      * Get the time when the transaction was issued or the time of the block including
      * this transaction
@@ -257,7 +257,7 @@ declare class NJSRippleLikeTransaction
     /** Get Ledger's sequence in which the tx was included */
     declare function getLedgerSequence(): NJSBigInt;
     /** Get Signing public Key */
-    declare function getSigningPubKey(): String;
+    declare function getSigningPubKey(): Object;
     /** Get all memos associated with the transaction. */
     declare function getMemos(): Array<RippleLikeMemo>;
     /** Add a memo to a transaction. */
@@ -331,8 +331,8 @@ declare class NJSRippleLikeTransactionBuilder
     declare function clone(): NJSRippleLikeTransactionBuilder;
     /** Reset the current instance to its initial state */
     declare function reset();
-    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: String): NJSRippleLikeTransaction;
-    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: String): NJSRippleLikeTransaction;
+    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: Object): NJSRippleLikeTransaction;
+    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: Object): NJSRippleLikeTransaction;
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSRippleLikeTransactionCallback
@@ -347,7 +347,7 @@ declare class NJSRippleLikeTransactionCallback
 /**Class representing a Ripple account */
 declare class NJSRippleLikeAccount
 {
-    declare function broadcastRawTransaction(transaction: String, callback: NJSStringCallback);
+    declare function broadcastRawTransaction(transaction: Object, callback: NJSStringCallback);
     declare function broadcastTransaction(transaction: NJSRippleLikeTransaction, callback: NJSStringCallback);
     declare function buildTransaction(): NJSRippleLikeTransactionBuilder;
     /**
@@ -402,20 +402,20 @@ declare class NJSSecp256k1
      * @param compress get compressed (35 bytes) or uncompressed (65 bytes)
      * @return public key can be compressed (35 bytes starting with 02 or 03) or un compressed (65 bytes starting with 04)
      */
-    declare function computePubKey(privKey: String, compress: boolean): String;
+    declare function computePubKey(privKey: Object, compress: boolean): Object;
     /**
      * Generates uncompressed public key from compressed public key.
      * @param pubKey 33 byte private key (starting with 02 or 03)
      * @return uncompressed public key (65 bytes starting with 04)
      */
-    declare function computeUncompressedPubKey(pubKey: String): String;
+    declare function computeUncompressedPubKey(pubKey: Object): Object;
     /**
      * Signs message using a given private key.
      * @param privKey 32 bytes private key
      * @param data 32 bytes message to sign
      * @return 32 bytes signed message
      */
-    declare function sign(privKey: String, data: String): String;
+    declare function sign(privKey: Object, data: Object): Object;
     /**
      * Check if message was signed with given signature and public key.
      * @param data 32 bytes signed message
@@ -423,7 +423,7 @@ declare class NJSSecp256k1
      * @param oubkey 32 bytes public key
      * @return true if message was signed with signature and public key (both issued from same private key)
      */
-    declare function verify(data: String, signature: String, pubKey: String): boolean;
+    declare function verify(data: Object, signature: Object, pubKey: Object): boolean;
     static declare function newInstance(): NJSSecp256k1;
 }
 /** All available blockchain networks parameters. */
@@ -446,19 +446,19 @@ declare class NJSHashAlgorithmHelper
      * @param data in bytes, message to hash
      * @return 160 bits hashed message
      */
-    declare function ripemd160(data: String): String;
+    declare function ripemd160(data: Object): Object;
     /**
      * Secure Hash Algorithm (used in Bitcoin).
      * @param data in bytes, message to hash
      * @return 256 bits hashed message
      */
-    declare function sha256(data: String): String;
+    declare function sha256(data: Object): Object;
     /**
      * Hash algorithm used in ethereum.
      * @param data in bytes, message to hash
      * @return 256 bits hashed message
      */
-    declare function keccak256(data: String): String;
+    declare function keccak256(data: Object): Object;
 }
 /** Class representing an event. */
 declare class NJSEvent
@@ -1159,7 +1159,7 @@ declare class NJSDynamicArray
      * @param value, binary
      * @return DynamicArray with value stored in it
      */
-    declare function pushData(value: String): NJSDynamicArray;
+    declare function pushData(value: Object): NJSDynamicArray;
     /**
      * Push a bool.
      * @param value, bool
@@ -1207,7 +1207,7 @@ declare class NJSDynamicArray
      * @param index, 64-bit integer
      * @return Optional binary
      */
-    declare function getData(index: number): ?String;
+    declare function getData(index: number): ?Object;
     /**
      * Get bool at a given index.
      * @param index, 64-bit integer
@@ -1253,7 +1253,7 @@ declare class NJSDynamicArray
      * Serialize whole object to a binary.
      * @return binary, the serialized array
      */
-    declare function serialize(): String;
+    declare function serialize(): Object;
     /**
      * Get readonly status of object.
      * @return bool, whether the array is in read-only mode
@@ -1269,7 +1269,7 @@ declare class NJSDynamicArray
      * @param serialized, binary to parse
      * @return Optional, the unserialized dynamic array
      */
-    static declare function load(serialized: String): ?NJSDynamicArray;
+    static declare function load(serialized: Object): ?NJSDynamicArray;
 }
 /**
  * Class representing an object that stores values of different types of objects,
@@ -1312,7 +1312,7 @@ declare class NJSDynamicObject
      * @param value, binary
      * @return DynamicObject object with value stored in it
      */
-    declare function putData(key: string, value: String): NJSDynamicObject;
+    declare function putData(key: string, value: Object): NJSDynamicObject;
     /**
      * Store a boolean integer with a given key.
      * @param key, string, key to access stored value
@@ -1361,7 +1361,7 @@ declare class NJSDynamicObject
      * @param key, string, key of binary to look for
      * @return Optional binary
      */
-    declare function getData(key: string): ?String;
+    declare function getData(key: string): ?Object;
     /**
      * Get, if exists, stored bool having a specific key.
      * @param key, string, key of bool to look for
@@ -1412,7 +1412,7 @@ declare class NJSDynamicObject
      * Serialize whole object to a binary.
      * @return binary
      */
-    declare function serialize(): String;
+    declare function serialize(): Object;
     /**
      * Get readonly status of object.
      * @param bool
@@ -1433,7 +1433,7 @@ declare class NJSDynamicObject
      * @param serialized, binary to parse
      * @return Optional DynamicObject
      */
-    static declare function load(serialized: String): ?NJSDynamicObject;
+    static declare function load(serialized: Object): ?NJSDynamicObject;
 }
 /** Available API to use with explorers. */
 declare class NJSBlockchainExplorerEngines
@@ -1484,18 +1484,18 @@ declare class NJSDatabaseBlob
      * @param offset Start to read bytes from the blob at offset value.
      * @param length Maximum number of byte read from the blob
      */
-    declare function read(offset: number, length: number): String;
+    declare function read(offset: number, length: number): Object;
     /**
      * Write the given bytes at the given offset in the BLOB.
      * @return The number of written bytes
      */
-    declare function write(offset: number, data: String): number;
+    declare function write(offset: number, data: Object): number;
     /**
      * Append the given bytes to the BLOB.
      * @param The data to append to the BLOB
      * @return the number of bytes written
      */
-    declare function append(data: String): number;
+    declare function append(data: Object): number;
     /**
      * Truncate the BLOB to the length given by the newLen parameter (in bytes).
      * @param newLen The final size of the BLOB
@@ -1770,7 +1770,7 @@ declare class NJSRandomNumberGenerator
      * @params size number of bytes to generate
      * @return 'size' random bytes
      */
-    declare function getRandomBytes(size: number): String;
+    declare function getRandomBytes(size: number): Object;
     /**
      * Generates random 32 bits integer.
      * @return random 32 bits integer
@@ -1818,7 +1818,7 @@ declare class NJSBinaryCallback
      * @params result optional of type T, non null if main task failed
      * @params error optional of type Error, non null if main task succeeded
      */
-    declare function onCallback(result: ?String, error: ?Error);
+    declare function onCallback(result: ?Object, error: ?Error);
 }
 /** Class representing a Ethereum transaction. */
 declare class NJSERC20LikeOperation
@@ -1840,7 +1840,7 @@ declare class NJSERC20LikeOperation
     /** Get amount of ether to send. */
     declare function getValue(): NJSBigInt;
     /** Get binary data payload. */
-    declare function getData(): String;
+    declare function getData(): Object;
     /**
      * Get the time when the transaction was issued or the time of the block including this
      * this transaction.
@@ -1886,15 +1886,15 @@ declare class NJSEthereumLikeTransaction
     /** Get amount of ether to send. */
     declare function getValue(): NJSAmount;
     /** Get binary data payload. */
-    declare function getData(): ?String;
+    declare function getData(): ?Object;
     /** Get status of transaction: equals to 1 if succeeded, 0 otherwise */
     declare function getStatus(): number;
     /** Serialize the transaction to its raw format. */
-    declare function serialize(): String;
+    declare function serialize(): Object;
     /** Set signature of transaction, when a signature is set serialize method gives back serialized Tx. */
-    declare function setSignature(vSignature: String, rSignature: String, sSignature: String);
-    declare function setDERSignature(signature: String);
-    declare function setVSignature(vSignature: String);
+    declare function setSignature(vSignature: Object, rSignature: Object, sSignature: Object);
+    declare function setDERSignature(signature: Object);
+    declare function setVSignature(vSignature: Object);
     /**
      * Get the time when the transaction was issued or the time of the block including this
      * transaction.
@@ -1917,7 +1917,7 @@ declare class NJSInternalTransaction
     /** Get amount of ether to send. */
     declare function getValue(): NJSBigInt;
     /** Get binary data payload. */
-    declare function getData(): String;
+    declare function getData(): Object;
     /** Get operation type : whether it is a SEND or RECEIVE. */
     declare function getOperationType(): OperationType;
 }
@@ -1982,7 +1982,7 @@ declare class NJSEthereumLikeTransactionBuilder
      */
     declare function setGasLimit(gasLimit: NJSAmount): NJSEthereumLikeTransactionBuilder;
     /** Set input data the originator wants to embed in transaction. */
-    declare function setInputData(data: String): NJSEthereumLikeTransactionBuilder;
+    declare function setInputData(data: Object): NJSEthereumLikeTransactionBuilder;
     /** Build a transaction from the given builder parameters. */
     declare function build(callback: NJSEthereumLikeTransactionCallback);
     /**
@@ -1993,9 +1993,9 @@ declare class NJSEthereumLikeTransactionBuilder
     /** Reset the current instance to its initial state */
     declare function reset();
     /** Create an unsigned transaction for the Ethereum blockchain out of a raw binary. */
-    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: String): NJSEthereumLikeTransaction;
+    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: Object): NJSEthereumLikeTransaction;
     /** Create a signed transaction for the Ethereum blockchain out of a raw binary. */
-    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: String): NJSEthereumLikeTransaction;
+    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: Object): NJSEthereumLikeTransaction;
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSEthereumLikeTransactionCallback
@@ -2011,7 +2011,7 @@ declare class NJSEthereumLikeTransactionCallback
 declare class NJSEthereumLikeAccount
 {
     /** Send a raw (binary) transaction on the Ethereum blockchain. */
-    declare function broadcastRawTransaction(transaction: String, callback: NJSStringCallback);
+    declare function broadcastRawTransaction(transaction: Object, callback: NJSStringCallback);
     /** Send a transaction on the Ethereum blockchain. */
     declare function broadcastTransaction(transaction: NJSEthereumLikeTransaction, callback: NJSStringCallback);
     /** Get a builder object to construct transactions. */
@@ -2061,7 +2061,7 @@ declare class NJSBitcoinLikeScriptChunk
     declare function isOperator(): boolean;
     declare function isPushedData(): boolean;
     declare function getOperator(): ?BitcoinLikeOperator;
-    declare function getPushedData(): ?String;
+    declare function getPushedData(): ?Object;
     declare function next(): NJSBitcoinLikeScriptChunk;
     declare function hasNext(): boolean;
 }
@@ -2076,7 +2076,7 @@ declare class NJSBitcoinLikeScript
     /** Turn the script into a string representation. */
     declare function toString(): string;
     /** Parse data into a script. */
-    static declare function parse(data: String): NJSBitcoinLikeScript;
+    static declare function parse(data: Object): NJSBitcoinLikeScript;
 }
 /** Helper class for manipulating Tezos like addresses. */
 declare class NJSTezosLikeAddress
@@ -2085,12 +2085,12 @@ declare class NJSTezosLikeAddress
      * Gets the version of the address.
      * @return The version of the address
      */
-    declare function getVersion(): String;
+    declare function getVersion(): Object;
     /**
      * Gets the raw hash160 of the public key
      * @return The 20 bytes of the public key hash160
      */
-    declare function getHash160(): String;
+    declare function getHash160(): Object;
     /**
      * Gets the network parameters used for serializing the address.
      * @return The network parameters of the address
@@ -2108,9 +2108,9 @@ declare class NJSTezosLikeExtendedPublicKey
     /** Derive an address from an xPUB and a path. */
     declare function derive(path: string): NJSTezosLikeAddress;
     /** Derive a public key from an xPUB and a path. */
-    declare function derivePublicKey(path: string): String;
+    declare function derivePublicKey(path: string): Object;
     /** Derive a shorten version of a public key (SHA256 + RIPEMD160) from an xPUB and a path. */
-    declare function deriveHash160(path: string): String;
+    declare function deriveHash160(path: string): Object;
     /** Get the xPUB in base 58. */
     declare function toBase58(): string;
     /** Get the root path of the xPUB. */
@@ -2123,12 +2123,12 @@ declare class NJSRippleLikeAddress
      * Gets the version of the address
      * @return The version of the address
      */
-    declare function getVersion(): String;
+    declare function getVersion(): Object;
     /**
      * Gets the raw hash160 of the public key
      * @return The 20 bytes of the public key hash160
      */
-    declare function getHash160(): String;
+    declare function getHash160(): Object;
     /**
      * Gets the network parameters used for serializing the address
      * @return The network parameters of the address
@@ -2143,8 +2143,8 @@ declare class NJSRippleLikeAddress
 declare class NJSRippleLikeExtendedPublicKey
 {
     declare function derive(path: string): NJSRippleLikeAddress;
-    declare function derivePublicKey(path: string): String;
-    declare function deriveHash160(path: string): String;
+    declare function derivePublicKey(path: string): Object;
+    declare function deriveHash160(path: string): Object;
     declare function toBase58(): string;
     declare function getRootPath(): string;
 }
@@ -2155,12 +2155,12 @@ declare class NJSEthereumLikeAddress
      * Gets the version of the address.
      * @return The version of the address
      */
-    declare function getVersion(): String;
+    declare function getVersion(): Object;
     /**
      * Gets the raw keccak hash of the public key (truncated to 20 bytes).
      * @return The 20 bytes of the public key keccak hash
      */
-    declare function getKeccakHash(): String;
+    declare function getKeccakHash(): Object;
     /**
      * Gets the network parameters used for serializing the address.
      * @return The network parameters of the address
@@ -2178,9 +2178,9 @@ declare class NJSEthereumLikeExtendedPublicKey
     /** Derive an address from an xPUB and a path. */
     declare function derive(path: string): NJSEthereumLikeAddress;
     /** Derive a public key from an xPUB and a path. */
-    declare function derivePublicKey(path: string): String;
+    declare function derivePublicKey(path: string): Object;
     /** Derive a shorten version of a public key (SHA256 + RIPEMD160) from an xPUB and a path. */
-    declare function deriveHash160(path: string): String;
+    declare function deriveHash160(path: string): Object;
     /** Get the xPUB in base 58. */
     declare function toBase58(): string;
     /** Get the root path of the xPUB. */
@@ -2193,12 +2193,12 @@ declare class NJSBitcoinLikeAddress
      * Gets the version of the address (P2SH or P2PKH)
      * @return The version of the address
      */
-    declare function getVersion(): String;
+    declare function getVersion(): Object;
     /**
      * Gets the raw hash160 of the public key
      * @return The 20 bytes of the public key hash160
      */
-    declare function getHash160(): String;
+    declare function getHash160(): Object;
     /**
      * Gets the network parameters used for serializing the address
      * @return The network parameters of the address
@@ -2244,9 +2244,9 @@ declare class NJSBitcoinLikeExtendedPublicKey
     /** Derive an address from an xPUB and a path. */
     declare function derive(path: string): NJSBitcoinLikeAddress;
     /** Derive a public key from an xPUB and a path. */
-    declare function derivePublicKey(path: string): String;
+    declare function derivePublicKey(path: string): Object;
     /** Derive a shorten version of a public key (SHA256 + RIPEMD160) from an xPUB and a path. */
-    declare function deriveHash160(path: string): String;
+    declare function deriveHash160(path: string): Object;
     /** Get the xPUB in base 58. */
     declare function toBase58(): string;
     /** Get the root path of the xPUB. */
@@ -2337,7 +2337,7 @@ declare class NJSPreferences
      * Retrieves the value associated with the given key or fallback to the default value.
      * @return The data associated with the key or fallbackValue.
      */
-    declare function getData(key: string, fallbackValue: String): String;
+    declare function getData(key: string, fallbackValue: Object): Object;
     /**
      * Checks whether the Preferences contains the given key.
      * @return true the preferences contains the key, false otherwise.
@@ -2393,7 +2393,7 @@ declare class NJSPreferencesEditor
      * @param value The value to store
      * @return The reference of self in order to chain the call to the editor.
      */
-    declare function putData(key: string, value: String): NJSPreferencesEditor;
+    declare function putData(key: string, value: Object): NJSPreferencesEditor;
     /**
      * Removes the data associated with the given key.
      * @param key The key to remove from the Preferences
@@ -2418,7 +2418,7 @@ declare class NJSBitcoinLikeInput
      * Returns the public associated with the address. This value can be NULL if you are building a transaction with an
      * address which does not belong to your wallet.
      */
-    declare function getPublicKeys(): Array<String>;
+    declare function getPublicKeys(): Array<Object>;
     /** Returns the derivation path of this input if the address is owned by the wallet. */
     declare function getDerivationPath(): Array<NJSDerivationPath>;
     /**
@@ -2454,16 +2454,16 @@ declare class NJSBitcoinLikeInput
      */
     declare function getPreviousOuput(): NJSBitcoinLikeOutput;
     /** Get ScriptSig of this input. The scriptsig is the first half of a script necessary to spend a previous output. */
-    declare function getScriptSig(): String;
+    declare function getScriptSig(): Object;
     /** Parse the script sig to a [[BitcoinLikeScript]]. */
     declare function parseScriptSig(): NJSBitcoinLikeScript;
     /**
      * Set the ScriptS to the given value.
      * @param scriptSig The ScriptSig to use for this input
      */
-    declare function setScriptSig(scriptSig: String);
+    declare function setScriptSig(scriptSig: Object);
     /** Push data to the end of the current ScriptSig. */
-    declare function pushToScriptSig(data: String);
+    declare function pushToScriptSig(data: Object);
     /** Set the sequence number of this input. */
     declare function setSequence(sequence: number);
     /** Get the sequence number of this input. */
@@ -2471,7 +2471,7 @@ declare class NJSBitcoinLikeInput
     /** Get the previous transaction associated with the input. */
     declare function getPreviousTransaction(callback: NJSBinaryCallback);
     /** Easy way to set the P2PKH script signature. Shorthand for input.pushToScriptSig(input.getPublicKeys()[0], signature). */
-    declare function setP2PKHSigScript(signature: String);
+    declare function setP2PKHSigScript(signature: Object);
 }
 /** Class representing Bitcoin outputs. */
 declare class NJSBitcoinLikeOutput
@@ -2495,7 +2495,7 @@ declare class NJSBitcoinLikeOutput
      * Get script (witness script) cryptographic puzzle that determines the conditions to spend the output.
      * @return in Bytes (variable size depending on type of script P2PKH, P2SH), locking script to spend UTXO
      */
-    declare function getScript(): String;
+    declare function getScript(): Object;
     declare function parseScript(): NJSBitcoinLikeScript;
     /**
      * Get address that spent the output.
@@ -2549,11 +2549,11 @@ declare class NJSBitcoinLikeTransaction
     /** Get Transaction version. */
     declare function getVersion(): number;
     /** Serialize the transaction to its raw format. */
-    declare function serialize(): String;
+    declare function serialize(): Object;
     /** Serialize outputs of the raw transaction into a byte array using the bitcoin transaction format. */
-    declare function serializeOutputs(): String;
+    declare function serializeOutputs(): Object;
     /** Get the witness if the underlying transaction is a segwit transaction. */
-    declare function getWitness(): ?String;
+    declare function getWitness(): ?Object;
     /**
      * Estimate the size of the raw transaction in bytes. This method returns a minimum estimated size and a maximum estimated
      * size.
@@ -2569,7 +2569,7 @@ declare class NJSBitcoinLikeTransaction
      * Sign all inputs for given transaction. 
      * @return SIGNING_SUCCEED if succeed case else refers to BitcoinLikeSignatureState enumeration
      */
-    declare function setDERSignatures(signatures: Array<String>, override: boolean): BitcoinLikeSignatureState;
+    declare function setDERSignatures(signatures: Array<Object>, override: boolean): BitcoinLikeSignatureState;
 }
 /** Class representing a Bitcoin Operation. */
 declare class NJSBitcoinLikeOperation
@@ -2662,7 +2662,7 @@ declare class NJSBitcoinLikeTransactionBuilder
      * Parsing unsigned transaction.
      * parsing a tx might change depending on block height we are on (if an update is effective starting from a given hight)
      */
-    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: String, currentBlockHeight: ?number): NJSBitcoinLikeTransaction;
+    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: Object, currentBlockHeight: ?number): NJSBitcoinLikeTransaction;
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSBitcoinLikeTransactionCallback
@@ -2689,7 +2689,7 @@ declare class NJSBitcoinLikeAccount
      * @param callback, Callback object which returns number of UTXO owned by this account
      */
     declare function getUTXOCount(callback: NJSI32Callback);
-    declare function broadcastRawTransaction(transaction: String, callback: NJSStringCallback);
+    declare function broadcastRawTransaction(transaction: Object, callback: NJSStringCallback);
     declare function broadcastTransaction(transaction: NJSBitcoinLikeTransaction, callback: NJSStringCallback);
     declare function buildTransaction(partial: ?boolean): NJSBitcoinLikeTransactionBuilder;
     /**
@@ -3049,7 +3049,7 @@ declare class NJSHttpRequest
      * Get body of request.
      * @return binary
      */
-    declare function getBody(): String;
+    declare function getBody(): Object;
     /**
      * Get Url of request.
      * @return string

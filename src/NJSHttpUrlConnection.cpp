@@ -3,7 +3,6 @@
 
 #include "NJSHttpUrlConnection.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -74,7 +73,7 @@ std::unordered_map<std::string, std::string> NJSHttpUrlConnection::getHeaders()
     auto fResult_getHeaders_prop_names = fResult_getHeaders_container->GetPropertyNames(Nan::GetCurrentContext()).ToLocalChecked();
     for(uint32_t fResult_getHeaders_id = 0; fResult_getHeaders_id < fResult_getHeaders_prop_names->Length(); fResult_getHeaders_id++)
     {
-        auto key = fResult_getHeaders_prop_names->Get(Nan::GetCurrentContext(), fResult_getHeaders_id).ToLocalChecked();
+        auto key = fResult_getHeaders_prop_names->Get(fResult_getHeaders_id);
         auto fResult_getHeaders_key_ctx = fResult_getHeaders_container->Get(Nan::GetCurrentContext(), key).ToLocalChecked();
         if(key->IsString() && fResult_getHeaders_key_ctx->IsString())
         {
@@ -128,20 +127,15 @@ HttpReadBodyResult NJSHttpUrlConnection::readBody()
     auto fResult_readBody_2 = std::experimental::optional<std::vector<uint8_t>>();
     if(!field_fResult_readBody_2->IsNull() && !field_fResult_readBody_2->IsUndefined())
     {
-        if(!field_fResult_readBody_2->IsString())
+        vector<uint8_t> opt_fResult_readBody_2;
+        Local<Array> opt_fResult_readBody_2_container = Local<Array>::Cast(field_fResult_readBody_2);
+        for(uint32_t opt_fResult_readBody_2_id = 0; opt_fResult_readBody_2_id < opt_fResult_readBody_2_container->Length(); opt_fResult_readBody_2_id++)
         {
-            Nan::ThrowError("field_fResult_readBody_2 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_fResult_readBody_2;
-        Nan::Utf8String str_opt_fResult_readBody_2(field_fResult_readBody_2);
-        std::string string_opt_fResult_readBody_2(*str_opt_fResult_readBody_2, str_opt_fResult_readBody_2.length());
-        if (string_opt_fResult_readBody_2.rfind("0x", 0) == 0)
-        {
-            opt_fResult_readBody_2 = djinni::js::hex::toByteArray(string_opt_fResult_readBody_2.substr(2));
-        }
-        else
-        {
-            opt_fResult_readBody_2 = std::vector<uint8_t>(string_opt_fResult_readBody_2.cbegin(), string_opt_fResult_readBody_2.cend());
+            if(opt_fResult_readBody_2_container->Get(opt_fResult_readBody_2_id)->IsUint32())
+            {
+                auto opt_fResult_readBody_2_elem = Nan::To<uint32_t>(opt_fResult_readBody_2_container->Get(opt_fResult_readBody_2_id)).FromJust();
+                opt_fResult_readBody_2.emplace_back(opt_fResult_readBody_2_elem);
+            }
         }
 
         fResult_readBody_2.emplace(opt_fResult_readBody_2);
@@ -201,5 +195,5 @@ void NJSHttpUrlConnection::Initialize(Local<Object> target) {
     HttpUrlConnection_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSHttpUrlConnection").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSHttpUrlConnection").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

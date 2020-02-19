@@ -3,7 +3,6 @@
 
 #include "NJSBitcoinLikeInputCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -64,9 +63,14 @@ NAN_METHOD(NJSBitcoinLikeInput::getPublicKeys) {
     Local<Array> arg_0 = Nan::New<Array>();
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
-        auto arg_0_elem = Nan::New<String>("0x" + djinni::js::hex::toString(result[arg_0_id])).ToLocalChecked();
+        Local<Array> arg_0_elem = Nan::New<Array>();
+        for(size_t arg_0_elem_id = 0; arg_0_elem_id < result[arg_0_id].size(); arg_0_elem_id++)
+        {
+            auto arg_0_elem_elem = Nan::New<Uint32>(result[arg_0_id][arg_0_elem_id]);
+            arg_0_elem->Set((int)arg_0_elem_id,arg_0_elem_elem);
+        }
 
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
 
@@ -98,7 +102,7 @@ NAN_METHOD(NJSBitcoinLikeInput::getDerivationPath) {
     {
         auto arg_0_elem = NJSDerivationPath::wrap(result[arg_0_id]);
 
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
 
@@ -299,7 +303,12 @@ NAN_METHOD(NJSBitcoinLikeInput::getScriptSig) {
     auto result = cpp_impl->getScriptSig();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
+    Local<Array> arg_0 = Nan::New<Array>();
+    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
+    {
+        auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
+    }
 
 
     //Return result
@@ -340,20 +349,15 @@ NAN_METHOD(NJSBitcoinLikeInput::setScriptSig) {
     }
 
     //Check if parameters have correct types
-    if(!info[0]->IsString())
+    vector<uint8_t> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        Nan::ThrowError("info[0] should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> arg_0;
-    Nan::Utf8String str_arg_0(info[0]);
-    std::string string_arg_0(*str_arg_0, str_arg_0.length());
-    if (string_arg_0.rfind("0x", 0) == 0)
-    {
-        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
-    }
-    else
-    {
-        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        {
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            arg_0.emplace_back(arg_0_elem);
+        }
     }
 
 
@@ -374,20 +378,15 @@ NAN_METHOD(NJSBitcoinLikeInput::pushToScriptSig) {
     }
 
     //Check if parameters have correct types
-    if(!info[0]->IsString())
+    vector<uint8_t> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        Nan::ThrowError("info[0] should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> arg_0;
-    Nan::Utf8String str_arg_0(info[0]);
-    std::string string_arg_0(*str_arg_0, str_arg_0.length());
-    if (string_arg_0.rfind("0x", 0) == 0)
-    {
-        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
-    }
-    else
-    {
-        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        {
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            arg_0.emplace_back(arg_0_elem);
+        }
     }
 
 
@@ -477,20 +476,15 @@ NAN_METHOD(NJSBitcoinLikeInput::setP2PKHSigScript) {
     }
 
     //Check if parameters have correct types
-    if(!info[0]->IsString())
+    vector<uint8_t> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        Nan::ThrowError("info[0] should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> arg_0;
-    Nan::Utf8String str_arg_0(info[0]);
-    std::string string_arg_0(*str_arg_0, str_arg_0.length());
-    if (string_arg_0.rfind("0x", 0) == 0)
-    {
-        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
-    }
-    else
-    {
-        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        {
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            arg_0.emplace_back(arg_0_elem);
+        }
     }
 
 
@@ -570,5 +564,5 @@ void NJSBitcoinLikeInput::Initialize(Local<Object> target) {
     BitcoinLikeInput_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSBitcoinLikeInput").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSBitcoinLikeInput").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

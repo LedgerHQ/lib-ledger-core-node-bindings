@@ -3,7 +3,6 @@
 
 #include "NJSWalletPoolCallback.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -88,5 +87,5 @@ void NJSWalletPoolCallback::Initialize(Local<Object> target) {
     WalletPoolCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSWalletPoolCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSWalletPoolCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

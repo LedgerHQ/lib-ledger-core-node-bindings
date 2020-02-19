@@ -3,7 +3,6 @@
 
 #include "NJSBigIntCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -173,7 +172,7 @@ NAN_METHOD(NJSBigInt::divideAndRemainder) {
     {
         auto arg_1_elem = NJSBigInt::wrap(result[arg_1_id]);
 
-        Nan::Set(arg_1, (int)arg_1_id,arg_1_elem);
+        arg_1->Set((int)arg_1_id,arg_1_elem);
     }
 
 
@@ -467,5 +466,5 @@ void NJSBigInt::Initialize(Local<Object> target) {
     BigInt_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSBigInt").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSBigInt").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

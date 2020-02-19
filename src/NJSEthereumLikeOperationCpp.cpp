@@ -3,7 +3,6 @@
 
 #include "NJSEthereumLikeOperationCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -60,7 +59,7 @@ NAN_METHOD(NJSEthereumLikeOperation::getInternalTransactions) {
     {
         auto arg_0_elem = NJSInternalTransaction::wrap(result[arg_0_id]);
 
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
 
@@ -120,5 +119,5 @@ void NJSEthereumLikeOperation::Initialize(Local<Object> target) {
     EthereumLikeOperation_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSEthereumLikeOperation").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSEthereumLikeOperation").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }
