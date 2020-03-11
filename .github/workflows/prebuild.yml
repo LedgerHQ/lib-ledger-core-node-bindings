@@ -24,10 +24,11 @@ jobs:
       - name: config gcc
         if: runner.os == 'Linux'
         run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
-      - name: prebuild for electron 7
-        run: npx node-pre-gyp configure build package --runtime=electron --target=7.1.9 --build-from-source --dist-url=https://electronjs.org/headers
+      - name: config yarn
+        if: runner.os == 'Windows'
+        run: yarn config set msbuild_path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
       - name: prebuild for electron 8
-        run: npx node-pre-gyp configure build package --runtime=electron --target=8.0.0 --build-from-source --dist-url=https://electronjs.org/headers
+        run: npx node-pre-gyp configure build package --runtime=electron --target=8.1.0 --build-from-source --dist-url=https://electronjs.org/headers
       - name: prebuild for node 12
         run: npx node-pre-gyp configure build package --target=12.16.0
       - name: publish
