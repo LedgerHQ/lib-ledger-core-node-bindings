@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-16.04, macos-latest, windows-2016]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
@@ -21,9 +21,9 @@ jobs:
         run: yarn --frozen-lockfile --ignore-scripts
       - name: fetch libcore
         run: yarn preinstall
-      - name: config yarn
-        if: runner.os == 'Windows'
-        run: yarn config set msbuild_path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
+      - name: config gcc
+        if: runner.os == 'Linux'
+        run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
       - name: prebuild for electron 8
         run: npx node-pre-gyp configure build package --runtime=electron --target=8.1.0 --build-from-source --dist-url=https://electronjs.org/headers
       - name: prebuild for node 12

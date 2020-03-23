@@ -15,7 +15,7 @@ const perPlatform = {
     chmod: 0o755,
   },
   win32: {
-    dir: 'win/vs2015',
+    dir: 'win/vs2017',
     files: ['ledger-core.dll', 'ledger-core.lib', 'crypto.dll'],
   },
 }
@@ -30,7 +30,6 @@ const dir =
   process.platform === 'linux' && Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 10
     ? `${conf.dir}-arch_ssl_1_1`
     : conf.dir
-
 
 const endpointURL = `https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core/${libcoreVersion}/${dir}`
 
