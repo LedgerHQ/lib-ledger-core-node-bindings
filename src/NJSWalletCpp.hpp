@@ -12,6 +12,7 @@
 #include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/ExtendedKeyAccountCreationInfo.hpp"
 #include "../include/RippleLikeNetworkParameters.hpp"
+#include "../include/StellarLikeNetworkParameters.hpp"
 #include "../include/TezosLikeNetworkParameters.hpp"
 #include "../include/WalletType.hpp"
 #include "NJSAccountCallback.hpp"
@@ -26,6 +27,7 @@
 #include "NJSI32Callback.hpp"
 #include "NJSLoggerCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
+#include "NJSStellarLikeWalletCpp.hpp"
 #include <chrono>
 #include <cstdint>
 #include <memory>
@@ -150,6 +152,15 @@ private:
      * @return bool
      */
     static NAN_METHOD(isInstanceOfRippleLikeWallet);
+
+    /**
+     * Tell whether wallet is a Stellar one.
+     * @return bool
+     */
+    static NAN_METHOD(isInstanceOfStellarLikeWallet);
+
+    /** Cast the instance to StellarLIkeWallet */
+    static NAN_METHOD(asStellarLikeWallet);
 
     /**
      * Get wallet type.

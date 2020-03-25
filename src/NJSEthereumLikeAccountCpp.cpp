@@ -192,6 +192,104 @@ NAN_METHOD(NJSEthereumLikeAccount::getEstimatedGasLimit) {
     cpp_impl->getEstimatedGasLimit(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSEthereumLikeAccount::getDryRunGasLimit) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getDryRunGasLimit needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    auto arg_0 = std::string(*string_arg_0);
+
+    auto field_arg_1_1 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("from").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_1 = std::experimental::optional<std::string>();
+    if(!field_arg_1_1->IsNull() && !field_arg_1_1->IsUndefined())
+    {
+        Nan::Utf8String string_opt_arg_1_1(field_arg_1_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_1 = std::string(*string_opt_arg_1_1);
+        arg_1_1.emplace(opt_arg_1_1);
+    }
+
+
+    auto field_arg_1_2 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("to").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_2 = std::experimental::optional<std::string>();
+    if(!field_arg_1_2->IsNull() && !field_arg_1_2->IsUndefined())
+    {
+        Nan::Utf8String string_opt_arg_1_2(field_arg_1_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_2 = std::string(*string_opt_arg_1_2);
+        arg_1_2.emplace(opt_arg_1_2);
+    }
+
+
+    auto field_arg_1_3 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("value").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_3 = std::experimental::optional<std::string>();
+    if(!field_arg_1_3->IsNull() && !field_arg_1_3->IsUndefined())
+    {
+        Nan::Utf8String string_opt_arg_1_3(field_arg_1_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_3 = std::string(*string_opt_arg_1_3);
+        arg_1_3.emplace(opt_arg_1_3);
+    }
+
+
+    auto field_arg_1_4 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("data").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_4 = std::experimental::optional<std::string>();
+    if(!field_arg_1_4->IsNull() && !field_arg_1_4->IsUndefined())
+    {
+        Nan::Utf8String string_opt_arg_1_4(field_arg_1_4->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_4 = std::string(*string_opt_arg_1_4);
+        arg_1_4.emplace(opt_arg_1_4);
+    }
+
+
+    auto field_arg_1_5 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("gas").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_5 = std::experimental::optional<std::string>();
+    if(!field_arg_1_5->IsNull() && !field_arg_1_5->IsUndefined())
+    {
+        Nan::Utf8String string_opt_arg_1_5(field_arg_1_5->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_5 = std::string(*string_opt_arg_1_5);
+        arg_1_5.emplace(opt_arg_1_5);
+    }
+
+
+    auto field_arg_1_6 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("gasPrice").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_6 = std::experimental::optional<std::string>();
+    if(!field_arg_1_6->IsNull() && !field_arg_1_6->IsUndefined())
+    {
+        Nan::Utf8String string_opt_arg_1_6(field_arg_1_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_6 = std::string(*string_opt_arg_1_6);
+        arg_1_6.emplace(opt_arg_1_6);
+    }
+
+
+    auto field_arg_1_7 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("amplifier").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_7 = std::experimental::optional<double>();
+    if(!field_arg_1_7->IsNull() && !field_arg_1_7->IsUndefined())
+    {
+        auto opt_arg_1_7 = Nan::To<double>(field_arg_1_7).FromJust();
+        arg_1_7.emplace(opt_arg_1_7);
+    }
+
+    EthereumGasLimitRequest arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7);
+
+
+    //Create promise and set it into Callback
+    auto arg_2_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntCallback *njs_ptr_arg_2 = new NJSBigIntCallback(arg_2_resolver);
+    std::shared_ptr<NJSBigIntCallback> arg_2(njs_ptr_arg_2);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::getDryRunGasLimit : implementation of EthereumLikeAccount is not valid");
+    }
+    cpp_impl->getDryRunGasLimit(arg_0,arg_1,arg_2);
+    info.GetReturnValue().Set(arg_2_resolver->GetPromise());
+}
 NAN_METHOD(NJSEthereumLikeAccount::getERC20Balance) {
 
     //Check if method called with right number of arguments
@@ -308,6 +406,7 @@ void NJSEthereumLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getERC20Accounts", getERC20Accounts);
     Nan::SetPrototypeMethod(func_template,"getGasPrice", getGasPrice);
     Nan::SetPrototypeMethod(func_template,"getEstimatedGasLimit", getEstimatedGasLimit);
+    Nan::SetPrototypeMethod(func_template,"getDryRunGasLimit", getDryRunGasLimit);
     Nan::SetPrototypeMethod(func_template,"getERC20Balance", getERC20Balance);
     Nan::SetPrototypeMethod(func_template,"getERC20Balances", getERC20Balances);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);

@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSETHEREUMLIKEACCOUNT_HPP
 
 
+#include "../include/EthereumGasLimitRequest.hpp"
 #include "NJSBigIntCallback.hpp"
 #include "NJSBigIntListCallback.hpp"
 #include "NJSERC20LikeAccountCpp.hpp"
@@ -63,6 +64,14 @@ private:
      * Note: same note as above
      */
     static NAN_METHOD(getEstimatedGasLimit);
+
+    /**
+     * Get estimated gas limit to set so the transaction will succeed
+     * The passed address could be EOA or contract
+     * This estimation is based on a dry-run on the node, and it will fail if the request is ill-formed
+     * Note: same note as above
+     */
+    static NAN_METHOD(getDryRunGasLimit);
 
     /**
      * Get balance of ERC20 token

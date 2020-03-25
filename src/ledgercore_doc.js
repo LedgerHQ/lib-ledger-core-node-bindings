@@ -460,6 +460,105 @@ declare class NJSHashAlgorithmHelper
      */
     declare function keccak256(data: String): String;
 }
+declare class NJSStellarLikeBlock
+{
+}
+declare class NJSStellarLikeTransaction
+{
+    declare function toRawTransaction(): String;
+    /** Returns the payload which should be signed by the user in order to send the transaction. */
+    declare function toSignatureBase(): String;
+    /** Add a new signature to the transaction envelope */
+    declare function putSignature(signature: String, address: NJSAddress);
+    /** Returns the author of the transaction */
+    declare function getSourceAccount(): NJSAddress;
+    /** Returns the sequence of the source account used for this transaction */
+    declare function getSourceAccountSequence(): NJSBigInt;
+    /** Returns the fee paid for this transaction to be validated */
+    declare function getFee(): NJSAmount;
+}
+declare class NJSStellarLikeTransactionBuilder
+{
+    declare function addNativePayment(address: string, amount: NJSAmount): NJSStellarLikeTransactionBuilder;
+    declare function addCreateAccount(address: string, amount: NJSAmount): NJSStellarLikeTransactionBuilder;
+    declare function setBaseFee(baseFee: NJSAmount): NJSStellarLikeTransactionBuilder;
+    declare function setTextMemo(text: string): NJSStellarLikeTransactionBuilder;
+    declare function setNumberMemo(number: NJSBigInt): NJSStellarLikeTransactionBuilder;
+    declare function setHashMemo(hash: String): NJSStellarLikeTransactionBuilder;
+    declare function setReturnMemo(value: String): NJSStellarLikeTransactionBuilder;
+    declare function setSequence(sequence: NJSBigInt): NJSStellarLikeTransactionBuilder;
+    declare function build(callback: NJSStellarLikeTransactionCallback);
+    static declare function parseRawTransaction(currency: Currency, rawTransaction: String): NJSStellarLikeTransaction;
+    static declare function parseSignatureBase(currency: Currency, rawTransaction: String): NJSStellarLikeTransaction;
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSStellarLikeTransactionCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?NJSStellarLikeTransaction, error: ?Error);
+}
+declare class NJSStellarLikeOperation
+{
+    /** Get the underlying operation information */
+    declare function getRecord(): StellarLikeOperationRecord;
+    /** Get the underlying transaction in which this operation can be found. */
+    declare function getTransaction(): NJSStellarLikeTransaction;
+}
+declare class NJSStellarLikeAccount
+{
+    /**
+     * Checks if the current account exists on the stellar Network. If it doesn't the account needs to be activated by
+     * sending an account creation operation with an amount of at least the base reserve.
+     * @return Callback with a boolean indicating if the account exists on the Stellar network or not.
+     */
+    declare function exists(callback: NJSBoolCallback);
+    /**
+     * Create a new transaction builder to create new transaction
+     * @return The transaction builder
+     */
+    declare function buildTransaction(): NJSStellarLikeTransactionBuilder;
+    /** Broadcast the given raw transaction to the network. */
+    declare function broadcastRawTransaction(tx: String, callback: NJSStringCallback);
+    /** Get base reserve of the network */
+    declare function getBaseReserve(callback: NJSAmountCallback);
+    /** Get sequence number to be used in the next transaction */
+    declare function getSequence(callback: NJSBigIntCallback);
+    /** Get recommended fee */
+    declare function getFeeStats(callback: NJSStellarLikeFeeStatsCallback);
+    /** Get signers for this account */
+    declare function getSigners(callback: NJSStellarLikeAccountSignerListCallback);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSStellarLikeFeeStatsCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?StellarLikeFeeStats, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSStellarLikeAccountSignerListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<StellarLikeAccountSigner>, error: ?Error);
+}
+declare class NJSStellarLikeWallet
+{
+    declare function exists(address: string, callback: NJSBoolCallback);
+}
+declare class NJSStellarLikeAddress
+{
+}
 /** Class representing an event. */
 declare class NJSEvent
 {
@@ -659,7 +758,13 @@ declare class NJSOperation
      *@return TezosLikeOperation object
      */
     declare function asTezosLikeOperation(): NJSTezosLikeOperation;
-    /** Same as isInstanceOfBitcoinLikeOperation for bitcoin. */
+    /**
+     * Same as isInstanceOfBitcoinLikeOperation for bitcoin.
+     * Convert operation as Ethereum operation.
+     * @return EthereumLikeOperation object
+     */
+    declare function asStellarLikeOperation(): NJSStellarLikeOperation;
+    /** Is this an instance of a Bitcoin-like operation? */
     declare function isInstanceOfBitcoinLikeOperation(): boolean;
     /** Same as isInstanceOfEthereumLikeOperation for ethereum. */
     declare function isInstanceOfEthereumLikeOperation(): boolean;
@@ -667,6 +772,8 @@ declare class NJSOperation
     declare function isInstanceOfRippleLikeOperation(): boolean;
     /** Same as isInstanceOfTezosLikeOperation for tezos. */
     declare function isInstanceOfTezosLikeOperation(): boolean;
+    /** Same as isInstanceOfBitcoinLikeOperation for ripple. */
+    declare function isInstanceOfStellarLikeOperation(): boolean;
     /**
      * Tells if the operation is complete.
      * @return boolean
@@ -786,6 +893,9 @@ declare class NJSAddress
     declare function toString(): string;
     declare function asBitcoinLikeAddress(): ?NJSBitcoinLikeAddress;
     declare function isInstanceOfBitcoinLikeAddress(): boolean;
+    /** Cast the address to a stellar like one */
+    declare function asStellarLikeAddress(): ?NJSStellarLikeAddress;
+    declare function isInstanceOfStellarLikeAddress(): boolean;
     declare function getCurrency(): Currency;
     /**
      * Attempt to parse a string address. If the address can be parse return it otherwise return a NONE
@@ -866,6 +976,11 @@ declare class NJSAccount
     /** Turn the account into a Tezos one, allowing operations to be performed on the Tezos network. */
     declare function asTezosLikeAccount(): NJSTezosLikeAccount;
     /**
+     * Turn the account into a Stellar one, allowing operations to be performerd on the Stellar
+     * network.
+     */
+    declare function asStellarLikeAccount(): NJSStellarLikeAccount;
+    /**
      * Check if account is a Bitcoin one.
      * @return bool
      */
@@ -875,6 +990,11 @@ declare class NJSAccount
      * @return bool
      */
     declare function isInstanceOfEthereumLikeAccount(): boolean;
+    /**
+     * Check if account is a Stellar one.
+     * @return bool
+     */
+    declare function isInstanceOfStellarLikeAccount(): boolean;
     /**
      * Check if account is a Ripple one.
      * @return bool
@@ -1031,6 +1151,13 @@ declare class NJSWallet
      * @return bool
      */
     declare function isInstanceOfRippleLikeWallet(): boolean;
+    /**
+     * Tell whether wallet is a Stellar one.
+     * @return bool
+     */
+    declare function isInstanceOfStellarLikeWallet(): boolean;
+    /** Cast the instance to StellarLIkeWallet */
+    declare function asStellarLikeWallet(): NJSStellarLikeWallet;
     /**
      * Get wallet type.
      * @return WalletType object
@@ -1435,6 +1562,10 @@ declare class NJSDynamicObject
      */
     static declare function load(serialized: String): ?NJSDynamicObject;
 }
+/** Available API to use with Stellar wallets */
+declare class NJSStellarConfiguration
+{
+}
 /** Available API to use with explorers. */
 declare class NJSBlockchainExplorerEngines
 {
@@ -1705,6 +1836,8 @@ declare class NJSDatabaseConnection
      * @return An empty blob
      */
     declare function newBlob(): NJSDatabaseBlob;
+    /** Check whether the connection is still alive. */
+    declare function isAlive(): boolean;
 }
 /** A pool of connections to a single database. */
 declare class NJSDatabaseConnectionPool
@@ -2033,6 +2166,13 @@ declare class NJSEthereumLikeAccount
      * Note: same note as above
      */
     declare function getEstimatedGasLimit(address: string, callback: NJSBigIntCallback);
+    /**
+     * Get estimated gas limit to set so the transaction will succeed
+     * The passed address could be EOA or contract
+     * This estimation is based on a dry-run on the node, and it will fail if the request is ill-formed
+     * Note: same note as above
+     */
+    declare function getDryRunGasLimit(address: string, request: EthereumGasLimitRequest, callback: NJSBigIntCallback);
     /**
      * Get balance of ERC20 token
      * The passed address is an ERC20 account
@@ -2700,6 +2840,11 @@ declare class NJSBitcoinLikeAccount
      * when the right time comes !
      */
     declare function getFees(callback: NJSBigIntListCallback);
+    /**
+     * Get addresses given a range of indices
+     * Note: this will return public and change addresses
+     */
+    declare function getAddresses(from: number, to: number, callback: NJSAddressListCallback);
 }
 /** Callback triggered by main completed task, returning optional result as list of template type T. */
 declare class NJSBitcoinLikeOutputListCallback

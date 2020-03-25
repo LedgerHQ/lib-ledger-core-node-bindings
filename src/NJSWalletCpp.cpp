@@ -496,6 +496,35 @@ NAN_METHOD(NJSWallet::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked(), arg_0_9);
+    Local<Value> arg_0_10;
+    if(result.stellarLikeNetworkParameters)
+    {
+        auto arg_0_10_optional = (result.stellarLikeNetworkParameters).value();
+        auto arg_0_10_tmp = Nan::New<Object>();
+        auto arg_0_10_tmp_1 = Nan::New<String>(arg_0_10_optional.Identifier).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_10_tmp_1);
+        auto arg_0_10_tmp_2 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_10_optional.Version)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("Version").ToLocalChecked(), arg_0_10_tmp_2);
+        auto arg_0_10_tmp_3 = Nan::New<Number>(arg_0_10_optional.BaseReserve);
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("BaseReserve").ToLocalChecked(), arg_0_10_tmp_3);
+        auto arg_0_10_tmp_4 = Nan::New<Number>(arg_0_10_optional.BaseFee);
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("BaseFee").ToLocalChecked(), arg_0_10_tmp_4);
+        Local<Array> arg_0_10_tmp_5 = Nan::New<Array>();
+        for(size_t arg_0_10_tmp_5_id = 0; arg_0_10_tmp_5_id < arg_0_10_optional.AdditionalSEPs.size(); arg_0_10_tmp_5_id++)
+        {
+            auto arg_0_10_tmp_5_elem = Nan::New<String>(arg_0_10_optional.AdditionalSEPs[arg_0_10_tmp_5_id]).ToLocalChecked();
+            Nan::Set(arg_0_10_tmp_5, (int)arg_0_10_tmp_5_id,arg_0_10_tmp_5_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("AdditionalSEPs").ToLocalChecked(), arg_0_10_tmp_5);
+        auto arg_0_10_tmp_6 = Nan::New<String>(arg_0_10_optional.NetworkPassphrase).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("NetworkPassphrase").ToLocalChecked(), arg_0_10_tmp_6);
+
+        arg_0_10 = arg_0_10_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_10);
 
 
     //Return result
@@ -572,6 +601,57 @@ NAN_METHOD(NJSWallet::isInstanceOfRippleLikeWallet) {
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSWallet::isInstanceOfStellarLikeWallet) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSWallet::isInstanceOfStellarLikeWallet needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWallet::isInstanceOfStellarLikeWallet : implementation of Wallet is not valid");
+    }
+
+    auto result = cpp_impl->isInstanceOfStellarLikeWallet();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSWallet::asStellarLikeWallet) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSWallet::asStellarLikeWallet needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWallet::asStellarLikeWallet : implementation of Wallet is not valid");
+    }
+
+    auto result = cpp_impl->asStellarLikeWallet();
+
+    //Wrap result in node object
+    auto arg_0 = NJSStellarLikeWallet::wrap(result);
+
 
     //Return result
     info.GetReturnValue().Set(arg_0);
@@ -1029,6 +1109,8 @@ void NJSWallet::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeWallet", isInstanceOfBitcoinLikeWallet);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfEthereumLikeWallet", isInstanceOfEthereumLikeWallet);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfRippleLikeWallet", isInstanceOfRippleLikeWallet);
+    Nan::SetPrototypeMethod(func_template,"isInstanceOfStellarLikeWallet", isInstanceOfStellarLikeWallet);
+    Nan::SetPrototypeMethod(func_template,"asStellarLikeWallet", asStellarLikeWallet);
     Nan::SetPrototypeMethod(func_template,"getWalletType", getWalletType);
     Nan::SetPrototypeMethod(func_template,"getLastBlock", getLastBlock);
     Nan::SetPrototypeMethod(func_template,"getAccountCreationInfo", getAccountCreationInfo);

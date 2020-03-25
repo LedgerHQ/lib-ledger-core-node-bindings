@@ -11,8 +11,10 @@
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/RippleLikeNetworkParameters.hpp"
+#include "../include/StellarLikeNetworkParameters.hpp"
 #include "../include/TezosLikeNetworkParameters.hpp"
 #include "NJSBitcoinLikeAddressCpp.hpp"
+#include "NJSStellarLikeAddressCpp.hpp"
 #include <memory>
 #include <string>
 
@@ -50,6 +52,11 @@ private:
     static NAN_METHOD(asBitcoinLikeAddress);
 
     static NAN_METHOD(isInstanceOfBitcoinLikeAddress);
+
+    /** Cast the address to a stellar like one */
+    static NAN_METHOD(asStellarLikeAddress);
+
+    static NAN_METHOD(isInstanceOfStellarLikeAddress);
 
     static NAN_METHOD(getCurrency);
 

@@ -177,6 +177,35 @@ void NJSCurrencyListCallback::onCallback(const std::experimental::optional<std::
             }
 
             Nan::DefineOwnProperty(arg_0_tmp_elem, Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked(), arg_0_tmp_elem_9);
+            Local<Value> arg_0_tmp_elem_10;
+            if(arg_0_optional[arg_0_tmp_id].stellarLikeNetworkParameters)
+            {
+                auto arg_0_tmp_elem_10_optional = (arg_0_optional[arg_0_tmp_id].stellarLikeNetworkParameters).value();
+                auto arg_0_tmp_elem_10_tmp = Nan::New<Object>();
+                auto arg_0_tmp_elem_10_tmp_1 = Nan::New<String>(arg_0_tmp_elem_10_optional.Identifier).ToLocalChecked();
+                Nan::DefineOwnProperty(arg_0_tmp_elem_10_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_tmp_elem_10_tmp_1);
+                auto arg_0_tmp_elem_10_tmp_2 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_tmp_elem_10_optional.Version)).ToLocalChecked();
+
+                Nan::DefineOwnProperty(arg_0_tmp_elem_10_tmp, Nan::New<String>("Version").ToLocalChecked(), arg_0_tmp_elem_10_tmp_2);
+                auto arg_0_tmp_elem_10_tmp_3 = Nan::New<Number>(arg_0_tmp_elem_10_optional.BaseReserve);
+                Nan::DefineOwnProperty(arg_0_tmp_elem_10_tmp, Nan::New<String>("BaseReserve").ToLocalChecked(), arg_0_tmp_elem_10_tmp_3);
+                auto arg_0_tmp_elem_10_tmp_4 = Nan::New<Number>(arg_0_tmp_elem_10_optional.BaseFee);
+                Nan::DefineOwnProperty(arg_0_tmp_elem_10_tmp, Nan::New<String>("BaseFee").ToLocalChecked(), arg_0_tmp_elem_10_tmp_4);
+                Local<Array> arg_0_tmp_elem_10_tmp_5 = Nan::New<Array>();
+                for(size_t arg_0_tmp_elem_10_tmp_5_id = 0; arg_0_tmp_elem_10_tmp_5_id < arg_0_tmp_elem_10_optional.AdditionalSEPs.size(); arg_0_tmp_elem_10_tmp_5_id++)
+                {
+                    auto arg_0_tmp_elem_10_tmp_5_elem = Nan::New<String>(arg_0_tmp_elem_10_optional.AdditionalSEPs[arg_0_tmp_elem_10_tmp_5_id]).ToLocalChecked();
+                    Nan::Set(arg_0_tmp_elem_10_tmp_5, (int)arg_0_tmp_elem_10_tmp_5_id,arg_0_tmp_elem_10_tmp_5_elem);
+                }
+
+                Nan::DefineOwnProperty(arg_0_tmp_elem_10_tmp, Nan::New<String>("AdditionalSEPs").ToLocalChecked(), arg_0_tmp_elem_10_tmp_5);
+                auto arg_0_tmp_elem_10_tmp_6 = Nan::New<String>(arg_0_tmp_elem_10_optional.NetworkPassphrase).ToLocalChecked();
+                Nan::DefineOwnProperty(arg_0_tmp_elem_10_tmp, Nan::New<String>("NetworkPassphrase").ToLocalChecked(), arg_0_tmp_elem_10_tmp_6);
+
+                arg_0_tmp_elem_10 = arg_0_tmp_elem_10_tmp;
+            }
+
+            Nan::DefineOwnProperty(arg_0_tmp_elem, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_tmp_elem_10);
 
             Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
         }

@@ -192,6 +192,33 @@ NAN_METHOD(NJSBitcoinLikeAccount::getFees) {
     cpp_impl->getFees(arg_0);
     info.GetReturnValue().Set(arg_0_resolver->GetPromise());
 }
+NAN_METHOD(NJSBitcoinLikeAccount::getAddresses) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAccount::getAddresses needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
+    auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
+
+    //Create promise and set it into Callback
+    auto arg_2_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSAddressListCallback *njs_ptr_arg_2 = new NJSAddressListCallback(arg_2_resolver);
+    std::shared_ptr<NJSAddressListCallback> arg_2(njs_ptr_arg_2);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAccount::getAddresses : implementation of BitcoinLikeAccount is not valid");
+    }
+    cpp_impl->getAddresses(arg_0,arg_1,arg_2);
+    info.GetReturnValue().Set(arg_2_resolver->GetPromise());
+}
 
 NAN_METHOD(NJSBitcoinLikeAccount::New) {
     //Only new allowed
@@ -244,6 +271,7 @@ void NJSBitcoinLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"broadcastTransaction", broadcastTransaction);
     Nan::SetPrototypeMethod(func_template,"buildTransaction", buildTransaction);
     Nan::SetPrototypeMethod(func_template,"getFees", getFees);
+    Nan::SetPrototypeMethod(func_template,"getAddresses", getAddresses);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeAccount_prototype.Reset(objectTemplate);
