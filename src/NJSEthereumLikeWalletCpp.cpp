@@ -3,7 +3,6 @@
 
 #include "NJSEthereumLikeWalletCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -60,5 +59,5 @@ void NJSEthereumLikeWallet::Initialize(Local<Object> target) {
     EthereumLikeWallet_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSEthereumLikeWallet").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSEthereumLikeWallet").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

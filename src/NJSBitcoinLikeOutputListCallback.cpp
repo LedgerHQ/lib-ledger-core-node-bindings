@@ -3,7 +3,6 @@
 
 #include "NJSBitcoinLikeOutputListCallback.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -22,7 +21,7 @@ void NJSBitcoinLikeOutputListCallback::onCallback(const std::experimental::optio
         {
             auto arg_0_tmp_elem = NJSBitcoinLikeOutput::wrap(arg_0_optional[arg_0_tmp_id]);
 
-            Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
+            arg_0_tmp->Set((int)arg_0_tmp_id,arg_0_tmp_elem);
         }
 
         arg_0 = arg_0_tmp;
@@ -100,5 +99,5 @@ void NJSBitcoinLikeOutputListCallback::Initialize(Local<Object> target) {
     BitcoinLikeOutputListCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSBitcoinLikeOutputListCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSBitcoinLikeOutputListCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

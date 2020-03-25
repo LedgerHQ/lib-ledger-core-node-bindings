@@ -3,7 +3,6 @@
 
 #include "NJSDatabaseConnection.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -129,6 +128,27 @@ std::shared_ptr<DatabaseBlob> NJSDatabaseConnection::newBlob()
     return fResult_newBlob;
 }
 
+bool NJSDatabaseConnection::isAlive()
+{
+    Nan::HandleScope scope;
+    //Wrap parameters
+    Local<Value> args[1];
+    Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
+    if(!local_njs_impl->IsObject())
+    {
+        Nan::ThrowError("NJSDatabaseConnection::isAlive fail to retrieve node implementation");
+    }
+    auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("isAlive").ToLocalChecked()).ToLocalChecked();
+    auto result_isAlive = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
+    if(result_isAlive.IsEmpty())
+    {
+        Nan::ThrowError("NJSDatabaseConnection::isAlive call failed");
+    }
+    auto checkedResult_isAlive = result_isAlive.ToLocalChecked();
+    auto fResult_isAlive = Nan::To<bool>(checkedResult_isAlive).FromJust();
+    return fResult_isAlive;
+}
+
 NAN_METHOD(NJSDatabaseConnection::New) {
     //Only new allowed
     if(!info.IsConstructCall())
@@ -178,5 +198,5 @@ void NJSDatabaseConnection::Initialize(Local<Object> target) {
     DatabaseConnection_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSDatabaseConnection").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSDatabaseConnection").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

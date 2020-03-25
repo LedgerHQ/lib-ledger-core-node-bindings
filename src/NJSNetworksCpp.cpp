@@ -3,7 +3,6 @@
 
 #include "NJSNetworksCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -25,13 +24,28 @@ NAN_METHOD(NJSNetworks::bitcoin) {
     auto arg_0 = Nan::New<Object>();
     auto arg_0_1 = Nan::New<String>(result.Identifier).ToLocalChecked();
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_1);
-    auto arg_0_2 = Nan::New<String>("0x" + djinni::js::hex::toString(result.P2PKHVersion)).ToLocalChecked();
+    Local<Array> arg_0_2 = Nan::New<Array>();
+    for(size_t arg_0_2_id = 0; arg_0_2_id < result.P2PKHVersion.size(); arg_0_2_id++)
+    {
+        auto arg_0_2_elem = Nan::New<Uint32>(result.P2PKHVersion[arg_0_2_id]);
+        arg_0_2->Set((int)arg_0_2_id,arg_0_2_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("P2PKHVersion").ToLocalChecked(), arg_0_2);
-    auto arg_0_3 = Nan::New<String>("0x" + djinni::js::hex::toString(result.P2SHVersion)).ToLocalChecked();
+    Local<Array> arg_0_3 = Nan::New<Array>();
+    for(size_t arg_0_3_id = 0; arg_0_3_id < result.P2SHVersion.size(); arg_0_3_id++)
+    {
+        auto arg_0_3_elem = Nan::New<Uint32>(result.P2SHVersion[arg_0_3_id]);
+        arg_0_3->Set((int)arg_0_3_id,arg_0_3_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("P2SHVersion").ToLocalChecked(), arg_0_3);
-    auto arg_0_4 = Nan::New<String>("0x" + djinni::js::hex::toString(result.XPUBVersion)).ToLocalChecked();
+    Local<Array> arg_0_4 = Nan::New<Array>();
+    for(size_t arg_0_4_id = 0; arg_0_4_id < result.XPUBVersion.size(); arg_0_4_id++)
+    {
+        auto arg_0_4_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_4_id]);
+        arg_0_4->Set((int)arg_0_4_id,arg_0_4_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_4);
     auto arg_0_5 = Nan::New<Integer>((int)result.FeePolicy);
@@ -44,14 +58,19 @@ NAN_METHOD(NJSNetworks::bitcoin) {
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked(), arg_0_8);
     auto arg_0_9 = Nan::New<Number>(result.TimestampDelay);
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_9);
-    auto arg_0_10 = Nan::New<String>("0x" + djinni::js::hex::toString(result.SigHash)).ToLocalChecked();
+    Local<Array> arg_0_10 = Nan::New<Array>();
+    for(size_t arg_0_10_id = 0; arg_0_10_id < result.SigHash.size(); arg_0_10_id++)
+    {
+        auto arg_0_10_elem = Nan::New<Uint32>(result.SigHash[arg_0_10_id]);
+        arg_0_10->Set((int)arg_0_10_id,arg_0_10_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_10);
     Local<Array> arg_0_11 = Nan::New<Array>();
     for(size_t arg_0_11_id = 0; arg_0_11_id < result.AdditionalBIPs.size(); arg_0_11_id++)
     {
         auto arg_0_11_elem = Nan::New<String>(result.AdditionalBIPs[arg_0_11_id]).ToLocalChecked();
-        Nan::Set(arg_0_11, (int)arg_0_11_id,arg_0_11_elem);
+        arg_0_11->Set((int)arg_0_11_id,arg_0_11_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_11);
@@ -80,14 +99,19 @@ NAN_METHOD(NJSNetworks::ethereum) {
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_2);
     auto arg_0_3 = Nan::New<String>(result.ChainID).ToLocalChecked();
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("ChainID").ToLocalChecked(), arg_0_3);
-    auto arg_0_4 = Nan::New<String>("0x" + djinni::js::hex::toString(result.XPUBVersion)).ToLocalChecked();
+    Local<Array> arg_0_4 = Nan::New<Array>();
+    for(size_t arg_0_4_id = 0; arg_0_4_id < result.XPUBVersion.size(); arg_0_4_id++)
+    {
+        auto arg_0_4_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_4_id]);
+        arg_0_4->Set((int)arg_0_4_id,arg_0_4_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_4);
     Local<Array> arg_0_5 = Nan::New<Array>();
     for(size_t arg_0_5_id = 0; arg_0_5_id < result.AdditionalEIPs.size(); arg_0_5_id++)
     {
         auto arg_0_5_elem = Nan::New<String>(result.AdditionalEIPs[arg_0_5_id]).ToLocalChecked();
-        Nan::Set(arg_0_5, (int)arg_0_5_id,arg_0_5_elem);
+        arg_0_5->Set((int)arg_0_5_id,arg_0_5_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalEIPs").ToLocalChecked(), arg_0_5);
@@ -116,14 +140,19 @@ NAN_METHOD(NJSNetworks::ripple) {
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_1);
     auto arg_0_2 = Nan::New<String>(result.MessagePrefix).ToLocalChecked();
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_2);
-    auto arg_0_3 = Nan::New<String>("0x" + djinni::js::hex::toString(result.XPUBVersion)).ToLocalChecked();
+    Local<Array> arg_0_3 = Nan::New<Array>();
+    for(size_t arg_0_3_id = 0; arg_0_3_id < result.XPUBVersion.size(); arg_0_3_id++)
+    {
+        auto arg_0_3_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_3_id]);
+        arg_0_3->Set((int)arg_0_3_id,arg_0_3_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_3);
     Local<Array> arg_0_4 = Nan::New<Array>();
     for(size_t arg_0_4_id = 0; arg_0_4_id < result.AdditionalRIPs.size(); arg_0_4_id++)
     {
         auto arg_0_4_elem = Nan::New<String>(result.AdditionalRIPs[arg_0_4_id]).ToLocalChecked();
-        Nan::Set(arg_0_4, (int)arg_0_4_id,arg_0_4_elem);
+        arg_0_4->Set((int)arg_0_4_id,arg_0_4_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_4);
@@ -152,20 +181,35 @@ NAN_METHOD(NJSNetworks::tezos) {
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_1);
     auto arg_0_2 = Nan::New<String>(result.MessagePrefix).ToLocalChecked();
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_2);
-    auto arg_0_3 = Nan::New<String>("0x" + djinni::js::hex::toString(result.XPUBVersion)).ToLocalChecked();
+    Local<Array> arg_0_3 = Nan::New<Array>();
+    for(size_t arg_0_3_id = 0; arg_0_3_id < result.XPUBVersion.size(); arg_0_3_id++)
+    {
+        auto arg_0_3_elem = Nan::New<Uint32>(result.XPUBVersion[arg_0_3_id]);
+        arg_0_3->Set((int)arg_0_3_id,arg_0_3_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_3);
-    auto arg_0_4 = Nan::New<String>("0x" + djinni::js::hex::toString(result.ImplicitPrefix)).ToLocalChecked();
+    Local<Array> arg_0_4 = Nan::New<Array>();
+    for(size_t arg_0_4_id = 0; arg_0_4_id < result.ImplicitPrefix.size(); arg_0_4_id++)
+    {
+        auto arg_0_4_elem = Nan::New<Uint32>(result.ImplicitPrefix[arg_0_4_id]);
+        arg_0_4->Set((int)arg_0_4_id,arg_0_4_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_4);
-    auto arg_0_5 = Nan::New<String>("0x" + djinni::js::hex::toString(result.OriginatedPrefix)).ToLocalChecked();
+    Local<Array> arg_0_5 = Nan::New<Array>();
+    for(size_t arg_0_5_id = 0; arg_0_5_id < result.OriginatedPrefix.size(); arg_0_5_id++)
+    {
+        auto arg_0_5_elem = Nan::New<Uint32>(result.OriginatedPrefix[arg_0_5_id]);
+        arg_0_5->Set((int)arg_0_5_id,arg_0_5_elem);
+    }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_5);
     Local<Array> arg_0_6 = Nan::New<Array>();
     for(size_t arg_0_6_id = 0; arg_0_6_id < result.AdditionalTIPs.size(); arg_0_6_id++)
     {
         auto arg_0_6_elem = Nan::New<String>(result.AdditionalTIPs[arg_0_6_id]).ToLocalChecked();
-        Nan::Set(arg_0_6, (int)arg_0_6_id,arg_0_6_elem);
+        arg_0_6->Set((int)arg_0_6_id,arg_0_6_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_6);
@@ -231,5 +275,5 @@ void NJSNetworks::Initialize(Local<Object> target) {
     Networks_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSNetworks").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSNetworks").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

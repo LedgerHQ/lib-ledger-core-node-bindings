@@ -3,7 +3,6 @@
 
 #include "NJSHashAlgorithmHelper.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -13,7 +12,12 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::ripemd160(const std::vector<uint8_t
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(data)).ToLocalChecked();
+    Local<Array> arg_0 = Nan::New<Array>();
+    for(size_t arg_0_id = 0; arg_0_id < data.size(); arg_0_id++)
+    {
+        auto arg_0_elem = Nan::New<Uint32>(data[arg_0_id]);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
+    }
 
     Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
@@ -28,20 +32,15 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::ripemd160(const std::vector<uint8_t
         Nan::ThrowError("NJSHashAlgorithmHelper::ripemd160 call failed");
     }
     auto checkedResult_ripemd160 = result_ripemd160.ToLocalChecked();
-    if(!checkedResult_ripemd160->IsString())
+    vector<uint8_t> fResult_ripemd160;
+    Local<Array> fResult_ripemd160_container = Local<Array>::Cast(checkedResult_ripemd160);
+    for(uint32_t fResult_ripemd160_id = 0; fResult_ripemd160_id < fResult_ripemd160_container->Length(); fResult_ripemd160_id++)
     {
-        Nan::ThrowError("checkedResult_ripemd160 should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> fResult_ripemd160;
-    Nan::Utf8String str_fResult_ripemd160(checkedResult_ripemd160);
-    std::string string_fResult_ripemd160(*str_fResult_ripemd160, str_fResult_ripemd160.length());
-    if (string_fResult_ripemd160.rfind("0x", 0) == 0)
-    {
-        fResult_ripemd160 = djinni::js::hex::toByteArray(string_fResult_ripemd160.substr(2));
-    }
-    else
-    {
-        fResult_ripemd160 = std::vector<uint8_t>(string_fResult_ripemd160.cbegin(), string_fResult_ripemd160.cend());
+        if(fResult_ripemd160_container->Get(fResult_ripemd160_id)->IsUint32())
+        {
+            auto fResult_ripemd160_elem = Nan::To<uint32_t>(fResult_ripemd160_container->Get(fResult_ripemd160_id)).FromJust();
+            fResult_ripemd160.emplace_back(fResult_ripemd160_elem);
+        }
     }
 
     return fResult_ripemd160;
@@ -51,7 +50,12 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::sha256(const std::vector<uint8_t> &
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(data)).ToLocalChecked();
+    Local<Array> arg_0 = Nan::New<Array>();
+    for(size_t arg_0_id = 0; arg_0_id < data.size(); arg_0_id++)
+    {
+        auto arg_0_elem = Nan::New<Uint32>(data[arg_0_id]);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
+    }
 
     Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
@@ -66,20 +70,15 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::sha256(const std::vector<uint8_t> &
         Nan::ThrowError("NJSHashAlgorithmHelper::sha256 call failed");
     }
     auto checkedResult_sha256 = result_sha256.ToLocalChecked();
-    if(!checkedResult_sha256->IsString())
+    vector<uint8_t> fResult_sha256;
+    Local<Array> fResult_sha256_container = Local<Array>::Cast(checkedResult_sha256);
+    for(uint32_t fResult_sha256_id = 0; fResult_sha256_id < fResult_sha256_container->Length(); fResult_sha256_id++)
     {
-        Nan::ThrowError("checkedResult_sha256 should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> fResult_sha256;
-    Nan::Utf8String str_fResult_sha256(checkedResult_sha256);
-    std::string string_fResult_sha256(*str_fResult_sha256, str_fResult_sha256.length());
-    if (string_fResult_sha256.rfind("0x", 0) == 0)
-    {
-        fResult_sha256 = djinni::js::hex::toByteArray(string_fResult_sha256.substr(2));
-    }
-    else
-    {
-        fResult_sha256 = std::vector<uint8_t>(string_fResult_sha256.cbegin(), string_fResult_sha256.cend());
+        if(fResult_sha256_container->Get(fResult_sha256_id)->IsUint32())
+        {
+            auto fResult_sha256_elem = Nan::To<uint32_t>(fResult_sha256_container->Get(fResult_sha256_id)).FromJust();
+            fResult_sha256.emplace_back(fResult_sha256_elem);
+        }
     }
 
     return fResult_sha256;
@@ -89,7 +88,12 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::keccak256(const std::vector<uint8_t
 {
     Nan::HandleScope scope;
     //Wrap parameters
-    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(data)).ToLocalChecked();
+    Local<Array> arg_0 = Nan::New<Array>();
+    for(size_t arg_0_id = 0; arg_0_id < data.size(); arg_0_id++)
+    {
+        auto arg_0_elem = Nan::New<Uint32>(data[arg_0_id]);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
+    }
 
     Local<Value> args[1] = {arg_0};
     Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
@@ -104,20 +108,15 @@ std::vector<uint8_t> NJSHashAlgorithmHelper::keccak256(const std::vector<uint8_t
         Nan::ThrowError("NJSHashAlgorithmHelper::keccak256 call failed");
     }
     auto checkedResult_keccak256 = result_keccak256.ToLocalChecked();
-    if(!checkedResult_keccak256->IsString())
+    vector<uint8_t> fResult_keccak256;
+    Local<Array> fResult_keccak256_container = Local<Array>::Cast(checkedResult_keccak256);
+    for(uint32_t fResult_keccak256_id = 0; fResult_keccak256_id < fResult_keccak256_container->Length(); fResult_keccak256_id++)
     {
-        Nan::ThrowError("checkedResult_keccak256 should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> fResult_keccak256;
-    Nan::Utf8String str_fResult_keccak256(checkedResult_keccak256);
-    std::string string_fResult_keccak256(*str_fResult_keccak256, str_fResult_keccak256.length());
-    if (string_fResult_keccak256.rfind("0x", 0) == 0)
-    {
-        fResult_keccak256 = djinni::js::hex::toByteArray(string_fResult_keccak256.substr(2));
-    }
-    else
-    {
-        fResult_keccak256 = std::vector<uint8_t>(string_fResult_keccak256.cbegin(), string_fResult_keccak256.cend());
+        if(fResult_keccak256_container->Get(fResult_keccak256_id)->IsUint32())
+        {
+            auto fResult_keccak256_elem = Nan::To<uint32_t>(fResult_keccak256_container->Get(fResult_keccak256_id)).FromJust();
+            fResult_keccak256.emplace_back(fResult_keccak256_elem);
+        }
     }
 
     return fResult_keccak256;
@@ -172,5 +171,5 @@ void NJSHashAlgorithmHelper::Initialize(Local<Object> target) {
     HashAlgorithmHelper_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSHashAlgorithmHelper").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSHashAlgorithmHelper").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

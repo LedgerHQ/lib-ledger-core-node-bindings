@@ -3,7 +3,6 @@
 
 #include "NJSDynamicObjectCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -137,20 +136,15 @@ NAN_METHOD(NJSDynamicObject::putData) {
     //Check if parameters have correct types
     Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_0 = std::string(*string_arg_0);
-    if(!info[1]->IsString())
+    vector<uint8_t> arg_1;
+    Local<Array> arg_1_container = Local<Array>::Cast(info[1]);
+    for(uint32_t arg_1_id = 0; arg_1_id < arg_1_container->Length(); arg_1_id++)
     {
-        Nan::ThrowError("info[1] should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> arg_1;
-    Nan::Utf8String str_arg_1(info[1]);
-    std::string string_arg_1(*str_arg_1, str_arg_1.length());
-    if (string_arg_1.rfind("0x", 0) == 0)
-    {
-        arg_1 = djinni::js::hex::toByteArray(string_arg_1.substr(2));
-    }
-    else
-    {
-        arg_1 = std::vector<uint8_t>(string_arg_1.cbegin(), string_arg_1.cend());
+        if(arg_1_container->Get(arg_1_id)->IsUint32())
+        {
+            auto arg_1_elem = Nan::To<uint32_t>(arg_1_container->Get(arg_1_id)).FromJust();
+            arg_1.emplace_back(arg_1_elem);
+        }
     }
 
 
@@ -431,7 +425,12 @@ NAN_METHOD(NJSDynamicObject::getData) {
     if(result)
     {
         auto arg_1_optional = (result).value();
-        auto arg_1_tmp = Nan::New<String>("0x" + djinni::js::hex::toString(arg_1_optional)).ToLocalChecked();
+        Local<Array> arg_1_tmp = Nan::New<Array>();
+        for(size_t arg_1_tmp_id = 0; arg_1_tmp_id < arg_1_optional.size(); arg_1_tmp_id++)
+        {
+            auto arg_1_tmp_elem = Nan::New<Uint32>(arg_1_optional[arg_1_tmp_id]);
+            arg_1_tmp->Set((int)arg_1_tmp_id,arg_1_tmp_elem);
+        }
 
         arg_1 = arg_1_tmp;
     }
@@ -610,7 +609,7 @@ NAN_METHOD(NJSDynamicObject::getKeys) {
     for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
     {
         auto arg_0_elem = Nan::New<String>(result[arg_0_id]).ToLocalChecked();
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
 
@@ -696,7 +695,12 @@ NAN_METHOD(NJSDynamicObject::serialize) {
     auto result = cpp_impl->serialize();
 
     //Wrap result in node object
-    auto arg_0 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
+    Local<Array> arg_0 = Nan::New<Array>();
+    for(size_t arg_0_id = 0; arg_0_id < result.size(); arg_0_id++)
+    {
+        auto arg_0_elem = Nan::New<Uint32>(result[arg_0_id]);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
+    }
 
 
     //Return result
@@ -780,20 +784,15 @@ NAN_METHOD(NJSDynamicObject::load) {
     }
 
     //Check if parameters have correct types
-    if(!info[0]->IsString())
+    vector<uint8_t> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
     {
-        Nan::ThrowError("info[0] should be a hexadecimal string.");
-    }
-    std::vector<uint8_t> arg_0;
-    Nan::Utf8String str_arg_0(info[0]);
-    std::string string_arg_0(*str_arg_0, str_arg_0.length());
-    if (string_arg_0.rfind("0x", 0) == 0)
-    {
-        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
-    }
-    else
-    {
-        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+        if(arg_0_container->Get(arg_0_id)->IsUint32())
+        {
+            auto arg_0_elem = Nan::To<uint32_t>(arg_0_container->Get(arg_0_id)).FromJust();
+            arg_0.emplace_back(arg_0_elem);
+        }
     }
 
 
@@ -896,5 +895,5 @@ void NJSDynamicObject::Initialize(Local<Object> target) {
     DynamicObject_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSDynamicObject").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSDynamicObject").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

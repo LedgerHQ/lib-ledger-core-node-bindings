@@ -3,7 +3,6 @@
 
 #include "NJSAccountCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -350,6 +349,32 @@ NAN_METHOD(NJSAccount::asTezosLikeAccount) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSAccount::asStellarLikeAccount) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAccount::asStellarLikeAccount needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAccount::asStellarLikeAccount : implementation of Account is not valid");
+    }
+
+    auto result = cpp_impl->asStellarLikeAccount();
+
+    //Wrap result in node object
+    auto arg_0 = NJSStellarLikeAccount::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSAccount::isInstanceOfBitcoinLikeAccount) {
 
     //Check if method called with right number of arguments
@@ -393,6 +418,31 @@ NAN_METHOD(NJSAccount::isInstanceOfEthereumLikeAccount) {
     }
 
     auto result = cpp_impl->isInstanceOfEthereumLikeAccount();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSAccount::isInstanceOfStellarLikeAccount) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAccount::isInstanceOfStellarLikeAccount needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAccount::isInstanceOfStellarLikeAccount : implementation of Account is not valid");
+    }
+
+    auto result = cpp_impl->isInstanceOfStellarLikeAccount();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Boolean>(result);
@@ -698,8 +748,10 @@ void NJSAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"asEthereumLikeAccount", asEthereumLikeAccount);
     Nan::SetPrototypeMethod(func_template,"asRippleLikeAccount", asRippleLikeAccount);
     Nan::SetPrototypeMethod(func_template,"asTezosLikeAccount", asTezosLikeAccount);
+    Nan::SetPrototypeMethod(func_template,"asStellarLikeAccount", asStellarLikeAccount);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeAccount", isInstanceOfBitcoinLikeAccount);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfEthereumLikeAccount", isInstanceOfEthereumLikeAccount);
+    Nan::SetPrototypeMethod(func_template,"isInstanceOfStellarLikeAccount", isInstanceOfStellarLikeAccount);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfRippleLikeAccount", isInstanceOfRippleLikeAccount);
     Nan::SetPrototypeMethod(func_template,"getFreshPublicAddresses", getFreshPublicAddresses);
     Nan::SetPrototypeMethod(func_template,"getWalletType", getWalletType);
@@ -715,5 +767,5 @@ void NJSAccount::Initialize(Local<Object> target) {
     Account_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSAccount").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSAccount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

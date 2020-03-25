@@ -3,7 +3,6 @@
 
 #include "NJSWebSocketConnectionCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -168,5 +167,5 @@ void NJSWebSocketConnection::Initialize(Local<Object> target) {
     WebSocketConnection_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSWebSocketConnection").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSWebSocketConnection").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

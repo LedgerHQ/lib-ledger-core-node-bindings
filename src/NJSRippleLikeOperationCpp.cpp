@@ -3,7 +3,6 @@
 
 #include "NJSRippleLikeOperationCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -87,5 +86,5 @@ void NJSRippleLikeOperation::Initialize(Local<Object> target) {
     RippleLikeOperation_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSRippleLikeOperation").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSRippleLikeOperation").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

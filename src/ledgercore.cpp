@@ -29,6 +29,16 @@
 #include "NJSSecp256k1Cpp.hpp"
 #include "NJSNetworksCpp.hpp"
 #include "NJSHashAlgorithmHelper.hpp"
+#include "NJSStellarLikeBlockCpp.hpp"
+#include "NJSStellarLikeTransactionCpp.hpp"
+#include "NJSStellarLikeTransactionBuilderCpp.hpp"
+#include "NJSStellarLikeTransactionCallback.hpp"
+#include "NJSStellarLikeOperationCpp.hpp"
+#include "NJSStellarLikeAccountCpp.hpp"
+#include "NJSStellarLikeFeeStatsCallback.hpp"
+#include "NJSStellarLikeAccountSignerListCallback.hpp"
+#include "NJSStellarLikeWalletCpp.hpp"
+#include "NJSStellarLikeAddressCpp.hpp"
 #include "NJSEventCpp.hpp"
 #include "NJSEventReceiver.hpp"
 #include "NJSEventBusCpp.hpp"
@@ -53,6 +63,7 @@
 #include "NJSExtendedKeyAccountCreationInfoCallback.hpp"
 #include "NJSDynamicArrayCpp.hpp"
 #include "NJSDynamicObjectCpp.hpp"
+#include "NJSStellarConfigurationCpp.hpp"
 #include "NJSBlockchainExplorerEnginesCpp.hpp"
 #include "NJSBlockchainObserverEnginesCpp.hpp"
 #include "NJSKeychainEnginesCpp.hpp"
@@ -163,6 +174,16 @@ static void initAll(Local<Object> target)
     NJSSecp256k1::Initialize(target);
     NJSNetworks::Initialize(target);
     NJSHashAlgorithmHelper::Initialize(target);
+    NJSStellarLikeBlock::Initialize(target);
+    NJSStellarLikeTransaction::Initialize(target);
+    NJSStellarLikeTransactionBuilder::Initialize(target);
+    NJSStellarLikeTransactionCallback::Initialize(target);
+    NJSStellarLikeOperation::Initialize(target);
+    NJSStellarLikeAccount::Initialize(target);
+    NJSStellarLikeFeeStatsCallback::Initialize(target);
+    NJSStellarLikeAccountSignerListCallback::Initialize(target);
+    NJSStellarLikeWallet::Initialize(target);
+    NJSStellarLikeAddress::Initialize(target);
     NJSEvent::Initialize(target);
     NJSEventReceiver::Initialize(target);
     NJSEventBus::Initialize(target);
@@ -187,6 +208,7 @@ static void initAll(Local<Object> target)
     NJSExtendedKeyAccountCreationInfoCallback::Initialize(target);
     NJSDynamicArray::Initialize(target);
     NJSDynamicObject::Initialize(target);
+    NJSStellarConfiguration::Initialize(target);
     NJSBlockchainExplorerEngines::Initialize(target);
     NJSBlockchainObserverEngines::Initialize(target);
     NJSKeychainEngines::Initialize(target);

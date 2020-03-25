@@ -3,7 +3,6 @@
 
 #include "NJSERC20LikeAccountCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -123,7 +122,7 @@ NAN_METHOD(NJSERC20LikeAccount::getBalanceHistoryFor) {
     {
         auto arg_3_elem = NJSBigInt::wrap(result[arg_3_id]);
 
-        Nan::Set(arg_3, (int)arg_3_id,arg_3_elem);
+        arg_3->Set((int)arg_3_id,arg_3_elem);
     }
 
 
@@ -155,7 +154,7 @@ NAN_METHOD(NJSERC20LikeAccount::getOperations) {
     {
         auto arg_0_elem = NJSERC20LikeOperation::wrap(result[arg_0_id]);
 
-        Nan::Set(arg_0, (int)arg_0_id,arg_0_elem);
+        arg_0->Set((int)arg_0_id,arg_0_elem);
     }
 
 
@@ -280,5 +279,5 @@ void NJSERC20LikeAccount::Initialize(Local<Object> target) {
     ERC20LikeAccount_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSERC20LikeAccount").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSERC20LikeAccount").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

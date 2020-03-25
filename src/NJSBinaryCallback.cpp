@@ -3,7 +3,6 @@
 
 #include "NJSBinaryCallback.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -17,7 +16,12 @@ void NJSBinaryCallback::onCallback(const std::experimental::optional<std::vector
     if(result)
     {
         auto arg_0_optional = (result).value();
-        auto arg_0_tmp = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_optional)).ToLocalChecked();
+        Local<Array> arg_0_tmp = Nan::New<Array>();
+        for(size_t arg_0_tmp_id = 0; arg_0_tmp_id < arg_0_optional.size(); arg_0_tmp_id++)
+        {
+            auto arg_0_tmp_elem = Nan::New<Uint32>(arg_0_optional[arg_0_tmp_id]);
+            arg_0_tmp->Set((int)arg_0_tmp_id,arg_0_tmp_elem);
+        }
 
         arg_0 = arg_0_tmp;
     }
@@ -94,5 +98,5 @@ void NJSBinaryCallback::Initialize(Local<Object> target) {
     BinaryCallback_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSBinaryCallback").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSBinaryCallback").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

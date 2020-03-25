@@ -60,6 +60,9 @@ public:
      */
     std::shared_ptr<DatabaseBlob> newBlob();
 
+    /** Check whether the connection is still alive. */
+    bool isAlive();
+
 private:
     /**
      * Prepare a statement object using the given SQL query. The statement object will then be responsible of executing
@@ -86,6 +89,9 @@ private:
      * @return An empty blob
      */
     static NAN_METHOD(newBlob);
+
+    /** Check whether the connection is still alive. */
+    static NAN_METHOD(isAlive);
 
     static NAN_METHOD(New);
 

@@ -3,7 +3,6 @@
 
 #include "NJSAddressCpp.hpp"
 #include "NJSObjectWrapper.hpp"
-#include "NJSHexUtils.hpp"
 
 using namespace v8;
 using namespace node;
@@ -118,6 +117,58 @@ NAN_METHOD(NJSAddress::isInstanceOfBitcoinLikeAddress) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSAddress::asStellarLikeAddress) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAddress::asStellarLikeAddress needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Address>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAddress::asStellarLikeAddress : implementation of Address is not valid");
+    }
+
+    auto result = cpp_impl->asStellarLikeAddress();
+
+    //Wrap result in node object
+    auto arg_0 = NJSStellarLikeAddress::wrap(result);
+
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSAddress::isInstanceOfStellarLikeAddress) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAddress::isInstanceOfStellarLikeAddress needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Address>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAddress::isInstanceOfStellarLikeAddress : implementation of Address is not valid");
+    }
+
+    auto result = cpp_impl->isInstanceOfStellarLikeAddress();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSAddress::getCurrency) {
 
     //Check if method called with right number of arguments
@@ -160,7 +211,7 @@ NAN_METHOD(NJSAddress::getCurrency) {
         auto arg_0_5_elem_4 = Nan::New<Int32>(result.units[arg_0_5_id].numberOfDecimal);
         Nan::DefineOwnProperty(arg_0_5_elem, Nan::New<String>("numberOfDecimal").ToLocalChecked(), arg_0_5_elem_4);
 
-        Nan::Set(arg_0_5, (int)arg_0_5_id,arg_0_5_elem);
+        arg_0_5->Set((int)arg_0_5_id,arg_0_5_elem);
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("units").ToLocalChecked(), arg_0_5);
@@ -171,13 +222,28 @@ NAN_METHOD(NJSAddress::getCurrency) {
         auto arg_0_6_tmp = Nan::New<Object>();
         auto arg_0_6_tmp_1 = Nan::New<String>(arg_0_6_optional.Identifier).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_6_tmp_1);
-        auto arg_0_6_tmp_2 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_6_optional.P2PKHVersion)).ToLocalChecked();
+        Local<Array> arg_0_6_tmp_2 = Nan::New<Array>();
+        for(size_t arg_0_6_tmp_2_id = 0; arg_0_6_tmp_2_id < arg_0_6_optional.P2PKHVersion.size(); arg_0_6_tmp_2_id++)
+        {
+            auto arg_0_6_tmp_2_elem = Nan::New<Uint32>(arg_0_6_optional.P2PKHVersion[arg_0_6_tmp_2_id]);
+            arg_0_6_tmp_2->Set((int)arg_0_6_tmp_2_id,arg_0_6_tmp_2_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("P2PKHVersion").ToLocalChecked(), arg_0_6_tmp_2);
-        auto arg_0_6_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_6_optional.P2SHVersion)).ToLocalChecked();
+        Local<Array> arg_0_6_tmp_3 = Nan::New<Array>();
+        for(size_t arg_0_6_tmp_3_id = 0; arg_0_6_tmp_3_id < arg_0_6_optional.P2SHVersion.size(); arg_0_6_tmp_3_id++)
+        {
+            auto arg_0_6_tmp_3_elem = Nan::New<Uint32>(arg_0_6_optional.P2SHVersion[arg_0_6_tmp_3_id]);
+            arg_0_6_tmp_3->Set((int)arg_0_6_tmp_3_id,arg_0_6_tmp_3_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("P2SHVersion").ToLocalChecked(), arg_0_6_tmp_3);
-        auto arg_0_6_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_6_optional.XPUBVersion)).ToLocalChecked();
+        Local<Array> arg_0_6_tmp_4 = Nan::New<Array>();
+        for(size_t arg_0_6_tmp_4_id = 0; arg_0_6_tmp_4_id < arg_0_6_optional.XPUBVersion.size(); arg_0_6_tmp_4_id++)
+        {
+            auto arg_0_6_tmp_4_elem = Nan::New<Uint32>(arg_0_6_optional.XPUBVersion[arg_0_6_tmp_4_id]);
+            arg_0_6_tmp_4->Set((int)arg_0_6_tmp_4_id,arg_0_6_tmp_4_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_6_tmp_4);
         auto arg_0_6_tmp_5 = Nan::New<Integer>((int)arg_0_6_optional.FeePolicy);
@@ -190,14 +256,19 @@ NAN_METHOD(NJSAddress::getCurrency) {
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked(), arg_0_6_tmp_8);
         auto arg_0_6_tmp_9 = Nan::New<Number>(arg_0_6_optional.TimestampDelay);
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_6_tmp_9);
-        auto arg_0_6_tmp_10 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_6_optional.SigHash)).ToLocalChecked();
+        Local<Array> arg_0_6_tmp_10 = Nan::New<Array>();
+        for(size_t arg_0_6_tmp_10_id = 0; arg_0_6_tmp_10_id < arg_0_6_optional.SigHash.size(); arg_0_6_tmp_10_id++)
+        {
+            auto arg_0_6_tmp_10_elem = Nan::New<Uint32>(arg_0_6_optional.SigHash[arg_0_6_tmp_10_id]);
+            arg_0_6_tmp_10->Set((int)arg_0_6_tmp_10_id,arg_0_6_tmp_10_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_6_tmp_10);
         Local<Array> arg_0_6_tmp_11 = Nan::New<Array>();
         for(size_t arg_0_6_tmp_11_id = 0; arg_0_6_tmp_11_id < arg_0_6_optional.AdditionalBIPs.size(); arg_0_6_tmp_11_id++)
         {
             auto arg_0_6_tmp_11_elem = Nan::New<String>(arg_0_6_optional.AdditionalBIPs[arg_0_6_tmp_11_id]).ToLocalChecked();
-            Nan::Set(arg_0_6_tmp_11, (int)arg_0_6_tmp_11_id,arg_0_6_tmp_11_elem);
+            arg_0_6_tmp_11->Set((int)arg_0_6_tmp_11_id,arg_0_6_tmp_11_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_6_tmp, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_6_tmp_11);
@@ -217,14 +288,19 @@ NAN_METHOD(NJSAddress::getCurrency) {
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_7_tmp_2);
         auto arg_0_7_tmp_3 = Nan::New<String>(arg_0_7_optional.ChainID).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("ChainID").ToLocalChecked(), arg_0_7_tmp_3);
-        auto arg_0_7_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.XPUBVersion)).ToLocalChecked();
+        Local<Array> arg_0_7_tmp_4 = Nan::New<Array>();
+        for(size_t arg_0_7_tmp_4_id = 0; arg_0_7_tmp_4_id < arg_0_7_optional.XPUBVersion.size(); arg_0_7_tmp_4_id++)
+        {
+            auto arg_0_7_tmp_4_elem = Nan::New<Uint32>(arg_0_7_optional.XPUBVersion[arg_0_7_tmp_4_id]);
+            arg_0_7_tmp_4->Set((int)arg_0_7_tmp_4_id,arg_0_7_tmp_4_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_7_tmp_4);
         Local<Array> arg_0_7_tmp_5 = Nan::New<Array>();
         for(size_t arg_0_7_tmp_5_id = 0; arg_0_7_tmp_5_id < arg_0_7_optional.AdditionalEIPs.size(); arg_0_7_tmp_5_id++)
         {
             auto arg_0_7_tmp_5_elem = Nan::New<String>(arg_0_7_optional.AdditionalEIPs[arg_0_7_tmp_5_id]).ToLocalChecked();
-            Nan::Set(arg_0_7_tmp_5, (int)arg_0_7_tmp_5_id,arg_0_7_tmp_5_elem);
+            arg_0_7_tmp_5->Set((int)arg_0_7_tmp_5_id,arg_0_7_tmp_5_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AdditionalEIPs").ToLocalChecked(), arg_0_7_tmp_5);
@@ -244,14 +320,19 @@ NAN_METHOD(NJSAddress::getCurrency) {
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_8_tmp_1);
         auto arg_0_8_tmp_2 = Nan::New<String>(arg_0_8_optional.MessagePrefix).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_8_tmp_2);
-        auto arg_0_8_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_8_optional.XPUBVersion)).ToLocalChecked();
+        Local<Array> arg_0_8_tmp_3 = Nan::New<Array>();
+        for(size_t arg_0_8_tmp_3_id = 0; arg_0_8_tmp_3_id < arg_0_8_optional.XPUBVersion.size(); arg_0_8_tmp_3_id++)
+        {
+            auto arg_0_8_tmp_3_elem = Nan::New<Uint32>(arg_0_8_optional.XPUBVersion[arg_0_8_tmp_3_id]);
+            arg_0_8_tmp_3->Set((int)arg_0_8_tmp_3_id,arg_0_8_tmp_3_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_8_tmp_3);
         Local<Array> arg_0_8_tmp_4 = Nan::New<Array>();
         for(size_t arg_0_8_tmp_4_id = 0; arg_0_8_tmp_4_id < arg_0_8_optional.AdditionalRIPs.size(); arg_0_8_tmp_4_id++)
         {
             auto arg_0_8_tmp_4_elem = Nan::New<String>(arg_0_8_optional.AdditionalRIPs[arg_0_8_tmp_4_id]).ToLocalChecked();
-            Nan::Set(arg_0_8_tmp_4, (int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
+            arg_0_8_tmp_4->Set((int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_8_tmp_4);
@@ -271,20 +352,35 @@ NAN_METHOD(NJSAddress::getCurrency) {
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_9_tmp_1);
         auto arg_0_9_tmp_2 = Nan::New<String>(arg_0_9_optional.MessagePrefix).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_9_tmp_2);
-        auto arg_0_9_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.XPUBVersion)).ToLocalChecked();
+        Local<Array> arg_0_9_tmp_3 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_3_id = 0; arg_0_9_tmp_3_id < arg_0_9_optional.XPUBVersion.size(); arg_0_9_tmp_3_id++)
+        {
+            auto arg_0_9_tmp_3_elem = Nan::New<Uint32>(arg_0_9_optional.XPUBVersion[arg_0_9_tmp_3_id]);
+            arg_0_9_tmp_3->Set((int)arg_0_9_tmp_3_id,arg_0_9_tmp_3_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_9_tmp_3);
-        auto arg_0_9_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.ImplicitPrefix)).ToLocalChecked();
+        Local<Array> arg_0_9_tmp_4 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_4_id = 0; arg_0_9_tmp_4_id < arg_0_9_optional.ImplicitPrefix.size(); arg_0_9_tmp_4_id++)
+        {
+            auto arg_0_9_tmp_4_elem = Nan::New<Uint32>(arg_0_9_optional.ImplicitPrefix[arg_0_9_tmp_4_id]);
+            arg_0_9_tmp_4->Set((int)arg_0_9_tmp_4_id,arg_0_9_tmp_4_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_9_tmp_4);
-        auto arg_0_9_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.OriginatedPrefix)).ToLocalChecked();
+        Local<Array> arg_0_9_tmp_5 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_5_id = 0; arg_0_9_tmp_5_id < arg_0_9_optional.OriginatedPrefix.size(); arg_0_9_tmp_5_id++)
+        {
+            auto arg_0_9_tmp_5_elem = Nan::New<Uint32>(arg_0_9_optional.OriginatedPrefix[arg_0_9_tmp_5_id]);
+            arg_0_9_tmp_5->Set((int)arg_0_9_tmp_5_id,arg_0_9_tmp_5_elem);
+        }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_9_tmp_5);
         Local<Array> arg_0_9_tmp_6 = Nan::New<Array>();
         for(size_t arg_0_9_tmp_6_id = 0; arg_0_9_tmp_6_id < arg_0_9_optional.AdditionalTIPs.size(); arg_0_9_tmp_6_id++)
         {
             auto arg_0_9_tmp_6_elem = Nan::New<String>(arg_0_9_optional.AdditionalTIPs[arg_0_9_tmp_6_id]).ToLocalChecked();
-            Nan::Set(arg_0_9_tmp_6, (int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
+            arg_0_9_tmp_6->Set((int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
         }
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_9_tmp_6);
@@ -295,6 +391,40 @@ NAN_METHOD(NJSAddress::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked(), arg_0_9);
+    Local<Value> arg_0_10;
+    if(result.stellarLikeNetworkParameters)
+    {
+        auto arg_0_10_optional = (result.stellarLikeNetworkParameters).value();
+        auto arg_0_10_tmp = Nan::New<Object>();
+        auto arg_0_10_tmp_1 = Nan::New<String>(arg_0_10_optional.Identifier).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_10_tmp_1);
+        Local<Array> arg_0_10_tmp_2 = Nan::New<Array>();
+        for(size_t arg_0_10_tmp_2_id = 0; arg_0_10_tmp_2_id < arg_0_10_optional.Version.size(); arg_0_10_tmp_2_id++)
+        {
+            auto arg_0_10_tmp_2_elem = Nan::New<Uint32>(arg_0_10_optional.Version[arg_0_10_tmp_2_id]);
+            arg_0_10_tmp_2->Set((int)arg_0_10_tmp_2_id,arg_0_10_tmp_2_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("Version").ToLocalChecked(), arg_0_10_tmp_2);
+        auto arg_0_10_tmp_3 = Nan::New<Number>(arg_0_10_optional.BaseReserve);
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("BaseReserve").ToLocalChecked(), arg_0_10_tmp_3);
+        auto arg_0_10_tmp_4 = Nan::New<Number>(arg_0_10_optional.BaseFee);
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("BaseFee").ToLocalChecked(), arg_0_10_tmp_4);
+        Local<Array> arg_0_10_tmp_5 = Nan::New<Array>();
+        for(size_t arg_0_10_tmp_5_id = 0; arg_0_10_tmp_5_id < arg_0_10_optional.AdditionalSEPs.size(); arg_0_10_tmp_5_id++)
+        {
+            auto arg_0_10_tmp_5_elem = Nan::New<String>(arg_0_10_optional.AdditionalSEPs[arg_0_10_tmp_5_id]).ToLocalChecked();
+            arg_0_10_tmp_5->Set((int)arg_0_10_tmp_5_id,arg_0_10_tmp_5_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("AdditionalSEPs").ToLocalChecked(), arg_0_10_tmp_5);
+        auto arg_0_10_tmp_6 = Nan::New<String>(arg_0_10_optional.NetworkPassphrase).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("NetworkPassphrase").ToLocalChecked(), arg_0_10_tmp_6);
+
+        arg_0_10 = arg_0_10_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_10);
 
 
     //Return result
@@ -331,22 +461,22 @@ NAN_METHOD(NJSAddress::parse) {
     Local<Array> arg_1_5_container = Local<Array>::Cast(field_arg_1_5);
     for(uint32_t arg_1_5_id = 0; arg_1_5_id < arg_1_5_container->Length(); arg_1_5_id++)
     {
-        if(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->IsObject())
+        if(arg_1_5_container->Get(arg_1_5_id)->IsObject())
         {
 
-            auto field_arg_1_5_elem_1 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_1 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_1(field_arg_1_5_elem_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_1 = std::string(*string_arg_1_5_elem_1);
 
-            auto field_arg_1_5_elem_2 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_2 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_2(field_arg_1_5_elem_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_2 = std::string(*string_arg_1_5_elem_2);
 
-            auto field_arg_1_5_elem_3 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_3 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_3(field_arg_1_5_elem_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_3 = std::string(*string_arg_1_5_elem_3);
 
-            auto field_arg_1_5_elem_4 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_4 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
             auto arg_1_5_elem_4 = Nan::To<int32_t>(field_arg_1_5_elem_4).FromJust();
             CurrencyUnit arg_1_5_elem(arg_1_5_elem_1, arg_1_5_elem_2, arg_1_5_elem_3, arg_1_5_elem_4);
 
@@ -365,56 +495,41 @@ NAN_METHOD(NJSAddress::parse) {
         auto opt_arg_1_6_1 = std::string(*string_opt_arg_1_6_1);
 
         auto field_opt_arg_1_6_2 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2PKHVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_2->IsString())
+        vector<uint8_t> opt_arg_1_6_2;
+        Local<Array> opt_arg_1_6_2_container = Local<Array>::Cast(field_opt_arg_1_6_2);
+        for(uint32_t opt_arg_1_6_2_id = 0; opt_arg_1_6_2_id < opt_arg_1_6_2_container->Length(); opt_arg_1_6_2_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_2 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_2;
-        Nan::Utf8String str_opt_arg_1_6_2(field_opt_arg_1_6_2);
-        std::string string_opt_arg_1_6_2(*str_opt_arg_1_6_2, str_opt_arg_1_6_2.length());
-        if (string_opt_arg_1_6_2.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_2 = djinni::js::hex::toByteArray(string_opt_arg_1_6_2.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_2 = std::vector<uint8_t>(string_opt_arg_1_6_2.cbegin(), string_opt_arg_1_6_2.cend());
+            if(opt_arg_1_6_2_container->Get(opt_arg_1_6_2_id)->IsUint32())
+            {
+                auto opt_arg_1_6_2_elem = Nan::To<uint32_t>(opt_arg_1_6_2_container->Get(opt_arg_1_6_2_id)).FromJust();
+                opt_arg_1_6_2.emplace_back(opt_arg_1_6_2_elem);
+            }
         }
 
 
         auto field_opt_arg_1_6_3 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2SHVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_3->IsString())
+        vector<uint8_t> opt_arg_1_6_3;
+        Local<Array> opt_arg_1_6_3_container = Local<Array>::Cast(field_opt_arg_1_6_3);
+        for(uint32_t opt_arg_1_6_3_id = 0; opt_arg_1_6_3_id < opt_arg_1_6_3_container->Length(); opt_arg_1_6_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_3;
-        Nan::Utf8String str_opt_arg_1_6_3(field_opt_arg_1_6_3);
-        std::string string_opt_arg_1_6_3(*str_opt_arg_1_6_3, str_opt_arg_1_6_3.length());
-        if (string_opt_arg_1_6_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_3 = djinni::js::hex::toByteArray(string_opt_arg_1_6_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_3 = std::vector<uint8_t>(string_opt_arg_1_6_3.cbegin(), string_opt_arg_1_6_3.cend());
+            if(opt_arg_1_6_3_container->Get(opt_arg_1_6_3_id)->IsUint32())
+            {
+                auto opt_arg_1_6_3_elem = Nan::To<uint32_t>(opt_arg_1_6_3_container->Get(opt_arg_1_6_3_id)).FromJust();
+                opt_arg_1_6_3.emplace_back(opt_arg_1_6_3_elem);
+            }
         }
 
 
         auto field_opt_arg_1_6_4 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_4->IsString())
+        vector<uint8_t> opt_arg_1_6_4;
+        Local<Array> opt_arg_1_6_4_container = Local<Array>::Cast(field_opt_arg_1_6_4);
+        for(uint32_t opt_arg_1_6_4_id = 0; opt_arg_1_6_4_id < opt_arg_1_6_4_container->Length(); opt_arg_1_6_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_4;
-        Nan::Utf8String str_opt_arg_1_6_4(field_opt_arg_1_6_4);
-        std::string string_opt_arg_1_6_4(*str_opt_arg_1_6_4, str_opt_arg_1_6_4.length());
-        if (string_opt_arg_1_6_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_4 = djinni::js::hex::toByteArray(string_opt_arg_1_6_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_4 = std::vector<uint8_t>(string_opt_arg_1_6_4.cbegin(), string_opt_arg_1_6_4.cend());
+            if(opt_arg_1_6_4_container->Get(opt_arg_1_6_4_id)->IsUint32())
+            {
+                auto opt_arg_1_6_4_elem = Nan::To<uint32_t>(opt_arg_1_6_4_container->Get(opt_arg_1_6_4_id)).FromJust();
+                opt_arg_1_6_4.emplace_back(opt_arg_1_6_4_elem);
+            }
         }
 
 
@@ -435,20 +550,15 @@ NAN_METHOD(NJSAddress::parse) {
         auto opt_arg_1_6_9 = Nan::To<int64_t>(field_opt_arg_1_6_9).FromJust();
 
         auto field_opt_arg_1_6_10 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_10->IsString())
+        vector<uint8_t> opt_arg_1_6_10;
+        Local<Array> opt_arg_1_6_10_container = Local<Array>::Cast(field_opt_arg_1_6_10);
+        for(uint32_t opt_arg_1_6_10_id = 0; opt_arg_1_6_10_id < opt_arg_1_6_10_container->Length(); opt_arg_1_6_10_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_10 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_10;
-        Nan::Utf8String str_opt_arg_1_6_10(field_opt_arg_1_6_10);
-        std::string string_opt_arg_1_6_10(*str_opt_arg_1_6_10, str_opt_arg_1_6_10.length());
-        if (string_opt_arg_1_6_10.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_10 = djinni::js::hex::toByteArray(string_opt_arg_1_6_10.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_10 = std::vector<uint8_t>(string_opt_arg_1_6_10.cbegin(), string_opt_arg_1_6_10.cend());
+            if(opt_arg_1_6_10_container->Get(opt_arg_1_6_10_id)->IsUint32())
+            {
+                auto opt_arg_1_6_10_elem = Nan::To<uint32_t>(opt_arg_1_6_10_container->Get(opt_arg_1_6_10_id)).FromJust();
+                opt_arg_1_6_10.emplace_back(opt_arg_1_6_10_elem);
+            }
         }
 
 
@@ -457,9 +567,9 @@ NAN_METHOD(NJSAddress::parse) {
         Local<Array> opt_arg_1_6_11_container = Local<Array>::Cast(field_opt_arg_1_6_11);
         for(uint32_t opt_arg_1_6_11_id = 0; opt_arg_1_6_11_id < opt_arg_1_6_11_container->Length(); opt_arg_1_6_11_id++)
         {
-            if(opt_arg_1_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_1_6_11_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_6_11_container->Get(opt_arg_1_6_11_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_6_11_elem(opt_arg_1_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_1_6_11_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_6_11_elem(opt_arg_1_6_11_container->Get(opt_arg_1_6_11_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_6_11_elem = std::string(*string_opt_arg_1_6_11_elem);
                 opt_arg_1_6_11.emplace_back(opt_arg_1_6_11_elem);
             }
@@ -489,20 +599,15 @@ NAN_METHOD(NJSAddress::parse) {
         auto opt_arg_1_7_3 = std::string(*string_opt_arg_1_7_3);
 
         auto field_opt_arg_1_7_4 = Nan::Get(field_arg_1_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_7_4->IsString())
+        vector<uint8_t> opt_arg_1_7_4;
+        Local<Array> opt_arg_1_7_4_container = Local<Array>::Cast(field_opt_arg_1_7_4);
+        for(uint32_t opt_arg_1_7_4_id = 0; opt_arg_1_7_4_id < opt_arg_1_7_4_container->Length(); opt_arg_1_7_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_7_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_7_4;
-        Nan::Utf8String str_opt_arg_1_7_4(field_opt_arg_1_7_4);
-        std::string string_opt_arg_1_7_4(*str_opt_arg_1_7_4, str_opt_arg_1_7_4.length());
-        if (string_opt_arg_1_7_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_7_4 = djinni::js::hex::toByteArray(string_opt_arg_1_7_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_7_4 = std::vector<uint8_t>(string_opt_arg_1_7_4.cbegin(), string_opt_arg_1_7_4.cend());
+            if(opt_arg_1_7_4_container->Get(opt_arg_1_7_4_id)->IsUint32())
+            {
+                auto opt_arg_1_7_4_elem = Nan::To<uint32_t>(opt_arg_1_7_4_container->Get(opt_arg_1_7_4_id)).FromJust();
+                opt_arg_1_7_4.emplace_back(opt_arg_1_7_4_elem);
+            }
         }
 
 
@@ -511,9 +616,9 @@ NAN_METHOD(NJSAddress::parse) {
         Local<Array> opt_arg_1_7_5_container = Local<Array>::Cast(field_opt_arg_1_7_5);
         for(uint32_t opt_arg_1_7_5_id = 0; opt_arg_1_7_5_id < opt_arg_1_7_5_container->Length(); opt_arg_1_7_5_id++)
         {
-            if(opt_arg_1_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_1_7_5_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_7_5_container->Get(opt_arg_1_7_5_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_7_5_elem(opt_arg_1_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_1_7_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_7_5_elem(opt_arg_1_7_5_container->Get(opt_arg_1_7_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_7_5_elem = std::string(*string_opt_arg_1_7_5_elem);
                 opt_arg_1_7_5.emplace_back(opt_arg_1_7_5_elem);
             }
@@ -542,20 +647,15 @@ NAN_METHOD(NJSAddress::parse) {
         auto opt_arg_1_8_2 = std::string(*string_opt_arg_1_8_2);
 
         auto field_opt_arg_1_8_3 = Nan::Get(field_arg_1_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_8_3->IsString())
+        vector<uint8_t> opt_arg_1_8_3;
+        Local<Array> opt_arg_1_8_3_container = Local<Array>::Cast(field_opt_arg_1_8_3);
+        for(uint32_t opt_arg_1_8_3_id = 0; opt_arg_1_8_3_id < opt_arg_1_8_3_container->Length(); opt_arg_1_8_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_8_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_8_3;
-        Nan::Utf8String str_opt_arg_1_8_3(field_opt_arg_1_8_3);
-        std::string string_opt_arg_1_8_3(*str_opt_arg_1_8_3, str_opt_arg_1_8_3.length());
-        if (string_opt_arg_1_8_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_8_3 = djinni::js::hex::toByteArray(string_opt_arg_1_8_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_8_3 = std::vector<uint8_t>(string_opt_arg_1_8_3.cbegin(), string_opt_arg_1_8_3.cend());
+            if(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)->IsUint32())
+            {
+                auto opt_arg_1_8_3_elem = Nan::To<uint32_t>(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)).FromJust();
+                opt_arg_1_8_3.emplace_back(opt_arg_1_8_3_elem);
+            }
         }
 
 
@@ -564,9 +664,9 @@ NAN_METHOD(NJSAddress::parse) {
         Local<Array> opt_arg_1_8_4_container = Local<Array>::Cast(field_opt_arg_1_8_4);
         for(uint32_t opt_arg_1_8_4_id = 0; opt_arg_1_8_4_id < opt_arg_1_8_4_container->Length(); opt_arg_1_8_4_id++)
         {
-            if(opt_arg_1_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_1_8_4_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_1_8_4_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_8_4_elem = std::string(*string_opt_arg_1_8_4_elem);
                 opt_arg_1_8_4.emplace_back(opt_arg_1_8_4_elem);
             }
@@ -595,56 +695,41 @@ NAN_METHOD(NJSAddress::parse) {
         auto opt_arg_1_9_2 = std::string(*string_opt_arg_1_9_2);
 
         auto field_opt_arg_1_9_3 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_3->IsString())
+        vector<uint8_t> opt_arg_1_9_3;
+        Local<Array> opt_arg_1_9_3_container = Local<Array>::Cast(field_opt_arg_1_9_3);
+        for(uint32_t opt_arg_1_9_3_id = 0; opt_arg_1_9_3_id < opt_arg_1_9_3_container->Length(); opt_arg_1_9_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_3;
-        Nan::Utf8String str_opt_arg_1_9_3(field_opt_arg_1_9_3);
-        std::string string_opt_arg_1_9_3(*str_opt_arg_1_9_3, str_opt_arg_1_9_3.length());
-        if (string_opt_arg_1_9_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_3 = djinni::js::hex::toByteArray(string_opt_arg_1_9_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_3 = std::vector<uint8_t>(string_opt_arg_1_9_3.cbegin(), string_opt_arg_1_9_3.cend());
+            if(opt_arg_1_9_3_container->Get(opt_arg_1_9_3_id)->IsUint32())
+            {
+                auto opt_arg_1_9_3_elem = Nan::To<uint32_t>(opt_arg_1_9_3_container->Get(opt_arg_1_9_3_id)).FromJust();
+                opt_arg_1_9_3.emplace_back(opt_arg_1_9_3_elem);
+            }
         }
 
 
         auto field_opt_arg_1_9_4 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_4->IsString())
+        vector<uint8_t> opt_arg_1_9_4;
+        Local<Array> opt_arg_1_9_4_container = Local<Array>::Cast(field_opt_arg_1_9_4);
+        for(uint32_t opt_arg_1_9_4_id = 0; opt_arg_1_9_4_id < opt_arg_1_9_4_container->Length(); opt_arg_1_9_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_4;
-        Nan::Utf8String str_opt_arg_1_9_4(field_opt_arg_1_9_4);
-        std::string string_opt_arg_1_9_4(*str_opt_arg_1_9_4, str_opt_arg_1_9_4.length());
-        if (string_opt_arg_1_9_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_4 = djinni::js::hex::toByteArray(string_opt_arg_1_9_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_4 = std::vector<uint8_t>(string_opt_arg_1_9_4.cbegin(), string_opt_arg_1_9_4.cend());
+            if(opt_arg_1_9_4_container->Get(opt_arg_1_9_4_id)->IsUint32())
+            {
+                auto opt_arg_1_9_4_elem = Nan::To<uint32_t>(opt_arg_1_9_4_container->Get(opt_arg_1_9_4_id)).FromJust();
+                opt_arg_1_9_4.emplace_back(opt_arg_1_9_4_elem);
+            }
         }
 
 
         auto field_opt_arg_1_9_5 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_5->IsString())
+        vector<uint8_t> opt_arg_1_9_5;
+        Local<Array> opt_arg_1_9_5_container = Local<Array>::Cast(field_opt_arg_1_9_5);
+        for(uint32_t opt_arg_1_9_5_id = 0; opt_arg_1_9_5_id < opt_arg_1_9_5_container->Length(); opt_arg_1_9_5_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_5 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_5;
-        Nan::Utf8String str_opt_arg_1_9_5(field_opt_arg_1_9_5);
-        std::string string_opt_arg_1_9_5(*str_opt_arg_1_9_5, str_opt_arg_1_9_5.length());
-        if (string_opt_arg_1_9_5.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_5 = djinni::js::hex::toByteArray(string_opt_arg_1_9_5.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_5 = std::vector<uint8_t>(string_opt_arg_1_9_5.cbegin(), string_opt_arg_1_9_5.cend());
+            if(opt_arg_1_9_5_container->Get(opt_arg_1_9_5_id)->IsUint32())
+            {
+                auto opt_arg_1_9_5_elem = Nan::To<uint32_t>(opt_arg_1_9_5_container->Get(opt_arg_1_9_5_id)).FromJust();
+                opt_arg_1_9_5.emplace_back(opt_arg_1_9_5_elem);
+            }
         }
 
 
@@ -653,9 +738,9 @@ NAN_METHOD(NJSAddress::parse) {
         Local<Array> opt_arg_1_9_6_container = Local<Array>::Cast(field_opt_arg_1_9_6);
         for(uint32_t opt_arg_1_9_6_id = 0; opt_arg_1_9_6_id < opt_arg_1_9_6_container->Length(); opt_arg_1_9_6_id++)
         {
-            if(opt_arg_1_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_1_9_6_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_9_6_container->Get(opt_arg_1_9_6_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_9_6_elem(opt_arg_1_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_1_9_6_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_9_6_elem(opt_arg_1_9_6_container->Get(opt_arg_1_9_6_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_9_6_elem = std::string(*string_opt_arg_1_9_6_elem);
                 opt_arg_1_9_6.emplace_back(opt_arg_1_9_6_elem);
             }
@@ -669,7 +754,58 @@ NAN_METHOD(NJSAddress::parse) {
         arg_1_9.emplace(opt_arg_1_9);
     }
 
-    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8, arg_1_9);
+
+    auto field_arg_1_10 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_10 = std::experimental::optional<StellarLikeNetworkParameters>();
+    if(!field_arg_1_10->IsNull() && !field_arg_1_10->IsUndefined())
+    {
+
+        auto field_opt_arg_1_10_1 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_10_1(field_opt_arg_1_10_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_10_1 = std::string(*string_opt_arg_1_10_1);
+
+        auto field_opt_arg_1_10_2 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Version").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_1_10_2;
+        Local<Array> opt_arg_1_10_2_container = Local<Array>::Cast(field_opt_arg_1_10_2);
+        for(uint32_t opt_arg_1_10_2_id = 0; opt_arg_1_10_2_id < opt_arg_1_10_2_container->Length(); opt_arg_1_10_2_id++)
+        {
+            if(opt_arg_1_10_2_container->Get(opt_arg_1_10_2_id)->IsUint32())
+            {
+                auto opt_arg_1_10_2_elem = Nan::To<uint32_t>(opt_arg_1_10_2_container->Get(opt_arg_1_10_2_id)).FromJust();
+                opt_arg_1_10_2.emplace_back(opt_arg_1_10_2_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_10_3 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseReserve").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_10_3 = Nan::To<int64_t>(field_opt_arg_1_10_3).FromJust();
+
+        auto field_opt_arg_1_10_4 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseFee").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_10_4 = Nan::To<int64_t>(field_opt_arg_1_10_4).FromJust();
+
+        auto field_opt_arg_1_10_5 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalSEPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_1_10_5;
+        Local<Array> opt_arg_1_10_5_container = Local<Array>::Cast(field_opt_arg_1_10_5);
+        for(uint32_t opt_arg_1_10_5_id = 0; opt_arg_1_10_5_id < opt_arg_1_10_5_container->Length(); opt_arg_1_10_5_id++)
+        {
+            if(opt_arg_1_10_5_container->Get(opt_arg_1_10_5_id)->IsString())
+            {
+                Nan::Utf8String string_opt_arg_1_10_5_elem(opt_arg_1_10_5_container->Get(opt_arg_1_10_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_1_10_5_elem = std::string(*string_opt_arg_1_10_5_elem);
+                opt_arg_1_10_5.emplace_back(opt_arg_1_10_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_10_6 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("NetworkPassphrase").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_10_6(field_opt_arg_1_10_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_10_6 = std::string(*string_opt_arg_1_10_6);
+        StellarLikeNetworkParameters opt_arg_1_10(opt_arg_1_10_1, opt_arg_1_10_2, opt_arg_1_10_3, opt_arg_1_10_4, opt_arg_1_10_5, opt_arg_1_10_6);
+
+        arg_1_10.emplace(opt_arg_1_10);
+    }
+
+    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8, arg_1_9, arg_1_10);
 
 
     auto result = ledger::core::api::Address::parse(arg_0,arg_1);
@@ -713,22 +849,22 @@ NAN_METHOD(NJSAddress::isValid) {
     Local<Array> arg_1_5_container = Local<Array>::Cast(field_arg_1_5);
     for(uint32_t arg_1_5_id = 0; arg_1_5_id < arg_1_5_container->Length(); arg_1_5_id++)
     {
-        if(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->IsObject())
+        if(arg_1_5_container->Get(arg_1_5_id)->IsObject())
         {
 
-            auto field_arg_1_5_elem_1 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_1 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_1(field_arg_1_5_elem_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_1 = std::string(*string_arg_1_5_elem_1);
 
-            auto field_arg_1_5_elem_2 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_2 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_2(field_arg_1_5_elem_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_2 = std::string(*string_arg_1_5_elem_2);
 
-            auto field_arg_1_5_elem_3 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_3 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_3(field_arg_1_5_elem_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_3 = std::string(*string_arg_1_5_elem_3);
 
-            auto field_arg_1_5_elem_4 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_4 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
             auto arg_1_5_elem_4 = Nan::To<int32_t>(field_arg_1_5_elem_4).FromJust();
             CurrencyUnit arg_1_5_elem(arg_1_5_elem_1, arg_1_5_elem_2, arg_1_5_elem_3, arg_1_5_elem_4);
 
@@ -747,56 +883,41 @@ NAN_METHOD(NJSAddress::isValid) {
         auto opt_arg_1_6_1 = std::string(*string_opt_arg_1_6_1);
 
         auto field_opt_arg_1_6_2 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2PKHVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_2->IsString())
+        vector<uint8_t> opt_arg_1_6_2;
+        Local<Array> opt_arg_1_6_2_container = Local<Array>::Cast(field_opt_arg_1_6_2);
+        for(uint32_t opt_arg_1_6_2_id = 0; opt_arg_1_6_2_id < opt_arg_1_6_2_container->Length(); opt_arg_1_6_2_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_2 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_2;
-        Nan::Utf8String str_opt_arg_1_6_2(field_opt_arg_1_6_2);
-        std::string string_opt_arg_1_6_2(*str_opt_arg_1_6_2, str_opt_arg_1_6_2.length());
-        if (string_opt_arg_1_6_2.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_2 = djinni::js::hex::toByteArray(string_opt_arg_1_6_2.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_2 = std::vector<uint8_t>(string_opt_arg_1_6_2.cbegin(), string_opt_arg_1_6_2.cend());
+            if(opt_arg_1_6_2_container->Get(opt_arg_1_6_2_id)->IsUint32())
+            {
+                auto opt_arg_1_6_2_elem = Nan::To<uint32_t>(opt_arg_1_6_2_container->Get(opt_arg_1_6_2_id)).FromJust();
+                opt_arg_1_6_2.emplace_back(opt_arg_1_6_2_elem);
+            }
         }
 
 
         auto field_opt_arg_1_6_3 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2SHVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_3->IsString())
+        vector<uint8_t> opt_arg_1_6_3;
+        Local<Array> opt_arg_1_6_3_container = Local<Array>::Cast(field_opt_arg_1_6_3);
+        for(uint32_t opt_arg_1_6_3_id = 0; opt_arg_1_6_3_id < opt_arg_1_6_3_container->Length(); opt_arg_1_6_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_3;
-        Nan::Utf8String str_opt_arg_1_6_3(field_opt_arg_1_6_3);
-        std::string string_opt_arg_1_6_3(*str_opt_arg_1_6_3, str_opt_arg_1_6_3.length());
-        if (string_opt_arg_1_6_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_3 = djinni::js::hex::toByteArray(string_opt_arg_1_6_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_3 = std::vector<uint8_t>(string_opt_arg_1_6_3.cbegin(), string_opt_arg_1_6_3.cend());
+            if(opt_arg_1_6_3_container->Get(opt_arg_1_6_3_id)->IsUint32())
+            {
+                auto opt_arg_1_6_3_elem = Nan::To<uint32_t>(opt_arg_1_6_3_container->Get(opt_arg_1_6_3_id)).FromJust();
+                opt_arg_1_6_3.emplace_back(opt_arg_1_6_3_elem);
+            }
         }
 
 
         auto field_opt_arg_1_6_4 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_4->IsString())
+        vector<uint8_t> opt_arg_1_6_4;
+        Local<Array> opt_arg_1_6_4_container = Local<Array>::Cast(field_opt_arg_1_6_4);
+        for(uint32_t opt_arg_1_6_4_id = 0; opt_arg_1_6_4_id < opt_arg_1_6_4_container->Length(); opt_arg_1_6_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_4;
-        Nan::Utf8String str_opt_arg_1_6_4(field_opt_arg_1_6_4);
-        std::string string_opt_arg_1_6_4(*str_opt_arg_1_6_4, str_opt_arg_1_6_4.length());
-        if (string_opt_arg_1_6_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_4 = djinni::js::hex::toByteArray(string_opt_arg_1_6_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_4 = std::vector<uint8_t>(string_opt_arg_1_6_4.cbegin(), string_opt_arg_1_6_4.cend());
+            if(opt_arg_1_6_4_container->Get(opt_arg_1_6_4_id)->IsUint32())
+            {
+                auto opt_arg_1_6_4_elem = Nan::To<uint32_t>(opt_arg_1_6_4_container->Get(opt_arg_1_6_4_id)).FromJust();
+                opt_arg_1_6_4.emplace_back(opt_arg_1_6_4_elem);
+            }
         }
 
 
@@ -817,20 +938,15 @@ NAN_METHOD(NJSAddress::isValid) {
         auto opt_arg_1_6_9 = Nan::To<int64_t>(field_opt_arg_1_6_9).FromJust();
 
         auto field_opt_arg_1_6_10 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_10->IsString())
+        vector<uint8_t> opt_arg_1_6_10;
+        Local<Array> opt_arg_1_6_10_container = Local<Array>::Cast(field_opt_arg_1_6_10);
+        for(uint32_t opt_arg_1_6_10_id = 0; opt_arg_1_6_10_id < opt_arg_1_6_10_container->Length(); opt_arg_1_6_10_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_10 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_10;
-        Nan::Utf8String str_opt_arg_1_6_10(field_opt_arg_1_6_10);
-        std::string string_opt_arg_1_6_10(*str_opt_arg_1_6_10, str_opt_arg_1_6_10.length());
-        if (string_opt_arg_1_6_10.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_10 = djinni::js::hex::toByteArray(string_opt_arg_1_6_10.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_10 = std::vector<uint8_t>(string_opt_arg_1_6_10.cbegin(), string_opt_arg_1_6_10.cend());
+            if(opt_arg_1_6_10_container->Get(opt_arg_1_6_10_id)->IsUint32())
+            {
+                auto opt_arg_1_6_10_elem = Nan::To<uint32_t>(opt_arg_1_6_10_container->Get(opt_arg_1_6_10_id)).FromJust();
+                opt_arg_1_6_10.emplace_back(opt_arg_1_6_10_elem);
+            }
         }
 
 
@@ -839,9 +955,9 @@ NAN_METHOD(NJSAddress::isValid) {
         Local<Array> opt_arg_1_6_11_container = Local<Array>::Cast(field_opt_arg_1_6_11);
         for(uint32_t opt_arg_1_6_11_id = 0; opt_arg_1_6_11_id < opt_arg_1_6_11_container->Length(); opt_arg_1_6_11_id++)
         {
-            if(opt_arg_1_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_1_6_11_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_6_11_container->Get(opt_arg_1_6_11_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_6_11_elem(opt_arg_1_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_1_6_11_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_6_11_elem(opt_arg_1_6_11_container->Get(opt_arg_1_6_11_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_6_11_elem = std::string(*string_opt_arg_1_6_11_elem);
                 opt_arg_1_6_11.emplace_back(opt_arg_1_6_11_elem);
             }
@@ -871,20 +987,15 @@ NAN_METHOD(NJSAddress::isValid) {
         auto opt_arg_1_7_3 = std::string(*string_opt_arg_1_7_3);
 
         auto field_opt_arg_1_7_4 = Nan::Get(field_arg_1_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_7_4->IsString())
+        vector<uint8_t> opt_arg_1_7_4;
+        Local<Array> opt_arg_1_7_4_container = Local<Array>::Cast(field_opt_arg_1_7_4);
+        for(uint32_t opt_arg_1_7_4_id = 0; opt_arg_1_7_4_id < opt_arg_1_7_4_container->Length(); opt_arg_1_7_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_7_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_7_4;
-        Nan::Utf8String str_opt_arg_1_7_4(field_opt_arg_1_7_4);
-        std::string string_opt_arg_1_7_4(*str_opt_arg_1_7_4, str_opt_arg_1_7_4.length());
-        if (string_opt_arg_1_7_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_7_4 = djinni::js::hex::toByteArray(string_opt_arg_1_7_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_7_4 = std::vector<uint8_t>(string_opt_arg_1_7_4.cbegin(), string_opt_arg_1_7_4.cend());
+            if(opt_arg_1_7_4_container->Get(opt_arg_1_7_4_id)->IsUint32())
+            {
+                auto opt_arg_1_7_4_elem = Nan::To<uint32_t>(opt_arg_1_7_4_container->Get(opt_arg_1_7_4_id)).FromJust();
+                opt_arg_1_7_4.emplace_back(opt_arg_1_7_4_elem);
+            }
         }
 
 
@@ -893,9 +1004,9 @@ NAN_METHOD(NJSAddress::isValid) {
         Local<Array> opt_arg_1_7_5_container = Local<Array>::Cast(field_opt_arg_1_7_5);
         for(uint32_t opt_arg_1_7_5_id = 0; opt_arg_1_7_5_id < opt_arg_1_7_5_container->Length(); opt_arg_1_7_5_id++)
         {
-            if(opt_arg_1_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_1_7_5_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_7_5_container->Get(opt_arg_1_7_5_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_7_5_elem(opt_arg_1_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_1_7_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_7_5_elem(opt_arg_1_7_5_container->Get(opt_arg_1_7_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_7_5_elem = std::string(*string_opt_arg_1_7_5_elem);
                 opt_arg_1_7_5.emplace_back(opt_arg_1_7_5_elem);
             }
@@ -924,20 +1035,15 @@ NAN_METHOD(NJSAddress::isValid) {
         auto opt_arg_1_8_2 = std::string(*string_opt_arg_1_8_2);
 
         auto field_opt_arg_1_8_3 = Nan::Get(field_arg_1_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_8_3->IsString())
+        vector<uint8_t> opt_arg_1_8_3;
+        Local<Array> opt_arg_1_8_3_container = Local<Array>::Cast(field_opt_arg_1_8_3);
+        for(uint32_t opt_arg_1_8_3_id = 0; opt_arg_1_8_3_id < opt_arg_1_8_3_container->Length(); opt_arg_1_8_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_8_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_8_3;
-        Nan::Utf8String str_opt_arg_1_8_3(field_opt_arg_1_8_3);
-        std::string string_opt_arg_1_8_3(*str_opt_arg_1_8_3, str_opt_arg_1_8_3.length());
-        if (string_opt_arg_1_8_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_8_3 = djinni::js::hex::toByteArray(string_opt_arg_1_8_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_8_3 = std::vector<uint8_t>(string_opt_arg_1_8_3.cbegin(), string_opt_arg_1_8_3.cend());
+            if(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)->IsUint32())
+            {
+                auto opt_arg_1_8_3_elem = Nan::To<uint32_t>(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)).FromJust();
+                opt_arg_1_8_3.emplace_back(opt_arg_1_8_3_elem);
+            }
         }
 
 
@@ -946,9 +1052,9 @@ NAN_METHOD(NJSAddress::isValid) {
         Local<Array> opt_arg_1_8_4_container = Local<Array>::Cast(field_opt_arg_1_8_4);
         for(uint32_t opt_arg_1_8_4_id = 0; opt_arg_1_8_4_id < opt_arg_1_8_4_container->Length(); opt_arg_1_8_4_id++)
         {
-            if(opt_arg_1_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_1_8_4_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_1_8_4_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_8_4_elem = std::string(*string_opt_arg_1_8_4_elem);
                 opt_arg_1_8_4.emplace_back(opt_arg_1_8_4_elem);
             }
@@ -977,56 +1083,41 @@ NAN_METHOD(NJSAddress::isValid) {
         auto opt_arg_1_9_2 = std::string(*string_opt_arg_1_9_2);
 
         auto field_opt_arg_1_9_3 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_3->IsString())
+        vector<uint8_t> opt_arg_1_9_3;
+        Local<Array> opt_arg_1_9_3_container = Local<Array>::Cast(field_opt_arg_1_9_3);
+        for(uint32_t opt_arg_1_9_3_id = 0; opt_arg_1_9_3_id < opt_arg_1_9_3_container->Length(); opt_arg_1_9_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_3;
-        Nan::Utf8String str_opt_arg_1_9_3(field_opt_arg_1_9_3);
-        std::string string_opt_arg_1_9_3(*str_opt_arg_1_9_3, str_opt_arg_1_9_3.length());
-        if (string_opt_arg_1_9_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_3 = djinni::js::hex::toByteArray(string_opt_arg_1_9_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_3 = std::vector<uint8_t>(string_opt_arg_1_9_3.cbegin(), string_opt_arg_1_9_3.cend());
+            if(opt_arg_1_9_3_container->Get(opt_arg_1_9_3_id)->IsUint32())
+            {
+                auto opt_arg_1_9_3_elem = Nan::To<uint32_t>(opt_arg_1_9_3_container->Get(opt_arg_1_9_3_id)).FromJust();
+                opt_arg_1_9_3.emplace_back(opt_arg_1_9_3_elem);
+            }
         }
 
 
         auto field_opt_arg_1_9_4 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_4->IsString())
+        vector<uint8_t> opt_arg_1_9_4;
+        Local<Array> opt_arg_1_9_4_container = Local<Array>::Cast(field_opt_arg_1_9_4);
+        for(uint32_t opt_arg_1_9_4_id = 0; opt_arg_1_9_4_id < opt_arg_1_9_4_container->Length(); opt_arg_1_9_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_4;
-        Nan::Utf8String str_opt_arg_1_9_4(field_opt_arg_1_9_4);
-        std::string string_opt_arg_1_9_4(*str_opt_arg_1_9_4, str_opt_arg_1_9_4.length());
-        if (string_opt_arg_1_9_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_4 = djinni::js::hex::toByteArray(string_opt_arg_1_9_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_4 = std::vector<uint8_t>(string_opt_arg_1_9_4.cbegin(), string_opt_arg_1_9_4.cend());
+            if(opt_arg_1_9_4_container->Get(opt_arg_1_9_4_id)->IsUint32())
+            {
+                auto opt_arg_1_9_4_elem = Nan::To<uint32_t>(opt_arg_1_9_4_container->Get(opt_arg_1_9_4_id)).FromJust();
+                opt_arg_1_9_4.emplace_back(opt_arg_1_9_4_elem);
+            }
         }
 
 
         auto field_opt_arg_1_9_5 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_5->IsString())
+        vector<uint8_t> opt_arg_1_9_5;
+        Local<Array> opt_arg_1_9_5_container = Local<Array>::Cast(field_opt_arg_1_9_5);
+        for(uint32_t opt_arg_1_9_5_id = 0; opt_arg_1_9_5_id < opt_arg_1_9_5_container->Length(); opt_arg_1_9_5_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_5 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_5;
-        Nan::Utf8String str_opt_arg_1_9_5(field_opt_arg_1_9_5);
-        std::string string_opt_arg_1_9_5(*str_opt_arg_1_9_5, str_opt_arg_1_9_5.length());
-        if (string_opt_arg_1_9_5.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_5 = djinni::js::hex::toByteArray(string_opt_arg_1_9_5.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_5 = std::vector<uint8_t>(string_opt_arg_1_9_5.cbegin(), string_opt_arg_1_9_5.cend());
+            if(opt_arg_1_9_5_container->Get(opt_arg_1_9_5_id)->IsUint32())
+            {
+                auto opt_arg_1_9_5_elem = Nan::To<uint32_t>(opt_arg_1_9_5_container->Get(opt_arg_1_9_5_id)).FromJust();
+                opt_arg_1_9_5.emplace_back(opt_arg_1_9_5_elem);
+            }
         }
 
 
@@ -1035,9 +1126,9 @@ NAN_METHOD(NJSAddress::isValid) {
         Local<Array> opt_arg_1_9_6_container = Local<Array>::Cast(field_opt_arg_1_9_6);
         for(uint32_t opt_arg_1_9_6_id = 0; opt_arg_1_9_6_id < opt_arg_1_9_6_container->Length(); opt_arg_1_9_6_id++)
         {
-            if(opt_arg_1_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_1_9_6_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_9_6_container->Get(opt_arg_1_9_6_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_9_6_elem(opt_arg_1_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_1_9_6_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_9_6_elem(opt_arg_1_9_6_container->Get(opt_arg_1_9_6_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_9_6_elem = std::string(*string_opt_arg_1_9_6_elem);
                 opt_arg_1_9_6.emplace_back(opt_arg_1_9_6_elem);
             }
@@ -1051,7 +1142,58 @@ NAN_METHOD(NJSAddress::isValid) {
         arg_1_9.emplace(opt_arg_1_9);
     }
 
-    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8, arg_1_9);
+
+    auto field_arg_1_10 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_10 = std::experimental::optional<StellarLikeNetworkParameters>();
+    if(!field_arg_1_10->IsNull() && !field_arg_1_10->IsUndefined())
+    {
+
+        auto field_opt_arg_1_10_1 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_10_1(field_opt_arg_1_10_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_10_1 = std::string(*string_opt_arg_1_10_1);
+
+        auto field_opt_arg_1_10_2 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Version").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_1_10_2;
+        Local<Array> opt_arg_1_10_2_container = Local<Array>::Cast(field_opt_arg_1_10_2);
+        for(uint32_t opt_arg_1_10_2_id = 0; opt_arg_1_10_2_id < opt_arg_1_10_2_container->Length(); opt_arg_1_10_2_id++)
+        {
+            if(opt_arg_1_10_2_container->Get(opt_arg_1_10_2_id)->IsUint32())
+            {
+                auto opt_arg_1_10_2_elem = Nan::To<uint32_t>(opt_arg_1_10_2_container->Get(opt_arg_1_10_2_id)).FromJust();
+                opt_arg_1_10_2.emplace_back(opt_arg_1_10_2_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_10_3 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseReserve").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_10_3 = Nan::To<int64_t>(field_opt_arg_1_10_3).FromJust();
+
+        auto field_opt_arg_1_10_4 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseFee").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_10_4 = Nan::To<int64_t>(field_opt_arg_1_10_4).FromJust();
+
+        auto field_opt_arg_1_10_5 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalSEPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_1_10_5;
+        Local<Array> opt_arg_1_10_5_container = Local<Array>::Cast(field_opt_arg_1_10_5);
+        for(uint32_t opt_arg_1_10_5_id = 0; opt_arg_1_10_5_id < opt_arg_1_10_5_container->Length(); opt_arg_1_10_5_id++)
+        {
+            if(opt_arg_1_10_5_container->Get(opt_arg_1_10_5_id)->IsString())
+            {
+                Nan::Utf8String string_opt_arg_1_10_5_elem(opt_arg_1_10_5_container->Get(opt_arg_1_10_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_1_10_5_elem = std::string(*string_opt_arg_1_10_5_elem);
+                opt_arg_1_10_5.emplace_back(opt_arg_1_10_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_10_6 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("NetworkPassphrase").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_10_6(field_opt_arg_1_10_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_10_6 = std::string(*string_opt_arg_1_10_6);
+        StellarLikeNetworkParameters opt_arg_1_10(opt_arg_1_10_1, opt_arg_1_10_2, opt_arg_1_10_3, opt_arg_1_10_4, opt_arg_1_10_5, opt_arg_1_10_6);
+
+        arg_1_10.emplace(opt_arg_1_10);
+    }
+
+    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8, arg_1_9, arg_1_10);
 
 
     auto result = ledger::core::api::Address::isValid(arg_0,arg_1);
@@ -1099,22 +1241,22 @@ NAN_METHOD(NJSAddress::New) {
     Local<Array> arg_1_5_container = Local<Array>::Cast(field_arg_1_5);
     for(uint32_t arg_1_5_id = 0; arg_1_5_id < arg_1_5_container->Length(); arg_1_5_id++)
     {
-        if(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->IsObject())
+        if(arg_1_5_container->Get(arg_1_5_id)->IsObject())
         {
 
-            auto field_arg_1_5_elem_1 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_1 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("name").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_1(field_arg_1_5_elem_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_1 = std::string(*string_arg_1_5_elem_1);
 
-            auto field_arg_1_5_elem_2 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_2 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("symbol").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_2(field_arg_1_5_elem_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_2 = std::string(*string_arg_1_5_elem_2);
 
-            auto field_arg_1_5_elem_3 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_3 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("code").ToLocalChecked()).ToLocalChecked();
             Nan::Utf8String string_arg_1_5_elem_3(field_arg_1_5_elem_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
             auto arg_1_5_elem_3 = std::string(*string_arg_1_5_elem_3);
 
-            auto field_arg_1_5_elem_4 = Nan::Get(arg_1_5_container->Get(Nan::GetCurrentContext(), arg_1_5_id).ToLocalChecked()->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
+            auto field_arg_1_5_elem_4 = Nan::Get(arg_1_5_container->Get(arg_1_5_id)->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("numberOfDecimal").ToLocalChecked()).ToLocalChecked();
             auto arg_1_5_elem_4 = Nan::To<int32_t>(field_arg_1_5_elem_4).FromJust();
             CurrencyUnit arg_1_5_elem(arg_1_5_elem_1, arg_1_5_elem_2, arg_1_5_elem_3, arg_1_5_elem_4);
 
@@ -1133,56 +1275,41 @@ NAN_METHOD(NJSAddress::New) {
         auto opt_arg_1_6_1 = std::string(*string_opt_arg_1_6_1);
 
         auto field_opt_arg_1_6_2 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2PKHVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_2->IsString())
+        vector<uint8_t> opt_arg_1_6_2;
+        Local<Array> opt_arg_1_6_2_container = Local<Array>::Cast(field_opt_arg_1_6_2);
+        for(uint32_t opt_arg_1_6_2_id = 0; opt_arg_1_6_2_id < opt_arg_1_6_2_container->Length(); opt_arg_1_6_2_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_2 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_2;
-        Nan::Utf8String str_opt_arg_1_6_2(field_opt_arg_1_6_2);
-        std::string string_opt_arg_1_6_2(*str_opt_arg_1_6_2, str_opt_arg_1_6_2.length());
-        if (string_opt_arg_1_6_2.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_2 = djinni::js::hex::toByteArray(string_opt_arg_1_6_2.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_2 = std::vector<uint8_t>(string_opt_arg_1_6_2.cbegin(), string_opt_arg_1_6_2.cend());
+            if(opt_arg_1_6_2_container->Get(opt_arg_1_6_2_id)->IsUint32())
+            {
+                auto opt_arg_1_6_2_elem = Nan::To<uint32_t>(opt_arg_1_6_2_container->Get(opt_arg_1_6_2_id)).FromJust();
+                opt_arg_1_6_2.emplace_back(opt_arg_1_6_2_elem);
+            }
         }
 
 
         auto field_opt_arg_1_6_3 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("P2SHVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_3->IsString())
+        vector<uint8_t> opt_arg_1_6_3;
+        Local<Array> opt_arg_1_6_3_container = Local<Array>::Cast(field_opt_arg_1_6_3);
+        for(uint32_t opt_arg_1_6_3_id = 0; opt_arg_1_6_3_id < opt_arg_1_6_3_container->Length(); opt_arg_1_6_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_3;
-        Nan::Utf8String str_opt_arg_1_6_3(field_opt_arg_1_6_3);
-        std::string string_opt_arg_1_6_3(*str_opt_arg_1_6_3, str_opt_arg_1_6_3.length());
-        if (string_opt_arg_1_6_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_3 = djinni::js::hex::toByteArray(string_opt_arg_1_6_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_3 = std::vector<uint8_t>(string_opt_arg_1_6_3.cbegin(), string_opt_arg_1_6_3.cend());
+            if(opt_arg_1_6_3_container->Get(opt_arg_1_6_3_id)->IsUint32())
+            {
+                auto opt_arg_1_6_3_elem = Nan::To<uint32_t>(opt_arg_1_6_3_container->Get(opt_arg_1_6_3_id)).FromJust();
+                opt_arg_1_6_3.emplace_back(opt_arg_1_6_3_elem);
+            }
         }
 
 
         auto field_opt_arg_1_6_4 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_4->IsString())
+        vector<uint8_t> opt_arg_1_6_4;
+        Local<Array> opt_arg_1_6_4_container = Local<Array>::Cast(field_opt_arg_1_6_4);
+        for(uint32_t opt_arg_1_6_4_id = 0; opt_arg_1_6_4_id < opt_arg_1_6_4_container->Length(); opt_arg_1_6_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_4;
-        Nan::Utf8String str_opt_arg_1_6_4(field_opt_arg_1_6_4);
-        std::string string_opt_arg_1_6_4(*str_opt_arg_1_6_4, str_opt_arg_1_6_4.length());
-        if (string_opt_arg_1_6_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_4 = djinni::js::hex::toByteArray(string_opt_arg_1_6_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_4 = std::vector<uint8_t>(string_opt_arg_1_6_4.cbegin(), string_opt_arg_1_6_4.cend());
+            if(opt_arg_1_6_4_container->Get(opt_arg_1_6_4_id)->IsUint32())
+            {
+                auto opt_arg_1_6_4_elem = Nan::To<uint32_t>(opt_arg_1_6_4_container->Get(opt_arg_1_6_4_id)).FromJust();
+                opt_arg_1_6_4.emplace_back(opt_arg_1_6_4_elem);
+            }
         }
 
 
@@ -1203,20 +1330,15 @@ NAN_METHOD(NJSAddress::New) {
         auto opt_arg_1_6_9 = Nan::To<int64_t>(field_opt_arg_1_6_9).FromJust();
 
         auto field_opt_arg_1_6_10 = Nan::Get(field_arg_1_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_6_10->IsString())
+        vector<uint8_t> opt_arg_1_6_10;
+        Local<Array> opt_arg_1_6_10_container = Local<Array>::Cast(field_opt_arg_1_6_10);
+        for(uint32_t opt_arg_1_6_10_id = 0; opt_arg_1_6_10_id < opt_arg_1_6_10_container->Length(); opt_arg_1_6_10_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_6_10 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_6_10;
-        Nan::Utf8String str_opt_arg_1_6_10(field_opt_arg_1_6_10);
-        std::string string_opt_arg_1_6_10(*str_opt_arg_1_6_10, str_opt_arg_1_6_10.length());
-        if (string_opt_arg_1_6_10.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_6_10 = djinni::js::hex::toByteArray(string_opt_arg_1_6_10.substr(2));
-        }
-        else
-        {
-            opt_arg_1_6_10 = std::vector<uint8_t>(string_opt_arg_1_6_10.cbegin(), string_opt_arg_1_6_10.cend());
+            if(opt_arg_1_6_10_container->Get(opt_arg_1_6_10_id)->IsUint32())
+            {
+                auto opt_arg_1_6_10_elem = Nan::To<uint32_t>(opt_arg_1_6_10_container->Get(opt_arg_1_6_10_id)).FromJust();
+                opt_arg_1_6_10.emplace_back(opt_arg_1_6_10_elem);
+            }
         }
 
 
@@ -1225,9 +1347,9 @@ NAN_METHOD(NJSAddress::New) {
         Local<Array> opt_arg_1_6_11_container = Local<Array>::Cast(field_opt_arg_1_6_11);
         for(uint32_t opt_arg_1_6_11_id = 0; opt_arg_1_6_11_id < opt_arg_1_6_11_container->Length(); opt_arg_1_6_11_id++)
         {
-            if(opt_arg_1_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_1_6_11_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_6_11_container->Get(opt_arg_1_6_11_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_6_11_elem(opt_arg_1_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_1_6_11_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_6_11_elem(opt_arg_1_6_11_container->Get(opt_arg_1_6_11_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_6_11_elem = std::string(*string_opt_arg_1_6_11_elem);
                 opt_arg_1_6_11.emplace_back(opt_arg_1_6_11_elem);
             }
@@ -1257,20 +1379,15 @@ NAN_METHOD(NJSAddress::New) {
         auto opt_arg_1_7_3 = std::string(*string_opt_arg_1_7_3);
 
         auto field_opt_arg_1_7_4 = Nan::Get(field_arg_1_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_7_4->IsString())
+        vector<uint8_t> opt_arg_1_7_4;
+        Local<Array> opt_arg_1_7_4_container = Local<Array>::Cast(field_opt_arg_1_7_4);
+        for(uint32_t opt_arg_1_7_4_id = 0; opt_arg_1_7_4_id < opt_arg_1_7_4_container->Length(); opt_arg_1_7_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_7_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_7_4;
-        Nan::Utf8String str_opt_arg_1_7_4(field_opt_arg_1_7_4);
-        std::string string_opt_arg_1_7_4(*str_opt_arg_1_7_4, str_opt_arg_1_7_4.length());
-        if (string_opt_arg_1_7_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_7_4 = djinni::js::hex::toByteArray(string_opt_arg_1_7_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_7_4 = std::vector<uint8_t>(string_opt_arg_1_7_4.cbegin(), string_opt_arg_1_7_4.cend());
+            if(opt_arg_1_7_4_container->Get(opt_arg_1_7_4_id)->IsUint32())
+            {
+                auto opt_arg_1_7_4_elem = Nan::To<uint32_t>(opt_arg_1_7_4_container->Get(opt_arg_1_7_4_id)).FromJust();
+                opt_arg_1_7_4.emplace_back(opt_arg_1_7_4_elem);
+            }
         }
 
 
@@ -1279,9 +1396,9 @@ NAN_METHOD(NJSAddress::New) {
         Local<Array> opt_arg_1_7_5_container = Local<Array>::Cast(field_opt_arg_1_7_5);
         for(uint32_t opt_arg_1_7_5_id = 0; opt_arg_1_7_5_id < opt_arg_1_7_5_container->Length(); opt_arg_1_7_5_id++)
         {
-            if(opt_arg_1_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_1_7_5_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_7_5_container->Get(opt_arg_1_7_5_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_7_5_elem(opt_arg_1_7_5_container->Get(Nan::GetCurrentContext(), opt_arg_1_7_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_7_5_elem(opt_arg_1_7_5_container->Get(opt_arg_1_7_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_7_5_elem = std::string(*string_opt_arg_1_7_5_elem);
                 opt_arg_1_7_5.emplace_back(opt_arg_1_7_5_elem);
             }
@@ -1310,20 +1427,15 @@ NAN_METHOD(NJSAddress::New) {
         auto opt_arg_1_8_2 = std::string(*string_opt_arg_1_8_2);
 
         auto field_opt_arg_1_8_3 = Nan::Get(field_arg_1_8->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_8_3->IsString())
+        vector<uint8_t> opt_arg_1_8_3;
+        Local<Array> opt_arg_1_8_3_container = Local<Array>::Cast(field_opt_arg_1_8_3);
+        for(uint32_t opt_arg_1_8_3_id = 0; opt_arg_1_8_3_id < opt_arg_1_8_3_container->Length(); opt_arg_1_8_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_8_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_8_3;
-        Nan::Utf8String str_opt_arg_1_8_3(field_opt_arg_1_8_3);
-        std::string string_opt_arg_1_8_3(*str_opt_arg_1_8_3, str_opt_arg_1_8_3.length());
-        if (string_opt_arg_1_8_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_8_3 = djinni::js::hex::toByteArray(string_opt_arg_1_8_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_8_3 = std::vector<uint8_t>(string_opt_arg_1_8_3.cbegin(), string_opt_arg_1_8_3.cend());
+            if(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)->IsUint32())
+            {
+                auto opt_arg_1_8_3_elem = Nan::To<uint32_t>(opt_arg_1_8_3_container->Get(opt_arg_1_8_3_id)).FromJust();
+                opt_arg_1_8_3.emplace_back(opt_arg_1_8_3_elem);
+            }
         }
 
 
@@ -1332,9 +1444,9 @@ NAN_METHOD(NJSAddress::New) {
         Local<Array> opt_arg_1_8_4_container = Local<Array>::Cast(field_opt_arg_1_8_4);
         for(uint32_t opt_arg_1_8_4_id = 0; opt_arg_1_8_4_id < opt_arg_1_8_4_container->Length(); opt_arg_1_8_4_id++)
         {
-            if(opt_arg_1_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_1_8_4_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(Nan::GetCurrentContext(), opt_arg_1_8_4_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_8_4_elem(opt_arg_1_8_4_container->Get(opt_arg_1_8_4_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_8_4_elem = std::string(*string_opt_arg_1_8_4_elem);
                 opt_arg_1_8_4.emplace_back(opt_arg_1_8_4_elem);
             }
@@ -1363,56 +1475,41 @@ NAN_METHOD(NJSAddress::New) {
         auto opt_arg_1_9_2 = std::string(*string_opt_arg_1_9_2);
 
         auto field_opt_arg_1_9_3 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("XPUBVersion").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_3->IsString())
+        vector<uint8_t> opt_arg_1_9_3;
+        Local<Array> opt_arg_1_9_3_container = Local<Array>::Cast(field_opt_arg_1_9_3);
+        for(uint32_t opt_arg_1_9_3_id = 0; opt_arg_1_9_3_id < opt_arg_1_9_3_container->Length(); opt_arg_1_9_3_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_3 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_3;
-        Nan::Utf8String str_opt_arg_1_9_3(field_opt_arg_1_9_3);
-        std::string string_opt_arg_1_9_3(*str_opt_arg_1_9_3, str_opt_arg_1_9_3.length());
-        if (string_opt_arg_1_9_3.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_3 = djinni::js::hex::toByteArray(string_opt_arg_1_9_3.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_3 = std::vector<uint8_t>(string_opt_arg_1_9_3.cbegin(), string_opt_arg_1_9_3.cend());
+            if(opt_arg_1_9_3_container->Get(opt_arg_1_9_3_id)->IsUint32())
+            {
+                auto opt_arg_1_9_3_elem = Nan::To<uint32_t>(opt_arg_1_9_3_container->Get(opt_arg_1_9_3_id)).FromJust();
+                opt_arg_1_9_3.emplace_back(opt_arg_1_9_3_elem);
+            }
         }
 
 
         auto field_opt_arg_1_9_4 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ImplicitPrefix").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_4->IsString())
+        vector<uint8_t> opt_arg_1_9_4;
+        Local<Array> opt_arg_1_9_4_container = Local<Array>::Cast(field_opt_arg_1_9_4);
+        for(uint32_t opt_arg_1_9_4_id = 0; opt_arg_1_9_4_id < opt_arg_1_9_4_container->Length(); opt_arg_1_9_4_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_4 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_4;
-        Nan::Utf8String str_opt_arg_1_9_4(field_opt_arg_1_9_4);
-        std::string string_opt_arg_1_9_4(*str_opt_arg_1_9_4, str_opt_arg_1_9_4.length());
-        if (string_opt_arg_1_9_4.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_4 = djinni::js::hex::toByteArray(string_opt_arg_1_9_4.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_4 = std::vector<uint8_t>(string_opt_arg_1_9_4.cbegin(), string_opt_arg_1_9_4.cend());
+            if(opt_arg_1_9_4_container->Get(opt_arg_1_9_4_id)->IsUint32())
+            {
+                auto opt_arg_1_9_4_elem = Nan::To<uint32_t>(opt_arg_1_9_4_container->Get(opt_arg_1_9_4_id)).FromJust();
+                opt_arg_1_9_4.emplace_back(opt_arg_1_9_4_elem);
+            }
         }
 
 
         auto field_opt_arg_1_9_5 = Nan::Get(field_arg_1_9->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("OriginatedPrefix").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_1_9_5->IsString())
+        vector<uint8_t> opt_arg_1_9_5;
+        Local<Array> opt_arg_1_9_5_container = Local<Array>::Cast(field_opt_arg_1_9_5);
+        for(uint32_t opt_arg_1_9_5_id = 0; opt_arg_1_9_5_id < opt_arg_1_9_5_container->Length(); opt_arg_1_9_5_id++)
         {
-            Nan::ThrowError("field_opt_arg_1_9_5 should be a hexadecimal string.");
-        }
-        std::vector<uint8_t> opt_arg_1_9_5;
-        Nan::Utf8String str_opt_arg_1_9_5(field_opt_arg_1_9_5);
-        std::string string_opt_arg_1_9_5(*str_opt_arg_1_9_5, str_opt_arg_1_9_5.length());
-        if (string_opt_arg_1_9_5.rfind("0x", 0) == 0)
-        {
-            opt_arg_1_9_5 = djinni::js::hex::toByteArray(string_opt_arg_1_9_5.substr(2));
-        }
-        else
-        {
-            opt_arg_1_9_5 = std::vector<uint8_t>(string_opt_arg_1_9_5.cbegin(), string_opt_arg_1_9_5.cend());
+            if(opt_arg_1_9_5_container->Get(opt_arg_1_9_5_id)->IsUint32())
+            {
+                auto opt_arg_1_9_5_elem = Nan::To<uint32_t>(opt_arg_1_9_5_container->Get(opt_arg_1_9_5_id)).FromJust();
+                opt_arg_1_9_5.emplace_back(opt_arg_1_9_5_elem);
+            }
         }
 
 
@@ -1421,9 +1518,9 @@ NAN_METHOD(NJSAddress::New) {
         Local<Array> opt_arg_1_9_6_container = Local<Array>::Cast(field_opt_arg_1_9_6);
         for(uint32_t opt_arg_1_9_6_id = 0; opt_arg_1_9_6_id < opt_arg_1_9_6_container->Length(); opt_arg_1_9_6_id++)
         {
-            if(opt_arg_1_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_1_9_6_id).ToLocalChecked()->IsString())
+            if(opt_arg_1_9_6_container->Get(opt_arg_1_9_6_id)->IsString())
             {
-                Nan::Utf8String string_opt_arg_1_9_6_elem(opt_arg_1_9_6_container->Get(Nan::GetCurrentContext(), opt_arg_1_9_6_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                Nan::Utf8String string_opt_arg_1_9_6_elem(opt_arg_1_9_6_container->Get(opt_arg_1_9_6_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
                 auto opt_arg_1_9_6_elem = std::string(*string_opt_arg_1_9_6_elem);
                 opt_arg_1_9_6.emplace_back(opt_arg_1_9_6_elem);
             }
@@ -1437,7 +1534,58 @@ NAN_METHOD(NJSAddress::New) {
         arg_1_9.emplace(opt_arg_1_9);
     }
 
-    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8, arg_1_9);
+
+    auto field_arg_1_10 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_10 = std::experimental::optional<StellarLikeNetworkParameters>();
+    if(!field_arg_1_10->IsNull() && !field_arg_1_10->IsUndefined())
+    {
+
+        auto field_opt_arg_1_10_1 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_10_1(field_opt_arg_1_10_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_10_1 = std::string(*string_opt_arg_1_10_1);
+
+        auto field_opt_arg_1_10_2 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Version").ToLocalChecked()).ToLocalChecked();
+        vector<uint8_t> opt_arg_1_10_2;
+        Local<Array> opt_arg_1_10_2_container = Local<Array>::Cast(field_opt_arg_1_10_2);
+        for(uint32_t opt_arg_1_10_2_id = 0; opt_arg_1_10_2_id < opt_arg_1_10_2_container->Length(); opt_arg_1_10_2_id++)
+        {
+            if(opt_arg_1_10_2_container->Get(opt_arg_1_10_2_id)->IsUint32())
+            {
+                auto opt_arg_1_10_2_elem = Nan::To<uint32_t>(opt_arg_1_10_2_container->Get(opt_arg_1_10_2_id)).FromJust();
+                opt_arg_1_10_2.emplace_back(opt_arg_1_10_2_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_10_3 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseReserve").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_10_3 = Nan::To<int64_t>(field_opt_arg_1_10_3).FromJust();
+
+        auto field_opt_arg_1_10_4 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseFee").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_1_10_4 = Nan::To<int64_t>(field_opt_arg_1_10_4).FromJust();
+
+        auto field_opt_arg_1_10_5 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalSEPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_1_10_5;
+        Local<Array> opt_arg_1_10_5_container = Local<Array>::Cast(field_opt_arg_1_10_5);
+        for(uint32_t opt_arg_1_10_5_id = 0; opt_arg_1_10_5_id < opt_arg_1_10_5_container->Length(); opt_arg_1_10_5_id++)
+        {
+            if(opt_arg_1_10_5_container->Get(opt_arg_1_10_5_id)->IsString())
+            {
+                Nan::Utf8String string_opt_arg_1_10_5_elem(opt_arg_1_10_5_container->Get(opt_arg_1_10_5_id)->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_1_10_5_elem = std::string(*string_opt_arg_1_10_5_elem);
+                opt_arg_1_10_5.emplace_back(opt_arg_1_10_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_1_10_6 = Nan::Get(field_arg_1_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("NetworkPassphrase").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_10_6(field_opt_arg_1_10_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_10_6 = std::string(*string_opt_arg_1_10_6);
+        StellarLikeNetworkParameters opt_arg_1_10(opt_arg_1_10_1, opt_arg_1_10_2, opt_arg_1_10_3, opt_arg_1_10_4, opt_arg_1_10_5, opt_arg_1_10_6);
+
+        arg_1_10.emplace(opt_arg_1_10);
+    }
+
+    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8, arg_1_9, arg_1_10);
 
 
     //Call factory
@@ -1486,6 +1634,8 @@ void NJSAddress::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"toString", toString);
     Nan::SetPrototypeMethod(func_template,"asBitcoinLikeAddress", asBitcoinLikeAddress);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeAddress", isInstanceOfBitcoinLikeAddress);
+    Nan::SetPrototypeMethod(func_template,"asStellarLikeAddress", asStellarLikeAddress);
+    Nan::SetPrototypeMethod(func_template,"isInstanceOfStellarLikeAddress", isInstanceOfStellarLikeAddress);
     Nan::SetPrototypeMethod(func_template,"getCurrency", getCurrency);
     Nan::SetPrototypeMethod(func_template,"parse", parse);
     Nan::SetPrototypeMethod(func_template,"isValid", isValid);
@@ -1494,5 +1644,5 @@ void NJSAddress::Initialize(Local<Object> target) {
     Address_prototype.Reset(objectTemplate);
 
     //Add template to target
-    Nan::Set(target, Nan::New<String>("NJSAddress").ToLocalChecked(), Nan::GetFunction(func_template).ToLocalChecked());
+    target->Set(Nan::New<String>("NJSAddress").ToLocalChecked(), func_template->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }

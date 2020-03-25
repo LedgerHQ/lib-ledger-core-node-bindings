@@ -19,6 +19,7 @@
 #include "NJSOperationQueryCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
 #include "NJSRippleLikeAccountCpp.hpp"
+#include "NJSStellarLikeAccountCpp.hpp"
 #include "NJSTezosLikeAccountCpp.hpp"
 #include <chrono>
 #include <cstdint>
@@ -117,6 +118,12 @@ private:
     static NAN_METHOD(asTezosLikeAccount);
 
     /**
+     * Turn the account into a Stellar one, allowing operations to be performerd on the Stellar
+     * network.
+     */
+    static NAN_METHOD(asStellarLikeAccount);
+
+    /**
      * Check if account is a Bitcoin one.
      * @return bool
      */
@@ -127,6 +134,12 @@ private:
      * @return bool
      */
     static NAN_METHOD(isInstanceOfEthereumLikeAccount);
+
+    /**
+     * Check if account is a Stellar one.
+     * @return bool
+     */
+    static NAN_METHOD(isInstanceOfStellarLikeAccount);
 
     /**
      * Check if account is a Ripple one.
