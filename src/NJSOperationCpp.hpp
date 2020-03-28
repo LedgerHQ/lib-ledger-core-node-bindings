@@ -12,6 +12,7 @@
 #include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/OperationType.hpp"
 #include "../include/RippleLikeNetworkParameters.hpp"
+#include "../include/StellarLikeNetworkParameters.hpp"
 #include "../include/TezosLikeNetworkParameters.hpp"
 #include "../include/WalletType.hpp"
 #include "NJSAmountCpp.hpp"
@@ -19,6 +20,7 @@
 #include "NJSEthereumLikeOperationCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
 #include "NJSRippleLikeOperationCpp.hpp"
+#include "NJSStellarLikeOperationCpp.hpp"
 #include "NJSTezosLikeOperationCpp.hpp"
 #include "NJSTrustIndicatorCpp.hpp"
 #include <chrono>
@@ -136,7 +138,14 @@ private:
      */
     static NAN_METHOD(asTezosLikeOperation);
 
-    /** Same as isInstanceOfBitcoinLikeOperation for bitcoin. */
+    /**
+     * Same as isInstanceOfBitcoinLikeOperation for bitcoin.
+     * Convert operation as Ethereum operation.
+     * @return EthereumLikeOperation object
+     */
+    static NAN_METHOD(asStellarLikeOperation);
+
+    /** Is this an instance of a Bitcoin-like operation? */
     static NAN_METHOD(isInstanceOfBitcoinLikeOperation);
 
     /** Same as isInstanceOfEthereumLikeOperation for ethereum. */
@@ -147,6 +156,9 @@ private:
 
     /** Same as isInstanceOfTezosLikeOperation for tezos. */
     static NAN_METHOD(isInstanceOfTezosLikeOperation);
+
+    /** Same as isInstanceOfBitcoinLikeOperation for ripple. */
+    static NAN_METHOD(isInstanceOfStellarLikeOperation);
 
     /**
      * Tells if the operation is complete.

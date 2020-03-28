@@ -6,6 +6,7 @@
 
 
 #include "../include/../utils/optional.hpp"
+#include "NJSAddressListCallback.hpp"
 #include "NJSBigIntListCallback.hpp"
 #include "NJSBitcoinLikeOutputListCallback.hpp"
 #include "NJSBitcoinLikeTransactionBuilderCpp.hpp"
@@ -63,6 +64,12 @@ private:
      * when the right time comes !
      */
     static NAN_METHOD(getFees);
+
+    /**
+     * Get addresses given a range of indices
+     * Note: this will return public and change addresses
+     */
+    static NAN_METHOD(getAddresses);
 
     static NAN_METHOD(New);
 

@@ -212,6 +212,35 @@ NAN_METHOD(NJSAmount::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked(), arg_0_9);
+    Local<Value> arg_0_10;
+    if(result.stellarLikeNetworkParameters)
+    {
+        auto arg_0_10_optional = (result.stellarLikeNetworkParameters).value();
+        auto arg_0_10_tmp = Nan::New<Object>();
+        auto arg_0_10_tmp_1 = Nan::New<String>(arg_0_10_optional.Identifier).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_10_tmp_1);
+        auto arg_0_10_tmp_2 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_10_optional.Version)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("Version").ToLocalChecked(), arg_0_10_tmp_2);
+        auto arg_0_10_tmp_3 = Nan::New<Number>(arg_0_10_optional.BaseReserve);
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("BaseReserve").ToLocalChecked(), arg_0_10_tmp_3);
+        auto arg_0_10_tmp_4 = Nan::New<Number>(arg_0_10_optional.BaseFee);
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("BaseFee").ToLocalChecked(), arg_0_10_tmp_4);
+        Local<Array> arg_0_10_tmp_5 = Nan::New<Array>();
+        for(size_t arg_0_10_tmp_5_id = 0; arg_0_10_tmp_5_id < arg_0_10_optional.AdditionalSEPs.size(); arg_0_10_tmp_5_id++)
+        {
+            auto arg_0_10_tmp_5_elem = Nan::New<String>(arg_0_10_optional.AdditionalSEPs[arg_0_10_tmp_5_id]).ToLocalChecked();
+            Nan::Set(arg_0_10_tmp_5, (int)arg_0_10_tmp_5_id,arg_0_10_tmp_5_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("AdditionalSEPs").ToLocalChecked(), arg_0_10_tmp_5);
+        auto arg_0_10_tmp_6 = Nan::New<String>(arg_0_10_optional.NetworkPassphrase).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("NetworkPassphrase").ToLocalChecked(), arg_0_10_tmp_6);
+
+        arg_0_10 = arg_0_10_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_10);
 
 
     //Return result
@@ -815,7 +844,63 @@ NAN_METHOD(NJSAmount::fromHex) {
         arg_0_9.emplace(opt_arg_0_9);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
+
+    auto field_arg_0_10 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_10 = std::experimental::optional<StellarLikeNetworkParameters>();
+    if(!field_arg_0_10->IsNull() && !field_arg_0_10->IsUndefined())
+    {
+
+        auto field_opt_arg_0_10_1 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_10_1(field_opt_arg_0_10_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_10_1 = std::string(*string_opt_arg_0_10_1);
+
+        auto field_opt_arg_0_10_2 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Version").ToLocalChecked()).ToLocalChecked();
+        if(!field_opt_arg_0_10_2->IsString())
+        {
+            Nan::ThrowError("field_opt_arg_0_10_2 should be a hexadecimal string.");
+        }
+        std::vector<uint8_t> opt_arg_0_10_2;
+        Nan::Utf8String str_opt_arg_0_10_2(field_opt_arg_0_10_2);
+        std::string string_opt_arg_0_10_2(*str_opt_arg_0_10_2, str_opt_arg_0_10_2.length());
+        if (string_opt_arg_0_10_2.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_10_2 = djinni::js::hex::toByteArray(string_opt_arg_0_10_2.substr(2));
+        }
+        else
+        {
+            opt_arg_0_10_2 = std::vector<uint8_t>(string_opt_arg_0_10_2.cbegin(), string_opt_arg_0_10_2.cend());
+        }
+
+
+        auto field_opt_arg_0_10_3 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseReserve").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_10_3 = Nan::To<int64_t>(field_opt_arg_0_10_3).FromJust();
+
+        auto field_opt_arg_0_10_4 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseFee").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_10_4 = Nan::To<int64_t>(field_opt_arg_0_10_4).FromJust();
+
+        auto field_opt_arg_0_10_5 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalSEPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_10_5;
+        Local<Array> opt_arg_0_10_5_container = Local<Array>::Cast(field_opt_arg_0_10_5);
+        for(uint32_t opt_arg_0_10_5_id = 0; opt_arg_0_10_5_id < opt_arg_0_10_5_container->Length(); opt_arg_0_10_5_id++)
+        {
+            if(opt_arg_0_10_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_10_5_id).ToLocalChecked()->IsString())
+            {
+                Nan::Utf8String string_opt_arg_0_10_5_elem(opt_arg_0_10_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_10_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_0_10_5_elem = std::string(*string_opt_arg_0_10_5_elem);
+                opt_arg_0_10_5.emplace_back(opt_arg_0_10_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_10_6 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("NetworkPassphrase").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_10_6(field_opt_arg_0_10_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_10_6 = std::string(*string_opt_arg_0_10_6);
+        StellarLikeNetworkParameters opt_arg_0_10(opt_arg_0_10_1, opt_arg_0_10_2, opt_arg_0_10_3, opt_arg_0_10_4, opt_arg_0_10_5, opt_arg_0_10_6);
+
+        arg_0_10.emplace(opt_arg_0_10);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10);
 
     Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
@@ -1196,7 +1281,63 @@ NAN_METHOD(NJSAmount::fromLong) {
         arg_0_9.emplace(opt_arg_0_9);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
+
+    auto field_arg_0_10 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_10 = std::experimental::optional<StellarLikeNetworkParameters>();
+    if(!field_arg_0_10->IsNull() && !field_arg_0_10->IsUndefined())
+    {
+
+        auto field_opt_arg_0_10_1 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_10_1(field_opt_arg_0_10_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_10_1 = std::string(*string_opt_arg_0_10_1);
+
+        auto field_opt_arg_0_10_2 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Version").ToLocalChecked()).ToLocalChecked();
+        if(!field_opt_arg_0_10_2->IsString())
+        {
+            Nan::ThrowError("field_opt_arg_0_10_2 should be a hexadecimal string.");
+        }
+        std::vector<uint8_t> opt_arg_0_10_2;
+        Nan::Utf8String str_opt_arg_0_10_2(field_opt_arg_0_10_2);
+        std::string string_opt_arg_0_10_2(*str_opt_arg_0_10_2, str_opt_arg_0_10_2.length());
+        if (string_opt_arg_0_10_2.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_10_2 = djinni::js::hex::toByteArray(string_opt_arg_0_10_2.substr(2));
+        }
+        else
+        {
+            opt_arg_0_10_2 = std::vector<uint8_t>(string_opt_arg_0_10_2.cbegin(), string_opt_arg_0_10_2.cend());
+        }
+
+
+        auto field_opt_arg_0_10_3 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseReserve").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_10_3 = Nan::To<int64_t>(field_opt_arg_0_10_3).FromJust();
+
+        auto field_opt_arg_0_10_4 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseFee").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_10_4 = Nan::To<int64_t>(field_opt_arg_0_10_4).FromJust();
+
+        auto field_opt_arg_0_10_5 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalSEPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_10_5;
+        Local<Array> opt_arg_0_10_5_container = Local<Array>::Cast(field_opt_arg_0_10_5);
+        for(uint32_t opt_arg_0_10_5_id = 0; opt_arg_0_10_5_id < opt_arg_0_10_5_container->Length(); opt_arg_0_10_5_id++)
+        {
+            if(opt_arg_0_10_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_10_5_id).ToLocalChecked()->IsString())
+            {
+                Nan::Utf8String string_opt_arg_0_10_5_elem(opt_arg_0_10_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_10_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_0_10_5_elem = std::string(*string_opt_arg_0_10_5_elem);
+                opt_arg_0_10_5.emplace_back(opt_arg_0_10_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_10_6 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("NetworkPassphrase").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_10_6(field_opt_arg_0_10_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_10_6 = std::string(*string_opt_arg_0_10_6);
+        StellarLikeNetworkParameters opt_arg_0_10(opt_arg_0_10_1, opt_arg_0_10_2, opt_arg_0_10_3, opt_arg_0_10_4, opt_arg_0_10_5, opt_arg_0_10_6);
+
+        arg_0_10.emplace(opt_arg_0_10);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10);
 
     auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
 
@@ -1582,7 +1723,63 @@ NAN_METHOD(NJSAmount::New) {
         arg_0_9.emplace(opt_arg_0_9);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9);
+
+    auto field_arg_0_10 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_10 = std::experimental::optional<StellarLikeNetworkParameters>();
+    if(!field_arg_0_10->IsNull() && !field_arg_0_10->IsUndefined())
+    {
+
+        auto field_opt_arg_0_10_1 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Identifier").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_10_1(field_opt_arg_0_10_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_10_1 = std::string(*string_opt_arg_0_10_1);
+
+        auto field_opt_arg_0_10_2 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Version").ToLocalChecked()).ToLocalChecked();
+        if(!field_opt_arg_0_10_2->IsString())
+        {
+            Nan::ThrowError("field_opt_arg_0_10_2 should be a hexadecimal string.");
+        }
+        std::vector<uint8_t> opt_arg_0_10_2;
+        Nan::Utf8String str_opt_arg_0_10_2(field_opt_arg_0_10_2);
+        std::string string_opt_arg_0_10_2(*str_opt_arg_0_10_2, str_opt_arg_0_10_2.length());
+        if (string_opt_arg_0_10_2.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_10_2 = djinni::js::hex::toByteArray(string_opt_arg_0_10_2.substr(2));
+        }
+        else
+        {
+            opt_arg_0_10_2 = std::vector<uint8_t>(string_opt_arg_0_10_2.cbegin(), string_opt_arg_0_10_2.cend());
+        }
+
+
+        auto field_opt_arg_0_10_3 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseReserve").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_10_3 = Nan::To<int64_t>(field_opt_arg_0_10_3).FromJust();
+
+        auto field_opt_arg_0_10_4 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("BaseFee").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_10_4 = Nan::To<int64_t>(field_opt_arg_0_10_4).FromJust();
+
+        auto field_opt_arg_0_10_5 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalSEPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_10_5;
+        Local<Array> opt_arg_0_10_5_container = Local<Array>::Cast(field_opt_arg_0_10_5);
+        for(uint32_t opt_arg_0_10_5_id = 0; opt_arg_0_10_5_id < opt_arg_0_10_5_container->Length(); opt_arg_0_10_5_id++)
+        {
+            if(opt_arg_0_10_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_10_5_id).ToLocalChecked()->IsString())
+            {
+                Nan::Utf8String string_opt_arg_0_10_5_elem(opt_arg_0_10_5_container->Get(Nan::GetCurrentContext(), opt_arg_0_10_5_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_0_10_5_elem = std::string(*string_opt_arg_0_10_5_elem);
+                opt_arg_0_10_5.emplace_back(opt_arg_0_10_5_elem);
+            }
+        }
+
+
+        auto field_opt_arg_0_10_6 = Nan::Get(field_arg_0_10->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("NetworkPassphrase").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_10_6(field_opt_arg_0_10_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_10_6 = std::string(*string_opt_arg_0_10_6);
+        StellarLikeNetworkParameters opt_arg_0_10(opt_arg_0_10_1, opt_arg_0_10_2, opt_arg_0_10_3, opt_arg_0_10_4, opt_arg_0_10_5, opt_arg_0_10_6);
+
+        arg_0_10.emplace(opt_arg_0_10);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10);
 
     Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
