@@ -6,6 +6,7 @@
 
 
 #include "../include/BitcoinLikeNetworkParameters.hpp"
+#include "../include/CosmosLikeNetworkParameters.hpp"
 #include "../include/Currency.hpp"
 #include "../include/CurrencyUnit.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"

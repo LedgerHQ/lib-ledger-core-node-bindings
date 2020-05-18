@@ -272,6 +272,32 @@ NAN_METHOD(NJSAccount::asBitcoinLikeAccount) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSAccount::asCosmosLikeAccount) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAccount::asCosmosLikeAccount needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAccount::asCosmosLikeAccount : implementation of Account is not valid");
+    }
+
+    auto result = cpp_impl->asCosmosLikeAccount();
+
+    //Wrap result in node object
+    auto arg_0 = NJSCosmosLikeAccount::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSAccount::asEthereumLikeAccount) {
 
     //Check if method called with right number of arguments
@@ -394,6 +420,31 @@ NAN_METHOD(NJSAccount::isInstanceOfBitcoinLikeAccount) {
     }
 
     auto result = cpp_impl->isInstanceOfBitcoinLikeAccount();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSAccount::isInstanceOfCosmosLikeAccount) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAccount::isInstanceOfCosmosLikeAccount needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAccount::isInstanceOfCosmosLikeAccount : implementation of Account is not valid");
+    }
+
+    auto result = cpp_impl->isInstanceOfCosmosLikeAccount();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Boolean>(result);
@@ -690,6 +741,32 @@ NAN_METHOD(NJSAccount::eraseDataSince) {
     cpp_impl->eraseDataSince(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSAccount::getAccountKeychain) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAccount::getAccountKeychain needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAccount::getAccountKeychain : implementation of Account is not valid");
+    }
+
+    auto result = cpp_impl->getAccountKeychain();
+
+    //Wrap result in node object
+    auto arg_0 = NJSKeychain::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSAccount::New) {
     //Only new allowed
@@ -746,11 +823,13 @@ void NJSAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getLogger", getLogger);
     Nan::SetPrototypeMethod(func_template,"getOperationPreferences", getOperationPreferences);
     Nan::SetPrototypeMethod(func_template,"asBitcoinLikeAccount", asBitcoinLikeAccount);
+    Nan::SetPrototypeMethod(func_template,"asCosmosLikeAccount", asCosmosLikeAccount);
     Nan::SetPrototypeMethod(func_template,"asEthereumLikeAccount", asEthereumLikeAccount);
     Nan::SetPrototypeMethod(func_template,"asRippleLikeAccount", asRippleLikeAccount);
     Nan::SetPrototypeMethod(func_template,"asTezosLikeAccount", asTezosLikeAccount);
     Nan::SetPrototypeMethod(func_template,"asStellarLikeAccount", asStellarLikeAccount);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeAccount", isInstanceOfBitcoinLikeAccount);
+    Nan::SetPrototypeMethod(func_template,"isInstanceOfCosmosLikeAccount", isInstanceOfCosmosLikeAccount);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfEthereumLikeAccount", isInstanceOfEthereumLikeAccount);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfStellarLikeAccount", isInstanceOfStellarLikeAccount);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfRippleLikeAccount", isInstanceOfRippleLikeAccount);
@@ -763,6 +842,7 @@ void NJSAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getLastBlock", getLastBlock);
     Nan::SetPrototypeMethod(func_template,"getRestoreKey", getRestoreKey);
     Nan::SetPrototypeMethod(func_template,"eraseDataSince", eraseDataSince);
+    Nan::SetPrototypeMethod(func_template,"getAccountKeychain", getAccountKeychain);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     Account_prototype.Reset(objectTemplate);

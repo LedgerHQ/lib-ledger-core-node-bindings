@@ -46,13 +46,13 @@ private:
 
     /**
      * Add offset to the operation query.
-     * @param from, 64-bit integer
+     * @param from, 32-bit integer
      */
     static NAN_METHOD(offset);
 
     /**
      * Add limit to the operation query results.
-     * @param count, 64-bit integer
+     * @param count, 32-bit integer
      */
     static NAN_METHOD(limit);
 

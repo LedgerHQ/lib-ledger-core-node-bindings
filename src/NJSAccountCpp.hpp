@@ -12,9 +12,11 @@
 #include "NJSAmountListCallback.hpp"
 #include "NJSBitcoinLikeAccountCpp.hpp"
 #include "NJSBlockCallback.hpp"
+#include "NJSCosmosLikeAccountCpp.hpp"
 #include "NJSErrorCodeCallback.hpp"
 #include "NJSEthereumLikeAccountCpp.hpp"
 #include "NJSEventBusCpp.hpp"
+#include "NJSKeychainCpp.hpp"
 #include "NJSLoggerCpp.hpp"
 #include "NJSOperationQueryCpp.hpp"
 #include "NJSPreferencesCpp.hpp"
@@ -106,6 +108,12 @@ private:
     static NAN_METHOD(asBitcoinLikeAccount);
 
     /**
+     * Turn the account into an Cosmos one, allowing operations to be performed on the Cosmos
+     * network.
+     */
+    static NAN_METHOD(asCosmosLikeAccount);
+
+    /**
      * Turn the account into an Ethereum one, allowing operations to be performrd on the Ethereum
      * network.
      */
@@ -128,6 +136,12 @@ private:
      * @return bool
      */
     static NAN_METHOD(isInstanceOfBitcoinLikeAccount);
+
+    /**
+     * Check if account is a Cosmos one.
+     * @return bool
+     */
+    static NAN_METHOD(isInstanceOfCosmosLikeAccount);
 
     /**
      * Check if account is an Ethereum one.
@@ -188,6 +202,9 @@ private:
      * @param date, start date of data deletion
      */
     static NAN_METHOD(eraseDataSince);
+
+    /** Access to underlying keychain. */
+    static NAN_METHOD(getAccountKeychain);
 
     static NAN_METHOD(New);
 

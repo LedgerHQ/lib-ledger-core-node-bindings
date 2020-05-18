@@ -60,6 +60,50 @@ NAN_METHOD(NJSNetworks::bitcoin) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSNetworks::cosmos) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSNetworks::cosmos needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    auto arg_0 = std::string(*string_arg_0);
+
+    auto result = ledger::core::api::Networks::cosmos(arg_0);
+
+    //Wrap result in node object
+    auto arg_1 = Nan::New<Object>();
+    auto arg_1_1 = Nan::New<String>(result.Identifier).ToLocalChecked();
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("Identifier").ToLocalChecked(), arg_1_1);
+    auto arg_1_2 = Nan::New<String>(result.MessagePrefix).ToLocalChecked();
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_1_2);
+    auto arg_1_3 = Nan::New<String>("0x" + djinni::js::hex::toString(result.XPUBVersion)).ToLocalChecked();
+
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_1_3);
+    auto arg_1_4 = Nan::New<String>("0x" + djinni::js::hex::toString(result.PubKeyPrefix)).ToLocalChecked();
+
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("PubKeyPrefix").ToLocalChecked(), arg_1_4);
+    auto arg_1_5 = Nan::New<String>("0x" + djinni::js::hex::toString(result.AddressPrefix)).ToLocalChecked();
+
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("AddressPrefix").ToLocalChecked(), arg_1_5);
+    auto arg_1_6 = Nan::New<String>(result.ChainId).ToLocalChecked();
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("ChainId").ToLocalChecked(), arg_1_6);
+    Local<Array> arg_1_7 = Nan::New<Array>();
+    for(size_t arg_1_7_id = 0; arg_1_7_id < result.AdditionalCIPs.size(); arg_1_7_id++)
+    {
+        auto arg_1_7_elem = Nan::New<String>(result.AdditionalCIPs[arg_1_7_id]).ToLocalChecked();
+        Nan::Set(arg_1_7, (int)arg_1_7_id,arg_1_7_elem);
+    }
+
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("AdditionalCIPs").ToLocalChecked(), arg_1_7);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_1);
+}
 NAN_METHOD(NJSNetworks::ethereum) {
 
     //Check if method called with right number of arguments
@@ -223,6 +267,7 @@ void NJSNetworks::Initialize(Local<Object> target) {
 
     //SetPrototypeMethod all methods
     Nan::SetPrototypeMethod(func_template,"bitcoin", bitcoin);
+    Nan::SetPrototypeMethod(func_template,"cosmos", cosmos);
     Nan::SetPrototypeMethod(func_template,"ethereum", ethereum);
     Nan::SetPrototypeMethod(func_template,"ripple", ripple);
     Nan::SetPrototypeMethod(func_template,"tezos", tezos);
