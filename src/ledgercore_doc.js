@@ -431,6 +431,8 @@ declare class NJSNetworks
 {
     /** The Bitcoin network parameters. */
     static declare function bitcoin(): BitcoinLikeNetworkParameters;
+    /** The Cosmos network parameters. */
+    static declare function cosmos(chainID: string): CosmosLikeNetworkParameters;
     /** The Ethereum network parameters. */
     static declare function ethereum(): EthereumLikeNetworkParameters;
     /** The Ripple network parameters. */
@@ -714,6 +716,13 @@ declare class NJSOperation
      */
     declare function getRecipients(): Array<string>;
     /**
+     * Get account-filtered recipients list associated with the operation.
+     *
+     * This function will filter recipients to retain only the ones that are owned by the current
+     * account.
+     */
+    declare function getSelfRecipients(): Array<string>;
+    /**
      * Get amount of operation.
      * @return Amount object
      */
@@ -744,6 +753,11 @@ declare class NJSOperation
      */
     declare function asBitcoinLikeOperation(): NJSBitcoinLikeOperation;
     /**
+     * Convert operation as Cosmos operation.
+     * @return CosmosLikeOperation object
+     */
+    declare function asCosmosLikeOperation(): NJSCosmosLikeOperation;
+    /**
      * Convert operation as Ethereum operation.
      * @return EthereumLikeOperation object
      */
@@ -766,6 +780,8 @@ declare class NJSOperation
     declare function asStellarLikeOperation(): NJSStellarLikeOperation;
     /** Is this an instance of a Bitcoin-like operation? */
     declare function isInstanceOfBitcoinLikeOperation(): boolean;
+    /** Same as isInstanceOfCosmosLikeOperation for cosmos. */
+    declare function isInstanceOfCosmosLikeOperation(): boolean;
     /** Same as isInstanceOfEthereumLikeOperation for ethereum. */
     declare function isInstanceOfEthereumLikeOperation(): boolean;
     /** Same as isInstanceOfRippleLikeOperation for ripple. */
@@ -848,12 +864,12 @@ declare class NJSOperationQuery
     declare function filter(): NJSQueryFilter;
     /**
      * Add offset to the operation query.
-     * @param from, 64-bit integer
+     * @param from, 32-bit integer
      */
     declare function offset(from: number): NJSOperationQuery;
     /**
      * Add limit to the operation query results.
-     * @param count, 64-bit integer
+     * @param count, 32-bit integer
      */
     declare function limit(count: number): NJSOperationQuery;
     /**
@@ -913,6 +929,17 @@ declare class NJSAddress
      */
     static declare function isValid(address: string, currency: Currency): boolean;
 }
+/**
+ * Keychain abstraction.
+ *
+ * A keychain can be seen as an address database that can be queried to get lists of addresses,
+ * ask whether an address is contained, or generate new addresses.
+ */
+declare class NJSKeychain
+{
+    /** Check whether an address is contained. */
+    declare function contains(address: string): boolean;
+}
 /** Class representing an account. */
 declare class NJSAccount
 {
@@ -967,6 +994,11 @@ declare class NJSAccount
      */
     declare function asBitcoinLikeAccount(): NJSBitcoinLikeAccount;
     /**
+     * Turn the account into an Cosmos one, allowing operations to be performed on the Cosmos
+     * network.
+     */
+    declare function asCosmosLikeAccount(): NJSCosmosLikeAccount;
+    /**
      * Turn the account into an Ethereum one, allowing operations to be performrd on the Ethereum
      * network.
      */
@@ -985,6 +1017,11 @@ declare class NJSAccount
      * @return bool
      */
     declare function isInstanceOfBitcoinLikeAccount(): boolean;
+    /**
+     * Check if account is a Cosmos one.
+     * @return bool
+     */
+    declare function isInstanceOfCosmosLikeAccount(): boolean;
     /**
      * Check if account is an Ethereum one.
      * @return bool
@@ -1033,6 +1070,8 @@ declare class NJSAccount
      * @param date, start date of data deletion
      */
     declare function eraseDataSince(date: Date, callback: NJSErrorCodeCallback);
+    /** Access to underlying keychain. */
+    declare function getAccountKeychain(): NJSKeychain;
 }
 /** Callback triggered by main completed task, returning optional result as list of template type T. */
 declare class NJSAddressListCallback
@@ -1132,6 +1171,11 @@ declare class NJSWallet
      */
     declare function asBitcoinLikeWallet(): NJSBitcoinLikeWallet;
     /**
+     * Convert wallet to a Cosmos one.
+     * @return CosmosWallet object
+     */
+    declare function asCosmosLikeWallet(): NJSCosmosLikeWallet;
+    /**
      * Get currency of wallet.
      * @return Currency object
      */
@@ -1141,6 +1185,11 @@ declare class NJSWallet
      * @return bool
      */
     declare function isInstanceOfBitcoinLikeWallet(): boolean;
+    /**
+     * Tell whether wallet is a Cosmos one.
+     * @return bool
+     */
+    declare function isInstanceOfCosmosLikeWallet(): boolean;
     /**
      * Tell whether wallet is a Ethereum one.
      * @return bool
@@ -1923,6 +1972,512 @@ declare class NJSRandomNumberGenerator
 declare class NJSEthereumPublicKeyProvider
 {
 }
+declare class NJSCosmosLikeMessage
+{
+    /**
+     * Get type
+     * @return CosmosLikeMsgType a message type
+     */
+    declare function getMessageType(): CosmosLikeMsgType;
+    /**
+     * Get type
+     * @return string a message type in string format
+     */
+    declare function getRawMessageType(): string;
+    /**
+     * Get type
+     * @return bool if the message was successfully executed on the chain
+     */
+    declare function getSuccess(): boolean;
+    /**
+     * Get type
+     * @return string the log of the message execution (useful when getSuccess() == false)
+     */
+    declare function getLog(): string;
+    /**
+     * Get message index in the tx
+     * @return string the 0-based index in the tx or "fees" for the fees in the tx
+     */
+    declare function getIndex(): string;
+    /**
+     * Wrap the given CosmosLikeMsgSend into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgSend(msg: CosmosLikeMsgSend): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgSend
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgDelegate the unwrapped message
+     */
+    static declare function unwrapMsgSend(msg: NJSCosmosLikeMessage): CosmosLikeMsgSend;
+    /**
+     * Wrap the given CosmosLikeMsgDelegate into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgDelegate(msg: CosmosLikeMsgDelegate): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgDelegate
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgDelegate the unwrapped message
+     */
+    static declare function unwrapMsgDelegate(msg: NJSCosmosLikeMessage): CosmosLikeMsgDelegate;
+    /**
+     * Wrap the given CosmosLikeMsgUndelegate into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgUndelegate(msg: CosmosLikeMsgUndelegate): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgUndelegate
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgUndelegate the unwrapped message
+     */
+    static declare function unwrapMsgUndelegate(msg: NJSCosmosLikeMessage): CosmosLikeMsgUndelegate;
+    /**
+     * Wrap the given CosmosLikeMsgBeginRedelegate into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgBeginRedelegate(msg: CosmosLikeMsgBeginRedelegate): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgBeginRedelegate
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgBeginRedelegate the unwrapped message
+     */
+    static declare function unwrapMsgBeginRedelegate(msg: NJSCosmosLikeMessage): CosmosLikeMsgBeginRedelegate;
+    /**
+     * Wrap the given CosmosLikeMsgSubmitProposal into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgSubmitProposal(msg: CosmosLikeMsgSubmitProposal): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgSubmitProposal
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgSubmitProposal the unwrapped message
+     */
+    static declare function unwrapMsgSubmitProposal(msg: NJSCosmosLikeMessage): CosmosLikeMsgSubmitProposal;
+    /**
+     * Wrap the given CosmosLikeMsgVote into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgVote(msg: CosmosLikeMsgVote): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgVote
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgVote the unwrapped message
+     */
+    static declare function unwrapMsgVote(msg: NJSCosmosLikeMessage): CosmosLikeMsgVote;
+    /**
+     * Wrap the given CosmosLikeMsgDeposit into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgDeposit(msg: CosmosLikeMsgDeposit): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgDeposit
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgDeposit the unwrapped message
+     */
+    static declare function unwrapMsgDeposit(msg: NJSCosmosLikeMessage): CosmosLikeMsgDeposit;
+    /**
+     * Wrap the given CosmosLikeMsgWithdrawDelegationReward into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgWithdrawDelegationReward(msg: CosmosLikeMsgWithdrawDelegationReward): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgWithdrawDelegationReward
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgWithdrawDelegationReward the unwrapped message
+     */
+    static declare function unwrapMsgWithdrawDelegationReward(msg: NJSCosmosLikeMessage): CosmosLikeMsgWithdrawDelegationReward;
+    /**
+     * Wrap the given CosmosLikeMsgMultiSend into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgMultiSend(msg: CosmosLikeMsgMultiSend): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgMultiSend
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgMultiSend the unwrapped message
+     */
+    static declare function unwrapMsgMultiSend(msg: NJSCosmosLikeMessage): CosmosLikeMsgMultiSend;
+    /**
+     * Wrap the given CosmosLikeMsgCreateValidator into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgCreateValidator(msg: CosmosLikeMsgCreateValidator): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgCreateValidator
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgCreateValidator the unwrapped message
+     */
+    static declare function unwrapMsgCreateValidator(msg: NJSCosmosLikeMessage): CosmosLikeMsgCreateValidator;
+    /**
+     * Wrap the given CosmosLikeMsgEditValidator into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgEditValidator(msg: CosmosLikeMsgEditValidator): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgEditValidator
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgEditValidator the unwrapped message
+     */
+    static declare function unwrapMsgEditValidator(msg: NJSCosmosLikeMessage): CosmosLikeMsgEditValidator;
+    /**
+     * Wrap the given CosmosLikeMsgSetWithdrawAddress into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgSetWithdrawAddress(msg: CosmosLikeMsgSetWithdrawAddress): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgSetWithdrawAddress
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgSetWithdrawAddress the unwrapped message
+     */
+    static declare function unwrapMsgSetWithdrawAddress(msg: NJSCosmosLikeMessage): CosmosLikeMsgSetWithdrawAddress;
+    /**
+     * Wrap the given CosmosLikeMsgWithdrawDelegatorReward into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgWithdrawDelegatorReward(msg: CosmosLikeMsgWithdrawDelegatorReward): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgWithdrawDelegatorReward
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgWithdrawDelegatorReward the unwrapped message
+     */
+    static declare function unwrapMsgWithdrawDelegatorReward(msg: NJSCosmosLikeMessage): CosmosLikeMsgWithdrawDelegatorReward;
+    /**
+     * Wrap the given CosmosLikeMsgWithdrawValidatorCommission into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgWithdrawValidatorCommission(msg: CosmosLikeMsgWithdrawValidatorCommission): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgWithdrawValidatorCommission
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgWithdrawValidatorCommission the unwrapped message
+     */
+    static declare function unwrapMsgWithdrawValidatorCommission(msg: NJSCosmosLikeMessage): CosmosLikeMsgWithdrawValidatorCommission;
+    /**
+     * Wrap the given CosmosLikeMsgUnjail into a CosmosLikeMessage
+     * @param msg The message you need to wrap.
+     * @return CosmosLikeMessage A wrapped message.
+     */
+    static declare function wrapMsgUnjail(msg: CosmosLikeMsgUnjail): NJSCosmosLikeMessage;
+    /**
+     * Unwrap a message to a CosmosLikeMsgUnjail
+     * @param msg The message to unwrap
+     * @return CosmosLikeMsgUnjail the unwrapped message
+     */
+    static declare function unwrapMsgUnjail(msg: NJSCosmosLikeMessage): CosmosLikeMsgUnjail;
+}
+/**Class representing a Cosmos transaction */
+declare class NJSCosmosLikeTransaction
+{
+    /** Get the time when the transaction was issued or the time of the block including this transaction */
+    declare function getDate(): Date;
+    /** Get Fee (in drop) */
+    declare function getFee(): NJSAmount;
+    /** Get gas Wanted (maximum gas advertised in transaction) */
+    declare function getGas(): NJSAmount;
+    /** Get gas used (gas actually used in the transaction) */
+    declare function getGasUsed(): NJSBigInt;
+    /** Get gas Wanted (in BigInt form) */
+    declare function getGasWanted(): NJSBigInt;
+    /** Get the hash of the transaction. */
+    declare function getHash(): string;
+    /** Get memo */
+    declare function getMemo(): string;
+    /** Get the list of messages */
+    declare function getMessages(): Array<NJSCosmosLikeMessage>;
+    /** Get Signing public Key */
+    declare function getSigningPubKey(): String;
+    /** Serialize the transaction to be signed */
+    declare function serializeForSignature(): string;
+    /** Set signature of transaction, when a signature is set it can be broadcasted */
+    declare function setSignature(rSignature: String, sSignature: String);
+    declare function setDERSignature(signature: String);
+    /**
+     * Serialize the transaction to be broadcast
+     * @param mode The supported broadcast modes include
+     *        "block"(return after tx commit), (https://docs.cosmos.network/master/basics/tx-lifecycle.html#commit)
+     *        "sync"(return afer CheckTx), (https://docs.cosmos.network/master/basics/tx-lifecycle.html#types-of-checks) and
+     *        "async"(return right away).
+     * @return string the json payload to broadcast on the network
+     */
+    declare function serializeForBroadcast(mode: string): string;
+}
+/**Class representing a Cosmos Operation */
+declare class NJSCosmosLikeOperation
+{
+    /**
+     *Get operation's transaction
+     *@return CosmosLikeTransaction object
+     */
+    declare function getTransaction(): NJSCosmosLikeTransaction;
+    /**
+     * Get message which created this operation
+     * @return CosmosLikeMessage object
+     */
+    declare function getMessage(): NJSCosmosLikeMessage;
+}
+/**Class representing Cosmos block */
+declare class NJSCosmosLikeBlock
+{
+    /**
+     *Hash of block
+     *@return string representing hash of this block
+     */
+    declare function getHash(): string;
+    /**
+     *Height of block in blockchain
+     *@return 64 bits integer, height of block
+     */
+    declare function getHeight(): number;
+    /**
+     *Timestamp when block was mined
+     *@return Date object, date when block was appended to blockchain
+     */
+    declare function getTime(): Date;
+}
+declare class NJSCosmosLikeTransactionBuilder
+{
+    /**
+     * Set memo
+     * @param memo the memo to set
+     */
+    declare function setMemo(memo: string): NJSCosmosLikeTransactionBuilder;
+    /**
+     * Set sequence
+     * @param sequence The sequence to set
+     */
+    declare function setSequence(sequence: string): NJSCosmosLikeTransactionBuilder;
+    /**
+     * Set accountNumber
+     * @param accountNumber The accountNumber to set
+     */
+    declare function setAccountNumber(accountNumber: string): NJSCosmosLikeTransactionBuilder;
+    /**
+     * Add a new message in the internal range of messages
+     * @param msg a new message
+     */
+    declare function addMessage(msg: NJSCosmosLikeMessage): NJSCosmosLikeTransactionBuilder;
+    /**
+     * Set gas price
+     * @param gas The gas to set
+     */
+    declare function setGas(gas: NJSAmount): NJSCosmosLikeTransactionBuilder;
+    /**
+     * Set gas Adjusment factor when estimating gas
+     * @param gasAdjustment The (multiplicative) factor for gas evaluation
+     */
+    declare function setGasAdjustment(gasAdjustment: number): NJSCosmosLikeTransactionBuilder;
+    /**
+     * Set fee
+     * Here the fee represents the gas price multiplied by the gas used
+     * @param fee The fee to set
+     */
+    declare function setFee(fee: NJSAmount): NJSCosmosLikeTransactionBuilder;
+    /** Build a transaction from the given builder parameters. */
+    declare function build(callback: NJSCosmosLikeTransactionCallback);
+    /**
+     * Creates a clone of this builder.
+     * @return A copy of the current builder instance.
+     */
+    declare function clone(): NJSCosmosLikeTransactionBuilder;
+    /** Reset the current instance to its initial state */
+    declare function reset();
+    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: string): NJSCosmosLikeTransaction;
+    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: string): NJSCosmosLikeTransaction;
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSCosmosLikeTransactionCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?NJSCosmosLikeTransaction, error: ?Error);
+}
+/**Class representing a Cosmos account */
+declare class NJSCosmosLikeAccount
+{
+    declare function broadcastRawTransaction(transaction: string, callback: NJSStringCallback);
+    declare function broadcastTransaction(transaction: NJSCosmosLikeTransaction, callback: NJSStringCallback);
+    declare function buildTransaction(): NJSCosmosLikeTransactionBuilder;
+    /** Get estimated gas limit to set so the transaction will succeed */
+    declare function getEstimatedGasLimit(transaction: NJSCosmosLikeTransaction, callback: NJSBigIntCallback);
+    /**
+     * Ask the account to estimate the gas for a building transaction
+     * This function uses the underlying infrastructure to simulate the gas
+     * needed for the transaction as requested until now.
+     * @param request is the CosmosGasLimitRequest for the specifics of the simulation
+     */
+    declare function estimateGas(buildingTx: CosmosGasLimitRequest, callback: NJSBigIntCallback);
+    /** Get the latest active validator set */
+    declare function getLatestValidatorSet(callback: NJSCosmosLikeValidatorListCallback);
+    /** Get information about one validator */
+    declare function getValidatorInfo(validatorAddress: string, callback: NJSCosmosLikeValidatorCallback);
+    /** Get Total balance of account. Sum of spendable, delegated, pending rewards, and pending unbondings */
+    declare function getTotalBalance(callback: NJSAmountCallback);
+    /** Get Total amount in delegation of account. */
+    declare function getDelegatedBalance(callback: NJSAmountCallback);
+    /** Get Total pending rewards of account. */
+    declare function getPendingRewardsBalance(callback: NJSAmountCallback);
+    /** Get Total unbondings funds of account. */
+    declare function getUnbondingBalance(callback: NJSAmountCallback);
+    /** Get Total spendable balance of account. */
+    declare function getSpendableBalance(callback: NJSAmountCallback);
+    declare function getDelegations(callback: NJSCosmosLikeDelegationListCallback);
+    declare function getPendingRewards(callback: NJSCosmosLikeRewardListCallback);
+    declare function getUnbondings(callback: NJSCosmosLikeUnbondingListCallback);
+    declare function getRedelegations(callback: NJSCosmosLikeRedelegationListCallback);
+    /**
+     * Get the current account sequence (synchronize to get latest value)
+     * string like "14"
+     */
+    declare function getSequence(callback: NJSStringCallback);
+    /**
+     * Get the account number
+     * String like "15"
+     */
+    declare function getAccountNumber(callback: NJSStringCallback);
+    /**
+     * Get the rewards withdrawal address
+     * String Bech32 encoded string
+     */
+    declare function getWithdrawAddress(callback: NJSStringCallback);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSCosmosLikeValidatorListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<CosmosLikeValidator>, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSCosmosLikeValidatorCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?CosmosLikeValidator, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSCosmosLikeDelegationListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<NJSCosmosLikeDelegation>, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSCosmosLikeRewardListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<NJSCosmosLikeReward>, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSCosmosLikeUnbondingListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<NJSCosmosLikeUnbonding>, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSCosmosLikeRedelegationListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<NJSCosmosLikeRedelegation>, error: ?Error);
+}
+/**Class representing a Cosmos delegation */
+declare class NJSCosmosLikeDelegation
+{
+    declare function getDelegatorAddress(): string;
+    declare function getValidatorAddress(): string;
+    declare function getDelegatedAmount(): NJSAmount;
+}
+/**Class representing a Cosmos reward */
+declare class NJSCosmosLikeReward
+{
+    declare function getDelegatorAddress(): string;
+    declare function getValidatorAddress(): string;
+    declare function getRewardAmount(): NJSAmount;
+}
+/** (Pending) Unbonding data */
+declare class NJSCosmosLikeUnbonding
+{
+    /** Delegator address */
+    declare function getDelegatorAddress(): string;
+    /** Validator address */
+    declare function getValidatorAddress(): string;
+    declare function getEntries(): Array<NJSCosmosLikeUnbondingEntry>;
+}
+declare class NJSCosmosLikeUnbondingEntry
+{
+    /** Block height of the unbonding request */
+    declare function getCreationHeight(): NJSBigInt;
+    /** Timestamp of the unbonding completion */
+    declare function getCompletionTime(): Date;
+    /** Balance requested to unbond */
+    declare function getInitialBalance(): NJSBigInt;
+    /** Current amount coming back (i.e. less than initialBalance if slashed) */
+    declare function getBalance(): NJSBigInt;
+}
+/** (Pending) Redelegation data */
+declare class NJSCosmosLikeRedelegation
+{
+    declare function getDelegatorAddress(): string;
+    declare function getSrcValidatorAddress(): string;
+    declare function getDstValidatorAddress(): string;
+    declare function getEntries(): Array<NJSCosmosLikeRedelegationEntry>;
+}
+declare class NJSCosmosLikeRedelegationEntry
+{
+    /** Block height of the begin redelegate request */
+    declare function getCreationHeight(): NJSBigInt;
+    /** Timestamp of the redelegation completion */
+    declare function getCompletionTime(): Date;
+    /** Balance requested to redelegate */
+    declare function getInitialBalance(): NJSBigInt;
+    /** Current amount being redelegated (i.e. less than initialBalance if slashed) */
+    declare function getBalance(): NJSBigInt;
+}
+declare class NJSCosmosConfigurationDefaults
+{
+}
+/** A cosmos-like wallet. */
+declare class NJSCosmosLikeWallet
+{
+}
 /** ERC20-like accounts class. */
 declare class NJSERC20LikeAccount
 {
@@ -2322,6 +2877,46 @@ declare class NJSEthereumLikeExtendedPublicKey
     /** Derive a shorten version of a public key (SHA256 + RIPEMD160) from an xPUB and a path. */
     declare function deriveHash160(path: string): String;
     /** Get the xPUB in base 58. */
+    declare function toBase58(): string;
+    /** Get the root path of the xPUB. */
+    declare function getRootPath(): string;
+}
+/** Helper class for manipulating Cosmos like addresses. */
+declare class NJSCosmosLikeAddress
+{
+    /**
+     * Gets the version of the address.
+     * @return The version of the address
+     */
+    declare function getVersion(): String;
+    /**
+     * Gets the raw hash160 of the public key
+     * @return The 20 bytes of the public key hash160
+     */
+    declare function getHash160(): String;
+    /**
+     * Gets the network parameters used for serializing the address.
+     * @return The network parameters of the address
+     */
+    declare function getNetworkParameters(): CosmosLikeNetworkParameters;
+    /**
+     * Encodes to Bech32.
+     * @return The Bech32 encoding
+     */
+    declare function toBech32(): string;
+}
+/** The xPUB definition for Cosmos. */
+declare class NJSCosmosLikeExtendedPublicKey
+{
+    /** Derive an address from an xPUB and a path. */
+    declare function derive(path: string): NJSCosmosLikeAddress;
+    /** Derive a public key from an xPUB and a path. */
+    declare function derivePublicKey(path: string): String;
+    /** Derive a shorten version of a public key (SHA256 + RIPEMD160) from an xPUB and a path. */
+    declare function deriveHash160(path: string): String;
+    /** Get the publicKey in bech32 representatrion. */
+    declare function toBech32(): string;
+    /** Get the publicKey in base58 representatrion. */
     declare function toBase58(): string;
     /** Get the root path of the xPUB. */
     declare function getRootPath(): string;

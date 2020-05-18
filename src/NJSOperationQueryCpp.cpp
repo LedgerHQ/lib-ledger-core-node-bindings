@@ -72,7 +72,7 @@ NAN_METHOD(NJSOperationQuery::offset) {
     }
 
     //Check if parameters have correct types
-    auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
+    auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
     auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());
@@ -99,7 +99,7 @@ NAN_METHOD(NJSOperationQuery::limit) {
     }
 
     //Check if parameters have correct types
-    auto arg_0 = Nan::To<int64_t>(info[0]).FromJust();
+    auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
     auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::OperationQuery>::Unwrap(info.This());

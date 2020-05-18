@@ -319,6 +319,32 @@ NAN_METHOD(NJSWallet::asBitcoinLikeWallet) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSWallet::asCosmosLikeWallet) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSWallet::asCosmosLikeWallet needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWallet::asCosmosLikeWallet : implementation of Wallet is not valid");
+    }
+
+    auto result = cpp_impl->asCosmosLikeWallet();
+
+    //Wrap result in node object
+    auto arg_0 = NJSCosmosLikeWallet::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSWallet::getCurrency) {
 
     //Check if method called with right number of arguments
@@ -408,65 +434,71 @@ NAN_METHOD(NJSWallet::getCurrency) {
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("bitcoinLikeNetworkParameters").ToLocalChecked(), arg_0_6);
     Local<Value> arg_0_7;
-    if(result.ethereumLikeNetworkParameters)
+    if(result.cosmosLikeNetworkParameters)
     {
-        auto arg_0_7_optional = (result.ethereumLikeNetworkParameters).value();
+        auto arg_0_7_optional = (result.cosmosLikeNetworkParameters).value();
         auto arg_0_7_tmp = Nan::New<Object>();
         auto arg_0_7_tmp_1 = Nan::New<String>(arg_0_7_optional.Identifier).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_7_tmp_1);
         auto arg_0_7_tmp_2 = Nan::New<String>(arg_0_7_optional.MessagePrefix).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_7_tmp_2);
-        auto arg_0_7_tmp_3 = Nan::New<String>(arg_0_7_optional.ChainID).ToLocalChecked();
-        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("ChainID").ToLocalChecked(), arg_0_7_tmp_3);
-        auto arg_0_7_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.XPUBVersion)).ToLocalChecked();
+        auto arg_0_7_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.XPUBVersion)).ToLocalChecked();
 
-        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_7_tmp_4);
-        Local<Array> arg_0_7_tmp_5 = Nan::New<Array>();
-        for(size_t arg_0_7_tmp_5_id = 0; arg_0_7_tmp_5_id < arg_0_7_optional.AdditionalEIPs.size(); arg_0_7_tmp_5_id++)
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_7_tmp_3);
+        auto arg_0_7_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.PubKeyPrefix)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("PubKeyPrefix").ToLocalChecked(), arg_0_7_tmp_4);
+        auto arg_0_7_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.AddressPrefix)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AddressPrefix").ToLocalChecked(), arg_0_7_tmp_5);
+        auto arg_0_7_tmp_6 = Nan::New<String>(arg_0_7_optional.ChainId).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("ChainId").ToLocalChecked(), arg_0_7_tmp_6);
+        Local<Array> arg_0_7_tmp_7 = Nan::New<Array>();
+        for(size_t arg_0_7_tmp_7_id = 0; arg_0_7_tmp_7_id < arg_0_7_optional.AdditionalCIPs.size(); arg_0_7_tmp_7_id++)
         {
-            auto arg_0_7_tmp_5_elem = Nan::New<String>(arg_0_7_optional.AdditionalEIPs[arg_0_7_tmp_5_id]).ToLocalChecked();
-            Nan::Set(arg_0_7_tmp_5, (int)arg_0_7_tmp_5_id,arg_0_7_tmp_5_elem);
+            auto arg_0_7_tmp_7_elem = Nan::New<String>(arg_0_7_optional.AdditionalCIPs[arg_0_7_tmp_7_id]).ToLocalChecked();
+            Nan::Set(arg_0_7_tmp_7, (int)arg_0_7_tmp_7_id,arg_0_7_tmp_7_elem);
         }
 
-        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AdditionalEIPs").ToLocalChecked(), arg_0_7_tmp_5);
-        auto arg_0_7_tmp_6 = Nan::New<Number>(arg_0_7_optional.TimestampDelay);
-        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_7_tmp_6);
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AdditionalCIPs").ToLocalChecked(), arg_0_7_tmp_7);
 
         arg_0_7 = arg_0_7_tmp;
     }
 
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("ethereumLikeNetworkParameters").ToLocalChecked(), arg_0_7);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("cosmosLikeNetworkParameters").ToLocalChecked(), arg_0_7);
     Local<Value> arg_0_8;
-    if(result.rippleLikeNetworkParameters)
+    if(result.ethereumLikeNetworkParameters)
     {
-        auto arg_0_8_optional = (result.rippleLikeNetworkParameters).value();
+        auto arg_0_8_optional = (result.ethereumLikeNetworkParameters).value();
         auto arg_0_8_tmp = Nan::New<Object>();
         auto arg_0_8_tmp_1 = Nan::New<String>(arg_0_8_optional.Identifier).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_8_tmp_1);
         auto arg_0_8_tmp_2 = Nan::New<String>(arg_0_8_optional.MessagePrefix).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_8_tmp_2);
-        auto arg_0_8_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_8_optional.XPUBVersion)).ToLocalChecked();
+        auto arg_0_8_tmp_3 = Nan::New<String>(arg_0_8_optional.ChainID).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("ChainID").ToLocalChecked(), arg_0_8_tmp_3);
+        auto arg_0_8_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_8_optional.XPUBVersion)).ToLocalChecked();
 
-        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_8_tmp_3);
-        Local<Array> arg_0_8_tmp_4 = Nan::New<Array>();
-        for(size_t arg_0_8_tmp_4_id = 0; arg_0_8_tmp_4_id < arg_0_8_optional.AdditionalRIPs.size(); arg_0_8_tmp_4_id++)
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_8_tmp_4);
+        Local<Array> arg_0_8_tmp_5 = Nan::New<Array>();
+        for(size_t arg_0_8_tmp_5_id = 0; arg_0_8_tmp_5_id < arg_0_8_optional.AdditionalEIPs.size(); arg_0_8_tmp_5_id++)
         {
-            auto arg_0_8_tmp_4_elem = Nan::New<String>(arg_0_8_optional.AdditionalRIPs[arg_0_8_tmp_4_id]).ToLocalChecked();
-            Nan::Set(arg_0_8_tmp_4, (int)arg_0_8_tmp_4_id,arg_0_8_tmp_4_elem);
+            auto arg_0_8_tmp_5_elem = Nan::New<String>(arg_0_8_optional.AdditionalEIPs[arg_0_8_tmp_5_id]).ToLocalChecked();
+            Nan::Set(arg_0_8_tmp_5, (int)arg_0_8_tmp_5_id,arg_0_8_tmp_5_elem);
         }
 
-        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_8_tmp_4);
-        auto arg_0_8_tmp_5 = Nan::New<Number>(arg_0_8_optional.TimestampDelay);
-        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_8_tmp_5);
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("AdditionalEIPs").ToLocalChecked(), arg_0_8_tmp_5);
+        auto arg_0_8_tmp_6 = Nan::New<Number>(arg_0_8_optional.TimestampDelay);
+        Nan::DefineOwnProperty(arg_0_8_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_8_tmp_6);
 
         arg_0_8 = arg_0_8_tmp;
     }
 
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked(), arg_0_8);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("ethereumLikeNetworkParameters").ToLocalChecked(), arg_0_8);
     Local<Value> arg_0_9;
-    if(result.tezosLikeNetworkParameters)
+    if(result.rippleLikeNetworkParameters)
     {
-        auto arg_0_9_optional = (result.tezosLikeNetworkParameters).value();
+        auto arg_0_9_optional = (result.rippleLikeNetworkParameters).value();
         auto arg_0_9_tmp = Nan::New<Object>();
         auto arg_0_9_tmp_1 = Nan::New<String>(arg_0_9_optional.Identifier).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_9_tmp_1);
@@ -475,56 +507,83 @@ NAN_METHOD(NJSWallet::getCurrency) {
         auto arg_0_9_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.XPUBVersion)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_9_tmp_3);
-        auto arg_0_9_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.ImplicitPrefix)).ToLocalChecked();
-
-        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_9_tmp_4);
-        auto arg_0_9_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_9_optional.OriginatedPrefix)).ToLocalChecked();
-
-        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_9_tmp_5);
-        Local<Array> arg_0_9_tmp_6 = Nan::New<Array>();
-        for(size_t arg_0_9_tmp_6_id = 0; arg_0_9_tmp_6_id < arg_0_9_optional.AdditionalTIPs.size(); arg_0_9_tmp_6_id++)
+        Local<Array> arg_0_9_tmp_4 = Nan::New<Array>();
+        for(size_t arg_0_9_tmp_4_id = 0; arg_0_9_tmp_4_id < arg_0_9_optional.AdditionalRIPs.size(); arg_0_9_tmp_4_id++)
         {
-            auto arg_0_9_tmp_6_elem = Nan::New<String>(arg_0_9_optional.AdditionalTIPs[arg_0_9_tmp_6_id]).ToLocalChecked();
-            Nan::Set(arg_0_9_tmp_6, (int)arg_0_9_tmp_6_id,arg_0_9_tmp_6_elem);
+            auto arg_0_9_tmp_4_elem = Nan::New<String>(arg_0_9_optional.AdditionalRIPs[arg_0_9_tmp_4_id]).ToLocalChecked();
+            Nan::Set(arg_0_9_tmp_4, (int)arg_0_9_tmp_4_id,arg_0_9_tmp_4_elem);
         }
 
-        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_9_tmp_6);
-        auto arg_0_9_tmp_7 = Nan::New<Number>(arg_0_9_optional.TimestampDelay);
-        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_9_tmp_7);
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("AdditionalRIPs").ToLocalChecked(), arg_0_9_tmp_4);
+        auto arg_0_9_tmp_5 = Nan::New<Number>(arg_0_9_optional.TimestampDelay);
+        Nan::DefineOwnProperty(arg_0_9_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_9_tmp_5);
 
         arg_0_9 = arg_0_9_tmp;
     }
 
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked(), arg_0_9);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("rippleLikeNetworkParameters").ToLocalChecked(), arg_0_9);
     Local<Value> arg_0_10;
-    if(result.stellarLikeNetworkParameters)
+    if(result.tezosLikeNetworkParameters)
     {
-        auto arg_0_10_optional = (result.stellarLikeNetworkParameters).value();
+        auto arg_0_10_optional = (result.tezosLikeNetworkParameters).value();
         auto arg_0_10_tmp = Nan::New<Object>();
         auto arg_0_10_tmp_1 = Nan::New<String>(arg_0_10_optional.Identifier).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_10_tmp_1);
-        auto arg_0_10_tmp_2 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_10_optional.Version)).ToLocalChecked();
+        auto arg_0_10_tmp_2 = Nan::New<String>(arg_0_10_optional.MessagePrefix).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_10_tmp_2);
+        auto arg_0_10_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_10_optional.XPUBVersion)).ToLocalChecked();
 
-        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("Version").ToLocalChecked(), arg_0_10_tmp_2);
-        auto arg_0_10_tmp_3 = Nan::New<Number>(arg_0_10_optional.BaseReserve);
-        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("BaseReserve").ToLocalChecked(), arg_0_10_tmp_3);
-        auto arg_0_10_tmp_4 = Nan::New<Number>(arg_0_10_optional.BaseFee);
-        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("BaseFee").ToLocalChecked(), arg_0_10_tmp_4);
-        Local<Array> arg_0_10_tmp_5 = Nan::New<Array>();
-        for(size_t arg_0_10_tmp_5_id = 0; arg_0_10_tmp_5_id < arg_0_10_optional.AdditionalSEPs.size(); arg_0_10_tmp_5_id++)
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_10_tmp_3);
+        auto arg_0_10_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_10_optional.ImplicitPrefix)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("ImplicitPrefix").ToLocalChecked(), arg_0_10_tmp_4);
+        auto arg_0_10_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_10_optional.OriginatedPrefix)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("OriginatedPrefix").ToLocalChecked(), arg_0_10_tmp_5);
+        Local<Array> arg_0_10_tmp_6 = Nan::New<Array>();
+        for(size_t arg_0_10_tmp_6_id = 0; arg_0_10_tmp_6_id < arg_0_10_optional.AdditionalTIPs.size(); arg_0_10_tmp_6_id++)
         {
-            auto arg_0_10_tmp_5_elem = Nan::New<String>(arg_0_10_optional.AdditionalSEPs[arg_0_10_tmp_5_id]).ToLocalChecked();
-            Nan::Set(arg_0_10_tmp_5, (int)arg_0_10_tmp_5_id,arg_0_10_tmp_5_elem);
+            auto arg_0_10_tmp_6_elem = Nan::New<String>(arg_0_10_optional.AdditionalTIPs[arg_0_10_tmp_6_id]).ToLocalChecked();
+            Nan::Set(arg_0_10_tmp_6, (int)arg_0_10_tmp_6_id,arg_0_10_tmp_6_elem);
         }
 
-        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("AdditionalSEPs").ToLocalChecked(), arg_0_10_tmp_5);
-        auto arg_0_10_tmp_6 = Nan::New<String>(arg_0_10_optional.NetworkPassphrase).ToLocalChecked();
-        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("NetworkPassphrase").ToLocalChecked(), arg_0_10_tmp_6);
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("AdditionalTIPs").ToLocalChecked(), arg_0_10_tmp_6);
+        auto arg_0_10_tmp_7 = Nan::New<Number>(arg_0_10_optional.TimestampDelay);
+        Nan::DefineOwnProperty(arg_0_10_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_10_tmp_7);
 
         arg_0_10 = arg_0_10_tmp;
     }
 
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_10);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("tezosLikeNetworkParameters").ToLocalChecked(), arg_0_10);
+    Local<Value> arg_0_11;
+    if(result.stellarLikeNetworkParameters)
+    {
+        auto arg_0_11_optional = (result.stellarLikeNetworkParameters).value();
+        auto arg_0_11_tmp = Nan::New<Object>();
+        auto arg_0_11_tmp_1 = Nan::New<String>(arg_0_11_optional.Identifier).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("Identifier").ToLocalChecked(), arg_0_11_tmp_1);
+        auto arg_0_11_tmp_2 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_11_optional.Version)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("Version").ToLocalChecked(), arg_0_11_tmp_2);
+        auto arg_0_11_tmp_3 = Nan::New<Number>(arg_0_11_optional.BaseReserve);
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("BaseReserve").ToLocalChecked(), arg_0_11_tmp_3);
+        auto arg_0_11_tmp_4 = Nan::New<Number>(arg_0_11_optional.BaseFee);
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("BaseFee").ToLocalChecked(), arg_0_11_tmp_4);
+        Local<Array> arg_0_11_tmp_5 = Nan::New<Array>();
+        for(size_t arg_0_11_tmp_5_id = 0; arg_0_11_tmp_5_id < arg_0_11_optional.AdditionalSEPs.size(); arg_0_11_tmp_5_id++)
+        {
+            auto arg_0_11_tmp_5_elem = Nan::New<String>(arg_0_11_optional.AdditionalSEPs[arg_0_11_tmp_5_id]).ToLocalChecked();
+            Nan::Set(arg_0_11_tmp_5, (int)arg_0_11_tmp_5_id,arg_0_11_tmp_5_elem);
+        }
+
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("AdditionalSEPs").ToLocalChecked(), arg_0_11_tmp_5);
+        auto arg_0_11_tmp_6 = Nan::New<String>(arg_0_11_optional.NetworkPassphrase).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("NetworkPassphrase").ToLocalChecked(), arg_0_11_tmp_6);
+
+        arg_0_11 = arg_0_11_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_11);
 
 
     //Return result
@@ -548,6 +607,31 @@ NAN_METHOD(NJSWallet::isInstanceOfBitcoinLikeWallet) {
     }
 
     auto result = cpp_impl->isInstanceOfBitcoinLikeWallet();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSWallet::isInstanceOfCosmosLikeWallet) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSWallet::isInstanceOfCosmosLikeWallet needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWallet::isInstanceOfCosmosLikeWallet : implementation of Wallet is not valid");
+    }
+
+    auto result = cpp_impl->isInstanceOfCosmosLikeWallet();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Boolean>(result);
@@ -1105,8 +1189,10 @@ void NJSWallet::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getLogger", getLogger);
     Nan::SetPrototypeMethod(func_template,"getAccountPreferences", getAccountPreferences);
     Nan::SetPrototypeMethod(func_template,"asBitcoinLikeWallet", asBitcoinLikeWallet);
+    Nan::SetPrototypeMethod(func_template,"asCosmosLikeWallet", asCosmosLikeWallet);
     Nan::SetPrototypeMethod(func_template,"getCurrency", getCurrency);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeWallet", isInstanceOfBitcoinLikeWallet);
+    Nan::SetPrototypeMethod(func_template,"isInstanceOfCosmosLikeWallet", isInstanceOfCosmosLikeWallet);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfEthereumLikeWallet", isInstanceOfEthereumLikeWallet);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfRippleLikeWallet", isInstanceOfRippleLikeWallet);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfStellarLikeWallet", isInstanceOfStellarLikeWallet);

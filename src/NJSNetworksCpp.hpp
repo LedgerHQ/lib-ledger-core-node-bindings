@@ -6,6 +6,7 @@
 
 
 #include "../include/BitcoinLikeNetworkParameters.hpp"
+#include "../include/CosmosLikeNetworkParameters.hpp"
 #include "../include/EthereumLikeNetworkParameters.hpp"
 #include "../include/RippleLikeNetworkParameters.hpp"
 #include "../include/TezosLikeNetworkParameters.hpp"
@@ -33,6 +34,9 @@ public:
 private:
     /** The Bitcoin network parameters. */
     static NAN_METHOD(bitcoin);
+
+    /** The Cosmos network parameters. */
+    static NAN_METHOD(cosmos);
 
     /** The Ethereum network parameters. */
     static NAN_METHOD(ethereum);
