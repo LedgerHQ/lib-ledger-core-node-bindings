@@ -465,6 +465,26 @@ declare class NJSHashAlgorithmHelper
 declare class NJSStellarLikeBlock
 {
 }
+declare class NJSStellarLikeMemo
+{
+    declare function getMemoType(): StellarLikeMemoType;
+    /** Get the value of the memo as string. Fail if the memo is not with type MEMO_TEXT */
+    declare function getMemoText(): string;
+    /** Get the value of the memo as BigInt. Fail if the memo is not with type MEMO_ID */
+    declare function getMemoId(): NJSBigInt;
+    /** Get the value of the memo as byte array. Fail if the memo is not with type MEMO_HASH */
+    declare function getMemoHash(): String;
+    /** Get the value of the memo as byte array. Fail if the memo is not with type MEMO_RETURN */
+    declare function getMemoReturn(): String;
+    /**
+     * Create a string version of the memo, no matter which underlying type it holds.
+     * For MEMO_TEXT returns memo value.
+     * For MEMO_ID, return a uint64 as string (base 10).
+     * For MEMO_HASH, MEMO_RETURN, returns a hex encoded string.
+     * For MEMO_NONE, returns an empty string
+     */
+    declare function memoValuetoString(): string;
+}
 declare class NJSStellarLikeTransaction
 {
     declare function toRawTransaction(): String;
@@ -478,6 +498,8 @@ declare class NJSStellarLikeTransaction
     declare function getSourceAccountSequence(): NJSBigInt;
     /** Returns the fee paid for this transaction to be validated */
     declare function getFee(): NJSAmount;
+    /** Returns the transaction memo */
+    declare function getMemo(): NJSStellarLikeMemo;
 }
 declare class NJSStellarLikeTransactionBuilder
 {

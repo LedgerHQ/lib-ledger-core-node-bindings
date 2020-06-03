@@ -8,6 +8,7 @@
 #include "NJSAddressCpp.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSBigIntCpp.hpp"
+#include "NJSStellarLikeMemoCpp.hpp"
 #include <cstdint>
 #include <memory>
 #include <vector>
@@ -47,6 +48,9 @@ private:
 
     /** Returns the fee paid for this transaction to be validated */
     static NAN_METHOD(getFee);
+
+    /** Returns the transaction memo */
+    static NAN_METHOD(getMemo);
 
     static NAN_METHOD(New);
 
