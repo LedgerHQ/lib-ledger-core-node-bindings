@@ -30,6 +30,7 @@
 #include "NJSNetworksCpp.hpp"
 #include "NJSHashAlgorithmHelper.hpp"
 #include "NJSStellarLikeBlockCpp.hpp"
+#include "NJSStellarLikeMemoCpp.hpp"
 #include "NJSStellarLikeTransactionCpp.hpp"
 #include "NJSStellarLikeTransactionBuilderCpp.hpp"
 #include "NJSStellarLikeTransactionCallback.hpp"
@@ -199,6 +200,7 @@ static void initAll(Local<Object> target)
     NJSNetworks::Initialize(target);
     NJSHashAlgorithmHelper::Initialize(target);
     NJSStellarLikeBlock::Initialize(target);
+    NJSStellarLikeMemo::Initialize(target);
     NJSStellarLikeTransaction::Initialize(target);
     NJSStellarLikeTransactionBuilder::Initialize(target);
     NJSStellarLikeTransactionCallback::Initialize(target);
