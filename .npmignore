@@ -5,3 +5,4 @@
 /prebuilds
 *.log
 dbdata/
+src/ledgercore_doc.js
