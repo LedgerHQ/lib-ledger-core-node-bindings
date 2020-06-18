@@ -6,6 +6,7 @@
 
 
 #include "../include/../utils/optional.hpp"
+#include "../include/AlgorandNetworkParameters.hpp"
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/BitcoinLikePickingStrategy.hpp"
 #include "../include/CosmosLikeNetworkParameters.hpp"

@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSSTELLARLIKETRANSACTIONBUILDER_HPP
 
 
+#include "../include/AlgorandNetworkParameters.hpp"
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/CosmosLikeNetworkParameters.hpp"
 #include "../include/Currency.hpp"

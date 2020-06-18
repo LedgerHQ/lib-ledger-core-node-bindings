@@ -6,6 +6,7 @@
 
 
 #include "../include/AccountCreationInfo.hpp"
+#include "../include/AlgorandNetworkParameters.hpp"
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/CosmosLikeNetworkParameters.hpp"
 #include "../include/Currency.hpp"
@@ -148,6 +149,12 @@ private:
      * @return bool
      */
     static NAN_METHOD(isInstanceOfBitcoinLikeWallet);
+
+    /**
+     * Tell whether wallet is an Algorand one.
+     * @return bool
+     */
+    static NAN_METHOD(isInstanceOfAlgorandLikeWallet);
 
     /**
      * Tell whether wallet is a Cosmos one.

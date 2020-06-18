@@ -242,6 +242,20 @@ void NJSCurrencyListCallback::onCallback(const std::experimental::optional<std::
             }
 
             Nan::DefineOwnProperty(arg_0_tmp_elem, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_tmp_elem_11);
+            Local<Value> arg_0_tmp_elem_12;
+            if(arg_0_optional[arg_0_tmp_id].algorandNetworkParameters)
+            {
+                auto arg_0_tmp_elem_12_optional = (arg_0_optional[arg_0_tmp_id].algorandNetworkParameters).value();
+                auto arg_0_tmp_elem_12_tmp = Nan::New<Object>();
+                auto arg_0_tmp_elem_12_tmp_1 = Nan::New<String>(arg_0_tmp_elem_12_optional.genesisID).ToLocalChecked();
+                Nan::DefineOwnProperty(arg_0_tmp_elem_12_tmp, Nan::New<String>("genesisID").ToLocalChecked(), arg_0_tmp_elem_12_tmp_1);
+                auto arg_0_tmp_elem_12_tmp_2 = Nan::New<String>(arg_0_tmp_elem_12_optional.genesisHash).ToLocalChecked();
+                Nan::DefineOwnProperty(arg_0_tmp_elem_12_tmp, Nan::New<String>("genesisHash").ToLocalChecked(), arg_0_tmp_elem_12_tmp_2);
+
+                arg_0_tmp_elem_12 = arg_0_tmp_elem_12_tmp;
+            }
+
+            Nan::DefineOwnProperty(arg_0_tmp_elem, Nan::New<String>("algorandNetworkParameters").ToLocalChecked(), arg_0_tmp_elem_12);
 
             Nan::Set(arg_0_tmp, (int)arg_0_tmp_id,arg_0_tmp_elem);
         }

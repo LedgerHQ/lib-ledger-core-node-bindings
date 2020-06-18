@@ -787,7 +787,25 @@ NAN_METHOD(NJSWalletPool::createWallet) {
         arg_1_11.emplace(opt_arg_1_11);
     }
 
-    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8, arg_1_9, arg_1_10, arg_1_11);
+
+    auto field_arg_1_12 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("algorandNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_1_12 = std::experimental::optional<AlgorandNetworkParameters>();
+    if(!field_arg_1_12->IsNull() && !field_arg_1_12->IsUndefined())
+    {
+
+        auto field_opt_arg_1_12_1 = Nan::Get(field_arg_1_12->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("genesisID").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_12_1(field_opt_arg_1_12_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_12_1 = std::string(*string_opt_arg_1_12_1);
+
+        auto field_opt_arg_1_12_2 = Nan::Get(field_arg_1_12->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("genesisHash").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_1_12_2(field_opt_arg_1_12_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_12_2 = std::string(*string_opt_arg_1_12_2);
+        AlgorandNetworkParameters opt_arg_1_12(opt_arg_1_12_1, opt_arg_1_12_2);
+
+        arg_1_12.emplace(opt_arg_1_12);
+    }
+
+    Currency arg_1(arg_1_1, arg_1_2, arg_1_3, arg_1_4, arg_1_5, arg_1_6, arg_1_7, arg_1_8, arg_1_9, arg_1_10, arg_1_11, arg_1_12);
 
     Local<Object> njs_arg_2 = info[2]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
     auto arg_2 = djinni::js::ObjectWrapper<ledger::core::api::DynamicObject>::Unwrap(njs_arg_2);
