@@ -953,10 +953,16 @@ declare class NJSOperation
     declare function asTezosLikeOperation(): NJSTezosLikeOperation;
     /**
      * Same as isInstanceOfBitcoinLikeOperation for bitcoin.
-     * Convert operation as Ethereum operation.
-     * @return EthereumLikeOperation object
+     * Convert operation as Stellar operation.
+     * @return StellarLikeOperation object
      */
     declare function asStellarLikeOperation(): NJSStellarLikeOperation;
+    /**
+     * Same as isInstanceOfBitcoinLikeOperation for bitcoin.
+     * Convert operation as Algorand operation.
+     * @return AlgorandOperation object
+     */
+    declare function asAlgorandOperation(): NJSAlgorandOperation;
     /** Is this an instance of a Bitcoin-like operation? */
     declare function isInstanceOfBitcoinLikeOperation(): boolean;
     /** Same as isInstanceOfCosmosLikeOperation for cosmos. */

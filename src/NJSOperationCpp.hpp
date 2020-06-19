@@ -17,6 +17,7 @@
 #include "../include/StellarLikeNetworkParameters.hpp"
 #include "../include/TezosLikeNetworkParameters.hpp"
 #include "../include/WalletType.hpp"
+#include "NJSAlgorandOperationCpp.hpp"
 #include "NJSAmountCpp.hpp"
 #include "NJSBitcoinLikeOperationCpp.hpp"
 #include "NJSCosmosLikeOperationCpp.hpp"
@@ -157,10 +158,17 @@ private:
 
     /**
      * Same as isInstanceOfBitcoinLikeOperation for bitcoin.
-     * Convert operation as Ethereum operation.
-     * @return EthereumLikeOperation object
+     * Convert operation as Stellar operation.
+     * @return StellarLikeOperation object
      */
     static NAN_METHOD(asStellarLikeOperation);
+
+    /**
+     * Same as isInstanceOfBitcoinLikeOperation for bitcoin.
+     * Convert operation as Algorand operation.
+     * @return AlgorandOperation object
+     */
+    static NAN_METHOD(asAlgorandOperation);
 
     /** Is this an instance of a Bitcoin-like operation? */
     static NAN_METHOD(isInstanceOfBitcoinLikeOperation);

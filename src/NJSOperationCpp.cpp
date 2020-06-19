@@ -496,6 +496,32 @@ NAN_METHOD(NJSOperation::asStellarLikeOperation) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSOperation::asAlgorandOperation) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSOperation::asAlgorandOperation needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSOperation::asAlgorandOperation : implementation of Operation is not valid");
+    }
+
+    auto result = cpp_impl->asAlgorandOperation();
+
+    //Wrap result in node object
+    auto arg_0 = NJSAlgorandOperation::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSOperation::isInstanceOfBitcoinLikeOperation) {
 
     //Check if method called with right number of arguments
@@ -1021,6 +1047,7 @@ void NJSOperation::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"asRippleLikeOperation", asRippleLikeOperation);
     Nan::SetPrototypeMethod(func_template,"asTezosLikeOperation", asTezosLikeOperation);
     Nan::SetPrototypeMethod(func_template,"asStellarLikeOperation", asStellarLikeOperation);
+    Nan::SetPrototypeMethod(func_template,"asAlgorandOperation", asAlgorandOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeOperation", isInstanceOfBitcoinLikeOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfCosmosLikeOperation", isInstanceOfCosmosLikeOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfEthereumLikeOperation", isInstanceOfEthereumLikeOperation);
