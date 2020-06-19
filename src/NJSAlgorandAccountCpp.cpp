@@ -329,6 +329,32 @@ NAN_METHOD(NJSAlgorandAccount::broadcastTransaction) {
     cpp_impl->broadcastTransaction(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSAlgorandAccount::createEmptyTransaction) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAlgorandAccount::createEmptyTransaction needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandAccount::createEmptyTransaction : implementation of AlgorandAccount is not valid");
+    }
+
+    auto result = cpp_impl->createEmptyTransaction();
+
+    //Wrap result in node object
+    auto arg_0 = NJSAlgorandTransaction::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSAlgorandAccount::New) {
     //Only new allowed
@@ -386,6 +412,7 @@ void NJSAlgorandAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getFeeEstimate", getFeeEstimate);
     Nan::SetPrototypeMethod(func_template,"broadcastRawTransaction", broadcastRawTransaction);
     Nan::SetPrototypeMethod(func_template,"broadcastTransaction", broadcastTransaction);
+    Nan::SetPrototypeMethod(func_template,"createEmptyTransaction", createEmptyTransaction);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     AlgorandAccount_prototype.Reset(objectTemplate);

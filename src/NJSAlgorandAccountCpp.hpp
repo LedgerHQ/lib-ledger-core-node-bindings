@@ -115,6 +115,12 @@ private:
      */
     static NAN_METHOD(broadcastTransaction);
 
+    /**
+     * Create a new transaction
+     * @return The new transaction
+     */
+    static NAN_METHOD(createEmptyTransaction);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

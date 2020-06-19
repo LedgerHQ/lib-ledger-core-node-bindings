@@ -8,6 +8,7 @@
 #include "../include/TimePeriod.hpp"
 #include "../include/WalletType.hpp"
 #include "NJSAddressListCallback.hpp"
+#include "NJSAlgorandAccountCpp.hpp"
 #include "NJSAmountCallback.hpp"
 #include "NJSAmountListCallback.hpp"
 #include "NJSBitcoinLikeAccountCpp.hpp"
@@ -124,6 +125,9 @@ private:
 
     /** Turn the account into a Tezos one, allowing operations to be performed on the Tezos network. */
     static NAN_METHOD(asTezosLikeAccount);
+
+    /** Turn the account into an Algorand one, allowing operations to be performed on the Algorand network. */
+    static NAN_METHOD(asAlgorandAccount);
 
     /**
      * Turn the account into a Stellar one, allowing operations to be performerd on the Stellar

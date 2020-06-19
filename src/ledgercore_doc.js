@@ -686,6 +686,11 @@ declare class NJSAlgorandAccount
      * @param callback, Callback returning the fees in MicroAlgos for the specified transaction
      */
     declare function broadcastTransaction(transaction: NJSAlgorandTransaction, callback: NJSStringCallback);
+    /**
+     * Create a new transaction
+     * @return The new transaction
+     */
+    declare function createEmptyTransaction(): NJSAlgorandTransaction;
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSAlgorandAssetParamsCallback
@@ -1192,6 +1197,8 @@ declare class NJSAccount
     declare function asRippleLikeAccount(): NJSRippleLikeAccount;
     /** Turn the account into a Tezos one, allowing operations to be performed on the Tezos network. */
     declare function asTezosLikeAccount(): NJSTezosLikeAccount;
+    /** Turn the account into an Algorand one, allowing operations to be performed on the Algorand network. */
+    declare function asAlgorandAccount(): NJSAlgorandAccount;
     /**
      * Turn the account into a Stellar one, allowing operations to be performerd on the Stellar
      * network.
