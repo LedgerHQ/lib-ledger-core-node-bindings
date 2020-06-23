@@ -39,4 +39,5 @@ jobs:
         run: |
             export COIN=$(echo ${GITHUB_REF#refs/heads/int-})
             echo "I hope you remembered to run 'yarn version --prerelease --preid \"$COIN\"'"
+            [ -z "$COIN" ] && echo "the COIN tag is not set. Aborting publish" && exit 1
             yarn publish --tag "$COIN"
