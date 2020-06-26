@@ -69,14 +69,6 @@ private:
 
     static NAN_METHOD(getBlockHeight);
 
-    /**
-     * Check if the transaction (which created this output) is replaceable (RBF).
-     * An output can be replaceable if the transaction has at least one RBF input
-     * and if the transaction is not a block.
-     * @return true if the output is replaceable, false otherwise
-     */
-    static NAN_METHOD(isReplaceable);
-
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

@@ -3485,13 +3485,6 @@ declare class NJSBitcoinLikeOutput
     declare function getAddress(): ?string;
     declare function getDerivationPath(): ?NJSDerivationPath;
     declare function getBlockHeight(): ?number;
-    /**
-     * Check if the transaction (which created this output) is replaceable (RBF).
-     * An output can be replaceable if the transaction has at least one RBF input
-     * and if the transaction is not a block.
-     * @return true if the output is replaceable, false otherwise
-     */
-    declare function isReplaceable(): boolean;
 }
 /** Class representing Bitcoin block */
 declare class NJSBitcoinLikeBlock

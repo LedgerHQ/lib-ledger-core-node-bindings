@@ -228,31 +228,6 @@ NAN_METHOD(NJSBitcoinLikeOutput::getBlockHeight) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
-NAN_METHOD(NJSBitcoinLikeOutput::isReplaceable) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSBitcoinLikeOutput::isReplaceable needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeOutput>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSBitcoinLikeOutput::isReplaceable : implementation of BitcoinLikeOutput is not valid");
-    }
-
-    auto result = cpp_impl->isReplaceable();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<Boolean>(result);
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
 
 NAN_METHOD(NJSBitcoinLikeOutput::New) {
     //Only new allowed
@@ -307,7 +282,6 @@ void NJSBitcoinLikeOutput::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getAddress", getAddress);
     Nan::SetPrototypeMethod(func_template,"getDerivationPath", getDerivationPath);
     Nan::SetPrototypeMethod(func_template,"getBlockHeight", getBlockHeight);
-    Nan::SetPrototypeMethod(func_template,"isReplaceable", isReplaceable);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeOutput_prototype.Reset(objectTemplate);
