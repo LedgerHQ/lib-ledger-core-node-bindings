@@ -26,10 +26,11 @@ if (!conf) {
   process.exit(1)
 }
 
-const dir =
-  process.platform === 'linux' && Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 10
-    ? `${conf.dir}-arch_ssl_1_1`
-    : conf.dir
+const dir = conf.dir
+// const dir =
+//   process.platform === 'linux' && Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 10
+//     ? `${conf.dir}-arch_ssl_1_1`
+//     : conf.dir
 
 const endpointURL = `https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core/int-algorand-libcorev1/debug/${libcoreVersion}/${dir}`
 
