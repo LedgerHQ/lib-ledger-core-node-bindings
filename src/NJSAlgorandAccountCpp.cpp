@@ -329,31 +329,30 @@ NAN_METHOD(NJSAlgorandAccount::broadcastTransaction) {
     cpp_impl->broadcastTransaction(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
-NAN_METHOD(NJSAlgorandAccount::createEmptyTransaction) {
+NAN_METHOD(NJSAlgorandAccount::createTransaction) {
 
     //Check if method called with right number of arguments
     if(info.Length() != 0)
     {
-        return Nan::ThrowError("NJSAlgorandAccount::createEmptyTransaction needs 0 arguments");
+        return Nan::ThrowError("NJSAlgorandAccount::createTransaction needs 0 arguments");
     }
 
     //Check if parameters have correct types
+
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSAlgorandTransactionCallback *njs_ptr_arg_0 = new NJSAlgorandTransactionCallback(arg_0_resolver);
+    std::shared_ptr<NJSAlgorandTransactionCallback> arg_0(njs_ptr_arg_0);
+
 
     //Unwrap current object and retrieve its Cpp Implementation
     auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandAccount>::Unwrap(info.This());
     if(!cpp_impl)
     {
-        return Nan::ThrowError("NJSAlgorandAccount::createEmptyTransaction : implementation of AlgorandAccount is not valid");
+        return Nan::ThrowError("NJSAlgorandAccount::createTransaction : implementation of AlgorandAccount is not valid");
     }
-
-    auto result = cpp_impl->createEmptyTransaction();
-
-    //Wrap result in node object
-    auto arg_0 = NJSAlgorandTransaction::wrap(result);
-
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
+    cpp_impl->createTransaction(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
 }
 
 NAN_METHOD(NJSAlgorandAccount::New) {
@@ -412,7 +411,7 @@ void NJSAlgorandAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getFeeEstimate", getFeeEstimate);
     Nan::SetPrototypeMethod(func_template,"broadcastRawTransaction", broadcastRawTransaction);
     Nan::SetPrototypeMethod(func_template,"broadcastTransaction", broadcastTransaction);
-    Nan::SetPrototypeMethod(func_template,"createEmptyTransaction", createEmptyTransaction);
+    Nan::SetPrototypeMethod(func_template,"createTransaction", createTransaction);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     AlgorandAccount_prototype.Reset(objectTemplate);

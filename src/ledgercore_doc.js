@@ -688,9 +688,9 @@ declare class NJSAlgorandAccount
     declare function broadcastTransaction(transaction: NJSAlgorandTransaction, callback: NJSStringCallback);
     /**
      * Create a new transaction
-     * @return The new transaction
+     * @param callback, The new transaction
      */
-    declare function createEmptyTransaction(): NJSAlgorandTransaction;
+    declare function createTransaction(callback: NJSAlgorandTransactionCallback);
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSAlgorandAssetParamsCallback
@@ -741,6 +741,16 @@ declare class NJSAlgorandAssetParamsMapCallback
      * @params error optional of type Error, non null if main task succeeded
      */
     declare function onCallback(result: ?Map<string, AlgorandAssetParams>, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSAlgorandTransactionCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?NJSAlgorandTransaction, error: ?Error);
 }
 declare class NJSAlgorandWallet
 {

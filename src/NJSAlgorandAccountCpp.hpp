@@ -11,6 +11,7 @@
 #include "NJSAlgorandAssetAmountMapCallback.hpp"
 #include "NJSAlgorandAssetParamsCallback.hpp"
 #include "NJSAlgorandAssetParamsMapCallback.hpp"
+#include "NJSAlgorandTransactionCallback.hpp"
 #include "NJSAlgorandTransactionCpp.hpp"
 #include "NJSAmountCallback.hpp"
 #include "NJSBoolCallback.hpp"
@@ -117,9 +118,9 @@ private:
 
     /**
      * Create a new transaction
-     * @return The new transaction
+     * @param callback, The new transaction
      */
-    static NAN_METHOD(createEmptyTransaction);
+    static NAN_METHOD(createTransaction);
 
     static NAN_METHOD(New);
 
