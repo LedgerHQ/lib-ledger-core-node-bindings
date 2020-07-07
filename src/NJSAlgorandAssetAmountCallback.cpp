@@ -24,6 +24,8 @@ void NJSAlgorandAssetAmountCallback::onCallback(const std::experimental::optiona
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("amount").ToLocalChecked(), arg_0_tmp_2);
         auto arg_0_tmp_3 = Nan::New<Boolean>(arg_0_optional.frozen);
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("frozen").ToLocalChecked(), arg_0_tmp_3);
+        auto arg_0_tmp_4 = Nan::New<String>(arg_0_optional.assetId).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("assetId").ToLocalChecked(), arg_0_tmp_4);
 
         arg_0 = arg_0_tmp;
     }

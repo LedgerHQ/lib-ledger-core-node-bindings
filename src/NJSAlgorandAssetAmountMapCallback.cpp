@@ -28,6 +28,8 @@ void NJSAlgorandAssetAmountMapCallback::onCallback(const std::experimental::opti
             Nan::DefineOwnProperty(arg_0_tmp_second, Nan::New<String>("amount").ToLocalChecked(), arg_0_tmp_second_2);
             auto arg_0_tmp_second_3 = Nan::New<Boolean>(arg_0_tmp_elem.second.frozen);
             Nan::DefineOwnProperty(arg_0_tmp_second, Nan::New<String>("frozen").ToLocalChecked(), arg_0_tmp_second_3);
+            auto arg_0_tmp_second_4 = Nan::New<String>(arg_0_tmp_elem.second.assetId).ToLocalChecked();
+            Nan::DefineOwnProperty(arg_0_tmp_second, Nan::New<String>("assetId").ToLocalChecked(), arg_0_tmp_second_4);
 
             arg_0_tmp->Set(Nan::GetCurrentContext(), arg_0_tmp_first, arg_0_tmp_second);
         }

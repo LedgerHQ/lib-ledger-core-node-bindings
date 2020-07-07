@@ -597,6 +597,9 @@ declare class NJSAlgorandTransaction
     declare function getFee(): string;
     declare function getNote(): string;
     declare function getRound(): string;
+    declare function getSenderRewards(): string;
+    declare function getReceiverRewards(): string;
+    declare function getCloseRewards(): string;
     declare function setSender(sender: string);
     declare function setFee(fee: string);
     declare function setNote(note: string);
@@ -632,7 +635,7 @@ declare class NJSAlgorandAccount
      * @param assetId, the unique identifier of the asset to look for
      * @param callback, Callback returning the true if the address hold the asset
      */
-    declare function hasAsset(addr: string, assetId: string, callback: NJSBoolCallback);
+    declare function hasAsset(address: string, assetId: string, callback: NJSBoolCallback);
     /**
      * Get balance of account for a particular asset.
      * @param assetId, the unique identifier of the asset on the algorand network

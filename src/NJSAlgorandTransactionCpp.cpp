@@ -159,6 +159,81 @@ NAN_METHOD(NJSAlgorandTransaction::getRound) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSAlgorandTransaction::getSenderRewards) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAlgorandTransaction::getSenderRewards needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandTransaction::getSenderRewards : implementation of AlgorandTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getSenderRewards();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSAlgorandTransaction::getReceiverRewards) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAlgorandTransaction::getReceiverRewards needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandTransaction::getReceiverRewards : implementation of AlgorandTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getReceiverRewards();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSAlgorandTransaction::getCloseRewards) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAlgorandTransaction::getCloseRewards needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandTransaction::getCloseRewards : implementation of AlgorandTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getCloseRewards();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSAlgorandTransaction::setSender) {
 
     //Check if method called with right number of arguments
@@ -256,37 +331,7 @@ NAN_METHOD(NJSAlgorandTransaction::setPaymentInfo) {
         arg_0_4.emplace(opt_arg_0_4);
     }
 
-
-    auto field_arg_0_5 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("fromRewards").ToLocalChecked()).ToLocalChecked();
-    auto arg_0_5 = std::experimental::optional<std::string>();
-    if(!field_arg_0_5->IsNull() && !field_arg_0_5->IsUndefined())
-    {
-        Nan::Utf8String string_opt_arg_0_5(field_arg_0_5->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-        auto opt_arg_0_5 = std::string(*string_opt_arg_0_5);
-        arg_0_5.emplace(opt_arg_0_5);
-    }
-
-
-    auto field_arg_0_6 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("closeRewards").ToLocalChecked()).ToLocalChecked();
-    auto arg_0_6 = std::experimental::optional<std::string>();
-    if(!field_arg_0_6->IsNull() && !field_arg_0_6->IsUndefined())
-    {
-        Nan::Utf8String string_opt_arg_0_6(field_arg_0_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-        auto opt_arg_0_6 = std::string(*string_opt_arg_0_6);
-        arg_0_6.emplace(opt_arg_0_6);
-    }
-
-
-    auto field_arg_0_7 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("recipientRewards").ToLocalChecked()).ToLocalChecked();
-    auto arg_0_7 = std::experimental::optional<std::string>();
-    if(!field_arg_0_7->IsNull() && !field_arg_0_7->IsUndefined())
-    {
-        Nan::Utf8String string_opt_arg_0_7(field_arg_0_7->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-        auto opt_arg_0_7 = std::string(*string_opt_arg_0_7);
-        arg_0_7.emplace(opt_arg_0_7);
-    }
-
-    AlgorandPaymentInfo arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7);
+    AlgorandPaymentInfo arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4);
 
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -340,33 +385,6 @@ NAN_METHOD(NJSAlgorandTransaction::getPaymentInfo) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("closeAmount").ToLocalChecked(), arg_0_4);
-    Local<Value> arg_0_5;
-    if(result.fromRewards)
-    {
-        auto arg_0_5_optional = (result.fromRewards).value();
-        auto arg_0_5_tmp = Nan::New<String>(arg_0_5_optional).ToLocalChecked();
-        arg_0_5 = arg_0_5_tmp;
-    }
-
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("fromRewards").ToLocalChecked(), arg_0_5);
-    Local<Value> arg_0_6;
-    if(result.closeRewards)
-    {
-        auto arg_0_6_optional = (result.closeRewards).value();
-        auto arg_0_6_tmp = Nan::New<String>(arg_0_6_optional).ToLocalChecked();
-        arg_0_6 = arg_0_6_tmp;
-    }
-
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("closeRewards").ToLocalChecked(), arg_0_6);
-    Local<Value> arg_0_7;
-    if(result.recipientRewards)
-    {
-        auto arg_0_7_optional = (result.recipientRewards).value();
-        auto arg_0_7_tmp = Nan::New<String>(arg_0_7_optional).ToLocalChecked();
-        arg_0_7 = arg_0_7_tmp;
-    }
-
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("recipientRewards").ToLocalChecked(), arg_0_7);
 
 
     //Return result
@@ -825,7 +843,17 @@ NAN_METHOD(NJSAlgorandTransaction::setAssetTransferInfo) {
         arg_0_5.emplace(opt_arg_0_5);
     }
 
-    AlgorandAssetTransferInfo arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5);
+
+    auto field_arg_0_6 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("closeAmount").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_6 = std::experimental::optional<std::string>();
+    if(!field_arg_0_6->IsNull() && !field_arg_0_6->IsUndefined())
+    {
+        Nan::Utf8String string_opt_arg_0_6(field_arg_0_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_6 = std::string(*string_opt_arg_0_6);
+        arg_0_6.emplace(opt_arg_0_6);
+    }
+
+    AlgorandAssetTransferInfo arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6);
 
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -888,6 +916,15 @@ NAN_METHOD(NJSAlgorandTransaction::getAssetTransferInfo) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("clawedBackAddress").ToLocalChecked(), arg_0_5);
+    Local<Value> arg_0_6;
+    if(result.closeAmount)
+    {
+        auto arg_0_6_optional = (result.closeAmount).value();
+        auto arg_0_6_tmp = Nan::New<String>(arg_0_6_optional).ToLocalChecked();
+        arg_0_6 = arg_0_6_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("closeAmount").ToLocalChecked(), arg_0_6);
 
 
     //Return result
@@ -1068,6 +1105,9 @@ void NJSAlgorandTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getFee", getFee);
     Nan::SetPrototypeMethod(func_template,"getNote", getNote);
     Nan::SetPrototypeMethod(func_template,"getRound", getRound);
+    Nan::SetPrototypeMethod(func_template,"getSenderRewards", getSenderRewards);
+    Nan::SetPrototypeMethod(func_template,"getReceiverRewards", getReceiverRewards);
+    Nan::SetPrototypeMethod(func_template,"getCloseRewards", getCloseRewards);
     Nan::SetPrototypeMethod(func_template,"setSender", setSender);
     Nan::SetPrototypeMethod(func_template,"setFee", setFee);
     Nan::SetPrototypeMethod(func_template,"setNote", setNote);

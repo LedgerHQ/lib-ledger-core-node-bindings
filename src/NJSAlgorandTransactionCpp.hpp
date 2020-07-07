@@ -47,6 +47,12 @@ private:
 
     static NAN_METHOD(getRound);
 
+    static NAN_METHOD(getSenderRewards);
+
+    static NAN_METHOD(getReceiverRewards);
+
+    static NAN_METHOD(getCloseRewards);
+
     static NAN_METHOD(setSender);
 
     static NAN_METHOD(setFee);
