@@ -8,9 +8,8 @@
 #include "../include/TimePeriod.hpp"
 #include "NJSAlgorandAssetAmountCallback.hpp"
 #include "NJSAlgorandAssetAmountListCallback.hpp"
-#include "NJSAlgorandAssetAmountMapCallback.hpp"
 #include "NJSAlgorandAssetParamsCallback.hpp"
-#include "NJSAlgorandAssetParamsMapCallback.hpp"
+#include "NJSAlgorandAssetParamsListCallback.hpp"
 #include "NJSAlgorandTransactionCallback.hpp"
 #include "NJSAlgorandTransactionCpp.hpp"
 #include "NJSAmountCallback.hpp"
@@ -73,13 +72,13 @@ private:
 
     /**
      * Get balances of all assets to which account is registered
-     * @param callback, MapCallback returning a list of AlgorandAssetAmount objects representing the different balances
+     * @param callback, ListCallback returning a list of AlgorandAssetAmount objects representing the different balances
      */
     static NAN_METHOD(getAssetsBalances);
 
     /**
      * Get information about the assets created by account
-     * @param callback, MapCallback returning a list of AlgorandAssetParams objects representing the assets created by account
+     * @param callback, ListCallback returning a list of AlgorandAssetParams objects representing the assets created by account
      */
     static NAN_METHOD(getCreatedAssets);
 

@@ -653,14 +653,14 @@ declare class NJSAlgorandAccount
     declare function getAssetBalanceHistory(assetId: string, start: string, end: string, period: TimePeriod, callback: NJSAlgorandAssetAmountListCallback);
     /**
      * Get balances of all assets to which account is registered
-     * @param callback, MapCallback returning a list of AlgorandAssetAmount objects representing the different balances
+     * @param callback, ListCallback returning a list of AlgorandAssetAmount objects representing the different balances
      */
-    declare function getAssetsBalances(callback: NJSAlgorandAssetAmountMapCallback);
+    declare function getAssetsBalances(callback: NJSAlgorandAssetAmountListCallback);
     /**
      * Get information about the assets created by account
-     * @param callback, MapCallback returning a list of AlgorandAssetParams objects representing the assets created by account
+     * @param callback, ListCallback returning a list of AlgorandAssetParams objects representing the assets created by account
      */
-    declare function getCreatedAssets(callback: NJSAlgorandAssetParamsMapCallback);
+    declare function getCreatedAssets(callback: NJSAlgorandAssetParamsListCallback);
     /**
      * Get the pending rewards for account
      * @param callback, Callback returning the amount of pending rewards in MicroAlgos
@@ -725,25 +725,15 @@ declare class NJSAlgorandAssetAmountListCallback
      */
     declare function onCallback(result: ?Array<AlgorandAssetAmount>, error: ?Error);
 }
-/** Callback triggered by main completed task, returning optional result as map<string, T> */
-declare class NJSAlgorandAssetAmountMapCallback
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSAlgorandAssetParamsListCallback
 {
     /**
      * Method triggered when main task complete.
-     * @params result optional of type Map<string, T>, non null if main task failed
+     * @params result optional of type list<T>, non null if main task failed
      * @params error optional of type Error, non null if main task succeeded
      */
-    declare function onCallback(result: ?Map<string, AlgorandAssetAmount>, error: ?Error);
-}
-/** Callback triggered by main completed task, returning optional result as map<string, T> */
-declare class NJSAlgorandAssetParamsMapCallback
-{
-    /**
-     * Method triggered when main task complete.
-     * @params result optional of type Map<string, T>, non null if main task failed
-     * @params error optional of type Error, non null if main task succeeded
-     */
-    declare function onCallback(result: ?Map<string, AlgorandAssetParams>, error: ?Error);
+    declare function onCallback(result: ?Array<AlgorandAssetParams>, error: ?Error);
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSAlgorandTransactionCallback

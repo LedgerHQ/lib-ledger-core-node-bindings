@@ -48,8 +48,7 @@
 #include "NJSAlgorandAssetParamsCallback.hpp"
 #include "NJSAlgorandAssetAmountCallback.hpp"
 #include "NJSAlgorandAssetAmountListCallback.hpp"
-#include "NJSAlgorandAssetAmountMapCallback.hpp"
-#include "NJSAlgorandAssetParamsMapCallback.hpp"
+#include "NJSAlgorandAssetParamsListCallback.hpp"
 #include "NJSAlgorandTransactionCallback.hpp"
 #include "NJSAlgorandWalletCpp.hpp"
 #include "NJSEventCpp.hpp"
@@ -231,8 +230,7 @@ static void initAll(Local<Object> target)
     NJSAlgorandAssetParamsCallback::Initialize(target);
     NJSAlgorandAssetAmountCallback::Initialize(target);
     NJSAlgorandAssetAmountListCallback::Initialize(target);
-    NJSAlgorandAssetAmountMapCallback::Initialize(target);
-    NJSAlgorandAssetParamsMapCallback::Initialize(target);
+    NJSAlgorandAssetParamsListCallback::Initialize(target);
     NJSAlgorandTransactionCallback::Initialize(target);
     NJSAlgorandWallet::Initialize(target);
     NJSEvent::Initialize(target);

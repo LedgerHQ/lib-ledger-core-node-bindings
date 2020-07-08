@@ -136,8 +136,8 @@ NAN_METHOD(NJSAlgorandAccount::getAssetsBalances) {
 
     //Create promise and set it into Callback
     auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
-    NJSAlgorandAssetAmountMapCallback *njs_ptr_arg_0 = new NJSAlgorandAssetAmountMapCallback(arg_0_resolver);
-    std::shared_ptr<NJSAlgorandAssetAmountMapCallback> arg_0(njs_ptr_arg_0);
+    NJSAlgorandAssetAmountListCallback *njs_ptr_arg_0 = new NJSAlgorandAssetAmountListCallback(arg_0_resolver);
+    std::shared_ptr<NJSAlgorandAssetAmountListCallback> arg_0(njs_ptr_arg_0);
 
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -161,8 +161,8 @@ NAN_METHOD(NJSAlgorandAccount::getCreatedAssets) {
 
     //Create promise and set it into Callback
     auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
-    NJSAlgorandAssetParamsMapCallback *njs_ptr_arg_0 = new NJSAlgorandAssetParamsMapCallback(arg_0_resolver);
-    std::shared_ptr<NJSAlgorandAssetParamsMapCallback> arg_0(njs_ptr_arg_0);
+    NJSAlgorandAssetParamsListCallback *njs_ptr_arg_0 = new NJSAlgorandAssetParamsListCallback(arg_0_resolver);
+    std::shared_ptr<NJSAlgorandAssetParamsListCallback> arg_0(njs_ptr_arg_0);
 
 
     //Unwrap current object and retrieve its Cpp Implementation
