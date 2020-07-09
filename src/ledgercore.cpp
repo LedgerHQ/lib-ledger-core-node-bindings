@@ -84,7 +84,6 @@
 #include "NJSDatabaseConnectionPool.hpp"
 #include "NJSDatabaseEngine.hpp"
 #include "NJSDatabaseBackendCpp.hpp"
-#include "NJSRandomNumberGenerator.hpp"
 #include "NJSEthereumPublicKeyProvider.hpp"
 #include "NJSCosmosLikeMessageCpp.hpp"
 #include "NJSCosmosLikeTransactionCpp.hpp"
@@ -133,8 +132,10 @@
 #include "NJSBitcoinLikeAddressCpp.hpp"
 #include "NJSBitcoinLikeExtendedPublicKeyCpp.hpp"
 #include "NJSAmountCpp.hpp"
+#include "NJSRandomNumberGenerator.hpp"
 #include "NJSPreferencesCpp.hpp"
 #include "NJSPreferencesEditorCpp.hpp"
+#include "NJSPreferencesBackendCpp.hpp"
 #include "NJSBitcoinLikeWalletConfigurationCpp.hpp"
 #include "NJSBitcoinLikeInputCpp.hpp"
 #include "NJSBitcoinLikeOutputCpp.hpp"
@@ -254,7 +255,6 @@ static void initAll(Local<Object> target)
     NJSDatabaseConnectionPool::Initialize(target);
     NJSDatabaseEngine::Initialize(target);
     NJSDatabaseBackend::Initialize(target);
-    NJSRandomNumberGenerator::Initialize(target);
     NJSEthereumPublicKeyProvider::Initialize(target);
     NJSCosmosLikeMessage::Initialize(target);
     NJSCosmosLikeTransaction::Initialize(target);
@@ -303,8 +303,10 @@ static void initAll(Local<Object> target)
     NJSBitcoinLikeAddress::Initialize(target);
     NJSBitcoinLikeExtendedPublicKey::Initialize(target);
     NJSAmount::Initialize(target);
+    NJSRandomNumberGenerator::Initialize(target);
     NJSPreferences::Initialize(target);
     NJSPreferencesEditor::Initialize(target);
+    NJSPreferencesBackend::Initialize(target);
     NJSBitcoinLikeWalletConfiguration::Initialize(target);
     NJSBitcoinLikeInput::Initialize(target);
     NJSBitcoinLikeOutput::Initialize(target);

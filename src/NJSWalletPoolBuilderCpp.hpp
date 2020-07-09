@@ -10,6 +10,7 @@
 #include "NJSHttpClient.hpp"
 #include "NJSLogPrinter.hpp"
 #include "NJSPathResolver.hpp"
+#include "NJSPreferencesBackendCpp.hpp"
 #include "NJSRandomNumberGenerator.hpp"
 #include "NJSThreadDispatcher.hpp"
 #include "NJSWalletPoolCallback.hpp"
@@ -105,6 +106,20 @@ private:
      * @return WalletPoolBuilder object, with wallet pool configuration set
      */
     static NAN_METHOD(setConfiguration);
+
+    /**
+     * Set the external PreferencesBackend
+     * @param backend, PreferencesBackend object
+     * @return WalletPoolBuilder object, with wallet pool externalPreferencesBackend set
+     */
+    static NAN_METHOD(setExternalPreferencesBackend);
+
+    /**
+     * Set the internal PreferencesBackend
+     * @param backend, PreferencesBackend object
+     * @return WalletPoolBuilder object, with wallet pool internalPreferencesBackend set
+     */
+    static NAN_METHOD(setInternalPreferencesBackend);
 
     /**
      * Create wallet pool.

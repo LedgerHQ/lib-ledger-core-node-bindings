@@ -305,6 +305,72 @@ NAN_METHOD(NJSWalletPoolBuilder::setConfiguration) {
     //Return result
     info.GetReturnValue().Set(arg_1);
 }
+NAN_METHOD(NJSWalletPoolBuilder::setExternalPreferencesBackend) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSWalletPoolBuilder::setExternalPreferencesBackend needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::PreferencesBackend>::Unwrap(njs_arg_0);
+    if(!arg_0)
+    {
+        return Nan::ThrowError("NodeJs Object to NJSPreferencesBackend failed");
+    }
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPoolBuilder>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWalletPoolBuilder::setExternalPreferencesBackend : implementation of WalletPoolBuilder is not valid");
+    }
+
+    auto result = cpp_impl->setExternalPreferencesBackend(arg_0);
+
+    //Wrap result in node object
+    auto arg_1 = NJSWalletPoolBuilder::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_1);
+}
+NAN_METHOD(NJSWalletPoolBuilder::setInternalPreferencesBackend) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSWalletPoolBuilder::setInternalPreferencesBackend needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
+    auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::PreferencesBackend>::Unwrap(njs_arg_0);
+    if(!arg_0)
+    {
+        return Nan::ThrowError("NodeJs Object to NJSPreferencesBackend failed");
+    }
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::WalletPoolBuilder>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWalletPoolBuilder::setInternalPreferencesBackend : implementation of WalletPoolBuilder is not valid");
+    }
+
+    auto result = cpp_impl->setInternalPreferencesBackend(arg_0);
+
+    //Wrap result in node object
+    auto arg_1 = NJSWalletPoolBuilder::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_1);
+}
 NAN_METHOD(NJSWalletPoolBuilder::build) {
 
     //Check if method called with right number of arguments
@@ -417,6 +483,8 @@ void NJSWalletPoolBuilder::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"setRandomNumberGenerator", setRandomNumberGenerator);
     Nan::SetPrototypeMethod(func_template,"setDatabaseBackend", setDatabaseBackend);
     Nan::SetPrototypeMethod(func_template,"setConfiguration", setConfiguration);
+    Nan::SetPrototypeMethod(func_template,"setExternalPreferencesBackend", setExternalPreferencesBackend);
+    Nan::SetPrototypeMethod(func_template,"setInternalPreferencesBackend", setInternalPreferencesBackend);
     Nan::SetPrototypeMethod(func_template,"build", build);
     Nan::SetPrototypeMethod(func_template,"createInstance", createInstance);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
