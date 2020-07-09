@@ -619,8 +619,9 @@ declare class NJSAlgorandTransaction
 }
 declare class NJSAlgorandOperation
 {
-    declare function getAlgorandOperationType(): AlgorandOperationType;
     declare function getTransaction(): NJSAlgorandTransaction;
+    declare function getAlgorandOperationType(): AlgorandOperationType;
+    declare function getRewards(): string;
 }
 declare class NJSAlgorandAccount
 {

@@ -8,6 +8,7 @@
 #include "../include/AlgorandOperationType.hpp"
 #include "NJSAlgorandTransactionCpp.hpp"
 #include <memory>
+#include <string>
 
 #include <nan.h>
 #include <node.h>
@@ -28,9 +29,11 @@ public:
     static Nan::Persistent<ObjectTemplate> AlgorandOperation_prototype;
 
 private:
+    static NAN_METHOD(getTransaction);
+
     static NAN_METHOD(getAlgorandOperationType);
 
-    static NAN_METHOD(getTransaction);
+    static NAN_METHOD(getRewards);
 
     static NAN_METHOD(New);
 

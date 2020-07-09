@@ -9,6 +9,32 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
+NAN_METHOD(NJSAlgorandOperation::getTransaction) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAlgorandOperation::getTransaction needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandOperation>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandOperation::getTransaction : implementation of AlgorandOperation is not valid");
+    }
+
+    auto result = cpp_impl->getTransaction();
+
+    //Wrap result in node object
+    auto arg_0 = NJSAlgorandTransaction::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSAlgorandOperation::getAlgorandOperationType) {
 
     //Check if method called with right number of arguments
@@ -34,12 +60,12 @@ NAN_METHOD(NJSAlgorandOperation::getAlgorandOperationType) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
-NAN_METHOD(NJSAlgorandOperation::getTransaction) {
+NAN_METHOD(NJSAlgorandOperation::getRewards) {
 
     //Check if method called with right number of arguments
     if(info.Length() != 0)
     {
-        return Nan::ThrowError("NJSAlgorandOperation::getTransaction needs 0 arguments");
+        return Nan::ThrowError("NJSAlgorandOperation::getRewards needs 0 arguments");
     }
 
     //Check if parameters have correct types
@@ -48,14 +74,13 @@ NAN_METHOD(NJSAlgorandOperation::getTransaction) {
     auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandOperation>::Unwrap(info.This());
     if(!cpp_impl)
     {
-        return Nan::ThrowError("NJSAlgorandOperation::getTransaction : implementation of AlgorandOperation is not valid");
+        return Nan::ThrowError("NJSAlgorandOperation::getRewards : implementation of AlgorandOperation is not valid");
     }
 
-    auto result = cpp_impl->getTransaction();
+    auto result = cpp_impl->getRewards();
 
     //Wrap result in node object
-    auto arg_0 = NJSAlgorandTransaction::wrap(result);
-
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
 
     //Return result
     info.GetReturnValue().Set(arg_0);
@@ -106,8 +131,9 @@ void NJSAlgorandOperation::Initialize(Local<Object> target) {
     func_template->SetClassName(Nan::New<String>("NJSAlgorandOperation").ToLocalChecked());
 
     //SetPrototypeMethod all methods
-    Nan::SetPrototypeMethod(func_template,"getAlgorandOperationType", getAlgorandOperationType);
     Nan::SetPrototypeMethod(func_template,"getTransaction", getTransaction);
+    Nan::SetPrototypeMethod(func_template,"getAlgorandOperationType", getAlgorandOperationType);
+    Nan::SetPrototypeMethod(func_template,"getRewards", getRewards);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     AlgorandOperation_prototype.Reset(objectTemplate);
