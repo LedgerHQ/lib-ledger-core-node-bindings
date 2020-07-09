@@ -1966,31 +1966,6 @@ declare class NJSDatabaseBackend
     /** Create a database backend instance from the given DatabaseEngine implementation. */
     static declare function createBackendFromEngine(engine: NJSDatabaseEngine): NJSDatabaseBackend;
 }
-/** Class to generate random numbers. */
-declare class NJSRandomNumberGenerator
-{
-    /**
-     * Generates random bytes.
-     * @params size number of bytes to generate
-     * @return 'size' random bytes
-     */
-    declare function getRandomBytes(size: number): String;
-    /**
-     * Generates random 32 bits integer.
-     * @return random 32 bits integer
-     */
-    declare function getRandomInt(): number;
-    /**
-     * Generates random 64 bits integer.
-     * @return random 64 bits integer
-     */
-    declare function getRandomLong(): number;
-    /**
-     * Generates random byte.
-     * @return random byte
-     */
-    declare function getRandomByte(): number;
-}
 declare class NJSEthereumPublicKeyProvider
 {
 }
@@ -3057,6 +3032,31 @@ declare class NJSAmount
     /** Transform a 64-bit number into an amount (expressed in the given currency). */
     static declare function fromLong(currency: Currency, value: number): NJSAmount;
 }
+/** Class to generate random numbers. */
+declare class NJSRandomNumberGenerator
+{
+    /**
+     * Generates random bytes.
+     * @params size number of bytes to generate
+     * @return 'size' random bytes
+     */
+    declare function getRandomBytes(size: number): String;
+    /**
+     * Generates random 32 bits integer.
+     * @return random 32 bits integer
+     */
+    declare function getRandomInt(): number;
+    /**
+     * Generates random 64 bits integer.
+     * @return random 64 bits integer
+     */
+    declare function getRandomLong(): number;
+    /**
+     * Generates random byte.
+     * @return random byte
+     */
+    declare function getRandomByte(): number;
+}
 /**
  * Interface for accessing and modifying custom preferences. Preferences are key - value data which will be persisted to
  * the filesystem. They can be local or stored with the Ledger API backend (encrypted by a user secret). This can be used to
@@ -3159,6 +3159,55 @@ declare class NJSPreferencesEditor
     declare function remove(key: string): NJSPreferencesEditor;
     /** Persists the changes to the Preferences. */
     declare function commit();
+    /** Clear all preferences. */
+    declare function clear();
+}
+/** Interface describing the behaviour of the backend used by Preferences. */
+declare class NJSPreferencesBackend
+{
+    /**
+     * Gets the value associated to the given key.
+     * @param key The data key.
+     * @return The value associated to the key if it exists, an empty option otherwise.
+     */
+    declare function get(key: String): ?string;
+    /**
+     * Commit a change.
+     * @param changes The list of changes to commit.
+     * @return false if unsuccessful (might happen if the underlying DB was destroyed).
+     */
+    declare function commit(changes: Array<PreferencesChange>): boolean;
+    /**
+     * Turn encryption on for all future uses.
+     * This method will set encryption on for all future values that will be persisted.
+     * If this function is called on a plaintext storage (i.e. first encryption for
+     * instance), it will also encrypt all data already present.
+     * @param rng Random number generator used to generate the encryption salt.
+     * @param password The new password.
+     */
+    declare function setEncryption(rng: NJSRandomNumberGenerator, password: string);
+    /**
+     * Turn off encryption by disabling the use of the internal cipher. Data is left
+     * untouched.
+     * This method is suitable when you want to get back raw, encrypted data. If you want
+     * to disable encryption in order to read clear data back without password, consider
+     * the resetEncryption method instead.
+     */
+    declare function unsetEncryption();
+    /**
+     * Reset the encryption with a new password by first decrypting on the
+     * fly with the old password the data present.
+     * If the new password is an empty string, after this method is called, the database
+     * is completely unciphered and no password is required to read from it.
+     * @return true if the reset occurred correctly, false otherwise (e.g. trying to change
+     * password with an old password but without a proper salt already persisted).
+     */
+    declare function resetEncryption(rng: NJSRandomNumberGenerator, oldPassword: string, newPassword: string): boolean;
+    /**
+     * Get encryption salt, if any.
+     * @return the encryption salt if it exists, an empty string otherwise.
+     */
+    declare function getEncryptionSalt(): string;
     /** Clear all preferences. */
     declare function clear();
 }
@@ -3712,6 +3761,18 @@ declare class NJSWalletPoolBuilder
      * @return WalletPoolBuilder object, with wallet pool configuration set
      */
     declare function setConfiguration(configuration: NJSDynamicObject): NJSWalletPoolBuilder;
+    /**
+     * Set the external PreferencesBackend
+     * @param backend, PreferencesBackend object
+     * @return WalletPoolBuilder object, with wallet pool externalPreferencesBackend set
+     */
+    declare function setExternalPreferencesBackend(backend: NJSPreferencesBackend): NJSWalletPoolBuilder;
+    /**
+     * Set the internal PreferencesBackend
+     * @param backend, PreferencesBackend object
+     * @return WalletPoolBuilder object, with wallet pool internalPreferencesBackend set
+     */
+    declare function setInternalPreferencesBackend(backend: NJSPreferencesBackend): NJSWalletPoolBuilder;
     /**
      * Create wallet pool.
      * @param callback, Callback object returning a WalletPool instance
