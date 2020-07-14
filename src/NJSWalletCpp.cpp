@@ -565,20 +565,23 @@ NAN_METHOD(NJSWallet::getCurrency) {
         auto arg_0_11_tmp_2 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_11_optional.Version)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("Version").ToLocalChecked(), arg_0_11_tmp_2);
-        auto arg_0_11_tmp_3 = Nan::New<Number>(arg_0_11_optional.BaseReserve);
-        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("BaseReserve").ToLocalChecked(), arg_0_11_tmp_3);
-        auto arg_0_11_tmp_4 = Nan::New<Number>(arg_0_11_optional.BaseFee);
-        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("BaseFee").ToLocalChecked(), arg_0_11_tmp_4);
-        Local<Array> arg_0_11_tmp_5 = Nan::New<Array>();
-        for(size_t arg_0_11_tmp_5_id = 0; arg_0_11_tmp_5_id < arg_0_11_optional.AdditionalSEPs.size(); arg_0_11_tmp_5_id++)
+        auto arg_0_11_tmp_3 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_11_optional.MuxedVersion)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("MuxedVersion").ToLocalChecked(), arg_0_11_tmp_3);
+        auto arg_0_11_tmp_4 = Nan::New<Number>(arg_0_11_optional.BaseReserve);
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("BaseReserve").ToLocalChecked(), arg_0_11_tmp_4);
+        auto arg_0_11_tmp_5 = Nan::New<Number>(arg_0_11_optional.BaseFee);
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("BaseFee").ToLocalChecked(), arg_0_11_tmp_5);
+        Local<Array> arg_0_11_tmp_6 = Nan::New<Array>();
+        for(size_t arg_0_11_tmp_6_id = 0; arg_0_11_tmp_6_id < arg_0_11_optional.AdditionalSEPs.size(); arg_0_11_tmp_6_id++)
         {
-            auto arg_0_11_tmp_5_elem = Nan::New<String>(arg_0_11_optional.AdditionalSEPs[arg_0_11_tmp_5_id]).ToLocalChecked();
-            Nan::Set(arg_0_11_tmp_5, (int)arg_0_11_tmp_5_id,arg_0_11_tmp_5_elem);
+            auto arg_0_11_tmp_6_elem = Nan::New<String>(arg_0_11_optional.AdditionalSEPs[arg_0_11_tmp_6_id]).ToLocalChecked();
+            Nan::Set(arg_0_11_tmp_6, (int)arg_0_11_tmp_6_id,arg_0_11_tmp_6_elem);
         }
 
-        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("AdditionalSEPs").ToLocalChecked(), arg_0_11_tmp_5);
-        auto arg_0_11_tmp_6 = Nan::New<String>(arg_0_11_optional.NetworkPassphrase).ToLocalChecked();
-        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("NetworkPassphrase").ToLocalChecked(), arg_0_11_tmp_6);
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("AdditionalSEPs").ToLocalChecked(), arg_0_11_tmp_6);
+        auto arg_0_11_tmp_7 = Nan::New<String>(arg_0_11_optional.NetworkPassphrase).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_11_tmp, Nan::New<String>("NetworkPassphrase").ToLocalChecked(), arg_0_11_tmp_7);
 
         arg_0_11 = arg_0_11_tmp;
     }
