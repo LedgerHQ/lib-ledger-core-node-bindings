@@ -622,9 +622,16 @@ declare class NJSAlgorandOperation
     declare function getTransaction(): NJSAlgorandTransaction;
     declare function getAlgorandOperationType(): AlgorandOperationType;
     declare function getRewards(): string;
+    declare function getAssetAmount(): string;
 }
 declare class NJSAlgorandAccount
 {
+    /**
+     * Get the maximum amount spendable in one transaction
+     * @param callback, Callback returning the maximum amount spendable
+     * @param operationType, the type of the operation
+     */
+    declare function getSpendableBalance(operationType: AlgorandOperationType, callback: NJSAmountCallback);
     /**
      * Get information about a specific asset
      * @param assetId, the unique identifier of the asset to look for
@@ -678,6 +685,13 @@ declare class NJSAlgorandAccount
      * @param callback, Callback returning the fees in MicroAlgos for the specified transaction
      */
     declare function getFeeEstimate(transaction: NJSAlgorandTransaction, callback: NJSAmountCallback);
+    /**
+     * Build a raw signed transaction from a raw unsigned transaction and the signature
+     * @param rawUnsignedTransaction, the msgpack-encoded unsigned transaction
+     * @param signature, the signature of the transaction
+     * @return binary, the msgpack-encoded signed transaction
+     */
+    declare function buildRawSignedTransaction(rawUnsignedTransaction: String, signature: String): String;
     /**
      * Broadcast a raw transaction to the algorand network
      * @param transaction, the msgpack-encoded transaction

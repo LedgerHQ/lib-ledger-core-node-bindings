@@ -85,6 +85,31 @@ NAN_METHOD(NJSAlgorandOperation::getRewards) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSAlgorandOperation::getAssetAmount) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSAlgorandOperation::getAssetAmount needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandOperation>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandOperation::getAssetAmount : implementation of AlgorandOperation is not valid");
+    }
+
+    auto result = cpp_impl->getAssetAmount();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSAlgorandOperation::New) {
     //Only new allowed
@@ -134,6 +159,7 @@ void NJSAlgorandOperation::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getTransaction", getTransaction);
     Nan::SetPrototypeMethod(func_template,"getAlgorandOperationType", getAlgorandOperationType);
     Nan::SetPrototypeMethod(func_template,"getRewards", getRewards);
+    Nan::SetPrototypeMethod(func_template,"getAssetAmount", getAssetAmount);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     AlgorandOperation_prototype.Reset(objectTemplate);

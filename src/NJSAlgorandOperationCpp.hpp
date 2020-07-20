@@ -35,6 +35,8 @@ private:
 
     static NAN_METHOD(getRewards);
 
+    static NAN_METHOD(getAssetAmount);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

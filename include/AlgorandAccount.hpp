@@ -27,11 +27,19 @@ class AlgorandTransactionCallback;
 class AmountCallback;
 class BoolCallback;
 class StringCallback;
+enum class AlgorandOperationType;
 enum class TimePeriod;
 
 class LIBCORE_EXPORT AlgorandAccount {
 public:
     virtual ~AlgorandAccount() {}
+
+    /**
+     * Get the maximum amount spendable in one transaction
+     * @param callback, Callback returning the maximum amount spendable
+     * @param operationType, the type of the operation
+     */
+    virtual void getSpendableBalance(AlgorandOperationType operationType, const std::shared_ptr<AmountCallback> & callback) = 0;
 
     /**
      * Get information about a specific asset
@@ -94,6 +102,14 @@ public:
      * @param callback, Callback returning the fees in MicroAlgos for the specified transaction
      */
     virtual void getFeeEstimate(const std::shared_ptr<AlgorandTransaction> & transaction, const std::shared_ptr<AmountCallback> & callback) = 0;
+
+    /**
+     * Build a raw signed transaction from a raw unsigned transaction and the signature
+     * @param rawUnsignedTransaction, the msgpack-encoded unsigned transaction
+     * @param signature, the signature of the transaction
+     * @return binary, the msgpack-encoded signed transaction
+     */
+    virtual std::vector<uint8_t> buildRawSignedTransaction(const std::vector<uint8_t> & rawUnsignedTransaction, const std::vector<uint8_t> & signature) const = 0;
 
     /**
      * Broadcast a raw transaction to the algorand network

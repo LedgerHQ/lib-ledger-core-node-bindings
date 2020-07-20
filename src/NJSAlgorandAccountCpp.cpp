@@ -9,6 +9,32 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
+NAN_METHOD(NJSAlgorandAccount::getSpendableBalance) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSAlgorandAccount::getSpendableBalance needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    auto arg_0 = (ledger::core::api::AlgorandOperationType)Nan::To<int>(info[0]).FromJust();
+
+    //Create promise and set it into Callback
+    auto arg_1_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSAmountCallback *njs_ptr_arg_1 = new NJSAmountCallback(arg_1_resolver);
+    std::shared_ptr<NJSAmountCallback> arg_1(njs_ptr_arg_1);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandAccount::getSpendableBalance : implementation of AlgorandAccount is not valid");
+    }
+    cpp_impl->getSpendableBalance(arg_0,arg_1);
+    info.GetReturnValue().Set(arg_1_resolver->GetPromise());
+}
 NAN_METHOD(NJSAlgorandAccount::getAsset) {
 
     //Check if method called with right number of arguments
@@ -256,6 +282,64 @@ NAN_METHOD(NJSAlgorandAccount::getFeeEstimate) {
     cpp_impl->getFeeEstimate(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSAlgorandAccount::buildRawSignedTransaction) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSAlgorandAccount::buildRawSignedTransaction needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    if(!info[0]->IsString())
+    {
+        Nan::ThrowError("info[0] should be a hexadecimal string.");
+    }
+    std::vector<uint8_t> arg_0;
+    Nan::Utf8String str_arg_0(info[0]);
+    std::string string_arg_0(*str_arg_0, str_arg_0.length());
+    if (string_arg_0.rfind("0x", 0) == 0)
+    {
+        arg_0 = djinni::js::hex::toByteArray(string_arg_0.substr(2));
+    }
+    else
+    {
+        arg_0 = std::vector<uint8_t>(string_arg_0.cbegin(), string_arg_0.cend());
+    }
+
+    if(!info[1]->IsString())
+    {
+        Nan::ThrowError("info[1] should be a hexadecimal string.");
+    }
+    std::vector<uint8_t> arg_1;
+    Nan::Utf8String str_arg_1(info[1]);
+    std::string string_arg_1(*str_arg_1, str_arg_1.length());
+    if (string_arg_1.rfind("0x", 0) == 0)
+    {
+        arg_1 = djinni::js::hex::toByteArray(string_arg_1.substr(2));
+    }
+    else
+    {
+        arg_1 = std::vector<uint8_t>(string_arg_1.cbegin(), string_arg_1.cend());
+    }
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandAccount::buildRawSignedTransaction : implementation of AlgorandAccount is not valid");
+    }
+
+    auto result = cpp_impl->buildRawSignedTransaction(arg_0,arg_1);
+
+    //Wrap result in node object
+    auto arg_2 = Nan::New<String>("0x" + djinni::js::hex::toString(result)).ToLocalChecked();
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_2);
+}
 NAN_METHOD(NJSAlgorandAccount::broadcastRawTransaction) {
 
     //Check if method called with right number of arguments
@@ -400,6 +484,7 @@ void NJSAlgorandAccount::Initialize(Local<Object> target) {
     func_template->SetClassName(Nan::New<String>("NJSAlgorandAccount").ToLocalChecked());
 
     //SetPrototypeMethod all methods
+    Nan::SetPrototypeMethod(func_template,"getSpendableBalance", getSpendableBalance);
     Nan::SetPrototypeMethod(func_template,"getAsset", getAsset);
     Nan::SetPrototypeMethod(func_template,"hasAsset", hasAsset);
     Nan::SetPrototypeMethod(func_template,"getAssetBalance", getAssetBalance);
@@ -409,6 +494,7 @@ void NJSAlgorandAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getPendingRewards", getPendingRewards);
     Nan::SetPrototypeMethod(func_template,"getTotalRewards", getTotalRewards);
     Nan::SetPrototypeMethod(func_template,"getFeeEstimate", getFeeEstimate);
+    Nan::SetPrototypeMethod(func_template,"buildRawSignedTransaction", buildRawSignedTransaction);
     Nan::SetPrototypeMethod(func_template,"broadcastRawTransaction", broadcastRawTransaction);
     Nan::SetPrototypeMethod(func_template,"broadcastTransaction", broadcastTransaction);
     Nan::SetPrototypeMethod(func_template,"createTransaction", createTransaction);

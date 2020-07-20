@@ -5,6 +5,7 @@
 #define DJINNI_GENERATED_NJSALGORANDACCOUNT_HPP
 
 
+#include "../include/AlgorandOperationType.hpp"
 #include "../include/TimePeriod.hpp"
 #include "NJSAlgorandAssetAmountCallback.hpp"
 #include "NJSAlgorandAssetAmountListCallback.hpp"
@@ -39,6 +40,13 @@ public:
     static Nan::Persistent<ObjectTemplate> AlgorandAccount_prototype;
 
 private:
+    /**
+     * Get the maximum amount spendable in one transaction
+     * @param callback, Callback returning the maximum amount spendable
+     * @param operationType, the type of the operation
+     */
+    static NAN_METHOD(getSpendableBalance);
+
     /**
      * Get information about a specific asset
      * @param assetId, the unique identifier of the asset to look for
@@ -100,6 +108,14 @@ private:
      * @param callback, Callback returning the fees in MicroAlgos for the specified transaction
      */
     static NAN_METHOD(getFeeEstimate);
+
+    /**
+     * Build a raw signed transaction from a raw unsigned transaction and the signature
+     * @param rawUnsignedTransaction, the msgpack-encoded unsigned transaction
+     * @param signature, the signature of the transaction
+     * @return binary, the msgpack-encoded signed transaction
+     */
+    static NAN_METHOD(buildRawSignedTransaction);
 
     /**
      * Broadcast a raw transaction to the algorand network
