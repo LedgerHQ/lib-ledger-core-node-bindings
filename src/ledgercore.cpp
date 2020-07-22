@@ -44,6 +44,7 @@
 #include "NJSAlgorandBlockchainObserverEnginesCpp.hpp"
 #include "NJSAlgorandTransactionCpp.hpp"
 #include "NJSAlgorandOperationCpp.hpp"
+#include "NJSAlgorandAddressCpp.hpp"
 #include "NJSAlgorandAccountCpp.hpp"
 #include "NJSAlgorandAssetParamsCallback.hpp"
 #include "NJSAlgorandAssetAmountCallback.hpp"
@@ -226,6 +227,7 @@ static void initAll(Local<Object> target)
     NJSAlgorandBlockchainObserverEngines::Initialize(target);
     NJSAlgorandTransaction::Initialize(target);
     NJSAlgorandOperation::Initialize(target);
+    NJSAlgorandAddress::Initialize(target);
     NJSAlgorandAccount::Initialize(target);
     NJSAlgorandAssetParamsCallback::Initialize(target);
     NJSAlgorandAssetAmountCallback::Initialize(target);

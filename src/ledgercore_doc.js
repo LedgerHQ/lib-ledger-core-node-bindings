@@ -624,6 +624,11 @@ declare class NJSAlgorandOperation
     declare function getRewards(): string;
     declare function getAssetAmount(): string;
 }
+declare class NJSAlgorandAddress
+{
+    static declare function fromPublicKey(pubkey: String): string;
+    static declare function toPublicKey(address: string): String;
+}
 declare class NJSAlgorandAccount
 {
     /**
