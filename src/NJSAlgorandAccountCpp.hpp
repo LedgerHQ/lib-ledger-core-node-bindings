@@ -56,10 +56,20 @@ private:
 
     /**
      * Check if address has a specific asset
+     * @param address, the address to check
      * @param assetId, the unique identifier of the asset to look for
      * @param callback, Callback returning the true if the address hold the asset
      */
     static NAN_METHOD(hasAsset);
+
+    /**
+     * Check if address can receive the given amount:
+     * it may not be enough to reach the minimum balance, if the account has 0 ALGO
+     * @param address, the address to check
+     * @param amount, the amount to test
+     * @param callback, Callback returning the true if the address hold the asset
+     */
+    static NAN_METHOD(isAmountValid);
 
     /**
      * Get balance of account for a particular asset.

@@ -91,6 +91,35 @@ NAN_METHOD(NJSAlgorandAccount::hasAsset) {
     cpp_impl->hasAsset(arg_0,arg_1,arg_2);
     info.GetReturnValue().Set(arg_2_resolver->GetPromise());
 }
+NAN_METHOD(NJSAlgorandAccount::isAmountValid) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSAlgorandAccount::isAmountValid needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    auto arg_0 = std::string(*string_arg_0);
+    Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    auto arg_1 = std::string(*string_arg_1);
+
+    //Create promise and set it into Callback
+    auto arg_2_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBoolCallback *njs_ptr_arg_2 = new NJSBoolCallback(arg_2_resolver);
+    std::shared_ptr<NJSBoolCallback> arg_2(njs_ptr_arg_2);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::AlgorandAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSAlgorandAccount::isAmountValid : implementation of AlgorandAccount is not valid");
+    }
+    cpp_impl->isAmountValid(arg_0,arg_1,arg_2);
+    info.GetReturnValue().Set(arg_2_resolver->GetPromise());
+}
 NAN_METHOD(NJSAlgorandAccount::getAssetBalance) {
 
     //Check if method called with right number of arguments
@@ -487,6 +516,7 @@ void NJSAlgorandAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getSpendableBalance", getSpendableBalance);
     Nan::SetPrototypeMethod(func_template,"getAsset", getAsset);
     Nan::SetPrototypeMethod(func_template,"hasAsset", hasAsset);
+    Nan::SetPrototypeMethod(func_template,"isAmountValid", isAmountValid);
     Nan::SetPrototypeMethod(func_template,"getAssetBalance", getAssetBalance);
     Nan::SetPrototypeMethod(func_template,"getAssetBalanceHistory", getAssetBalanceHistory);
     Nan::SetPrototypeMethod(func_template,"getAssetsBalances", getAssetsBalances);

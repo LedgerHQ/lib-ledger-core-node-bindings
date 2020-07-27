@@ -645,10 +645,19 @@ declare class NJSAlgorandAccount
     declare function getAsset(assetId: string, callback: NJSAlgorandAssetParamsCallback);
     /**
      * Check if address has a specific asset
+     * @param address, the address to check
      * @param assetId, the unique identifier of the asset to look for
      * @param callback, Callback returning the true if the address hold the asset
      */
     declare function hasAsset(address: string, assetId: string, callback: NJSBoolCallback);
+    /**
+     * Check if address can receive the given amount:
+     * it may not be enough to reach the minimum balance, if the account has 0 ALGO
+     * @param address, the address to check
+     * @param amount, the amount to test
+     * @param callback, Callback returning the true if the address hold the asset
+     */
+    declare function isAmountValid(address: string, amount: string, callback: NJSBoolCallback);
     /**
      * Get balance of account for a particular asset.
      * @param assetId, the unique identifier of the asset on the algorand network
