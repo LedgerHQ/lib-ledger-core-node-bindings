@@ -41,7 +41,6 @@
 #include "NJSStellarLikeWalletCpp.hpp"
 #include "NJSStellarLikeAddressCpp.hpp"
 #include "NJSAlgorandBlockchainExplorerEnginesCpp.hpp"
-#include "NJSAlgorandBlockchainObserverEnginesCpp.hpp"
 #include "NJSAlgorandTransactionCpp.hpp"
 #include "NJSAlgorandOperationCpp.hpp"
 #include "NJSAlgorandAddressCpp.hpp"
@@ -224,7 +223,6 @@ static void initAll(Local<Object> target)
     NJSStellarLikeWallet::Initialize(target);
     NJSStellarLikeAddress::Initialize(target);
     NJSAlgorandBlockchainExplorerEngines::Initialize(target);
-    NJSAlgorandBlockchainObserverEngines::Initialize(target);
     NJSAlgorandTransaction::Initialize(target);
     NJSAlgorandOperation::Initialize(target);
     NJSAlgorandAddress::Initialize(target);

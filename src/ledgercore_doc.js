@@ -586,9 +586,6 @@ declare class NJSStellarLikeAddress
 declare class NJSAlgorandBlockchainExplorerEngines
 {
 }
-declare class NJSAlgorandBlockchainObserverEngines
-{
-}
 declare class NJSAlgorandTransaction
 {
     declare function getId(): string;
