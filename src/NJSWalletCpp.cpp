@@ -587,6 +587,20 @@ NAN_METHOD(NJSWallet::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_11);
+    Local<Value> arg_0_12;
+    if(result.algorandNetworkParameters)
+    {
+        auto arg_0_12_optional = (result.algorandNetworkParameters).value();
+        auto arg_0_12_tmp = Nan::New<Object>();
+        auto arg_0_12_tmp_1 = Nan::New<String>(arg_0_12_optional.genesisID).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_12_tmp, Nan::New<String>("genesisID").ToLocalChecked(), arg_0_12_tmp_1);
+        auto arg_0_12_tmp_2 = Nan::New<String>(arg_0_12_optional.genesisHash).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_12_tmp, Nan::New<String>("genesisHash").ToLocalChecked(), arg_0_12_tmp_2);
+
+        arg_0_12 = arg_0_12_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("algorandNetworkParameters").ToLocalChecked(), arg_0_12);
 
 
     //Return result
@@ -610,6 +624,31 @@ NAN_METHOD(NJSWallet::isInstanceOfBitcoinLikeWallet) {
     }
 
     auto result = cpp_impl->isInstanceOfBitcoinLikeWallet();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Boolean>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSWallet::isInstanceOfAlgorandLikeWallet) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSWallet::isInstanceOfAlgorandLikeWallet needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Wallet>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSWallet::isInstanceOfAlgorandLikeWallet : implementation of Wallet is not valid");
+    }
+
+    auto result = cpp_impl->isInstanceOfAlgorandLikeWallet();
 
     //Wrap result in node object
     auto arg_0 = Nan::New<Boolean>(result);
@@ -1195,6 +1234,7 @@ void NJSWallet::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"asCosmosLikeWallet", asCosmosLikeWallet);
     Nan::SetPrototypeMethod(func_template,"getCurrency", getCurrency);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeWallet", isInstanceOfBitcoinLikeWallet);
+    Nan::SetPrototypeMethod(func_template,"isInstanceOfAlgorandLikeWallet", isInstanceOfAlgorandLikeWallet);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfCosmosLikeWallet", isInstanceOfCosmosLikeWallet);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfEthereumLikeWallet", isInstanceOfEthereumLikeWallet);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfRippleLikeWallet", isInstanceOfRippleLikeWallet);

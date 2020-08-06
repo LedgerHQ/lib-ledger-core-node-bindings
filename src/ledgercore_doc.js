@@ -583,6 +583,197 @@ declare class NJSStellarLikeWallet
 declare class NJSStellarLikeAddress
 {
 }
+declare class NJSAlgorandBlockchainExplorerEngines
+{
+}
+declare class NJSAlgorandTransaction
+{
+    declare function getId(): string;
+    declare function getType(): string;
+    declare function getSender(): string;
+    declare function getFee(): string;
+    declare function getNote(): string;
+    declare function getRound(): string;
+    declare function getSenderRewards(): string;
+    declare function getReceiverRewards(): string;
+    declare function getCloseRewards(): string;
+    declare function setSender(sender: string);
+    declare function setFee(fee: string);
+    declare function setNote(note: string);
+    declare function setPaymentInfo(info: AlgorandPaymentInfo);
+    declare function getPaymentInfo(): AlgorandPaymentInfo;
+    declare function setParticipationInfo(info: AlgorandParticipationInfo);
+    declare function getParticipationInfo(): AlgorandParticipationInfo;
+    declare function setAssetConfigurationInfo(info: AlgorandAssetConfigurationInfo);
+    declare function getAssetConfigurationInfo(): AlgorandAssetConfigurationInfo;
+    declare function setAssetTransferInfo(info: AlgorandAssetTransferInfo);
+    declare function getAssetTransferInfo(): AlgorandAssetTransferInfo;
+    declare function setAssetFreezeInfo(info: AlgorandAssetFreezeInfo);
+    declare function getAssetFreezeInfo(): AlgorandAssetFreezeInfo;
+    /** Serialize the transaction in MsgPack format */
+    declare function serialize(): String;
+    declare function setSignature(signature: String);
+}
+declare class NJSAlgorandOperation
+{
+    declare function getTransaction(): NJSAlgorandTransaction;
+    declare function getAlgorandOperationType(): AlgorandOperationType;
+    declare function getRewards(): string;
+    declare function getAssetAmount(): string;
+}
+declare class NJSAlgorandAddress
+{
+    static declare function fromPublicKey(pubkey: String): string;
+    static declare function toPublicKey(address: string): String;
+}
+declare class NJSAlgorandAccount
+{
+    /**
+     * Get the maximum amount spendable in one transaction
+     * @param callback, Callback returning the maximum amount spendable
+     * @param operationType, the type of the operation
+     */
+    declare function getSpendableBalance(operationType: AlgorandOperationType, callback: NJSAmountCallback);
+    /**
+     * Get information about a specific asset
+     * @param assetId, the unique identifier of the asset to look for
+     * @param callback, Callback returning the information about the queried asset
+     */
+    declare function getAsset(assetId: string, callback: NJSAlgorandAssetParamsCallback);
+    /**
+     * Check if address has a specific asset
+     * @param address, the address to check
+     * @param assetId, the unique identifier of the asset to look for
+     * @param callback, Callback returning the true if the address hold the asset
+     */
+    declare function hasAsset(address: string, assetId: string, callback: NJSBoolCallback);
+    /**
+     * Check if address can receive the given amount:
+     * it may not be enough to reach the minimum balance, if the account has 0 ALGO
+     * @param address, the address to check
+     * @param amount, the amount to test
+     * @param callback, Callback returning the true if the address hold the asset
+     */
+    declare function isAmountValid(address: string, amount: string, callback: NJSBoolCallback);
+    /**
+     * Get balance of account for a particular asset.
+     * @param assetId, the unique identifier of the asset on the algorand network
+     * @param callback, if getAssetBalance succeeds, Callback returning an Amount object which represents account's balance
+     */
+    declare function getAssetBalance(assetId: string, callback: NJSAlgorandAssetAmountCallback);
+    /**
+     * Get balance of account for a particular asset at a precise interval with a certain granularity
+     * @param assetId, the unique identifier of the asset on the algorand network
+     * @param start, lower bound of search range
+     * @param end, upper bound of search range
+     * @param precision, granularity at which we want results
+     * @param callback, ListCallback returning a list of Amount objects which represents account's balance
+     */
+    declare function getAssetBalanceHistory(assetId: string, start: string, end: string, period: TimePeriod, callback: NJSAlgorandAssetAmountListCallback);
+    /**
+     * Get balances of all assets to which account is registered
+     * @param callback, ListCallback returning a list of AlgorandAssetAmount objects representing the different balances
+     */
+    declare function getAssetsBalances(callback: NJSAlgorandAssetAmountListCallback);
+    /**
+     * Get information about the assets created by account
+     * @param callback, ListCallback returning a list of AlgorandAssetParams objects representing the assets created by account
+     */
+    declare function getCreatedAssets(callback: NJSAlgorandAssetParamsListCallback);
+    /**
+     * Get the pending rewards for account
+     * @param callback, Callback returning the amount of pending rewards in MicroAlgos
+     */
+    declare function getPendingRewards(callback: NJSAmountCallback);
+    /**
+     * Get the total rewards of MicroAlgos account has received, including pending rewards.
+     * @param callback, Callback returning the total rewards in MicroAlgos.
+     */
+    declare function getTotalRewards(callback: NJSAmountCallback);
+    /**
+     * Get an estimation (in MicroAlgos) of the fees needed to broadcast a given transaction to the algorand network
+     * @param transaction, the transaction for which fees are estimated
+     * @param callback, Callback returning the fees in MicroAlgos for the specified transaction
+     */
+    declare function getFeeEstimate(transaction: NJSAlgorandTransaction, callback: NJSAmountCallback);
+    /**
+     * Build a raw signed transaction from a raw unsigned transaction and the signature
+     * @param rawUnsignedTransaction, the msgpack-encoded unsigned transaction
+     * @param signature, the signature of the transaction
+     * @return binary, the msgpack-encoded signed transaction
+     */
+    declare function buildRawSignedTransaction(rawUnsignedTransaction: String, signature: String): String;
+    /**
+     * Broadcast a raw transaction to the algorand network
+     * @param transaction, the msgpack-encoded transaction
+     * @param callback, Callback returning the id of the transaction in case of success, an error message otherwise
+     */
+    declare function broadcastRawTransaction(transaction: String, callback: NJSStringCallback);
+    /**
+     * Broadcast an AlgorandTransaction object to the algorand network
+     * @param transaction, the transaction to broadcast
+     * @param callback, Callback returning the fees in MicroAlgos for the specified transaction
+     */
+    declare function broadcastTransaction(transaction: NJSAlgorandTransaction, callback: NJSStringCallback);
+    /**
+     * Create a new transaction
+     * @param callback, The new transaction
+     */
+    declare function createTransaction(callback: NJSAlgorandTransactionCallback);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSAlgorandAssetParamsCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?AlgorandAssetParams, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSAlgorandAssetAmountCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?AlgorandAssetAmount, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSAlgorandAssetAmountListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<AlgorandAssetAmount>, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSAlgorandAssetParamsListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<AlgorandAssetParams>, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSAlgorandTransactionCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?NJSAlgorandTransaction, error: ?Error);
+}
+declare class NJSAlgorandWallet
+{
+}
 /** Class representing an event. */
 declare class NJSEvent
 {
@@ -796,10 +987,16 @@ declare class NJSOperation
     declare function asTezosLikeOperation(): NJSTezosLikeOperation;
     /**
      * Same as isInstanceOfBitcoinLikeOperation for bitcoin.
-     * Convert operation as Ethereum operation.
-     * @return EthereumLikeOperation object
+     * Convert operation as Stellar operation.
+     * @return StellarLikeOperation object
      */
     declare function asStellarLikeOperation(): NJSStellarLikeOperation;
+    /**
+     * Same as isInstanceOfBitcoinLikeOperation for bitcoin.
+     * Convert operation as Algorand operation.
+     * @return AlgorandOperation object
+     */
+    declare function asAlgorandOperation(): NJSAlgorandOperation;
     /** Is this an instance of a Bitcoin-like operation? */
     declare function isInstanceOfBitcoinLikeOperation(): boolean;
     /** Same as isInstanceOfCosmosLikeOperation for cosmos. */
@@ -1029,6 +1226,8 @@ declare class NJSAccount
     declare function asRippleLikeAccount(): NJSRippleLikeAccount;
     /** Turn the account into a Tezos one, allowing operations to be performed on the Tezos network. */
     declare function asTezosLikeAccount(): NJSTezosLikeAccount;
+    /** Turn the account into an Algorand one, allowing operations to be performed on the Algorand network. */
+    declare function asAlgorandAccount(): NJSAlgorandAccount;
     /**
      * Turn the account into a Stellar one, allowing operations to be performerd on the Stellar
      * network.
@@ -1207,6 +1406,11 @@ declare class NJSWallet
      * @return bool
      */
     declare function isInstanceOfBitcoinLikeWallet(): boolean;
+    /**
+     * Tell whether wallet is an Algorand one.
+     * @return bool
+     */
+    declare function isInstanceOfAlgorandLikeWallet(): boolean;
     /**
      * Tell whether wallet is a Cosmos one.
      * @return bool

@@ -40,6 +40,17 @@
 #include "NJSStellarLikeAccountSignerListCallback.hpp"
 #include "NJSStellarLikeWalletCpp.hpp"
 #include "NJSStellarLikeAddressCpp.hpp"
+#include "NJSAlgorandBlockchainExplorerEnginesCpp.hpp"
+#include "NJSAlgorandTransactionCpp.hpp"
+#include "NJSAlgorandOperationCpp.hpp"
+#include "NJSAlgorandAddressCpp.hpp"
+#include "NJSAlgorandAccountCpp.hpp"
+#include "NJSAlgorandAssetParamsCallback.hpp"
+#include "NJSAlgorandAssetAmountCallback.hpp"
+#include "NJSAlgorandAssetAmountListCallback.hpp"
+#include "NJSAlgorandAssetParamsListCallback.hpp"
+#include "NJSAlgorandTransactionCallback.hpp"
+#include "NJSAlgorandWalletCpp.hpp"
 #include "NJSEventCpp.hpp"
 #include "NJSEventReceiver.hpp"
 #include "NJSEventBusCpp.hpp"
@@ -211,6 +222,17 @@ static void initAll(Local<Object> target)
     NJSStellarLikeAccountSignerListCallback::Initialize(target);
     NJSStellarLikeWallet::Initialize(target);
     NJSStellarLikeAddress::Initialize(target);
+    NJSAlgorandBlockchainExplorerEngines::Initialize(target);
+    NJSAlgorandTransaction::Initialize(target);
+    NJSAlgorandOperation::Initialize(target);
+    NJSAlgorandAddress::Initialize(target);
+    NJSAlgorandAccount::Initialize(target);
+    NJSAlgorandAssetParamsCallback::Initialize(target);
+    NJSAlgorandAssetAmountCallback::Initialize(target);
+    NJSAlgorandAssetAmountListCallback::Initialize(target);
+    NJSAlgorandAssetParamsListCallback::Initialize(target);
+    NJSAlgorandTransactionCallback::Initialize(target);
+    NJSAlgorandWallet::Initialize(target);
     NJSEvent::Initialize(target);
     NJSEventReceiver::Initialize(target);
     NJSEventBus::Initialize(target);

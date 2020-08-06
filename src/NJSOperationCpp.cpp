@@ -496,6 +496,32 @@ NAN_METHOD(NJSOperation::asStellarLikeOperation) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSOperation::asAlgorandOperation) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSOperation::asAlgorandOperation needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Operation>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSOperation::asAlgorandOperation : implementation of Operation is not valid");
+    }
+
+    auto result = cpp_impl->asAlgorandOperation();
+
+    //Wrap result in node object
+    auto arg_0 = NJSAlgorandOperation::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSOperation::isInstanceOfBitcoinLikeOperation) {
 
     //Check if method called with right number of arguments
@@ -938,6 +964,20 @@ NAN_METHOD(NJSOperation::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_11);
+    Local<Value> arg_0_12;
+    if(result.algorandNetworkParameters)
+    {
+        auto arg_0_12_optional = (result.algorandNetworkParameters).value();
+        auto arg_0_12_tmp = Nan::New<Object>();
+        auto arg_0_12_tmp_1 = Nan::New<String>(arg_0_12_optional.genesisID).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_12_tmp, Nan::New<String>("genesisID").ToLocalChecked(), arg_0_12_tmp_1);
+        auto arg_0_12_tmp_2 = Nan::New<String>(arg_0_12_optional.genesisHash).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_12_tmp, Nan::New<String>("genesisHash").ToLocalChecked(), arg_0_12_tmp_2);
+
+        arg_0_12 = arg_0_12_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("algorandNetworkParameters").ToLocalChecked(), arg_0_12);
 
 
     //Return result
@@ -1007,6 +1047,7 @@ void NJSOperation::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"asRippleLikeOperation", asRippleLikeOperation);
     Nan::SetPrototypeMethod(func_template,"asTezosLikeOperation", asTezosLikeOperation);
     Nan::SetPrototypeMethod(func_template,"asStellarLikeOperation", asStellarLikeOperation);
+    Nan::SetPrototypeMethod(func_template,"asAlgorandOperation", asAlgorandOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfBitcoinLikeOperation", isInstanceOfBitcoinLikeOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfCosmosLikeOperation", isInstanceOfCosmosLikeOperation);
     Nan::SetPrototypeMethod(func_template,"isInstanceOfEthereumLikeOperation", isInstanceOfEthereumLikeOperation);

@@ -277,6 +277,20 @@ NAN_METHOD(NJSAmount::getCurrency) {
     }
 
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("stellarLikeNetworkParameters").ToLocalChecked(), arg_0_11);
+    Local<Value> arg_0_12;
+    if(result.algorandNetworkParameters)
+    {
+        auto arg_0_12_optional = (result.algorandNetworkParameters).value();
+        auto arg_0_12_tmp = Nan::New<Object>();
+        auto arg_0_12_tmp_1 = Nan::New<String>(arg_0_12_optional.genesisID).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_12_tmp, Nan::New<String>("genesisID").ToLocalChecked(), arg_0_12_tmp_1);
+        auto arg_0_12_tmp_2 = Nan::New<String>(arg_0_12_optional.genesisHash).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_12_tmp, Nan::New<String>("genesisHash").ToLocalChecked(), arg_0_12_tmp_2);
+
+        arg_0_12 = arg_0_12_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("algorandNetworkParameters").ToLocalChecked(), arg_0_12);
 
 
     //Return result
@@ -1044,7 +1058,25 @@ NAN_METHOD(NJSAmount::fromHex) {
         arg_0_11.emplace(opt_arg_0_11);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10, arg_0_11);
+
+    auto field_arg_0_12 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("algorandNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_12 = std::experimental::optional<AlgorandNetworkParameters>();
+    if(!field_arg_0_12->IsNull() && !field_arg_0_12->IsUndefined())
+    {
+
+        auto field_opt_arg_0_12_1 = Nan::Get(field_arg_0_12->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("genesisID").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_12_1(field_opt_arg_0_12_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_12_1 = std::string(*string_opt_arg_0_12_1);
+
+        auto field_opt_arg_0_12_2 = Nan::Get(field_arg_0_12->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("genesisHash").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_12_2(field_opt_arg_0_12_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_12_2 = std::string(*string_opt_arg_0_12_2);
+        AlgorandNetworkParameters opt_arg_0_12(opt_arg_0_12_1, opt_arg_0_12_2);
+
+        arg_0_12.emplace(opt_arg_0_12);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10, arg_0_11, arg_0_12);
 
     Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
@@ -1589,7 +1621,25 @@ NAN_METHOD(NJSAmount::fromLong) {
         arg_0_11.emplace(opt_arg_0_11);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10, arg_0_11);
+
+    auto field_arg_0_12 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("algorandNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_12 = std::experimental::optional<AlgorandNetworkParameters>();
+    if(!field_arg_0_12->IsNull() && !field_arg_0_12->IsUndefined())
+    {
+
+        auto field_opt_arg_0_12_1 = Nan::Get(field_arg_0_12->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("genesisID").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_12_1(field_opt_arg_0_12_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_12_1 = std::string(*string_opt_arg_0_12_1);
+
+        auto field_opt_arg_0_12_2 = Nan::Get(field_arg_0_12->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("genesisHash").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_12_2(field_opt_arg_0_12_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_12_2 = std::string(*string_opt_arg_0_12_2);
+        AlgorandNetworkParameters opt_arg_0_12(opt_arg_0_12_1, opt_arg_0_12_2);
+
+        arg_0_12.emplace(opt_arg_0_12);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10, arg_0_11, arg_0_12);
 
     auto arg_1 = Nan::To<int64_t>(info[1]).FromJust();
 
@@ -2139,7 +2189,25 @@ NAN_METHOD(NJSAmount::New) {
         arg_0_11.emplace(opt_arg_0_11);
     }
 
-    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10, arg_0_11);
+
+    auto field_arg_0_12 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("algorandNetworkParameters").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_12 = std::experimental::optional<AlgorandNetworkParameters>();
+    if(!field_arg_0_12->IsNull() && !field_arg_0_12->IsUndefined())
+    {
+
+        auto field_opt_arg_0_12_1 = Nan::Get(field_arg_0_12->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("genesisID").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_12_1(field_opt_arg_0_12_1->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_12_1 = std::string(*string_opt_arg_0_12_1);
+
+        auto field_opt_arg_0_12_2 = Nan::Get(field_arg_0_12->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("genesisHash").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_12_2(field_opt_arg_0_12_2->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_12_2 = std::string(*string_opt_arg_0_12_2);
+        AlgorandNetworkParameters opt_arg_0_12(opt_arg_0_12_1, opt_arg_0_12_2);
+
+        arg_0_12.emplace(opt_arg_0_12);
+    }
+
+    Currency arg_0(arg_0_1, arg_0_2, arg_0_3, arg_0_4, arg_0_5, arg_0_6, arg_0_7, arg_0_8, arg_0_9, arg_0_10, arg_0_11, arg_0_12);
 
     Nan::Utf8String string_arg_1(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
     auto arg_1 = std::string(*string_arg_1);
