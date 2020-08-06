@@ -32,7 +32,7 @@ const dir = conf.dir
 //     ? `${conf.dir}-arch_ssl_1_1`
 //     : conf.dir
 
-const endpointURL = `https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core/int-algorand-libcorev1/release/${libcoreVersion}/${dir}`
+const endpointURL = `https://s3-eu-west-1.amazonaws.com/ledger-lib-ledger-core/${libcoreVersion}/${dir}`
 
 if (!fs.existsSync('lib')) {
   fs.mkdirSync('lib')
