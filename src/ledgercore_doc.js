@@ -3374,7 +3374,7 @@ declare class NJSPreferencesBackend
      * @param key The data key.
      * @return The value associated to the key if it exists, an empty option otherwise.
      */
-    declare function get(key: String): ?string;
+    declare function get(key: String): ?String;
     /**
      * Commit a change.
      * @param changes The list of changes to commit.
@@ -3722,6 +3722,8 @@ declare class NJSBitcoinLikeAccount
      * Note: this will return public and change addresses
      */
     declare function getAddresses(from: number, to: number, callback: NJSAddressListCallback);
+    /** get all contained adresses. */
+    declare function getAllAddresses(): Array<NJSAddress>;
 }
 /** Callback triggered by main completed task, returning optional result as list of template type T. */
 declare class NJSBitcoinLikeOutputListCallback

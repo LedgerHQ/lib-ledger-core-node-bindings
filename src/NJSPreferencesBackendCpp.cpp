@@ -49,7 +49,8 @@ NAN_METHOD(NJSPreferencesBackend::get) {
     if(result)
     {
         auto arg_1_optional = (result).value();
-        auto arg_1_tmp = Nan::New<String>(arg_1_optional).ToLocalChecked();
+        auto arg_1_tmp = Nan::New<String>("0x" + djinni::js::hex::toString(arg_1_optional)).ToLocalChecked();
+
         arg_1 = arg_1_tmp;
     }
 

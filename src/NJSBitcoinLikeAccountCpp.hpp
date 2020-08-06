@@ -6,6 +6,7 @@
 
 
 #include "../include/../utils/optional.hpp"
+#include "NJSAddressCpp.hpp"
 #include "NJSAddressListCallback.hpp"
 #include "NJSBigIntListCallback.hpp"
 #include "NJSBitcoinLikeOutputListCallback.hpp"
@@ -70,6 +71,9 @@ private:
      * Note: this will return public and change addresses
      */
     static NAN_METHOD(getAddresses);
+
+    /** get all contained adresses. */
+    static NAN_METHOD(getAllAddresses);
 
     static NAN_METHOD(New);
 
