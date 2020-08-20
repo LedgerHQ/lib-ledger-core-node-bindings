@@ -5,7 +5,6 @@
 #define DJINNI_GENERATED_NJSBITCOINLIKETRANSACTIONBUILDER_HPP
 
 
-#include "../include/../utils/optional.hpp"
 #include "../include/AlgorandNetworkParameters.hpp"
 #include "../include/BitcoinLikeNetworkParameters.hpp"
 #include "../include/BitcoinLikePickingStrategy.hpp"
