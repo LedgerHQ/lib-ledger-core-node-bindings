@@ -989,13 +989,7 @@ NAN_METHOD(NJSBitcoinLikeTransactionBuilder::parseRawUnsignedTransaction) {
         arg_1 = std::vector<uint8_t>(string_arg_1.cbegin(), string_arg_1.cend());
     }
 
-    auto arg_2 = std::experimental::optional<int32_t>();
-    if(!info[2]->IsNull() && !info[2]->IsUndefined())
-    {
-        auto opt_arg_2 = Nan::To<int32_t>(info[2]).FromJust();
-        arg_2.emplace(opt_arg_2);
-    }
-
+    auto arg_2 = Nan::To<int32_t>(info[2]).FromJust();
 
     auto result = ledger::core::api::BitcoinLikeTransactionBuilder::parseRawUnsignedTransaction(arg_0,arg_1,arg_2);
 

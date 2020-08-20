@@ -5,7 +5,6 @@
 #define DJINNI_GENERATED_NJSBITCOINLIKEACCOUNT_HPP
 
 
-#include "../include/../utils/optional.hpp"
 #include "NJSAddressCpp.hpp"
 #include "NJSAddressListCallback.hpp"
 #include "NJSBigIntListCallback.hpp"

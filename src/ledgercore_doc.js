@@ -3679,7 +3679,7 @@ declare class NJSBitcoinLikeTransactionBuilder
      * Parsing unsigned transaction.
      * parsing a tx might change depending on block height we are on (if an update is effective starting from a given hight)
      */
-    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: String, currentBlockHeight: ?number): NJSBitcoinLikeTransaction;
+    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: String, currentBlockHeight: number): NJSBitcoinLikeTransaction;
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSBitcoinLikeTransactionCallback
@@ -3708,7 +3708,7 @@ declare class NJSBitcoinLikeAccount
     declare function getUTXOCount(callback: NJSI32Callback);
     declare function broadcastRawTransaction(transaction: String, callback: NJSStringCallback);
     declare function broadcastTransaction(transaction: NJSBitcoinLikeTransaction, callback: NJSStringCallback);
-    declare function buildTransaction(partial: ?boolean): NJSBitcoinLikeTransactionBuilder;
+    declare function buildTransaction(partial: boolean): NJSBitcoinLikeTransactionBuilder;
     /**
      * Get fees from network, fees are ordered in descending order (i.e. fastest to slowest confirmation)
      * Note: it would have been better to have this method on BitcoinLikeWallet

@@ -143,13 +143,7 @@ NAN_METHOD(NJSBitcoinLikeAccount::buildTransaction) {
     }
 
     //Check if parameters have correct types
-    auto arg_0 = std::experimental::optional<bool>();
-    if(!info[0]->IsNull() && !info[0]->IsUndefined())
-    {
-        auto opt_arg_0 = Nan::To<bool>(info[0]).FromJust();
-        arg_0.emplace(opt_arg_0);
-    }
-
+    auto arg_0 = Nan::To<bool>(info[0]).FromJust();
 
     //Unwrap current object and retrieve its Cpp Implementation
     auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
