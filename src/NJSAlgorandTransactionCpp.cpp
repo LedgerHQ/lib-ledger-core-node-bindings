@@ -532,13 +532,7 @@ NAN_METHOD(NJSAlgorandTransaction::setAssetConfigurationInfo) {
 
 
         auto field_opt_arg_0_2_5 = Nan::Get(field_arg_0_2->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("defaultFrozen").ToLocalChecked()).ToLocalChecked();
-        auto opt_arg_0_2_5 = std::experimental::optional<bool>();
-        if(!field_opt_arg_0_2_5->IsNull() && !field_opt_arg_0_2_5->IsUndefined())
-        {
-            auto opt_opt_arg_0_2_5 = Nan::To<bool>(field_opt_arg_0_2_5).FromJust();
-            opt_arg_0_2_5.emplace(opt_opt_arg_0_2_5);
-        }
-
+        auto opt_arg_0_2_5 = Nan::To<bool>(field_opt_arg_0_2_5).FromJust();
 
         auto field_opt_arg_0_2_6 = Nan::Get(field_arg_0_2->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("total").ToLocalChecked()).ToLocalChecked();
         auto opt_arg_0_2_6 = std::experimental::optional<std::string>();
@@ -551,10 +545,11 @@ NAN_METHOD(NJSAlgorandTransaction::setAssetConfigurationInfo) {
 
 
         auto field_opt_arg_0_2_7 = Nan::Get(field_arg_0_2->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("decimals").ToLocalChecked()).ToLocalChecked();
-        auto opt_arg_0_2_7 = std::experimental::optional<int32_t>();
+        auto opt_arg_0_2_7 = std::experimental::optional<std::string>();
         if(!field_opt_arg_0_2_7->IsNull() && !field_opt_arg_0_2_7->IsUndefined())
         {
-            auto opt_opt_arg_0_2_7 = Nan::To<int32_t>(field_opt_arg_0_2_7).FromJust();
+            Nan::Utf8String string_opt_opt_arg_0_2_7(field_opt_arg_0_2_7->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+            auto opt_opt_arg_0_2_7 = std::string(*string_opt_opt_arg_0_2_7);
             opt_arg_0_2_7.emplace(opt_opt_arg_0_2_7);
         }
 
@@ -705,14 +700,7 @@ NAN_METHOD(NJSAlgorandTransaction::getAssetConfigurationInfo) {
         }
 
         Nan::DefineOwnProperty(arg_0_2_tmp, Nan::New<String>("url").ToLocalChecked(), arg_0_2_tmp_4);
-        Local<Value> arg_0_2_tmp_5;
-        if(arg_0_2_optional.defaultFrozen)
-        {
-            auto arg_0_2_tmp_5_optional = (arg_0_2_optional.defaultFrozen).value();
-            auto arg_0_2_tmp_5_tmp = Nan::New<Boolean>(arg_0_2_tmp_5_optional);
-            arg_0_2_tmp_5 = arg_0_2_tmp_5_tmp;
-        }
-
+        auto arg_0_2_tmp_5 = Nan::New<Boolean>(arg_0_2_optional.defaultFrozen);
         Nan::DefineOwnProperty(arg_0_2_tmp, Nan::New<String>("defaultFrozen").ToLocalChecked(), arg_0_2_tmp_5);
         Local<Value> arg_0_2_tmp_6;
         if(arg_0_2_optional.total)
@@ -727,7 +715,7 @@ NAN_METHOD(NJSAlgorandTransaction::getAssetConfigurationInfo) {
         if(arg_0_2_optional.decimals)
         {
             auto arg_0_2_tmp_7_optional = (arg_0_2_optional.decimals).value();
-            auto arg_0_2_tmp_7_tmp = Nan::New<Int32>(arg_0_2_tmp_7_optional);
+            auto arg_0_2_tmp_7_tmp = Nan::New<String>(arg_0_2_tmp_7_optional).ToLocalChecked();
             arg_0_2_tmp_7 = arg_0_2_tmp_7_tmp;
         }
 

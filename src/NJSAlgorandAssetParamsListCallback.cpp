@@ -57,14 +57,7 @@ void NJSAlgorandAssetParamsListCallback::onCallback(const std::experimental::opt
             }
 
             Nan::DefineOwnProperty(arg_0_tmp_elem, Nan::New<String>("url").ToLocalChecked(), arg_0_tmp_elem_4);
-            Local<Value> arg_0_tmp_elem_5;
-            if(arg_0_optional[arg_0_tmp_id].defaultFrozen)
-            {
-                auto arg_0_tmp_elem_5_optional = (arg_0_optional[arg_0_tmp_id].defaultFrozen).value();
-                auto arg_0_tmp_elem_5_tmp = Nan::New<Boolean>(arg_0_tmp_elem_5_optional);
-                arg_0_tmp_elem_5 = arg_0_tmp_elem_5_tmp;
-            }
-
+            auto arg_0_tmp_elem_5 = Nan::New<Boolean>(arg_0_optional[arg_0_tmp_id].defaultFrozen);
             Nan::DefineOwnProperty(arg_0_tmp_elem, Nan::New<String>("defaultFrozen").ToLocalChecked(), arg_0_tmp_elem_5);
             Local<Value> arg_0_tmp_elem_6;
             if(arg_0_optional[arg_0_tmp_id].total)
@@ -79,7 +72,7 @@ void NJSAlgorandAssetParamsListCallback::onCallback(const std::experimental::opt
             if(arg_0_optional[arg_0_tmp_id].decimals)
             {
                 auto arg_0_tmp_elem_7_optional = (arg_0_optional[arg_0_tmp_id].decimals).value();
-                auto arg_0_tmp_elem_7_tmp = Nan::New<Int32>(arg_0_tmp_elem_7_optional);
+                auto arg_0_tmp_elem_7_tmp = Nan::New<String>(arg_0_tmp_elem_7_optional).ToLocalChecked();
                 arg_0_tmp_elem_7 = arg_0_tmp_elem_7_tmp;
             }
 
