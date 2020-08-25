@@ -166,10 +166,11 @@ NAN_METHOD(NJSCosmosLikeAccount::estimateGas) {
 
 
     auto field_arg_0_3 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("amplifier").ToLocalChecked()).ToLocalChecked();
-    auto arg_0_3 = std::experimental::optional<double>();
+    auto arg_0_3 = std::experimental::optional<std::string>();
     if(!field_arg_0_3->IsNull() && !field_arg_0_3->IsUndefined())
     {
-        auto opt_arg_0_3 = Nan::To<double>(field_arg_0_3).FromJust();
+        Nan::Utf8String string_opt_arg_0_3(field_arg_0_3->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_3 = std::string(*string_opt_arg_0_3);
         arg_0_3.emplace(opt_arg_0_3);
     }
 

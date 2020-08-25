@@ -265,10 +265,11 @@ NAN_METHOD(NJSEthereumLikeAccount::getDryRunGasLimit) {
 
 
     auto field_arg_1_7 = Nan::Get(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("amplifier").ToLocalChecked()).ToLocalChecked();
-    auto arg_1_7 = std::experimental::optional<double>();
+    auto arg_1_7 = std::experimental::optional<std::string>();
     if(!field_arg_1_7->IsNull() && !field_arg_1_7->IsUndefined())
     {
-        auto opt_arg_1_7 = Nan::To<double>(field_arg_1_7).FromJust();
+        Nan::Utf8String string_opt_arg_1_7(field_arg_1_7->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_1_7 = std::string(*string_opt_arg_1_7);
         arg_1_7.emplace(opt_arg_1_7);
     }
 

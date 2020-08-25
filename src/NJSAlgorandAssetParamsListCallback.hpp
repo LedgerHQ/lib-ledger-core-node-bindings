@@ -8,7 +8,6 @@
 #include "../include/../utils/optional.hpp"
 #include "../include/AlgorandAssetParams.hpp"
 #include "../include/Error.hpp"
-#include <cstdint>
 #include <string>
 #include <vector>
 
