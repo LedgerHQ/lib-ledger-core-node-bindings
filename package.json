@@ -1,7 +1,7 @@
 {
   "name": "@ledgerhq/ledger-core",
   "version": "6.8.10",
-  "libcoreVersion": "3.5.0-rc-edc43a",
+  "libcoreVersion": "3.5.0-rc-44d218",
   "description": "Ledger Core Library cross-platform C++ bindings for NodeJs",
   "main": "js/index.js",
   "repository": {
@@ -42,16 +42,16 @@
   "dependencies": {
     "bindings": "1.5.0",
     "nan": "^2.14.1",
-    "node-gyp": "^6.1.0",
-    "node-pre-gyp": "^0.14.0",
+    "node-gyp": "^7.1.0",
+    "node-pre-gyp": "^0.15.0",
     "node-pre-gyp-github": "^1.4.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.0.0",
-    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.11.0",
-    "prettier": "^2.0.5",
+    "prettier": "^2.1.2",
     "rimraf": "^3.0.2"
   }
 }
