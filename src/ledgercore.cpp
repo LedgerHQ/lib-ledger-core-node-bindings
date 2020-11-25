@@ -146,7 +146,7 @@
 #include "NJSRandomNumberGenerator.hpp"
 #include "NJSPreferencesCpp.hpp"
 #include "NJSPreferencesEditorCpp.hpp"
-#include "NJSPreferencesBackendCpp.hpp"
+#include "NJSPreferencesBackend.hpp"
 #include "NJSBitcoinLikeWalletConfigurationCpp.hpp"
 #include "NJSBitcoinLikeInputCpp.hpp"
 #include "NJSBitcoinLikeOutputCpp.hpp"
