@@ -86,19 +86,22 @@ NAN_METHOD(NJSNetworks::cosmos) {
     auto arg_1_4 = Nan::New<String>("0x" + djinni::js::hex::toString(result.PubKeyPrefix)).ToLocalChecked();
 
     Nan::DefineOwnProperty(arg_1, Nan::New<String>("PubKeyPrefix").ToLocalChecked(), arg_1_4);
-    auto arg_1_5 = Nan::New<String>("0x" + djinni::js::hex::toString(result.AddressPrefix)).ToLocalChecked();
+    auto arg_1_5 = Nan::New<String>("0x" + djinni::js::hex::toString(result.Ed25519PubKeyPrefix)).ToLocalChecked();
 
-    Nan::DefineOwnProperty(arg_1, Nan::New<String>("AddressPrefix").ToLocalChecked(), arg_1_5);
-    auto arg_1_6 = Nan::New<String>(result.ChainId).ToLocalChecked();
-    Nan::DefineOwnProperty(arg_1, Nan::New<String>("ChainId").ToLocalChecked(), arg_1_6);
-    Local<Array> arg_1_7 = Nan::New<Array>();
-    for(size_t arg_1_7_id = 0; arg_1_7_id < result.AdditionalCIPs.size(); arg_1_7_id++)
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("Ed25519PubKeyPrefix").ToLocalChecked(), arg_1_5);
+    auto arg_1_6 = Nan::New<String>("0x" + djinni::js::hex::toString(result.AddressPrefix)).ToLocalChecked();
+
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("AddressPrefix").ToLocalChecked(), arg_1_6);
+    auto arg_1_7 = Nan::New<String>(result.ChainId).ToLocalChecked();
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("ChainId").ToLocalChecked(), arg_1_7);
+    Local<Array> arg_1_8 = Nan::New<Array>();
+    for(size_t arg_1_8_id = 0; arg_1_8_id < result.AdditionalCIPs.size(); arg_1_8_id++)
     {
-        auto arg_1_7_elem = Nan::New<String>(result.AdditionalCIPs[arg_1_7_id]).ToLocalChecked();
-        Nan::Set(arg_1_7, (int)arg_1_7_id,arg_1_7_elem);
+        auto arg_1_8_elem = Nan::New<String>(result.AdditionalCIPs[arg_1_8_id]).ToLocalChecked();
+        Nan::Set(arg_1_8, (int)arg_1_8_id,arg_1_8_elem);
     }
 
-    Nan::DefineOwnProperty(arg_1, Nan::New<String>("AdditionalCIPs").ToLocalChecked(), arg_1_7);
+    Nan::DefineOwnProperty(arg_1, Nan::New<String>("AdditionalCIPs").ToLocalChecked(), arg_1_8);
 
 
     //Return result

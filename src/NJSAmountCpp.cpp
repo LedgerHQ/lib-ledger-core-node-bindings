@@ -138,19 +138,22 @@ NAN_METHOD(NJSAmount::getCurrency) {
         auto arg_0_7_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.PubKeyPrefix)).ToLocalChecked();
 
         Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("PubKeyPrefix").ToLocalChecked(), arg_0_7_tmp_4);
-        auto arg_0_7_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.AddressPrefix)).ToLocalChecked();
+        auto arg_0_7_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.Ed25519PubKeyPrefix)).ToLocalChecked();
 
-        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AddressPrefix").ToLocalChecked(), arg_0_7_tmp_5);
-        auto arg_0_7_tmp_6 = Nan::New<String>(arg_0_7_optional.ChainId).ToLocalChecked();
-        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("ChainId").ToLocalChecked(), arg_0_7_tmp_6);
-        Local<Array> arg_0_7_tmp_7 = Nan::New<Array>();
-        for(size_t arg_0_7_tmp_7_id = 0; arg_0_7_tmp_7_id < arg_0_7_optional.AdditionalCIPs.size(); arg_0_7_tmp_7_id++)
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("Ed25519PubKeyPrefix").ToLocalChecked(), arg_0_7_tmp_5);
+        auto arg_0_7_tmp_6 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_7_optional.AddressPrefix)).ToLocalChecked();
+
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AddressPrefix").ToLocalChecked(), arg_0_7_tmp_6);
+        auto arg_0_7_tmp_7 = Nan::New<String>(arg_0_7_optional.ChainId).ToLocalChecked();
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("ChainId").ToLocalChecked(), arg_0_7_tmp_7);
+        Local<Array> arg_0_7_tmp_8 = Nan::New<Array>();
+        for(size_t arg_0_7_tmp_8_id = 0; arg_0_7_tmp_8_id < arg_0_7_optional.AdditionalCIPs.size(); arg_0_7_tmp_8_id++)
         {
-            auto arg_0_7_tmp_7_elem = Nan::New<String>(arg_0_7_optional.AdditionalCIPs[arg_0_7_tmp_7_id]).ToLocalChecked();
-            Nan::Set(arg_0_7_tmp_7, (int)arg_0_7_tmp_7_id,arg_0_7_tmp_7_elem);
+            auto arg_0_7_tmp_8_elem = Nan::New<String>(arg_0_7_optional.AdditionalCIPs[arg_0_7_tmp_8_id]).ToLocalChecked();
+            Nan::Set(arg_0_7_tmp_8, (int)arg_0_7_tmp_8_id,arg_0_7_tmp_8_elem);
         }
 
-        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AdditionalCIPs").ToLocalChecked(), arg_0_7_tmp_7);
+        Nan::DefineOwnProperty(arg_0_7_tmp, Nan::New<String>("AdditionalCIPs").ToLocalChecked(), arg_0_7_tmp_8);
 
         arg_0_7 = arg_0_7_tmp;
     }
@@ -745,7 +748,7 @@ NAN_METHOD(NJSAmount::fromHex) {
         }
 
 
-        auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AddressPrefix").ToLocalChecked()).ToLocalChecked();
+        auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Ed25519PubKeyPrefix").ToLocalChecked()).ToLocalChecked();
         if(!field_opt_arg_0_7_5->IsString())
         {
             Nan::ThrowError("field_opt_arg_0_7_5 should be a hexadecimal string.");
@@ -763,24 +766,42 @@ NAN_METHOD(NJSAmount::fromHex) {
         }
 
 
-        auto field_opt_arg_0_7_6 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ChainId").ToLocalChecked()).ToLocalChecked();
-        Nan::Utf8String string_opt_arg_0_7_6(field_opt_arg_0_7_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-        auto opt_arg_0_7_6 = std::string(*string_opt_arg_0_7_6);
-
-        auto field_opt_arg_0_7_7 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalCIPs").ToLocalChecked()).ToLocalChecked();
-        vector<std::string> opt_arg_0_7_7;
-        Local<Array> opt_arg_0_7_7_container = Local<Array>::Cast(field_opt_arg_0_7_7);
-        for(uint32_t opt_arg_0_7_7_id = 0; opt_arg_0_7_7_id < opt_arg_0_7_7_container->Length(); opt_arg_0_7_7_id++)
+        auto field_opt_arg_0_7_6 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AddressPrefix").ToLocalChecked()).ToLocalChecked();
+        if(!field_opt_arg_0_7_6->IsString())
         {
-            if(opt_arg_0_7_7_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_7_id).ToLocalChecked()->IsString())
+            Nan::ThrowError("field_opt_arg_0_7_6 should be a hexadecimal string.");
+        }
+        std::vector<uint8_t> opt_arg_0_7_6;
+        Nan::Utf8String str_opt_arg_0_7_6(field_opt_arg_0_7_6);
+        std::string string_opt_arg_0_7_6(*str_opt_arg_0_7_6, str_opt_arg_0_7_6.length());
+        if (string_opt_arg_0_7_6.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_7_6 = djinni::js::hex::toByteArray(string_opt_arg_0_7_6.substr(2));
+        }
+        else
+        {
+            opt_arg_0_7_6 = std::vector<uint8_t>(string_opt_arg_0_7_6.cbegin(), string_opt_arg_0_7_6.cend());
+        }
+
+
+        auto field_opt_arg_0_7_7 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ChainId").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_7_7(field_opt_arg_0_7_7->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_7_7 = std::string(*string_opt_arg_0_7_7);
+
+        auto field_opt_arg_0_7_8 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalCIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_7_8;
+        Local<Array> opt_arg_0_7_8_container = Local<Array>::Cast(field_opt_arg_0_7_8);
+        for(uint32_t opt_arg_0_7_8_id = 0; opt_arg_0_7_8_id < opt_arg_0_7_8_container->Length(); opt_arg_0_7_8_id++)
+        {
+            if(opt_arg_0_7_8_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_8_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_7_7_elem(opt_arg_0_7_7_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_7_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-                auto opt_arg_0_7_7_elem = std::string(*string_opt_arg_0_7_7_elem);
-                opt_arg_0_7_7.emplace_back(opt_arg_0_7_7_elem);
+                Nan::Utf8String string_opt_arg_0_7_8_elem(opt_arg_0_7_8_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_8_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_0_7_8_elem = std::string(*string_opt_arg_0_7_8_elem);
+                opt_arg_0_7_8.emplace_back(opt_arg_0_7_8_elem);
             }
         }
 
-        CosmosLikeNetworkParameters opt_arg_0_7(opt_arg_0_7_1, opt_arg_0_7_2, opt_arg_0_7_3, opt_arg_0_7_4, opt_arg_0_7_5, opt_arg_0_7_6, opt_arg_0_7_7);
+        CosmosLikeNetworkParameters opt_arg_0_7(opt_arg_0_7_1, opt_arg_0_7_2, opt_arg_0_7_3, opt_arg_0_7_4, opt_arg_0_7_5, opt_arg_0_7_6, opt_arg_0_7_7, opt_arg_0_7_8);
 
         arg_0_7.emplace(opt_arg_0_7);
     }
@@ -1308,7 +1329,7 @@ NAN_METHOD(NJSAmount::fromLong) {
         }
 
 
-        auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AddressPrefix").ToLocalChecked()).ToLocalChecked();
+        auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Ed25519PubKeyPrefix").ToLocalChecked()).ToLocalChecked();
         if(!field_opt_arg_0_7_5->IsString())
         {
             Nan::ThrowError("field_opt_arg_0_7_5 should be a hexadecimal string.");
@@ -1326,24 +1347,42 @@ NAN_METHOD(NJSAmount::fromLong) {
         }
 
 
-        auto field_opt_arg_0_7_6 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ChainId").ToLocalChecked()).ToLocalChecked();
-        Nan::Utf8String string_opt_arg_0_7_6(field_opt_arg_0_7_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-        auto opt_arg_0_7_6 = std::string(*string_opt_arg_0_7_6);
-
-        auto field_opt_arg_0_7_7 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalCIPs").ToLocalChecked()).ToLocalChecked();
-        vector<std::string> opt_arg_0_7_7;
-        Local<Array> opt_arg_0_7_7_container = Local<Array>::Cast(field_opt_arg_0_7_7);
-        for(uint32_t opt_arg_0_7_7_id = 0; opt_arg_0_7_7_id < opt_arg_0_7_7_container->Length(); opt_arg_0_7_7_id++)
+        auto field_opt_arg_0_7_6 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AddressPrefix").ToLocalChecked()).ToLocalChecked();
+        if(!field_opt_arg_0_7_6->IsString())
         {
-            if(opt_arg_0_7_7_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_7_id).ToLocalChecked()->IsString())
+            Nan::ThrowError("field_opt_arg_0_7_6 should be a hexadecimal string.");
+        }
+        std::vector<uint8_t> opt_arg_0_7_6;
+        Nan::Utf8String str_opt_arg_0_7_6(field_opt_arg_0_7_6);
+        std::string string_opt_arg_0_7_6(*str_opt_arg_0_7_6, str_opt_arg_0_7_6.length());
+        if (string_opt_arg_0_7_6.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_7_6 = djinni::js::hex::toByteArray(string_opt_arg_0_7_6.substr(2));
+        }
+        else
+        {
+            opt_arg_0_7_6 = std::vector<uint8_t>(string_opt_arg_0_7_6.cbegin(), string_opt_arg_0_7_6.cend());
+        }
+
+
+        auto field_opt_arg_0_7_7 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ChainId").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_7_7(field_opt_arg_0_7_7->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_7_7 = std::string(*string_opt_arg_0_7_7);
+
+        auto field_opt_arg_0_7_8 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalCIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_7_8;
+        Local<Array> opt_arg_0_7_8_container = Local<Array>::Cast(field_opt_arg_0_7_8);
+        for(uint32_t opt_arg_0_7_8_id = 0; opt_arg_0_7_8_id < opt_arg_0_7_8_container->Length(); opt_arg_0_7_8_id++)
+        {
+            if(opt_arg_0_7_8_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_8_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_7_7_elem(opt_arg_0_7_7_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_7_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-                auto opt_arg_0_7_7_elem = std::string(*string_opt_arg_0_7_7_elem);
-                opt_arg_0_7_7.emplace_back(opt_arg_0_7_7_elem);
+                Nan::Utf8String string_opt_arg_0_7_8_elem(opt_arg_0_7_8_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_8_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_0_7_8_elem = std::string(*string_opt_arg_0_7_8_elem);
+                opt_arg_0_7_8.emplace_back(opt_arg_0_7_8_elem);
             }
         }
 
-        CosmosLikeNetworkParameters opt_arg_0_7(opt_arg_0_7_1, opt_arg_0_7_2, opt_arg_0_7_3, opt_arg_0_7_4, opt_arg_0_7_5, opt_arg_0_7_6, opt_arg_0_7_7);
+        CosmosLikeNetworkParameters opt_arg_0_7(opt_arg_0_7_1, opt_arg_0_7_2, opt_arg_0_7_3, opt_arg_0_7_4, opt_arg_0_7_5, opt_arg_0_7_6, opt_arg_0_7_7, opt_arg_0_7_8);
 
         arg_0_7.emplace(opt_arg_0_7);
     }
@@ -1876,7 +1915,7 @@ NAN_METHOD(NJSAmount::New) {
         }
 
 
-        auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AddressPrefix").ToLocalChecked()).ToLocalChecked();
+        auto field_opt_arg_0_7_5 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Ed25519PubKeyPrefix").ToLocalChecked()).ToLocalChecked();
         if(!field_opt_arg_0_7_5->IsString())
         {
             Nan::ThrowError("field_opt_arg_0_7_5 should be a hexadecimal string.");
@@ -1894,24 +1933,42 @@ NAN_METHOD(NJSAmount::New) {
         }
 
 
-        auto field_opt_arg_0_7_6 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ChainId").ToLocalChecked()).ToLocalChecked();
-        Nan::Utf8String string_opt_arg_0_7_6(field_opt_arg_0_7_6->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-        auto opt_arg_0_7_6 = std::string(*string_opt_arg_0_7_6);
-
-        auto field_opt_arg_0_7_7 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalCIPs").ToLocalChecked()).ToLocalChecked();
-        vector<std::string> opt_arg_0_7_7;
-        Local<Array> opt_arg_0_7_7_container = Local<Array>::Cast(field_opt_arg_0_7_7);
-        for(uint32_t opt_arg_0_7_7_id = 0; opt_arg_0_7_7_id < opt_arg_0_7_7_container->Length(); opt_arg_0_7_7_id++)
+        auto field_opt_arg_0_7_6 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AddressPrefix").ToLocalChecked()).ToLocalChecked();
+        if(!field_opt_arg_0_7_6->IsString())
         {
-            if(opt_arg_0_7_7_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_7_id).ToLocalChecked()->IsString())
+            Nan::ThrowError("field_opt_arg_0_7_6 should be a hexadecimal string.");
+        }
+        std::vector<uint8_t> opt_arg_0_7_6;
+        Nan::Utf8String str_opt_arg_0_7_6(field_opt_arg_0_7_6);
+        std::string string_opt_arg_0_7_6(*str_opt_arg_0_7_6, str_opt_arg_0_7_6.length());
+        if (string_opt_arg_0_7_6.rfind("0x", 0) == 0)
+        {
+            opt_arg_0_7_6 = djinni::js::hex::toByteArray(string_opt_arg_0_7_6.substr(2));
+        }
+        else
+        {
+            opt_arg_0_7_6 = std::vector<uint8_t>(string_opt_arg_0_7_6.cbegin(), string_opt_arg_0_7_6.cend());
+        }
+
+
+        auto field_opt_arg_0_7_7 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("ChainId").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_7_7(field_opt_arg_0_7_7->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_7_7 = std::string(*string_opt_arg_0_7_7);
+
+        auto field_opt_arg_0_7_8 = Nan::Get(field_arg_0_7->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalCIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_7_8;
+        Local<Array> opt_arg_0_7_8_container = Local<Array>::Cast(field_opt_arg_0_7_8);
+        for(uint32_t opt_arg_0_7_8_id = 0; opt_arg_0_7_8_id < opt_arg_0_7_8_container->Length(); opt_arg_0_7_8_id++)
+        {
+            if(opt_arg_0_7_8_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_8_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_7_7_elem(opt_arg_0_7_7_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_7_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-                auto opt_arg_0_7_7_elem = std::string(*string_opt_arg_0_7_7_elem);
-                opt_arg_0_7_7.emplace_back(opt_arg_0_7_7_elem);
+                Nan::Utf8String string_opt_arg_0_7_8_elem(opt_arg_0_7_8_container->Get(Nan::GetCurrentContext(), opt_arg_0_7_8_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_0_7_8_elem = std::string(*string_opt_arg_0_7_8_elem);
+                opt_arg_0_7_8.emplace_back(opt_arg_0_7_8_elem);
             }
         }
 
-        CosmosLikeNetworkParameters opt_arg_0_7(opt_arg_0_7_1, opt_arg_0_7_2, opt_arg_0_7_3, opt_arg_0_7_4, opt_arg_0_7_5, opt_arg_0_7_6, opt_arg_0_7_7);
+        CosmosLikeNetworkParameters opt_arg_0_7(opt_arg_0_7_1, opt_arg_0_7_2, opt_arg_0_7_3, opt_arg_0_7_4, opt_arg_0_7_5, opt_arg_0_7_6, opt_arg_0_7_7, opt_arg_0_7_8);
 
         arg_0_7.emplace(opt_arg_0_7);
     }

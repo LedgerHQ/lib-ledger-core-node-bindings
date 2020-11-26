@@ -103,19 +103,22 @@ void NJSCurrencyListCallback::onCallback(const std::experimental::optional<std::
                 auto arg_0_tmp_elem_7_tmp_4 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_tmp_elem_7_optional.PubKeyPrefix)).ToLocalChecked();
 
                 Nan::DefineOwnProperty(arg_0_tmp_elem_7_tmp, Nan::New<String>("PubKeyPrefix").ToLocalChecked(), arg_0_tmp_elem_7_tmp_4);
-                auto arg_0_tmp_elem_7_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_tmp_elem_7_optional.AddressPrefix)).ToLocalChecked();
+                auto arg_0_tmp_elem_7_tmp_5 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_tmp_elem_7_optional.Ed25519PubKeyPrefix)).ToLocalChecked();
 
-                Nan::DefineOwnProperty(arg_0_tmp_elem_7_tmp, Nan::New<String>("AddressPrefix").ToLocalChecked(), arg_0_tmp_elem_7_tmp_5);
-                auto arg_0_tmp_elem_7_tmp_6 = Nan::New<String>(arg_0_tmp_elem_7_optional.ChainId).ToLocalChecked();
-                Nan::DefineOwnProperty(arg_0_tmp_elem_7_tmp, Nan::New<String>("ChainId").ToLocalChecked(), arg_0_tmp_elem_7_tmp_6);
-                Local<Array> arg_0_tmp_elem_7_tmp_7 = Nan::New<Array>();
-                for(size_t arg_0_tmp_elem_7_tmp_7_id = 0; arg_0_tmp_elem_7_tmp_7_id < arg_0_tmp_elem_7_optional.AdditionalCIPs.size(); arg_0_tmp_elem_7_tmp_7_id++)
+                Nan::DefineOwnProperty(arg_0_tmp_elem_7_tmp, Nan::New<String>("Ed25519PubKeyPrefix").ToLocalChecked(), arg_0_tmp_elem_7_tmp_5);
+                auto arg_0_tmp_elem_7_tmp_6 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_tmp_elem_7_optional.AddressPrefix)).ToLocalChecked();
+
+                Nan::DefineOwnProperty(arg_0_tmp_elem_7_tmp, Nan::New<String>("AddressPrefix").ToLocalChecked(), arg_0_tmp_elem_7_tmp_6);
+                auto arg_0_tmp_elem_7_tmp_7 = Nan::New<String>(arg_0_tmp_elem_7_optional.ChainId).ToLocalChecked();
+                Nan::DefineOwnProperty(arg_0_tmp_elem_7_tmp, Nan::New<String>("ChainId").ToLocalChecked(), arg_0_tmp_elem_7_tmp_7);
+                Local<Array> arg_0_tmp_elem_7_tmp_8 = Nan::New<Array>();
+                for(size_t arg_0_tmp_elem_7_tmp_8_id = 0; arg_0_tmp_elem_7_tmp_8_id < arg_0_tmp_elem_7_optional.AdditionalCIPs.size(); arg_0_tmp_elem_7_tmp_8_id++)
                 {
-                    auto arg_0_tmp_elem_7_tmp_7_elem = Nan::New<String>(arg_0_tmp_elem_7_optional.AdditionalCIPs[arg_0_tmp_elem_7_tmp_7_id]).ToLocalChecked();
-                    Nan::Set(arg_0_tmp_elem_7_tmp_7, (int)arg_0_tmp_elem_7_tmp_7_id,arg_0_tmp_elem_7_tmp_7_elem);
+                    auto arg_0_tmp_elem_7_tmp_8_elem = Nan::New<String>(arg_0_tmp_elem_7_optional.AdditionalCIPs[arg_0_tmp_elem_7_tmp_8_id]).ToLocalChecked();
+                    Nan::Set(arg_0_tmp_elem_7_tmp_8, (int)arg_0_tmp_elem_7_tmp_8_id,arg_0_tmp_elem_7_tmp_8_elem);
                 }
 
-                Nan::DefineOwnProperty(arg_0_tmp_elem_7_tmp, Nan::New<String>("AdditionalCIPs").ToLocalChecked(), arg_0_tmp_elem_7_tmp_7);
+                Nan::DefineOwnProperty(arg_0_tmp_elem_7_tmp, Nan::New<String>("AdditionalCIPs").ToLocalChecked(), arg_0_tmp_elem_7_tmp_8);
 
                 arg_0_tmp_elem_7 = arg_0_tmp_elem_7_tmp;
             }
