@@ -40,14 +40,23 @@ void NJSCosmosLikeValidatorCallback::onCallback(const std::experimental::optiona
 
         Nan::DefineOwnProperty(arg_0_tmp_1, Nan::New<String>("website").ToLocalChecked(), arg_0_tmp_1_3);
         Local<Value> arg_0_tmp_1_4;
-        if(arg_0_optional.validatorDetails.details)
+        if(arg_0_optional.validatorDetails.securityContact)
         {
-            auto arg_0_tmp_1_4_optional = (arg_0_optional.validatorDetails.details).value();
+            auto arg_0_tmp_1_4_optional = (arg_0_optional.validatorDetails.securityContact).value();
             auto arg_0_tmp_1_4_tmp = Nan::New<String>(arg_0_tmp_1_4_optional).ToLocalChecked();
             arg_0_tmp_1_4 = arg_0_tmp_1_4_tmp;
         }
 
-        Nan::DefineOwnProperty(arg_0_tmp_1, Nan::New<String>("details").ToLocalChecked(), arg_0_tmp_1_4);
+        Nan::DefineOwnProperty(arg_0_tmp_1, Nan::New<String>("securityContact").ToLocalChecked(), arg_0_tmp_1_4);
+        Local<Value> arg_0_tmp_1_5;
+        if(arg_0_optional.validatorDetails.details)
+        {
+            auto arg_0_tmp_1_5_optional = (arg_0_optional.validatorDetails.details).value();
+            auto arg_0_tmp_1_5_tmp = Nan::New<String>(arg_0_tmp_1_5_optional).ToLocalChecked();
+            arg_0_tmp_1_5 = arg_0_tmp_1_5_tmp;
+        }
+
+        Nan::DefineOwnProperty(arg_0_tmp_1, Nan::New<String>("details").ToLocalChecked(), arg_0_tmp_1_5);
 
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("validatorDetails").ToLocalChecked(), arg_0_tmp_1);
         auto arg_0_tmp_2 = Nan::New<Object>();
@@ -108,7 +117,7 @@ void NJSCosmosLikeValidatorCallback::onCallback(const std::experimental::optiona
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("operatorAddress").ToLocalChecked(), arg_0_tmp_10);
         auto arg_0_tmp_11 = Nan::New<String>(arg_0_optional.consensusPubkey).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("consensusPubkey").ToLocalChecked(), arg_0_tmp_11);
-        auto arg_0_tmp_12 = Nan::New<Int32>(arg_0_optional.activeStatus);
+        auto arg_0_tmp_12 = Nan::New<String>(arg_0_optional.activeStatus).ToLocalChecked();
         Nan::DefineOwnProperty(arg_0_tmp, Nan::New<String>("activeStatus").ToLocalChecked(), arg_0_tmp_12);
 
         arg_0 = arg_0_tmp;

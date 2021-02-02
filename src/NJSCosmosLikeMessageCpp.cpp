@@ -1009,7 +1009,7 @@ NAN_METHOD(NJSCosmosLikeMessage::wrapMsgCreateValidator) {
     }
 
 
-    auto field_arg_0_1_4 = Nan::Get(field_arg_0_1->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("details").ToLocalChecked()).ToLocalChecked();
+    auto field_arg_0_1_4 = Nan::Get(field_arg_0_1->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("securityContact").ToLocalChecked()).ToLocalChecked();
     auto arg_0_1_4 = std::experimental::optional<std::string>();
     if(!field_arg_0_1_4->IsNull() && !field_arg_0_1_4->IsUndefined())
     {
@@ -1018,7 +1018,17 @@ NAN_METHOD(NJSCosmosLikeMessage::wrapMsgCreateValidator) {
         arg_0_1_4.emplace(opt_arg_0_1_4);
     }
 
-    CosmosLikeValidatorDescription arg_0_1(arg_0_1_1, arg_0_1_2, arg_0_1_3, arg_0_1_4);
+
+    auto field_arg_0_1_5 = Nan::Get(field_arg_0_1->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("details").ToLocalChecked()).ToLocalChecked();
+    auto arg_0_1_5 = std::experimental::optional<std::string>();
+    if(!field_arg_0_1_5->IsNull() && !field_arg_0_1_5->IsUndefined())
+    {
+        Nan::Utf8String string_opt_arg_0_1_5(field_arg_0_1_5->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_1_5 = std::string(*string_opt_arg_0_1_5);
+        arg_0_1_5.emplace(opt_arg_0_1_5);
+    }
+
+    CosmosLikeValidatorDescription arg_0_1(arg_0_1_1, arg_0_1_2, arg_0_1_3, arg_0_1_4, arg_0_1_5);
 
 
     auto field_arg_0_2 = Nan::Get(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("commission").ToLocalChecked()).ToLocalChecked();
@@ -1127,14 +1137,23 @@ NAN_METHOD(NJSCosmosLikeMessage::unwrapMsgCreateValidator) {
 
     Nan::DefineOwnProperty(arg_1_1, Nan::New<String>("website").ToLocalChecked(), arg_1_1_3);
     Local<Value> arg_1_1_4;
-    if(result.descr.details)
+    if(result.descr.securityContact)
     {
-        auto arg_1_1_4_optional = (result.descr.details).value();
+        auto arg_1_1_4_optional = (result.descr.securityContact).value();
         auto arg_1_1_4_tmp = Nan::New<String>(arg_1_1_4_optional).ToLocalChecked();
         arg_1_1_4 = arg_1_1_4_tmp;
     }
 
-    Nan::DefineOwnProperty(arg_1_1, Nan::New<String>("details").ToLocalChecked(), arg_1_1_4);
+    Nan::DefineOwnProperty(arg_1_1, Nan::New<String>("securityContact").ToLocalChecked(), arg_1_1_4);
+    Local<Value> arg_1_1_5;
+    if(result.descr.details)
+    {
+        auto arg_1_1_5_optional = (result.descr.details).value();
+        auto arg_1_1_5_tmp = Nan::New<String>(arg_1_1_5_optional).ToLocalChecked();
+        arg_1_1_5 = arg_1_1_5_tmp;
+    }
+
+    Nan::DefineOwnProperty(arg_1_1, Nan::New<String>("details").ToLocalChecked(), arg_1_1_5);
 
     Nan::DefineOwnProperty(arg_1, Nan::New<String>("descr").ToLocalChecked(), arg_1_1);
     auto arg_1_2 = Nan::New<Object>();
@@ -1211,7 +1230,7 @@ NAN_METHOD(NJSCosmosLikeMessage::wrapMsgEditValidator) {
         }
 
 
-        auto field_opt_arg_0_1_4 = Nan::Get(field_arg_0_1->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("details").ToLocalChecked()).ToLocalChecked();
+        auto field_opt_arg_0_1_4 = Nan::Get(field_arg_0_1->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("securityContact").ToLocalChecked()).ToLocalChecked();
         auto opt_arg_0_1_4 = std::experimental::optional<std::string>();
         if(!field_opt_arg_0_1_4->IsNull() && !field_opt_arg_0_1_4->IsUndefined())
         {
@@ -1220,7 +1239,17 @@ NAN_METHOD(NJSCosmosLikeMessage::wrapMsgEditValidator) {
             opt_arg_0_1_4.emplace(opt_opt_arg_0_1_4);
         }
 
-        CosmosLikeValidatorDescription opt_arg_0_1(opt_arg_0_1_1, opt_arg_0_1_2, opt_arg_0_1_3, opt_arg_0_1_4);
+
+        auto field_opt_arg_0_1_5 = Nan::Get(field_arg_0_1->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("details").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_1_5 = std::experimental::optional<std::string>();
+        if(!field_opt_arg_0_1_5->IsNull() && !field_opt_arg_0_1_5->IsUndefined())
+        {
+            Nan::Utf8String string_opt_opt_arg_0_1_5(field_opt_arg_0_1_5->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+            auto opt_opt_arg_0_1_5 = std::string(*string_opt_opt_arg_0_1_5);
+            opt_arg_0_1_5.emplace(opt_opt_arg_0_1_5);
+        }
+
+        CosmosLikeValidatorDescription opt_arg_0_1(opt_arg_0_1_1, opt_arg_0_1_2, opt_arg_0_1_3, opt_arg_0_1_4, opt_arg_0_1_5);
 
         arg_0_1.emplace(opt_arg_0_1);
     }
@@ -1308,14 +1337,23 @@ NAN_METHOD(NJSCosmosLikeMessage::unwrapMsgEditValidator) {
 
         Nan::DefineOwnProperty(arg_1_1_tmp, Nan::New<String>("website").ToLocalChecked(), arg_1_1_tmp_3);
         Local<Value> arg_1_1_tmp_4;
-        if(arg_1_1_optional.details)
+        if(arg_1_1_optional.securityContact)
         {
-            auto arg_1_1_tmp_4_optional = (arg_1_1_optional.details).value();
+            auto arg_1_1_tmp_4_optional = (arg_1_1_optional.securityContact).value();
             auto arg_1_1_tmp_4_tmp = Nan::New<String>(arg_1_1_tmp_4_optional).ToLocalChecked();
             arg_1_1_tmp_4 = arg_1_1_tmp_4_tmp;
         }
 
-        Nan::DefineOwnProperty(arg_1_1_tmp, Nan::New<String>("details").ToLocalChecked(), arg_1_1_tmp_4);
+        Nan::DefineOwnProperty(arg_1_1_tmp, Nan::New<String>("securityContact").ToLocalChecked(), arg_1_1_tmp_4);
+        Local<Value> arg_1_1_tmp_5;
+        if(arg_1_1_optional.details)
+        {
+            auto arg_1_1_tmp_5_optional = (arg_1_1_optional.details).value();
+            auto arg_1_1_tmp_5_tmp = Nan::New<String>(arg_1_1_tmp_5_optional).ToLocalChecked();
+            arg_1_1_tmp_5 = arg_1_1_tmp_5_tmp;
+        }
+
+        Nan::DefineOwnProperty(arg_1_1_tmp, Nan::New<String>("details").ToLocalChecked(), arg_1_1_tmp_5);
 
         arg_1_1 = arg_1_1_tmp;
     }
