@@ -374,6 +374,31 @@ NAN_METHOD(NJSBitcoinLikeTransaction::getEstimatedSize) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSBitcoinLikeTransaction::getDustAmount) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeTransaction::getDustAmount needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeTransaction::getDustAmount : implementation of BitcoinLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getDustAmount();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Number>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSBitcoinLikeTransaction::setSignatures) {
 
     //Check if method called with right number of arguments
@@ -577,6 +602,7 @@ void NJSBitcoinLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"serializeOutputs", serializeOutputs);
     Nan::SetPrototypeMethod(func_template,"getWitness", getWitness);
     Nan::SetPrototypeMethod(func_template,"getEstimatedSize", getEstimatedSize);
+    Nan::SetPrototypeMethod(func_template,"getDustAmount", getDustAmount);
     Nan::SetPrototypeMethod(func_template,"setSignatures", setSignatures);
     Nan::SetPrototypeMethod(func_template,"setDERSignatures", setDERSignatures);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);

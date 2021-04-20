@@ -64,25 +64,27 @@ void NJSCurrencyListCallback::onCallback(const std::experimental::optional<std::
                 Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_tmp_elem_6_tmp_4);
                 auto arg_0_tmp_elem_6_tmp_5 = Nan::New<Integer>((int)arg_0_tmp_elem_6_optional.FeePolicy);
                 Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("FeePolicy").ToLocalChecked(), arg_0_tmp_elem_6_tmp_5);
-                auto arg_0_tmp_elem_6_tmp_6 = Nan::New<Number>(arg_0_tmp_elem_6_optional.DustAmount);
-                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("DustAmount").ToLocalChecked(), arg_0_tmp_elem_6_tmp_6);
-                auto arg_0_tmp_elem_6_tmp_7 = Nan::New<String>(arg_0_tmp_elem_6_optional.MessagePrefix).ToLocalChecked();
-                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_tmp_elem_6_tmp_7);
-                auto arg_0_tmp_elem_6_tmp_8 = Nan::New<Boolean>(arg_0_tmp_elem_6_optional.UsesTimestampedTransaction);
-                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked(), arg_0_tmp_elem_6_tmp_8);
-                auto arg_0_tmp_elem_6_tmp_9 = Nan::New<Number>(arg_0_tmp_elem_6_optional.TimestampDelay);
-                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_tmp_elem_6_tmp_9);
-                auto arg_0_tmp_elem_6_tmp_10 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_tmp_elem_6_optional.SigHash)).ToLocalChecked();
+                auto arg_0_tmp_elem_6_tmp_6 = Nan::New<Number>(arg_0_tmp_elem_6_optional.Dust);
+                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("Dust").ToLocalChecked(), arg_0_tmp_elem_6_tmp_6);
+                auto arg_0_tmp_elem_6_tmp_7 = Nan::New<Integer>((int)arg_0_tmp_elem_6_optional.DustPolicy);
+                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("DustPolicy").ToLocalChecked(), arg_0_tmp_elem_6_tmp_7);
+                auto arg_0_tmp_elem_6_tmp_8 = Nan::New<String>(arg_0_tmp_elem_6_optional.MessagePrefix).ToLocalChecked();
+                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_tmp_elem_6_tmp_8);
+                auto arg_0_tmp_elem_6_tmp_9 = Nan::New<Boolean>(arg_0_tmp_elem_6_optional.UsesTimestampedTransaction);
+                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked(), arg_0_tmp_elem_6_tmp_9);
+                auto arg_0_tmp_elem_6_tmp_10 = Nan::New<Number>(arg_0_tmp_elem_6_optional.TimestampDelay);
+                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_tmp_elem_6_tmp_10);
+                auto arg_0_tmp_elem_6_tmp_11 = Nan::New<String>("0x" + djinni::js::hex::toString(arg_0_tmp_elem_6_optional.SigHash)).ToLocalChecked();
 
-                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_tmp_elem_6_tmp_10);
-                Local<Array> arg_0_tmp_elem_6_tmp_11 = Nan::New<Array>();
-                for(size_t arg_0_tmp_elem_6_tmp_11_id = 0; arg_0_tmp_elem_6_tmp_11_id < arg_0_tmp_elem_6_optional.AdditionalBIPs.size(); arg_0_tmp_elem_6_tmp_11_id++)
+                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_tmp_elem_6_tmp_11);
+                Local<Array> arg_0_tmp_elem_6_tmp_12 = Nan::New<Array>();
+                for(size_t arg_0_tmp_elem_6_tmp_12_id = 0; arg_0_tmp_elem_6_tmp_12_id < arg_0_tmp_elem_6_optional.AdditionalBIPs.size(); arg_0_tmp_elem_6_tmp_12_id++)
                 {
-                    auto arg_0_tmp_elem_6_tmp_11_elem = Nan::New<String>(arg_0_tmp_elem_6_optional.AdditionalBIPs[arg_0_tmp_elem_6_tmp_11_id]).ToLocalChecked();
-                    Nan::Set(arg_0_tmp_elem_6_tmp_11, (int)arg_0_tmp_elem_6_tmp_11_id,arg_0_tmp_elem_6_tmp_11_elem);
+                    auto arg_0_tmp_elem_6_tmp_12_elem = Nan::New<String>(arg_0_tmp_elem_6_optional.AdditionalBIPs[arg_0_tmp_elem_6_tmp_12_id]).ToLocalChecked();
+                    Nan::Set(arg_0_tmp_elem_6_tmp_12, (int)arg_0_tmp_elem_6_tmp_12_id,arg_0_tmp_elem_6_tmp_12_elem);
                 }
 
-                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_tmp_elem_6_tmp_11);
+                Nan::DefineOwnProperty(arg_0_tmp_elem_6_tmp, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_tmp_elem_6_tmp_12);
 
                 arg_0_tmp_elem_6 = arg_0_tmp_elem_6_tmp;
             }

@@ -83,6 +83,9 @@ private:
      */
     static NAN_METHOD(getEstimatedSize);
 
+    /** Get the dust amount based on the maximum estimated size of the transaction */
+    static NAN_METHOD(getDustAmount);
+
     /**
      * Sign all inputs for given transaction. 
      * Build DER encoded signature from RSV data.

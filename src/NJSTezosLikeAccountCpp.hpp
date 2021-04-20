@@ -59,8 +59,20 @@ private:
     /** Get fees from network */
     static NAN_METHOD(getFees);
 
+    /** Get gas price from network */
+    static NAN_METHOD(getGasPrice);
+
     /** Get originated accounts by current account */
     static NAN_METHOD(getOriginatedAccounts);
+
+    /** Get current delegate */
+    static NAN_METHOD(getCurrentDelegate);
+
+    /**
+     * Get the balance of the account for a given token
+     * @param tokenAddress Address of the contract
+     */
+    static NAN_METHOD(getTokenBalance);
 
     static NAN_METHOD(New);
 

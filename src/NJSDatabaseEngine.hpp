@@ -46,6 +46,12 @@ public:
      */
     int32_t getPoolSize();
 
+    /**
+     * Get the maximum number of concurrent readonly connection on a single database.
+     * @return the maximum number of concurrent readonly connection that the engine is able to open on a single database.
+     */
+    int32_t getReadonlyPoolSize();
+
 private:
     /**
      * Open a connection to a database using the given database name.
@@ -59,6 +65,12 @@ private:
      * @return the maximum number of concurrent connection that the engine is able to open on a single database.
      */
     static NAN_METHOD(getPoolSize);
+
+    /**
+     * Get the maximum number of concurrent readonly connection on a single database.
+     * @return the maximum number of concurrent readonly connection that the engine is able to open on a single database.
+     */
+    static NAN_METHOD(getReadonlyPoolSize);
 
     static NAN_METHOD(New);
 

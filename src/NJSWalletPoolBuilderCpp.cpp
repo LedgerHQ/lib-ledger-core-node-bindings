@@ -316,10 +316,6 @@ NAN_METHOD(NJSWalletPoolBuilder::setExternalPreferencesBackend) {
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
     auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::PreferencesBackend>::Unwrap(njs_arg_0);
-    if(!arg_0)
-    {
-        return Nan::ThrowError("NodeJs Object to NJSPreferencesBackend failed");
-    }
 
 
     //Unwrap current object and retrieve its Cpp Implementation
@@ -349,10 +345,6 @@ NAN_METHOD(NJSWalletPoolBuilder::setInternalPreferencesBackend) {
     //Check if parameters have correct types
     Local<Object> njs_arg_0 = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
     auto arg_0 = djinni::js::ObjectWrapper<ledger::core::api::PreferencesBackend>::Unwrap(njs_arg_0);
-    if(!arg_0)
-    {
-        return Nan::ThrowError("NodeJs Object to NJSPreferencesBackend failed");
-    }
 
 
     //Unwrap current object and retrieve its Cpp Implementation
