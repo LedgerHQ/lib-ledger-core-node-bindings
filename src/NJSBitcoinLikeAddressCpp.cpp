@@ -95,25 +95,27 @@ NAN_METHOD(NJSBitcoinLikeAddress::getNetworkParameters) {
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("XPUBVersion").ToLocalChecked(), arg_0_4);
     auto arg_0_5 = Nan::New<Integer>((int)result.FeePolicy);
     Nan::DefineOwnProperty(arg_0, Nan::New<String>("FeePolicy").ToLocalChecked(), arg_0_5);
-    auto arg_0_6 = Nan::New<Number>(result.DustAmount);
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("DustAmount").ToLocalChecked(), arg_0_6);
-    auto arg_0_7 = Nan::New<String>(result.MessagePrefix).ToLocalChecked();
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_7);
-    auto arg_0_8 = Nan::New<Boolean>(result.UsesTimestampedTransaction);
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked(), arg_0_8);
-    auto arg_0_9 = Nan::New<Number>(result.TimestampDelay);
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_9);
-    auto arg_0_10 = Nan::New<String>("0x" + djinni::js::hex::toString(result.SigHash)).ToLocalChecked();
+    auto arg_0_6 = Nan::New<Number>(result.Dust);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("Dust").ToLocalChecked(), arg_0_6);
+    auto arg_0_7 = Nan::New<Integer>((int)result.DustPolicy);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("DustPolicy").ToLocalChecked(), arg_0_7);
+    auto arg_0_8 = Nan::New<String>(result.MessagePrefix).ToLocalChecked();
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("MessagePrefix").ToLocalChecked(), arg_0_8);
+    auto arg_0_9 = Nan::New<Boolean>(result.UsesTimestampedTransaction);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked(), arg_0_9);
+    auto arg_0_10 = Nan::New<Number>(result.TimestampDelay);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("TimestampDelay").ToLocalChecked(), arg_0_10);
+    auto arg_0_11 = Nan::New<String>("0x" + djinni::js::hex::toString(result.SigHash)).ToLocalChecked();
 
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_10);
-    Local<Array> arg_0_11 = Nan::New<Array>();
-    for(size_t arg_0_11_id = 0; arg_0_11_id < result.AdditionalBIPs.size(); arg_0_11_id++)
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("SigHash").ToLocalChecked(), arg_0_11);
+    Local<Array> arg_0_12 = Nan::New<Array>();
+    for(size_t arg_0_12_id = 0; arg_0_12_id < result.AdditionalBIPs.size(); arg_0_12_id++)
     {
-        auto arg_0_11_elem = Nan::New<String>(result.AdditionalBIPs[arg_0_11_id]).ToLocalChecked();
-        Nan::Set(arg_0_11, (int)arg_0_11_id,arg_0_11_elem);
+        auto arg_0_12_elem = Nan::New<String>(result.AdditionalBIPs[arg_0_12_id]).ToLocalChecked();
+        Nan::Set(arg_0_12, (int)arg_0_12_id,arg_0_12_elem);
     }
 
-    Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_11);
+    Nan::DefineOwnProperty(arg_0, Nan::New<String>("AdditionalBIPs").ToLocalChecked(), arg_0_12);
 
 
     //Return result

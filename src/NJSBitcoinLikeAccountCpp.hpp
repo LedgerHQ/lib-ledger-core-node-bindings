@@ -5,8 +5,11 @@
 #define DJINNI_GENERATED_NJSBITCOINLIKEACCOUNT_HPP
 
 
+#include "../include/../utils/optional.hpp"
+#include "../include/BitcoinLikePickingStrategy.hpp"
 #include "NJSAddressCpp.hpp"
 #include "NJSAddressListCallback.hpp"
+#include "NJSAmountCallback.hpp"
 #include "NJSBigIntListCallback.hpp"
 #include "NJSBitcoinLikeOutputListCallback.hpp"
 #include "NJSBitcoinLikeTransactionBuilderCpp.hpp"
@@ -73,6 +76,9 @@ private:
 
     /** get all contained adresses. */
     static NAN_METHOD(getAllAddresses);
+
+    /** get max spendable balance for a given strategy */
+    static NAN_METHOD(getMaxSpendable);
 
     static NAN_METHOD(New);
 

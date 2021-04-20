@@ -41,8 +41,17 @@ private:
     /** Get the hash of the transaction. */
     static NAN_METHOD(getHash);
 
-    /** Get Fees (in drop) */
+    /**
+     * Get Fees (in drop) 
+     * It returns the sum of transaction fees and reveal fees (if it exists)
+     */
     static NAN_METHOD(getFees);
+
+    /** get transaction fees (without reveal cost) */
+    static NAN_METHOD(getTransactionFees);
+
+    /** get reveal fees if the sender envolved is not revealed, else 0 */
+    static NAN_METHOD(getRevealFees);
 
     /** Get destination XTZ. address */
     static NAN_METHOD(getReceiver);

@@ -54,6 +54,27 @@ int32_t NJSDatabaseEngine::getPoolSize()
     return fResult_getPoolSize;
 }
 
+int32_t NJSDatabaseEngine::getReadonlyPoolSize()
+{
+    Nan::HandleScope scope;
+    //Wrap parameters
+    Local<Value> args[1];
+    Local<Object> local_njs_impl = Nan::New<Object>(njs_impl);
+    if(!local_njs_impl->IsObject())
+    {
+        Nan::ThrowError("NJSDatabaseEngine::getReadonlyPoolSize fail to retrieve node implementation");
+    }
+    auto calling_funtion = Nan::Get(local_njs_impl,Nan::New<String>("getReadonlyPoolSize").ToLocalChecked()).ToLocalChecked();
+    auto result_getReadonlyPoolSize = Nan::CallAsFunction(calling_funtion->ToObject(Nan::GetCurrentContext()).ToLocalChecked(),local_njs_impl,0,args);
+    if(result_getReadonlyPoolSize.IsEmpty())
+    {
+        Nan::ThrowError("NJSDatabaseEngine::getReadonlyPoolSize call failed");
+    }
+    auto checkedResult_getReadonlyPoolSize = result_getReadonlyPoolSize.ToLocalChecked();
+    auto fResult_getReadonlyPoolSize = Nan::To<int32_t>(checkedResult_getReadonlyPoolSize).FromJust();
+    return fResult_getReadonlyPoolSize;
+}
+
 NAN_METHOD(NJSDatabaseEngine::New) {
     //Only new allowed
     if(!info.IsConstructCall())

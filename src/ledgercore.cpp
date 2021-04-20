@@ -17,13 +17,14 @@
 #include "NJSAmountListCallback.hpp"
 #include "NJSTezosConfigurationCpp.hpp"
 #include "NJSTezosConfigurationDefaultsCpp.hpp"
+#include "NJSTezosLikeWalletCpp.hpp"
+#include "NJSBoolCallback.hpp"
 #include "NJSRippleLikeTransactionCpp.hpp"
 #include "NJSRippleLikeOperationCpp.hpp"
 #include "NJSRippleLikeBlockCpp.hpp"
 #include "NJSRippleLikeTransactionBuilderCpp.hpp"
 #include "NJSRippleLikeTransactionCallback.hpp"
 #include "NJSRippleLikeAccountCpp.hpp"
-#include "NJSBoolCallback.hpp"
 #include "NJSRippleConfigurationCpp.hpp"
 #include "NJSRippleConfigurationDefaultsCpp.hpp"
 #include "NJSSecp256k1Cpp.hpp"
@@ -118,6 +119,8 @@
 #include "NJSCosmosConfigurationDefaultsCpp.hpp"
 #include "NJSCosmosLikeWalletCpp.hpp"
 #include "NJSERC20LikeAccountCpp.hpp"
+#include "NJSERC20LikeOperationCallback.hpp"
+#include "NJSERC20LikeOperationListCallback.hpp"
 #include "NJSBinaryCallback.hpp"
 #include "NJSERC20LikeOperationCpp.hpp"
 #include "NJSGetEthreumLikeWalletCallback.hpp"
@@ -146,7 +149,7 @@
 #include "NJSRandomNumberGenerator.hpp"
 #include "NJSPreferencesCpp.hpp"
 #include "NJSPreferencesEditorCpp.hpp"
-#include "NJSPreferencesBackendCpp.hpp"
+#include "NJSPreferencesBackend.hpp"
 #include "NJSBitcoinLikeWalletConfigurationCpp.hpp"
 #include "NJSBitcoinLikeInputCpp.hpp"
 #include "NJSBitcoinLikeOutputCpp.hpp"
@@ -179,6 +182,8 @@
 #include "NJSLogPrinter.hpp"
 #include "NJSLoggerCpp.hpp"
 #include "NJSLedgerCoreCpp.hpp"
+#include "NJSAllocationMetricsCpp.hpp"
+#include "NJSDurationMetricsCpp.hpp"
 
 using namespace v8;
 using namespace node;
@@ -199,13 +204,14 @@ static void initAll(Local<Object> target)
     NJSAmountListCallback::Initialize(target);
     NJSTezosConfiguration::Initialize(target);
     NJSTezosConfigurationDefaults::Initialize(target);
+    NJSTezosLikeWallet::Initialize(target);
+    NJSBoolCallback::Initialize(target);
     NJSRippleLikeTransaction::Initialize(target);
     NJSRippleLikeOperation::Initialize(target);
     NJSRippleLikeBlock::Initialize(target);
     NJSRippleLikeTransactionBuilder::Initialize(target);
     NJSRippleLikeTransactionCallback::Initialize(target);
     NJSRippleLikeAccount::Initialize(target);
-    NJSBoolCallback::Initialize(target);
     NJSRippleConfiguration::Initialize(target);
     NJSRippleConfigurationDefaults::Initialize(target);
     NJSSecp256k1::Initialize(target);
@@ -300,6 +306,8 @@ static void initAll(Local<Object> target)
     NJSCosmosConfigurationDefaults::Initialize(target);
     NJSCosmosLikeWallet::Initialize(target);
     NJSERC20LikeAccount::Initialize(target);
+    NJSERC20LikeOperationCallback::Initialize(target);
+    NJSERC20LikeOperationListCallback::Initialize(target);
     NJSBinaryCallback::Initialize(target);
     NJSERC20LikeOperation::Initialize(target);
     NJSGetEthreumLikeWalletCallback::Initialize(target);
@@ -361,5 +369,7 @@ static void initAll(Local<Object> target)
     NJSLogPrinter::Initialize(target);
     NJSLogger::Initialize(target);
     NJSLedgerCore::Initialize(target);
+    NJSAllocationMetrics::Initialize(target);
+    NJSDurationMetrics::Initialize(target);
 }
 NODE_MODULE(ledgercore,initAll);

@@ -348,6 +348,56 @@ NAN_METHOD(NJSERC20LikeOperation::getBlockHeight) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSERC20LikeOperation::getETHOperationUid) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSERC20LikeOperation::getETHOperationUid needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSERC20LikeOperation::getETHOperationUid : implementation of ERC20LikeOperation is not valid");
+    }
+
+    auto result = cpp_impl->getETHOperationUid();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSERC20LikeOperation::getOperationUid) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSERC20LikeOperation::getOperationUid needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeOperation>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSERC20LikeOperation::getOperationUid : implementation of ERC20LikeOperation is not valid");
+    }
+
+    auto result = cpp_impl->getOperationUid();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 
 NAN_METHOD(NJSERC20LikeOperation::New) {
     //Only new allowed
@@ -407,6 +457,8 @@ void NJSERC20LikeOperation::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getOperationType", getOperationType);
     Nan::SetPrototypeMethod(func_template,"getStatus", getStatus);
     Nan::SetPrototypeMethod(func_template,"getBlockHeight", getBlockHeight);
+    Nan::SetPrototypeMethod(func_template,"getETHOperationUid", getETHOperationUid);
+    Nan::SetPrototypeMethod(func_template,"getOperationUid", getOperationUid);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     ERC20LikeOperation_prototype.Reset(objectTemplate);

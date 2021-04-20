@@ -78,6 +78,12 @@ private:
      */
     static NAN_METHOD(getBlockHeight);
 
+    /** Get parent ETH operation uid */
+    static NAN_METHOD(getETHOperationUid);
+
+    /** Get ERC20 operation uid */
+    static NAN_METHOD(getOperationUid);
+
     static NAN_METHOD(New);
 
     static NAN_METHOD(isNull);

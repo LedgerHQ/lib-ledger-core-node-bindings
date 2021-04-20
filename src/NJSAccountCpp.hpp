@@ -180,18 +180,6 @@ private:
      */
     static NAN_METHOD(getEventBus);
 
-    /** Start observing blockchain on which account synchronizes and send/receive transactions. */
-    static NAN_METHOD(startBlockchainObservation);
-
-    /** Stop observing blockchain. */
-    static NAN_METHOD(stopBlockchainObservation);
-
-    /**
-     * Get account's observation status.
-     * @return boolean
-     */
-    static NAN_METHOD(isObservingBlockchain);
-
     /**
      * Get Last block of blockchain on which account operates.
      * @param callback, Callback returning, if getLastBlock succeeds, a Block object

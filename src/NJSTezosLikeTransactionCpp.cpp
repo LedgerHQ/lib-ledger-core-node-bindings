@@ -85,6 +85,58 @@ NAN_METHOD(NJSTezosLikeTransaction::getFees) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSTezosLikeTransaction::getTransactionFees) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSTezosLikeTransaction::getTransactionFees needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TezosLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSTezosLikeTransaction::getTransactionFees : implementation of TezosLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getTransactionFees();
+
+    //Wrap result in node object
+    auto arg_0 = NJSAmount::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSTezosLikeTransaction::getRevealFees) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSTezosLikeTransaction::getRevealFees needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TezosLikeTransaction>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSTezosLikeTransaction::getRevealFees : implementation of TezosLikeTransaction is not valid");
+    }
+
+    auto result = cpp_impl->getRevealFees();
+
+    //Wrap result in node object
+    auto arg_0 = NJSAmount::wrap(result);
+
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSTezosLikeTransaction::getReceiver) {
 
     //Check if method called with right number of arguments
@@ -461,6 +513,8 @@ void NJSTezosLikeTransaction::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getType", getType);
     Nan::SetPrototypeMethod(func_template,"getHash", getHash);
     Nan::SetPrototypeMethod(func_template,"getFees", getFees);
+    Nan::SetPrototypeMethod(func_template,"getTransactionFees", getTransactionFees);
+    Nan::SetPrototypeMethod(func_template,"getRevealFees", getRevealFees);
     Nan::SetPrototypeMethod(func_template,"getReceiver", getReceiver);
     Nan::SetPrototypeMethod(func_template,"getSender", getSender);
     Nan::SetPrototypeMethod(func_template,"getValue", getValue);

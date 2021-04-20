@@ -355,6 +355,36 @@ NAN_METHOD(NJSEthereumLikeAccount::getERC20Balances) {
     cpp_impl->getERC20Balances(arg_0,arg_1);
     info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
+NAN_METHOD(NJSEthereumLikeAccount::addERC20Accounts) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::addERC20Accounts needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    vector<std::string> arg_0;
+    Local<Array> arg_0_container = Local<Array>::Cast(info[0]);
+    for(uint32_t arg_0_id = 0; arg_0_id < arg_0_container->Length(); arg_0_id++)
+    {
+        if(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->IsString())
+        {
+            Nan::Utf8String string_arg_0_elem(arg_0_container->Get(Nan::GetCurrentContext(), arg_0_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+            auto arg_0_elem = std::string(*string_arg_0_elem);
+            arg_0.emplace_back(arg_0_elem);
+        }
+    }
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::EthereumLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSEthereumLikeAccount::addERC20Accounts : implementation of EthereumLikeAccount is not valid");
+    }
+    cpp_impl->addERC20Accounts(arg_0);
+}
 
 NAN_METHOD(NJSEthereumLikeAccount::New) {
     //Only new allowed
@@ -410,6 +440,7 @@ void NJSEthereumLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getDryRunGasLimit", getDryRunGasLimit);
     Nan::SetPrototypeMethod(func_template,"getERC20Balance", getERC20Balance);
     Nan::SetPrototypeMethod(func_template,"getERC20Balances", getERC20Balances);
+    Nan::SetPrototypeMethod(func_template,"addERC20Accounts", addERC20Accounts);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     EthereumLikeAccount_prototype.Reset(objectTemplate);

@@ -66,9 +66,23 @@ private:
 
     /**
      * Set fees (in drop) the originator is willing to pay
+     * Set transaction and (if needed) reveal fees with 'fees'
+     * equivalent to call both functions setTransactionFees(fees) and setRevealFees(fees)
      * @return A reference on the same builder in order to chain calls.
      */
     static NAN_METHOD(setFees);
+
+    /**
+     * Set transaction fees (in drop) the originator is willing to pay (reveal is not included)
+     * @return A reference on the same builder in order to chain calls.
+     */
+    static NAN_METHOD(setTransactionFees);
+
+    /**
+     * Set reveal fees (in drop) the originator is willing to pay 
+     * @return A reference on the same builder in order to chain calls.
+     */
+    static NAN_METHOD(setRevealFees);
 
     /**
      * Set gas limit the originator is not willing to exceed.

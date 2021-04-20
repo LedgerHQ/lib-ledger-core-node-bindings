@@ -187,6 +187,31 @@ NAN_METHOD(NJSTezosLikeAccount::getFees) {
     cpp_impl->getFees(arg_0);
     info.GetReturnValue().Set(arg_0_resolver->GetPromise());
 }
+NAN_METHOD(NJSTezosLikeAccount::getGasPrice) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSTezosLikeAccount::getGasPrice needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntCallback *njs_ptr_arg_0 = new NJSBigIntCallback(arg_0_resolver);
+    std::shared_ptr<NJSBigIntCallback> arg_0(njs_ptr_arg_0);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TezosLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSTezosLikeAccount::getGasPrice : implementation of TezosLikeAccount is not valid");
+    }
+    cpp_impl->getGasPrice(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
+}
 NAN_METHOD(NJSTezosLikeAccount::getOriginatedAccounts) {
 
     //Check if method called with right number of arguments
@@ -218,6 +243,58 @@ NAN_METHOD(NJSTezosLikeAccount::getOriginatedAccounts) {
 
     //Return result
     info.GetReturnValue().Set(arg_0);
+}
+NAN_METHOD(NJSTezosLikeAccount::getCurrentDelegate) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSTezosLikeAccount::getCurrentDelegate needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Create promise and set it into Callback
+    auto arg_0_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSStringCallback *njs_ptr_arg_0 = new NJSStringCallback(arg_0_resolver);
+    std::shared_ptr<NJSStringCallback> arg_0(njs_ptr_arg_0);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TezosLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSTezosLikeAccount::getCurrentDelegate : implementation of TezosLikeAccount is not valid");
+    }
+    cpp_impl->getCurrentDelegate(arg_0);
+    info.GetReturnValue().Set(arg_0_resolver->GetPromise());
+}
+NAN_METHOD(NJSTezosLikeAccount::getTokenBalance) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSTezosLikeAccount::getTokenBalance needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    auto arg_0 = std::string(*string_arg_0);
+
+    //Create promise and set it into Callback
+    auto arg_1_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSBigIntCallback *njs_ptr_arg_1 = new NJSBigIntCallback(arg_1_resolver);
+    std::shared_ptr<NJSBigIntCallback> arg_1(njs_ptr_arg_1);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::TezosLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSTezosLikeAccount::getTokenBalance : implementation of TezosLikeAccount is not valid");
+    }
+    cpp_impl->getTokenBalance(arg_0,arg_1);
+    info.GetReturnValue().Set(arg_1_resolver->GetPromise());
 }
 
 NAN_METHOD(NJSTezosLikeAccount::New) {
@@ -271,7 +348,10 @@ void NJSTezosLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getStorage", getStorage);
     Nan::SetPrototypeMethod(func_template,"getEstimatedGasLimit", getEstimatedGasLimit);
     Nan::SetPrototypeMethod(func_template,"getFees", getFees);
+    Nan::SetPrototypeMethod(func_template,"getGasPrice", getGasPrice);
     Nan::SetPrototypeMethod(func_template,"getOriginatedAccounts", getOriginatedAccounts);
+    Nan::SetPrototypeMethod(func_template,"getCurrentDelegate", getCurrentDelegate);
+    Nan::SetPrototypeMethod(func_template,"getTokenBalance", getTokenBalance);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     TezosLikeAccount_prototype.Reset(objectTemplate);

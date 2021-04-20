@@ -245,6 +245,39 @@ NAN_METHOD(NJSBitcoinLikeAccount::getAllAddresses) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSBitcoinLikeAccount::getMaxSpendable) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 2)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAccount::getMaxSpendable needs 2 arguments");
+    }
+
+    //Check if parameters have correct types
+    auto arg_0 = (ledger::core::api::BitcoinLikePickingStrategy)Nan::To<int>(info[0]).FromJust();
+    auto arg_1 = std::experimental::optional<int32_t>();
+    if(!info[1]->IsNull() && !info[1]->IsUndefined())
+    {
+        auto opt_arg_1 = Nan::To<int32_t>(info[1]).FromJust();
+        arg_1.emplace(opt_arg_1);
+    }
+
+
+    //Create promise and set it into Callback
+    auto arg_2_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSAmountCallback *njs_ptr_arg_2 = new NJSAmountCallback(arg_2_resolver);
+    std::shared_ptr<NJSAmountCallback> arg_2(njs_ptr_arg_2);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::BitcoinLikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSBitcoinLikeAccount::getMaxSpendable : implementation of BitcoinLikeAccount is not valid");
+    }
+    cpp_impl->getMaxSpendable(arg_0,arg_1,arg_2);
+    info.GetReturnValue().Set(arg_2_resolver->GetPromise());
+}
 
 NAN_METHOD(NJSBitcoinLikeAccount::New) {
     //Only new allowed
@@ -299,6 +332,7 @@ void NJSBitcoinLikeAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getFees", getFees);
     Nan::SetPrototypeMethod(func_template,"getAddresses", getAddresses);
     Nan::SetPrototypeMethod(func_template,"getAllAddresses", getAllAddresses);
+    Nan::SetPrototypeMethod(func_template,"getMaxSpendable", getMaxSpendable);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);
     //Set object prototype
     BitcoinLikeAccount_prototype.Reset(objectTemplate);

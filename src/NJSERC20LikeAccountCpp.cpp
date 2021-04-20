@@ -9,6 +9,31 @@ using namespace v8;
 using namespace node;
 using namespace std;
 
+NAN_METHOD(NJSERC20LikeAccount::getUid) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getUid needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getUid : implementation of ERC20LikeAccount is not valid");
+    }
+
+    auto result = cpp_impl->getUid();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<String>(result).ToLocalChecked();
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSERC20LikeAccount::getToken) {
 
     //Check if method called with right number of arguments
@@ -162,6 +187,89 @@ NAN_METHOD(NJSERC20LikeAccount::getOperations) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSERC20LikeAccount::getOperation) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 1)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getOperation needs 1 arguments");
+    }
+
+    //Check if parameters have correct types
+    Nan::Utf8String string_arg_0(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    auto arg_0 = std::string(*string_arg_0);
+
+    //Create promise and set it into Callback
+    auto arg_1_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSERC20LikeOperationCallback *njs_ptr_arg_1 = new NJSERC20LikeOperationCallback(arg_1_resolver);
+    std::shared_ptr<NJSERC20LikeOperationCallback> arg_1(njs_ptr_arg_1);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getOperation : implementation of ERC20LikeAccount is not valid");
+    }
+    cpp_impl->getOperation(arg_0,arg_1);
+    info.GetReturnValue().Set(arg_1_resolver->GetPromise());
+}
+NAN_METHOD(NJSERC20LikeAccount::getAllOperations) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 3)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getAllOperations needs 3 arguments");
+    }
+
+    //Check if parameters have correct types
+    auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
+    auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
+    auto arg_2 = Nan::To<bool>(info[2]).FromJust();
+
+    //Create promise and set it into Callback
+    auto arg_3_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSERC20LikeOperationListCallback *njs_ptr_arg_3 = new NJSERC20LikeOperationListCallback(arg_3_resolver);
+    std::shared_ptr<NJSERC20LikeOperationListCallback> arg_3(njs_ptr_arg_3);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getAllOperations : implementation of ERC20LikeAccount is not valid");
+    }
+    cpp_impl->getAllOperations(arg_0,arg_1,arg_2,arg_3);
+    info.GetReturnValue().Set(arg_3_resolver->GetPromise());
+}
+NAN_METHOD(NJSERC20LikeAccount::getOperationsFromBlockHeight) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 3)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getOperationsFromBlockHeight needs 3 arguments");
+    }
+
+    //Check if parameters have correct types
+    auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
+    auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
+    auto arg_2 = Nan::To<int64_t>(info[2]).FromJust();
+
+    //Create promise and set it into Callback
+    auto arg_3_resolver = v8::Promise::Resolver::New(Nan::GetCurrentContext()).ToLocalChecked();
+    NJSERC20LikeOperationListCallback *njs_ptr_arg_3 = new NJSERC20LikeOperationListCallback(arg_3_resolver);
+    std::shared_ptr<NJSERC20LikeOperationListCallback> arg_3(njs_ptr_arg_3);
+
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::ERC20LikeAccount>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSERC20LikeAccount::getOperationsFromBlockHeight : implementation of ERC20LikeAccount is not valid");
+    }
+    cpp_impl->getOperationsFromBlockHeight(arg_0,arg_1,arg_2,arg_3);
+    info.GetReturnValue().Set(arg_3_resolver->GetPromise());
+}
 NAN_METHOD(NJSERC20LikeAccount::getTransferToAddressData) {
 
     //Check if method called with right number of arguments
@@ -268,11 +376,15 @@ void NJSERC20LikeAccount::Initialize(Local<Object> target) {
     func_template->SetClassName(Nan::New<String>("NJSERC20LikeAccount").ToLocalChecked());
 
     //SetPrototypeMethod all methods
+    Nan::SetPrototypeMethod(func_template,"getUid", getUid);
     Nan::SetPrototypeMethod(func_template,"getToken", getToken);
     Nan::SetPrototypeMethod(func_template,"getAddress", getAddress);
     Nan::SetPrototypeMethod(func_template,"getBalance", getBalance);
     Nan::SetPrototypeMethod(func_template,"getBalanceHistoryFor", getBalanceHistoryFor);
     Nan::SetPrototypeMethod(func_template,"getOperations", getOperations);
+    Nan::SetPrototypeMethod(func_template,"getOperation", getOperation);
+    Nan::SetPrototypeMethod(func_template,"getAllOperations", getAllOperations);
+    Nan::SetPrototypeMethod(func_template,"getOperationsFromBlockHeight", getOperationsFromBlockHeight);
     Nan::SetPrototypeMethod(func_template,"getTransferToAddressData", getTransferToAddressData);
     Nan::SetPrototypeMethod(func_template,"queryOperations", queryOperations);
     Nan::SetPrototypeMethod(func_template,"isNull", isNull);

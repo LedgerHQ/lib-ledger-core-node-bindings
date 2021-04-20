@@ -34,6 +34,31 @@ NAN_METHOD(NJSDatabaseBackend::getConnectionPoolSize) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
+NAN_METHOD(NJSDatabaseBackend::getReadonlyConnectionPoolSize) {
+
+    //Check if method called with right number of arguments
+    if(info.Length() != 0)
+    {
+        return Nan::ThrowError("NJSDatabaseBackend::getReadonlyConnectionPoolSize needs 0 arguments");
+    }
+
+    //Check if parameters have correct types
+
+    //Unwrap current object and retrieve its Cpp Implementation
+    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::DatabaseBackend>::Unwrap(info.This());
+    if(!cpp_impl)
+    {
+        return Nan::ThrowError("NJSDatabaseBackend::getReadonlyConnectionPoolSize : implementation of DatabaseBackend is not valid");
+    }
+
+    auto result = cpp_impl->getReadonlyConnectionPoolSize();
+
+    //Wrap result in node object
+    auto arg_0 = Nan::New<Int32>(result);
+
+    //Return result
+    info.GetReturnValue().Set(arg_0);
+}
 NAN_METHOD(NJSDatabaseBackend::enableQueryLogging) {
 
     //Check if method called with right number of arguments
@@ -108,22 +133,23 @@ NAN_METHOD(NJSDatabaseBackend::getSqlite3Backend) {
 NAN_METHOD(NJSDatabaseBackend::getPostgreSQLBackend) {
 
     //Check if method called with right number of arguments
-    if(info.Length() != 1)
+    if(info.Length() != 2)
     {
-        return Nan::ThrowError("NJSDatabaseBackend::getPostgreSQLBackend needs 1 arguments");
+        return Nan::ThrowError("NJSDatabaseBackend::getPostgreSQLBackend needs 2 arguments");
     }
 
     //Check if parameters have correct types
     auto arg_0 = Nan::To<int32_t>(info[0]).FromJust();
+    auto arg_1 = Nan::To<int32_t>(info[1]).FromJust();
 
-    auto result = ledger::core::api::DatabaseBackend::getPostgreSQLBackend(arg_0);
+    auto result = ledger::core::api::DatabaseBackend::getPostgreSQLBackend(arg_0,arg_1);
 
     //Wrap result in node object
-    auto arg_1 = NJSDatabaseBackend::wrap(result);
+    auto arg_2 = NJSDatabaseBackend::wrap(result);
 
 
     //Return result
-    info.GetReturnValue().Set(arg_1);
+    info.GetReturnValue().Set(arg_2);
 }
 NAN_METHOD(NJSDatabaseBackend::createBackendFromEngine) {
 
@@ -206,6 +232,7 @@ void NJSDatabaseBackend::Initialize(Local<Object> target) {
 
     //SetPrototypeMethod all methods
     Nan::SetPrototypeMethod(func_template,"getConnectionPoolSize", getConnectionPoolSize);
+    Nan::SetPrototypeMethod(func_template,"getReadonlyConnectionPoolSize", getReadonlyConnectionPoolSize);
     Nan::SetPrototypeMethod(func_template,"enableQueryLogging", enableQueryLogging);
     Nan::SetPrototypeMethod(func_template,"isLoggingEnabled", isLoggingEnabled);
     Nan::SetPrototypeMethod(func_template,"getSqlite3Backend", getSqlite3Backend);

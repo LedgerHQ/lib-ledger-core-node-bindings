@@ -8,8 +8,15 @@ declare class NJSTezosLikeTransaction
     declare function getType(): TezosOperationTag;
     /** Get the hash of the transaction. */
     declare function getHash(): string;
-    /** Get Fees (in drop) */
+    /**
+     * Get Fees (in drop) 
+     * It returns the sum of transaction fees and reveal fees (if it exists)
+     */
     declare function getFees(): NJSAmount;
+    /** get transaction fees (without reveal cost) */
+    declare function getTransactionFees(): NJSAmount;
+    /** get reveal fees if the sender envolved is not revealed, else 0 */
+    declare function getRevealFees(): NJSAmount;
     /** Get destination XTZ. address */
     declare function getReceiver(): ?NJSTezosLikeAddress;
     /** Get XTZ. sender address */
@@ -85,9 +92,21 @@ declare class NJSTezosLikeTransactionBuilder
     declare function wipeToAddress(address: string): NJSTezosLikeTransactionBuilder;
     /**
      * Set fees (in drop) the originator is willing to pay
+     * Set transaction and (if needed) reveal fees with 'fees'
+     * equivalent to call both functions setTransactionFees(fees) and setRevealFees(fees)
      * @return A reference on the same builder in order to chain calls.
      */
     declare function setFees(fees: NJSAmount): NJSTezosLikeTransactionBuilder;
+    /**
+     * Set transaction fees (in drop) the originator is willing to pay (reveal is not included)
+     * @return A reference on the same builder in order to chain calls.
+     */
+    declare function setTransactionFees(transactionFees: NJSAmount): NJSTezosLikeTransactionBuilder;
+    /**
+     * Set reveal fees (in drop) the originator is willing to pay 
+     * @return A reference on the same builder in order to chain calls.
+     */
+    declare function setRevealFees(revealFees: NJSAmount): NJSTezosLikeTransactionBuilder;
     /**
      * Set gas limit the originator is not willing to exceed.
      * @return A reference on the same builder in order to chain calls.
@@ -108,8 +127,8 @@ declare class NJSTezosLikeTransactionBuilder
     declare function clone(): NJSTezosLikeTransactionBuilder;
     /** Reset the current instance to its initial state */
     declare function reset();
-    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: String): NJSTezosLikeTransaction;
-    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: String): NJSTezosLikeTransaction;
+    static declare function parseRawUnsignedTransaction(currency: Currency, rawTransaction: String, protocolUpdate: string): NJSTezosLikeTransaction;
+    static declare function parseRawSignedTransaction(currency: Currency, rawTransaction: String, protocolUpdate: string): NJSTezosLikeTransaction;
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSTezosLikeTransactionCallback
@@ -143,8 +162,17 @@ declare class NJSTezosLikeAccount
     declare function getEstimatedGasLimit(address: string, callback: NJSBigIntCallback);
     /** Get fees from network */
     declare function getFees(callback: NJSBigIntCallback);
+    /** Get gas price from network */
+    declare function getGasPrice(callback: NJSBigIntCallback);
     /** Get originated accounts by current account */
     declare function getOriginatedAccounts(): Array<NJSTezosLikeOriginatedAccount>;
+    /** Get current delegate */
+    declare function getCurrentDelegate(callback: NJSStringCallback);
+    /**
+     * Get the balance of the account for a given token
+     * @param tokenAddress Address of the contract
+     */
+    declare function getTokenBalance(tokenAddress: string, callback: NJSBigIntCallback);
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSStringCallback
@@ -220,6 +248,20 @@ declare class NJSTezosConfiguration
 }
 declare class NJSTezosConfigurationDefaults
 {
+}
+declare class NJSTezosLikeWallet
+{
+    declare function isDelegate(address: string, callback: NJSBoolCallback);
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSBoolCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?boolean, error: ?Error);
 }
 /**
  * TODO: to be more accurate, all RippleLikeBlock classes should be renamed as RippleLikeLedger,
@@ -371,16 +413,6 @@ declare class NJSRippleLikeAccount
      * @return: true if valid address and has been activated, false otherwise
      */
     declare function isAddressActivated(address: string, isActivated: NJSBoolCallback);
-}
-/** Callback triggered by main completed task, returning optional result of template type T. */
-declare class NJSBoolCallback
-{
-    /**
-     * Method triggered when main task complete.
-     * @params result optional of type T, non null if main task failed
-     * @params error optional of type Error, non null if main task succeeded
-     */
-    declare function onCallback(result: ?boolean, error: ?Error);
 }
 declare class NJSRippleConfiguration
 {
@@ -1270,15 +1302,6 @@ declare class NJSAccount
      * @return EventBus object
      */
     declare function getEventBus(): NJSEventBus;
-    /** Start observing blockchain on which account synchronizes and send/receive transactions. */
-    declare function startBlockchainObservation();
-    /** Stop observing blockchain. */
-    declare function stopBlockchainObservation();
-    /**
-     * Get account's observation status.
-     * @return boolean
-     */
-    declare function isObservingBlockchain(): boolean;
     /**
      * Get Last block of blockchain on which account operates.
      * @param callback, Callback returning, if getLastBlock succeeds, a Block object
@@ -2138,6 +2161,11 @@ declare class NJSDatabaseEngine
      * @return the maximum number of concurrent connection that the engine is able to open on a single database.
      */
     declare function getPoolSize(): number;
+    /**
+     * Get the maximum number of concurrent readonly connection on a single database.
+     * @return the maximum number of concurrent readonly connection that the engine is able to open on a single database.
+     */
+    declare function getReadonlyPoolSize(): number;
 }
 /**Class representing a database backend. */
 declare class NJSDatabaseBackend
@@ -2147,6 +2175,11 @@ declare class NJSDatabaseBackend
      * @return the size of the connection pool.
      */
     declare function getConnectionPoolSize(): number;
+    /**
+     * Get the maximum number of concurrent readonly connection that the backend is able to open on a single database.
+     * @return the size of the readonly connection pool.
+     */
+    declare function getReadonlyConnectionPoolSize(): number;
     /**
      * Enable or disable query logging. By default logging is disabled. Query logging will record every SQL query in log streams.
      * @return this database backend (to chain configuration calls)
@@ -2166,7 +2199,7 @@ declare class NJSDatabaseBackend
      * Create an instance of PostgreSQL database.
      * @return DatabaseBackend object
      */
-    static declare function getPostgreSQLBackend(connectionPoolSize: number): NJSDatabaseBackend;
+    static declare function getPostgreSQLBackend(connectionPoolSize: number, readonlyConnectionPoolSize: number): NJSDatabaseBackend;
     /** Create a database backend instance from the given DatabaseEngine implementation. */
     static declare function createBackendFromEngine(engine: NJSDatabaseEngine): NJSDatabaseBackend;
 }
@@ -2682,6 +2715,8 @@ declare class NJSCosmosLikeWallet
 /** ERC20-like accounts class. */
 declare class NJSERC20LikeAccount
 {
+    /** Get uid */
+    declare function getUid(): string;
     /** Get an ERC20 token. */
     declare function getToken(): ERC20Token;
     /** Get the address of this ERC20 account. */
@@ -2695,9 +2730,35 @@ declare class NJSERC20LikeAccount
     declare function getBalanceHistoryFor(start: Date, end: Date, period: TimePeriod): Array<NJSBigInt>;
     /** Get the list of operations performed on this ERC20 account. */
     declare function getOperations(): Array<NJSERC20LikeOperation>;
+    /** Get ERC20 operation by uid */
+    declare function getOperation(uid: string, callback: NJSERC20LikeOperationCallback);
+    /** Get all ERC20 operations */
+    declare function getAllOperations(from: number, to: number, ascending: boolean, callback: NJSERC20LikeOperationListCallback);
+    /** Get ERC20 operations from a given block height (included), it also returns mempool operations */
+    declare function getOperationsFromBlockHeight(from: number, to: number, fromBlockHeight: number, callback: NJSERC20LikeOperationListCallback);
     /** Retrieve raw data concerning a transaction of a given amount to a given address. */
     declare function getTransferToAddressData(amount: NJSBigInt, address: string, data: NJSBinaryCallback);
     declare function queryOperations(): NJSOperationQuery;
+}
+/** Callback triggered by main completed task, returning optional result of template type T. */
+declare class NJSERC20LikeOperationCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type T, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?NJSERC20LikeOperation, error: ?Error);
+}
+/** Callback triggered by main completed task, returning optional result as list of template type T. */
+declare class NJSERC20LikeOperationListCallback
+{
+    /**
+     * Method triggered when main task complete.
+     * @params result optional of type list<T>, non null if main task failed
+     * @params error optional of type Error, non null if main task succeeded
+     */
+    declare function onCallback(result: ?Array<NJSERC20LikeOperation>, error: ?Error);
 }
 /** Callback triggered by main completed task, returning optional result of template type T. */
 declare class NJSBinaryCallback
@@ -2744,6 +2805,10 @@ declare class NJSERC20LikeOperation
      * @return Optional 64-bit integer, height of block in which operation was validated
      */
     declare function getBlockHeight(): ?number;
+    /** Get parent ETH operation uid */
+    declare function getETHOperationUid(): string;
+    /** Get ERC20 operation uid */
+    declare function getOperationUid(): string;
 }
 /** A callback called when an Ethereum-like wallet is available after issuing a get command. */
 declare class NJSGetEthreumLikeWalletCallback
@@ -2941,6 +3006,12 @@ declare class NJSEthereumLikeAccount
      * Note: same note as above
      */
     declare function getERC20Balances(erc20Addresses: Array<string>, callback: NJSBigIntListCallback);
+    /**
+     * Add ERC20 accounts
+     * The passed addresses are ERC20 accounts
+     * Note: same note as above
+     */
+    declare function addERC20Accounts(erc20Addresses: Array<string>);
 }
 /** Callback triggered by main completed task, returning optional result as list of template type T. */
 declare class NJSBigIntListCallback
@@ -3576,6 +3647,8 @@ declare class NJSBitcoinLikeTransaction
      * size.
      */
     declare function getEstimatedSize(): EstimatedSize;
+    /** Get the dust amount based on the maximum estimated size of the transaction */
+    declare function getDustAmount(): number;
     /**
      * Sign all inputs for given transaction. 
      * Build DER encoded signature from RSV data.
@@ -3645,9 +3718,10 @@ declare class NJSBitcoinLikeTransactionBuilder
      * @param strategy The strategy to adopt in order to select which input to use in the transaction.
      * @param sequence The sequence value serialized at the end of the raw transaction. If you don't know what to put here
      * just use 0xFFFFFF
+     * @param maxUtxo The maximum number of utxos to pick (It applies only for HIGHEST_FIRST_LIMIT_UTXO and LIMIT_UTXO)
      * @return A reference on the same builder in order to chain calls.
      */
-    declare function pickInputs(strategy: BitcoinLikePickingStrategy, sequence: number): NJSBitcoinLikeTransactionBuilder;
+    declare function pickInputs(strategy: BitcoinLikePickingStrategy, sequence: number, maxUtxo: ?number): NJSBitcoinLikeTransactionBuilder;
     /**
      * Send funds to the given address. This method can be called multiple times to send to multiple addresses.
      * @param amount The value to send
@@ -3724,6 +3798,8 @@ declare class NJSBitcoinLikeAccount
     declare function getAddresses(from: number, to: number, callback: NJSAddressListCallback);
     /** get all contained adresses. */
     declare function getAllAddresses(): Array<NJSAddress>;
+    /** get max spendable balance for a given strategy */
+    declare function getMaxSpendable(strategy: BitcoinLikePickingStrategy, maxUtxos: ?number, callback: NJSAmountCallback);
 }
 /** Callback triggered by main completed task, returning optional result as list of template type T. */
 declare class NJSBitcoinLikeOutputListCallback
@@ -4377,4 +4453,13 @@ declare class NJSLedgerCore
      * @return The integer version of the library
      */
     static declare function getIntVersion(): number;
+}
+declare class NJSAllocationMetrics
+{
+    static declare function getObjectAllocations(): Map<string, number>;
+}
+declare class NJSDurationMetrics
+{
+    /** Get all duration metrics */
+    static declare function getAllDurationMetrics(): Map<string, DurationMetric>;
 }
