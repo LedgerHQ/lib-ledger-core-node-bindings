@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04, macos-latest, windows-2016]
+        os: [ubuntu-16.04, macos-latest, windows-2016]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
@@ -27,7 +27,7 @@ jobs:
       - name: config gcc
         if: runner.os == 'Linux'
         run: |
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 700 --slave /usr/bin/g++ g++ /usr/bin/g++-9
       - name: prebuild for node 12
         run: npx node-pre-gyp configure build package --target=12.16.0
       - name: clean
