@@ -19,7 +19,7 @@ jobs:
           node-version: 12.x
       - uses: actions/setup-python@v1
         with:
-          python-version: '2.7.x'
+          python-version: '3.6.x'
       - name: install
         run: yarn --frozen-lockfile --ignore-scripts
       - name: fetch libcore
