@@ -42,7 +42,7 @@
   "dependencies": {
     "bindings": "1.5.0",
     "nan": "^2.14.2",
-    "node-gyp": "^8.0.0",
+    "node-gyp": "^7.1.2",
     "node-pre-gyp": "^0.17.0",
     "node-pre-gyp-github": "^1.4.3"
   },
