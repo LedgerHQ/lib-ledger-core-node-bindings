@@ -1,5 +1,8 @@
 name: core-prebuild
 on:
+  pull_request:
+    branches:
+      - '*'
   push:
     tags:
       - '*'
@@ -23,7 +26,13 @@ jobs:
         run: yarn preinstall
       - name: config gcc
         if: runner.os == 'Linux'
-        run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+        run: |
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+          sudo apt update
+          sudo apt install g++-7 -y
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+          sudo update-alternatives --config gcc
       - name: prebuild for node 12
         run: npx node-pre-gyp configure build package --target=12.16.0
       - name: clean
