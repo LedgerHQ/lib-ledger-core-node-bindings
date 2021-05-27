@@ -10,9 +10,12 @@
 #include "NJSBigIntCallback.hpp"
 #include "NJSBigIntCpp.hpp"
 #include "NJSBinaryCallback.hpp"
+#include "NJSERC20LikeOperationCallback.hpp"
 #include "NJSERC20LikeOperationCpp.hpp"
+#include "NJSERC20LikeOperationListCallback.hpp"
 #include "NJSOperationQueryCpp.hpp"
 #include <chrono>
+#include <cstdint>
 #include <memory>
 #include <string>
 #include <vector>
@@ -36,6 +39,9 @@ public:
     static Nan::Persistent<ObjectTemplate> ERC20LikeAccount_prototype;
 
 private:
+    /** Get uid */
+    static NAN_METHOD(getUid);
+
     /** Get an ERC20 token. */
     static NAN_METHOD(getToken);
 
@@ -53,6 +59,15 @@ private:
 
     /** Get the list of operations performed on this ERC20 account. */
     static NAN_METHOD(getOperations);
+
+    /** Get ERC20 operation by uid */
+    static NAN_METHOD(getOperation);
+
+    /** Get all ERC20 operations */
+    static NAN_METHOD(getAllOperations);
+
+    /** Get ERC20 operations from a given block height (included), it also returns mempool operations */
+    static NAN_METHOD(getOperationsFromBlockHeight);
 
     /** Retrieve raw data concerning a transaction of a given amount to a given address. */
     static NAN_METHOD(getTransferToAddressData);

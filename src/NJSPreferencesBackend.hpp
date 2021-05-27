@@ -7,6 +7,7 @@
 
 #include "../include/../utils/optional.hpp"
 #include "../include/PreferencesChange.hpp"
+#include "../include/RandomNumberGenerator.hpp"
 #include "NJSRandomNumberGenerator.hpp"
 #include <cstdint>
 #include <memory>
@@ -22,14 +23,70 @@ using namespace node;
 using namespace std;
 using namespace ledger::core::api;
 
-class NJSPreferencesBackend final {
+class NJSPreferencesBackend: public ledger::core::api::PreferencesBackend {
 public:
 
     static void Initialize(Local<Object> target);
-    NJSPreferencesBackend() = delete;
 
     static Local<Object> wrap(const std::shared_ptr<ledger::core::api::PreferencesBackend> &object);
     static Nan::Persistent<ObjectTemplate> PreferencesBackend_prototype;
+    ~NJSPreferencesBackend()
+    {
+        njs_impl.Reset();
+    };
+    NJSPreferencesBackend(Local<Object> njs_implementation){njs_impl.Reset(njs_implementation);};
+
+    /**
+     * Gets the value associated to the given key.
+     * @param key The data key.
+     * @return The value associated to the key if it exists, an empty option otherwise.
+     */
+    std::experimental::optional<std::vector<uint8_t>> get(const std::vector<uint8_t> & key);
+
+    /**
+     * Commit a change.
+     * @param changes The list of changes to commit.
+     * @return false if unsuccessful (might happen if the underlying DB was destroyed).
+     */
+    bool commit(const std::vector<::ledger::core::api::PreferencesChange> & changes);
+
+    /**
+     * Turn encryption on for all future uses.
+     * This method will set encryption on for all future values that will be persisted.
+     * If this function is called on a plaintext storage (i.e. first encryption for
+     * instance), it will also encrypt all data already present.
+     * @param rng Random number generator used to generate the encryption salt.
+     * @param password The new password.
+     */
+    void setEncryption(const std::shared_ptr<::ledger::core::api::RandomNumberGenerator> & rng, const std::string & password);
+
+    /**
+     * Turn off encryption by disabling the use of the internal cipher. Data is left
+     * untouched.
+     * This method is suitable when you want to get back raw, encrypted data. If you want
+     * to disable encryption in order to read clear data back without password, consider
+     * the resetEncryption method instead.
+     */
+    void unsetEncryption();
+
+    /**
+     * Reset the encryption with a new password by first decrypting on the
+     * fly with the old password the data present.
+     * If the new password is an empty string, after this method is called, the database
+     * is completely unciphered and no password is required to read from it.
+     * @return true if the reset occurred correctly, false otherwise (e.g. trying to change
+     * password with an old password but without a proper salt already persisted).
+     */
+    bool resetEncryption(const std::shared_ptr<::ledger::core::api::RandomNumberGenerator> & rng, const std::string & oldPassword, const std::string & newPassword);
+
+    /**
+     * Get encryption salt, if any.
+     * @return the encryption salt if it exists, an empty string otherwise.
+     */
+    std::string getEncryptionSalt();
+
+    /** Clear all preferences. */
+    void clear();
 
 private:
     /**
@@ -86,6 +143,6 @@ private:
 
     static NAN_METHOD(New);
 
-    static NAN_METHOD(isNull);
+    Nan::Persistent<Object> njs_impl;
 };
 #endif //DJINNI_GENERATED_NJSPREFERENCESBACKEND_HPP

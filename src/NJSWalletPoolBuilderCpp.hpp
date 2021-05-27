@@ -10,7 +10,7 @@
 #include "NJSHttpClient.hpp"
 #include "NJSLogPrinter.hpp"
 #include "NJSPathResolver.hpp"
-#include "NJSPreferencesBackendCpp.hpp"
+#include "NJSPreferencesBackend.hpp"
 #include "NJSRandomNumberGenerator.hpp"
 #include "NJSThreadDispatcher.hpp"
 #include "NJSWalletPoolCallback.hpp"

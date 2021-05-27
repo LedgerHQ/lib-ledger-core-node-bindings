@@ -629,67 +629,6 @@ NAN_METHOD(NJSAccount::getEventBus) {
     //Return result
     info.GetReturnValue().Set(arg_0);
 }
-NAN_METHOD(NJSAccount::startBlockchainObservation) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSAccount::startBlockchainObservation needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSAccount::startBlockchainObservation : implementation of Account is not valid");
-    }
-    cpp_impl->startBlockchainObservation();
-}
-NAN_METHOD(NJSAccount::stopBlockchainObservation) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSAccount::stopBlockchainObservation needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSAccount::stopBlockchainObservation : implementation of Account is not valid");
-    }
-    cpp_impl->stopBlockchainObservation();
-}
-NAN_METHOD(NJSAccount::isObservingBlockchain) {
-
-    //Check if method called with right number of arguments
-    if(info.Length() != 0)
-    {
-        return Nan::ThrowError("NJSAccount::isObservingBlockchain needs 0 arguments");
-    }
-
-    //Check if parameters have correct types
-
-    //Unwrap current object and retrieve its Cpp Implementation
-    auto cpp_impl = djinni::js::ObjectWrapper<ledger::core::api::Account>::Unwrap(info.This());
-    if(!cpp_impl)
-    {
-        return Nan::ThrowError("NJSAccount::isObservingBlockchain : implementation of Account is not valid");
-    }
-
-    auto result = cpp_impl->isObservingBlockchain();
-
-    //Wrap result in node object
-    auto arg_0 = Nan::New<Boolean>(result);
-
-    //Return result
-    info.GetReturnValue().Set(arg_0);
-}
 NAN_METHOD(NJSAccount::getLastBlock) {
 
     //Check if method called with right number of arguments
@@ -863,9 +802,6 @@ void NJSAccount::Initialize(Local<Object> target) {
     Nan::SetPrototypeMethod(func_template,"getFreshPublicAddresses", getFreshPublicAddresses);
     Nan::SetPrototypeMethod(func_template,"getWalletType", getWalletType);
     Nan::SetPrototypeMethod(func_template,"getEventBus", getEventBus);
-    Nan::SetPrototypeMethod(func_template,"startBlockchainObservation", startBlockchainObservation);
-    Nan::SetPrototypeMethod(func_template,"stopBlockchainObservation", stopBlockchainObservation);
-    Nan::SetPrototypeMethod(func_template,"isObservingBlockchain", isObservingBlockchain);
     Nan::SetPrototypeMethod(func_template,"getLastBlock", getLastBlock);
     Nan::SetPrototypeMethod(func_template,"getRestoreKey", getRestoreKey);
     Nan::SetPrototypeMethod(func_template,"eraseDataSince", eraseDataSince);

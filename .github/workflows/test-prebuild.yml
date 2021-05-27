@@ -1,0 +1,34 @@
+name: core-prebuild
+on: [push, pull_request]
+
+jobs:
+  prebuild-for-platform:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, macos-latest, windows-2016]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.6.x'
+      - name: install
+        run: yarn --frozen-lockfile --ignore-scripts
+      - name: fetch libcore
+        run: yarn preinstall
+      - name: config gcc
+        if: runner.os == 'Linux'
+        run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 700 --slave /usr/bin/g++ g++ /usr/bin/g++-9
+      - name: prebuild for node 12
+        run: npx node-pre-gyp configure rebuild package --target=12.16.0
+      - name: clean
+        run: npx node-pre-gyp clean
+      - name: prebuild for node 14
+        run: npx node-pre-gyp configure rebuild package --target=14.17.0
+      - name: clean
+        run: npx node-pre-gyp clean
+      - name: prebuild for electron 11.2
+        run: npx node-pre-gyp configure build package --runtime=electron --target=11.2.0 --build-from-source --dist-url=https://electronjs.org/headers

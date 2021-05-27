@@ -434,51 +434,54 @@ NAN_METHOD(NJSStellarLikeTransactionBuilder::parseRawTransaction) {
         auto field_opt_arg_0_6_5 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("FeePolicy").ToLocalChecked()).ToLocalChecked();
         auto opt_arg_0_6_5 = (ledger::core::api::BitcoinLikeFeePolicy)Nan::To<int>(field_opt_arg_0_6_5).FromJust();
 
-        auto field_opt_arg_0_6_6 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("DustAmount").ToLocalChecked()).ToLocalChecked();
+        auto field_opt_arg_0_6_6 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Dust").ToLocalChecked()).ToLocalChecked();
         auto opt_arg_0_6_6 = Nan::To<int64_t>(field_opt_arg_0_6_6).FromJust();
 
-        auto field_opt_arg_0_6_7 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
-        Nan::Utf8String string_opt_arg_0_6_7(field_opt_arg_0_6_7->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-        auto opt_arg_0_6_7 = std::string(*string_opt_arg_0_6_7);
+        auto field_opt_arg_0_6_7 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("DustPolicy").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_6_7 = (ledger::core::api::BitcoinLikeDustPolicy)Nan::To<int>(field_opt_arg_0_6_7).FromJust();
 
-        auto field_opt_arg_0_6_8 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked()).ToLocalChecked();
-        auto opt_arg_0_6_8 = Nan::To<bool>(field_opt_arg_0_6_8).FromJust();
+        auto field_opt_arg_0_6_8 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_6_8(field_opt_arg_0_6_8->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_6_8 = std::string(*string_opt_arg_0_6_8);
 
-        auto field_opt_arg_0_6_9 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
-        auto opt_arg_0_6_9 = Nan::To<int64_t>(field_opt_arg_0_6_9).FromJust();
+        auto field_opt_arg_0_6_9 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_6_9 = Nan::To<bool>(field_opt_arg_0_6_9).FromJust();
 
-        auto field_opt_arg_0_6_10 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_0_6_10->IsString())
+        auto field_opt_arg_0_6_10 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_6_10 = Nan::To<int64_t>(field_opt_arg_0_6_10).FromJust();
+
+        auto field_opt_arg_0_6_11 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
+        if(!field_opt_arg_0_6_11->IsString())
         {
-            Nan::ThrowError("field_opt_arg_0_6_10 should be a hexadecimal string.");
+            Nan::ThrowError("field_opt_arg_0_6_11 should be a hexadecimal string.");
         }
-        std::vector<uint8_t> opt_arg_0_6_10;
-        Nan::Utf8String str_opt_arg_0_6_10(field_opt_arg_0_6_10);
-        std::string string_opt_arg_0_6_10(*str_opt_arg_0_6_10, str_opt_arg_0_6_10.length());
-        if (string_opt_arg_0_6_10.rfind("0x", 0) == 0)
+        std::vector<uint8_t> opt_arg_0_6_11;
+        Nan::Utf8String str_opt_arg_0_6_11(field_opt_arg_0_6_11);
+        std::string string_opt_arg_0_6_11(*str_opt_arg_0_6_11, str_opt_arg_0_6_11.length());
+        if (string_opt_arg_0_6_11.rfind("0x", 0) == 0)
         {
-            opt_arg_0_6_10 = djinni::js::hex::toByteArray(string_opt_arg_0_6_10.substr(2));
+            opt_arg_0_6_11 = djinni::js::hex::toByteArray(string_opt_arg_0_6_11.substr(2));
         }
         else
         {
-            opt_arg_0_6_10 = std::vector<uint8_t>(string_opt_arg_0_6_10.cbegin(), string_opt_arg_0_6_10.cend());
+            opt_arg_0_6_11 = std::vector<uint8_t>(string_opt_arg_0_6_11.cbegin(), string_opt_arg_0_6_11.cend());
         }
 
 
-        auto field_opt_arg_0_6_11 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalBIPs").ToLocalChecked()).ToLocalChecked();
-        vector<std::string> opt_arg_0_6_11;
-        Local<Array> opt_arg_0_6_11_container = Local<Array>::Cast(field_opt_arg_0_6_11);
-        for(uint32_t opt_arg_0_6_11_id = 0; opt_arg_0_6_11_id < opt_arg_0_6_11_container->Length(); opt_arg_0_6_11_id++)
+        auto field_opt_arg_0_6_12 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalBIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_6_12;
+        Local<Array> opt_arg_0_6_12_container = Local<Array>::Cast(field_opt_arg_0_6_12);
+        for(uint32_t opt_arg_0_6_12_id = 0; opt_arg_0_6_12_id < opt_arg_0_6_12_container->Length(); opt_arg_0_6_12_id++)
         {
-            if(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->IsString())
+            if(opt_arg_0_6_12_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_12_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_6_11_elem(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-                auto opt_arg_0_6_11_elem = std::string(*string_opt_arg_0_6_11_elem);
-                opt_arg_0_6_11.emplace_back(opt_arg_0_6_11_elem);
+                Nan::Utf8String string_opt_arg_0_6_12_elem(opt_arg_0_6_12_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_12_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_0_6_12_elem = std::string(*string_opt_arg_0_6_12_elem);
+                opt_arg_0_6_12.emplace_back(opt_arg_0_6_12_elem);
             }
         }
 
-        BitcoinLikeNetworkParameters opt_arg_0_6(opt_arg_0_6_1, opt_arg_0_6_2, opt_arg_0_6_3, opt_arg_0_6_4, opt_arg_0_6_5, opt_arg_0_6_6, opt_arg_0_6_7, opt_arg_0_6_8, opt_arg_0_6_9, opt_arg_0_6_10, opt_arg_0_6_11);
+        BitcoinLikeNetworkParameters opt_arg_0_6(opt_arg_0_6_1, opt_arg_0_6_2, opt_arg_0_6_3, opt_arg_0_6_4, opt_arg_0_6_5, opt_arg_0_6_6, opt_arg_0_6_7, opt_arg_0_6_8, opt_arg_0_6_9, opt_arg_0_6_10, opt_arg_0_6_11, opt_arg_0_6_12);
 
         arg_0_6.emplace(opt_arg_0_6);
     }
@@ -1029,51 +1032,54 @@ NAN_METHOD(NJSStellarLikeTransactionBuilder::parseSignatureBase) {
         auto field_opt_arg_0_6_5 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("FeePolicy").ToLocalChecked()).ToLocalChecked();
         auto opt_arg_0_6_5 = (ledger::core::api::BitcoinLikeFeePolicy)Nan::To<int>(field_opt_arg_0_6_5).FromJust();
 
-        auto field_opt_arg_0_6_6 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("DustAmount").ToLocalChecked()).ToLocalChecked();
+        auto field_opt_arg_0_6_6 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("Dust").ToLocalChecked()).ToLocalChecked();
         auto opt_arg_0_6_6 = Nan::To<int64_t>(field_opt_arg_0_6_6).FromJust();
 
-        auto field_opt_arg_0_6_7 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
-        Nan::Utf8String string_opt_arg_0_6_7(field_opt_arg_0_6_7->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-        auto opt_arg_0_6_7 = std::string(*string_opt_arg_0_6_7);
+        auto field_opt_arg_0_6_7 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("DustPolicy").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_6_7 = (ledger::core::api::BitcoinLikeDustPolicy)Nan::To<int>(field_opt_arg_0_6_7).FromJust();
 
-        auto field_opt_arg_0_6_8 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked()).ToLocalChecked();
-        auto opt_arg_0_6_8 = Nan::To<bool>(field_opt_arg_0_6_8).FromJust();
+        auto field_opt_arg_0_6_8 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("MessagePrefix").ToLocalChecked()).ToLocalChecked();
+        Nan::Utf8String string_opt_arg_0_6_8(field_opt_arg_0_6_8->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+        auto opt_arg_0_6_8 = std::string(*string_opt_arg_0_6_8);
 
-        auto field_opt_arg_0_6_9 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
-        auto opt_arg_0_6_9 = Nan::To<int64_t>(field_opt_arg_0_6_9).FromJust();
+        auto field_opt_arg_0_6_9 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("UsesTimestampedTransaction").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_6_9 = Nan::To<bool>(field_opt_arg_0_6_9).FromJust();
 
-        auto field_opt_arg_0_6_10 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
-        if(!field_opt_arg_0_6_10->IsString())
+        auto field_opt_arg_0_6_10 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("TimestampDelay").ToLocalChecked()).ToLocalChecked();
+        auto opt_arg_0_6_10 = Nan::To<int64_t>(field_opt_arg_0_6_10).FromJust();
+
+        auto field_opt_arg_0_6_11 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("SigHash").ToLocalChecked()).ToLocalChecked();
+        if(!field_opt_arg_0_6_11->IsString())
         {
-            Nan::ThrowError("field_opt_arg_0_6_10 should be a hexadecimal string.");
+            Nan::ThrowError("field_opt_arg_0_6_11 should be a hexadecimal string.");
         }
-        std::vector<uint8_t> opt_arg_0_6_10;
-        Nan::Utf8String str_opt_arg_0_6_10(field_opt_arg_0_6_10);
-        std::string string_opt_arg_0_6_10(*str_opt_arg_0_6_10, str_opt_arg_0_6_10.length());
-        if (string_opt_arg_0_6_10.rfind("0x", 0) == 0)
+        std::vector<uint8_t> opt_arg_0_6_11;
+        Nan::Utf8String str_opt_arg_0_6_11(field_opt_arg_0_6_11);
+        std::string string_opt_arg_0_6_11(*str_opt_arg_0_6_11, str_opt_arg_0_6_11.length());
+        if (string_opt_arg_0_6_11.rfind("0x", 0) == 0)
         {
-            opt_arg_0_6_10 = djinni::js::hex::toByteArray(string_opt_arg_0_6_10.substr(2));
+            opt_arg_0_6_11 = djinni::js::hex::toByteArray(string_opt_arg_0_6_11.substr(2));
         }
         else
         {
-            opt_arg_0_6_10 = std::vector<uint8_t>(string_opt_arg_0_6_10.cbegin(), string_opt_arg_0_6_10.cend());
+            opt_arg_0_6_11 = std::vector<uint8_t>(string_opt_arg_0_6_11.cbegin(), string_opt_arg_0_6_11.cend());
         }
 
 
-        auto field_opt_arg_0_6_11 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalBIPs").ToLocalChecked()).ToLocalChecked();
-        vector<std::string> opt_arg_0_6_11;
-        Local<Array> opt_arg_0_6_11_container = Local<Array>::Cast(field_opt_arg_0_6_11);
-        for(uint32_t opt_arg_0_6_11_id = 0; opt_arg_0_6_11_id < opt_arg_0_6_11_container->Length(); opt_arg_0_6_11_id++)
+        auto field_opt_arg_0_6_12 = Nan::Get(field_arg_0_6->ToObject(Nan::GetCurrentContext()).ToLocalChecked(), Nan::New<String>("AdditionalBIPs").ToLocalChecked()).ToLocalChecked();
+        vector<std::string> opt_arg_0_6_12;
+        Local<Array> opt_arg_0_6_12_container = Local<Array>::Cast(field_opt_arg_0_6_12);
+        for(uint32_t opt_arg_0_6_12_id = 0; opt_arg_0_6_12_id < opt_arg_0_6_12_container->Length(); opt_arg_0_6_12_id++)
         {
-            if(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->IsString())
+            if(opt_arg_0_6_12_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_12_id).ToLocalChecked()->IsString())
             {
-                Nan::Utf8String string_opt_arg_0_6_11_elem(opt_arg_0_6_11_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_11_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-                auto opt_arg_0_6_11_elem = std::string(*string_opt_arg_0_6_11_elem);
-                opt_arg_0_6_11.emplace_back(opt_arg_0_6_11_elem);
+                Nan::Utf8String string_opt_arg_0_6_12_elem(opt_arg_0_6_12_container->Get(Nan::GetCurrentContext(), opt_arg_0_6_12_id).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+                auto opt_arg_0_6_12_elem = std::string(*string_opt_arg_0_6_12_elem);
+                opt_arg_0_6_12.emplace_back(opt_arg_0_6_12_elem);
             }
         }
 
-        BitcoinLikeNetworkParameters opt_arg_0_6(opt_arg_0_6_1, opt_arg_0_6_2, opt_arg_0_6_3, opt_arg_0_6_4, opt_arg_0_6_5, opt_arg_0_6_6, opt_arg_0_6_7, opt_arg_0_6_8, opt_arg_0_6_9, opt_arg_0_6_10, opt_arg_0_6_11);
+        BitcoinLikeNetworkParameters opt_arg_0_6(opt_arg_0_6_1, opt_arg_0_6_2, opt_arg_0_6_3, opt_arg_0_6_4, opt_arg_0_6_5, opt_arg_0_6_6, opt_arg_0_6_7, opt_arg_0_6_8, opt_arg_0_6_9, opt_arg_0_6_10, opt_arg_0_6_11, opt_arg_0_6_12);
 
         arg_0_6.emplace(opt_arg_0_6);
     }
