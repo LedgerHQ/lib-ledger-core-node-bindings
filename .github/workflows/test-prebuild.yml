@@ -1,8 +1,6 @@
 name: core-prebuild
-on:
-  push:
-    tags:
-      - '*'
+on: [push, pull_request]
+
 jobs:
   prebuild-for-platform:
     runs-on: ${{ matrix.os }}
@@ -34,7 +32,3 @@ jobs:
         run: npx node-pre-gyp clean
       - name: prebuild for electron 11.2
         run: npx node-pre-gyp configure build package --runtime=electron --target=11.2.0 --build-from-source --dist-url=https://electronjs.org/headers
-      - name: publish
-        env:
-          NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx node-pre-gyp-github publish
