@@ -1,4 +1,4 @@
-name: core-prebuild
+name: test-prebuild
 on: [push, pull_request]
 
 jobs:
@@ -22,12 +22,12 @@ jobs:
       - name: config gcc
         if: runner.os == 'Linux'
         run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 700 --slave /usr/bin/g++ g++ /usr/bin/g++-9
-      - name: prebuild for node 12
-        run: npx node-pre-gyp configure rebuild package --target=12.16.0
-      - name: clean
-        run: npx node-pre-gyp clean
       - name: prebuild for node 14
         run: npx node-pre-gyp configure rebuild package --target=14.17.0
+      - name: clean
+        run: npx node-pre-gyp clean
+      - name: prebuild for node 12
+        run: npx node-pre-gyp configure build package --target=12.16.0
       - name: clean
         run: npx node-pre-gyp clean
       - name: prebuild for electron 11.2

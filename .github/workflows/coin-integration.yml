@@ -8,8 +8,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-          # os: [ubuntu-16.04, macos-latest, windows-2016]
-          os: [ubuntu-16.04]
+        # os: [ubuntu-16.04, macos-latest, windows-2016]
+        os: [ubuntu-16.04]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
@@ -38,7 +38,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN_JDELLINGER }}
         run: |
-            export COIN=$(echo ${GITHUB_REF#refs/heads/int-})
-            echo "I hope you remembered to run 'yarn version --prerelease --preid \"$COIN\"'"
-            [ -z "$COIN" ] && echo "the COIN tag is not set. Aborting publish" && exit 1
-            yarn publish --tag "$COIN"
+          export COIN=$(echo ${GITHUB_REF#refs/heads/int-})
+          echo "I hope you remembered to run 'yarn version --prerelease --preid \"$COIN\"'"
+          [ -z "$COIN" ] && echo "the COIN tag is not set. Aborting publish" && exit 1
+          yarn publish --tag "$COIN"
