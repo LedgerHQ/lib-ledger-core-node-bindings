@@ -23,7 +23,7 @@ jobs:
         run: yarn preinstall
       - name: config gcc
         if: runner.os == 'Linux'
-        run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+        run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 700 --slave /usr/bin/g++ g++ /usr/bin/g++-9
       - name: prebuild for node 14
         run: npx node-pre-gyp configure rebuild package --target=14.17.0
       - name: clean
