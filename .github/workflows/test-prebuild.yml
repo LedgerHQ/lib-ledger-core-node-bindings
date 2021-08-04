@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.6.x'
       - name: install
-        run: strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib; yarn --frozen-lockfile --ignore-scripts
+        run: yarn --frozen-lockfile --ignore-scripts
       - name: fetch libcore
         run: yarn preinstall
       - name: config gcc
