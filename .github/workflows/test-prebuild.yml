@@ -6,7 +6,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-16.04, macos-latest, windows-2016]
+        os: [ubuntu-16.04]
+    container:
+        image: ghcr.io/ledgerhq/lib-ledger-core-build-env/lib-ledger-core-build-env:latest
     steps:
       - name: display glibcxx version
         if: runner.os == 'Linux'
