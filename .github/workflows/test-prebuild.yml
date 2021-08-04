@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: '3.6.x'
       - name: install
-        run: apt install -y yarn; yarn --frozen-lockfile --ignore-scripts
+        run: apt-get update;apt install -y yarn; yarn --frozen-lockfile --ignore-scripts
       - name: fetch libcore
         run: yarn preinstall
       - name: config gcc
