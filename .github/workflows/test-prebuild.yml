@@ -9,6 +9,9 @@ jobs:
         os: [ubuntu-16.04]
     container:
         image: ghcr.io/ledgerhq/lib-ledger-core-build-env/lib-ledger-core-build-env:latest
+        credentials:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CI_BOT_TOKEN }}
     steps:
       - name: display glibcxx version
         if: runner.os == 'Linux'
