@@ -21,7 +21,7 @@ jobs:
         run: yarn preinstall
       - name: config gcc
         if: runner.os == 'Linux'
-        run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 700 --slave /usr/bin/g++ g++ /usr/bin/g++-9; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
+        run: sudo apt-get install libstdc++6; sudo apt-get install g++9; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
       - name: prebuild for node 14
         run: npx node-pre-gyp configure rebuild package --target=14.17.0
       - name: clean

@@ -26,7 +26,7 @@ jobs:
         run: yarn preinstall
       - name: config gcc
         if: runner.os == 'Linux'
-        run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 700 --slave /usr/bin/g++ g++ /usr/bin/g++-7; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
+        run: sudo apt-get install libstdc++6; sudo apt-get install g++9; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
       - name: prebuild for electron 9.0
         run: npx node-pre-gyp configure build package --runtime=electron --target=9.0.0 --build-from-source --dist-url=https://electronjs.org/headers
       - name: prebuild for electron 8.2
