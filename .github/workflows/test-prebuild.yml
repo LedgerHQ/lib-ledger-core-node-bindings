@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: display glibcxx version
         if: runner.os == 'Linux'
-        run: strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
+        run: lsb_release -a; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
         with:
