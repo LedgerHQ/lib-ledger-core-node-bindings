@@ -26,7 +26,7 @@ jobs:
       - name: install
         run: apt-get update; curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"; nvm install 12;nvm use 12; npm install -g yarn; yarn --frozen-lockfile --ignore-scripts; ls; pwd; yarn preinstall; yarn;
       - name: prebuild for node 14
-        run: npm i npm -g; apt-get install libpython3.7-dev; npx node-pre-gyp configure rebuild package --target=14.17.0
+        run: npm i npm -g; apt-get install -y libpython3.7-dev; npx node-pre-gyp configure rebuild package --target=14.17.0
       - name: clean
         run: npx node-pre-gyp clean
       - name: prebuild for node 12
