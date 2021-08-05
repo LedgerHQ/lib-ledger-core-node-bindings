@@ -21,7 +21,7 @@ jobs:
       - name: clean
         run: npx node-pre-gyp clean
       - name: prebuild for node 12
-        run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx node-pre-gyp configure build package --target=12.16.0 --python=/usr/bin/python3
+        run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx node-pre-gyp configure build package --target=12.16.0
       - name: clean
         run: npx node-pre-gyp clean
       - name: prebuild for electron 11.2
