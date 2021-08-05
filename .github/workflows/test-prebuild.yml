@@ -2,7 +2,7 @@ name: test-prebuild
 on: [push, pull_request]
 
 jobs:
-  prebuild-for-platform:
+  prebuild-for-platform-linux:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -14,13 +14,38 @@ jobs:
           password: ${{ secrets.CI_BOT_TOKEN }}
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@master
-        with:
-          node-version: 12.x
       - name: install
         run: apt-get update; curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"; nvm install 12;nvm use 12;  apt-get install -y npm;  npm install -g yarn; yarn --frozen-lockfile --ignore-scripts; yarn preinstall
       - name: prebuild for node 14
         run: npm i npm -g; apt-get install -y libpython3.6; pwd; ls -l; ls -l ./lib/libledger-core.so; chmod 777 ./lib/libledger-core.so; chown -R 1001:118 . ; npx node-pre-gyp configure rebuild package --target=14.17.0 --python=/usr/bin/python3
+      - name: clean
+        run: npx node-pre-gyp clean
+      - name: prebuild for node 12
+        run: npx node-pre-gyp configure build package --target=12.16.0
+      - name: clean
+        run: npx node-pre-gyp clean
+      - name: prebuild for electron 11.2
+        run: npx node-pre-gyp configure build package --runtime=electron --target=11.2.0 --build-from-source --dist-url=https://electronjs.org/headers
+
+  prebuild-for-platform-windows-macos:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-2016]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.6.x'
+      - name: install
+        run: yarn --frozen-lockfile --ignore-scripts
+      - name: fetch libcore
+        run: yarn preinstall
+      - name: prebuild for node 14
+        run: npx node-pre-gyp configure rebuild package --target=14.17.0
       - name: clean
         run: npx node-pre-gyp clean
       - name: prebuild for node 12
