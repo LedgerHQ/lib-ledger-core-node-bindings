@@ -23,7 +23,7 @@ jobs:
       - name: prebuild for node 12
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx node-pre-gyp configure build package --target=12.16.0
       - name: clean
-        run: npx node-pre-gyp clean
+        run: npx node-pre-gyp clean; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
       - name: prebuild for electron 11.2
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx node-pre-gyp configure build package --runtime=electron --target=11.2.0 --build-from-source --dist-url=https://electronjs.org/headers
 
