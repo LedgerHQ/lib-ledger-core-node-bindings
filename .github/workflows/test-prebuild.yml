@@ -26,8 +26,8 @@ jobs:
         run: npx  @mapbox/node-pre-gyp clean; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
       - name: prebuild for electron 11.2
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=11.2.0 --build-from-source --dist-url=https://electronjs.org/headers
-      - name: prebuild for electron 13.1
-        run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=13.1.0 --build-from-source --dist-url=https://electronjs.org/headers
+      - name: prebuild for electron 13.5
+        run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=13.5.0 --build-from-source --dist-url=https://electronjs.org/headers
 
   prebuild-for-platform-windows-macos:
     runs-on: ${{ matrix.os }}
@@ -56,5 +56,5 @@ jobs:
         run: npx  @mapbox/node-pre-gyp clean
       - name: prebuild for electron 11.2
         run: npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=11.2.0 --build-from-source --dist-url=https://electronjs.org/headers
-      - name: prebuild for electron 13.1
-        run: npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=13.1.0 --build-from-source --dist-url=https://electronjs.org/headers
+      - name: prebuild for electron 13.5
+        run: npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=13.5.0 --build-from-source --dist-url=https://electronjs.org/headers
