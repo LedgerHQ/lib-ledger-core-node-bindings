@@ -1,12 +1,20 @@
 name: test-prebuild
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - hotfixes/6.x
+      - master
+  push:
+    branches:
+      - hotfixes/6.x
+      - master
 
 jobs:
   prebuild-for-platform-linux:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-16.04]
+        os: [ubuntu-20.04]
     container:
       image: ghcr.io/ledgerhq/lib-ledger-core-build-env/lib-ledger-core-build-env:latest
       credentials:
@@ -15,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: install
-        run: apt-get update; curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"; nvm install 12;nvm use 12;  apt-get install -y npm;  npm install -g yarn; yarn --frozen-lockfile --ignore-scripts; yarn preinstall
+        run: apt-get --allow-releaseinfo-change update; curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"; nvm install 12;nvm use 12;  apt-get install -y npm;  npm install -g yarn; yarn --frozen-lockfile --ignore-scripts; yarn preinstall
       - name: prebuild for node 14
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; apt-get install -y libpython3.6; pwd; ls -l; ls -l ./lib/libledger-core.so; chmod 777 ./lib/libledger-core.so; chown -R 1001:118 . ; npx  @mapbox/node-pre-gyp configure rebuild package --target=14.17.0 --python=/usr/bin/python3
       - name: clean
@@ -24,8 +32,6 @@ jobs:
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx  @mapbox/node-pre-gyp configure build package --target=12.16.0
       - name: clean
         run: npx  @mapbox/node-pre-gyp clean; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
-      - name: prebuild for electron 11.2
-        run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=11.2.0 --build-from-source --dist-url=https://electronjs.org/headers
       - name: prebuild for electron 13.5
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=13.5.0 --build-from-source --dist-url=https://electronjs.org/headers
 
@@ -33,7 +39,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, windows-2016]
+        os: [macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@master
@@ -41,7 +47,7 @@ jobs:
           node-version: 12.x
       - uses: actions/setup-python@v1
         with:
-          python-version: '3.6.x'
+          python-version: '3.8.x'
       - name: install
         run: yarn --frozen-lockfile --ignore-scripts
       - name: fetch libcore
@@ -54,7 +60,5 @@ jobs:
         run: npx  @mapbox/node-pre-gyp configure build package --target=12.16.0
       - name: clean
         run: npx  @mapbox/node-pre-gyp clean
-      - name: prebuild for electron 11.2
-        run: npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=11.2.0 --build-from-source --dist-url=https://electronjs.org/headers
       - name: prebuild for electron 13.5
         run: npx  @mapbox/node-pre-gyp configure build package --runtime=electron --target=13.5.0 --build-from-source --dist-url=https://electronjs.org/headers
