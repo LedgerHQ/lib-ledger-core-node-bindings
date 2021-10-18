@@ -27,6 +27,10 @@ jobs:
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx @mapbox/node-pre-gyp configure build package --target=12.16.0
       - name: clean
         run: npx @mapbox/node-pre-gyp clean; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
+      - name: prebuild for electron 13.1
+        run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx node-pre-gyp configure build package --runtime=electron --target=13.1.0 --build-from-source --dist-url=https://electronjs.org/headers
+      - name: clean
+        run: npx @mapbox/node-pre-gyp clean; strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep -i glib
       - name: prebuild for electron 13.5
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; npx node-pre-gyp configure build package --runtime=electron --target=13.5.0 --build-from-source --dist-url=https://electronjs.org/headers
       - name: publish
@@ -57,6 +61,10 @@ jobs:
         run: npx @mapbox/node-pre-gyp clean
       - name: prebuild for node 12
         run: npx @mapbox/node-pre-gyp configure build package --target=12.16.0
+      - name: clean
+        run: npx @mapbox/node-pre-gyp clean
+      - name: prebuild for electron 13.1
+        run: npx @mapbox/node-pre-gyp configure build package --runtime=electron --target=13.1.0 --build-from-source --dist-url=https://electronjs.org/headers
       - name: clean
         run: npx @mapbox/node-pre-gyp clean
       - name: prebuild for electron 13.5
