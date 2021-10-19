@@ -36,7 +36,9 @@ jobs:
       - name: publish
         env:
           NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx node-pre-gyp-github publish
+        run: |
+          npm config set strict-ssl false
+          npx node-pre-gyp-github publish
 
   prebuild-for-platform-windows-macos:
     runs-on: ${{ matrix.os }}
@@ -72,4 +74,6 @@ jobs:
       - name: publish
         env:
           NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx node-pre-gyp-github publish
+        run: |
+          npm config set strict-ssl false
+          npx node-pre-gyp-github publish
