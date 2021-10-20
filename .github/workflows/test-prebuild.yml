@@ -87,4 +87,4 @@ jobs:
       - name: publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: yarn publish
+        run: yarn release
