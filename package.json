@@ -41,7 +41,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@ledgerhq/node-pre-gyp-github": "^1.0.1",
+    "@ledgerhq/node-pre-gyp-github": "^1.0.2",
     "@mapbox/node-pre-gyp": "^1.0.5",
     "bindings": "1.5.0",
     "nan": "^2.14.2",
@@ -52,7 +52,7 @@
     "eslint": "^7.15.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^7.0.0",
-    "prettier": "^2.2.1",
+    "prettier": "^2.4.1",
     "rimraf": "^3.0.2"
   }
 }
