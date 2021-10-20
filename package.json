@@ -20,7 +20,8 @@
     "gypconfigx": "node-gyp configure -- -f xcode",
     "lint": "eslint js",
     "prettier": "prettier --write \"js/**/*.js\"",
-    "install": "node-pre-gyp install --fallback-to-build"
+    "install": "node-pre-gyp install --fallback-to-build",
+    "release": "node-pre-gyp-github publish"
   },
   "binary": {
     "module_name": "ledger-core-node",
@@ -40,11 +41,11 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@ledgerhq/node-pre-gyp-github": "^1.0.1",
     "@mapbox/node-pre-gyp": "^1.0.5",
     "bindings": "1.5.0",
     "nan": "^2.14.2",
-    "node-gyp": "^7.1.2",
-    "node-pre-gyp-github": "^1.4.3"
+    "node-gyp": "^7.1.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
