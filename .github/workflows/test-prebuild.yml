@@ -24,6 +24,8 @@ jobs:
       - uses: actions/checkout@v1
       - name: install
         run: apt-get --allow-releaseinfo-change update; curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"; nvm install 12;nvm use 12;  apt-get install -y npm;  npm install -g yarn; yarn --frozen-lockfile --ignore-scripts; yarn preinstall
+      - name: install yarn
+        run: npm i -g yarn
       - name: prebuild for node 14
         run: export NODE_TLS_REJECT_UNAUTHORIZED=0; apt-get install -y libpython3.6; pwd; ls -l; ls -l ./lib/libledger-core.so; chmod 777 ./lib/libledger-core.so; chown -R 1001:118 . ; npx  @mapbox/node-pre-gyp configure rebuild package --target=14.17.0 --python=/usr/bin/python3
       - name: clean
